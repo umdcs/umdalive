@@ -17,7 +17,7 @@ var clubs = new Array();//new empty array for clubs to reside
 //-----------------------------
 //PUT paths
 //-----------------------------
-app.put('newClub',function(req,res)){
+app.put('/newClub',function(req,res)){
 
         // If for some reason, the JSON isn't parsed, return a HTTP ERROR
         // 400
