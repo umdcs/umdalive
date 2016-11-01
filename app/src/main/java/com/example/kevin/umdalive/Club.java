@@ -45,7 +45,7 @@ public class Club extends AppCompatActivity {
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        restPOST(view);
+        restPUT(view);
     }
 
     protected void onPause() {
