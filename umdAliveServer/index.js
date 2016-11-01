@@ -25,10 +25,11 @@ app.put('newClub',function(req,res)){
 
         //takes data from request and makes into new 'club' object
         //contains name, keywords, description and its posts
-        var club = {name: req.body.clubName
+        var club = {clubname: req.body.clubname
+                    admin: req.body.admin
                     keywords: req.body.keywords
-                    description: req.body.desc
-                    posts: req.body.clubPosts};
+                    description: req.body.description
+                    post: req.body.post};
 
         clubs[clubs.length] = club; //adds new club to array of clubs
 
