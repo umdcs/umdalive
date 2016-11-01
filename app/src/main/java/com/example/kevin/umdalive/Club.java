@@ -190,7 +190,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         Log.d("DEBUG [PUT]:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://10.0.2.2:5000/newclub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+        new HTTPAsyncTask().execute("http://10.0.2.2:5000/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
     }
 
 }

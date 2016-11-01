@@ -24,7 +24,7 @@ var clubs = new Array();//new empty array for clubs to reside
 //-----------------------------
 
 app.put('/newClub',function(req,res){
-
+        console.log("At start of newClub ");
 
         // If for some reason, the JSON isn't parsed, return a HTTP ERROR
         // 400
@@ -40,7 +40,12 @@ app.put('/newClub',function(req,res){
 
         clubs[clubs.length] = club; //adds new club to array of clubs
 
-
+        var jsonResponse = {
+    	//id: '123',
+    	//status: 'updated'
+        id: '123', status: 'updated'
+        };
+        res.json(jsonResponse);
 
 
         console.log("new club has been created: " + req.body.clubname);
