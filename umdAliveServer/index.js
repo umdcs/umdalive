@@ -1,14 +1,17 @@
 
-var express = reqiure('express');
+var express = require('express');
 
 var app = express();
 
+
+var express = require('express');
 var bodyParser = require('body-parser');
 
+var app = express();
 app.set("port",5000);
 
 app.use(bodyParser.urlencoded({
-	extended: true;
+	extended: true
 }));
 
 app.use(bodyParser.json());
@@ -20,7 +23,7 @@ var clubs = new Array();//new empty array for clubs to reside
 //PUT paths
 //-----------------------------
 
-app.put('newClub',function(req,res){
+app.put('/newClub',function(req,res){
 
 
         // If for some reason, the JSON isn't parsed, return a HTTP ERROR
@@ -29,20 +32,22 @@ app.put('newClub',function(req,res){
 
         //takes data from request and makes into new 'club' object
         //contains name, keywords, description and its posts
-        var club = {clubname: req.body.clubname
-                    admin: req.body.admin
-                    keywords: req.body.keywords
-                    description: req.body.description
+        var club = {clubname: req.body.clubname,
+                    admin: req.body.admin,
+                    keywords: req.body.keywords,
+                    description: req.body.description,
                     post: req.body.post};
 
         clubs[clubs.length] = club; //adds new club to array of clubs
 
 
 
-        console.log("new club has been created: " + req.body.clubName);
+
+        console.log("new club has been created: " + req.body.clubname);
 });
 
 app.listen(app.get("port"), function(){
     console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));
+
 });
 

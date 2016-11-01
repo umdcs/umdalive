@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">UMDAlive</string>
+    <string name="clubs">Clubs</string>
+    <string name="dummy_club">DummyClub</string>
+    <string name="username">Dummy</string>
+    <string name="key_word">This is a dummy.</string>
+    <string name="post">This is a dummy post</string>
+    <string name="hint_for_club_posts">Posts will go here</string>
+
+
 </resources>
