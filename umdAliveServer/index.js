@@ -34,5 +34,5 @@ app.put('newClub',function(req,res)){
         clubs[clubs.length] = club; //adds new club to array of clubs
 
 
-        console.log("new club has been created: " + req.body.clubName);
+        console.log("new club has been created: " + req.body.clubname);
 }
