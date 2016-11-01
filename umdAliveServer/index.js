@@ -1,5 +1,7 @@
 
-var app = express()
+var express = reqiure('express');
+
+var app = express();
 
 var bodyParser = require('body-parser');
 
@@ -17,7 +19,9 @@ var clubs = new Array();//new empty array for clubs to reside
 //-----------------------------
 //PUT paths
 //-----------------------------
-app.put('/newClub',function(req,res)){
+
+app.put('newClub',function(req,res){
+
 
         // If for some reason, the JSON isn't parsed, return a HTTP ERROR
         // 400
@@ -34,5 +38,11 @@ app.put('/newClub',function(req,res)){
         clubs[clubs.length] = club; //adds new club to array of clubs
 
 
-        console.log("new club has been created: " + req.body.clubname);
-}
+
+        console.log("new club has been created: " + req.body.clubName);
+});
+
+app.listen(app.get("port"), function(){
+    console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));
+});
+
