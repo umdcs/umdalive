@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -33,14 +35,79 @@ public class Club extends AppCompatActivity {
     String keyWords = "#Dummy";
     String description = "This is a dummy.";
     String post = "This is a dummy post";
-
+    //Spinner spinner = (Spinner) findViewById(R.id.keywordChooser); // Create an ArrayAdapter using the string array and a default spinner layout
     public Club(){
+        clubName = "default";
+        userName = "default-user";
+        keyWords = "#default";
+        description = "default";
+        post = "This club did not get created correctly";
+    }
+    /*
+    This sets the name of the club
+    para: string of new club
+     */
+    public void setClubName(String name){
+        clubName = name;
+    }
+    /*
+    this resets the keyword to a new word
+     para: string of new keyword with '#' in front of it
+     */
+    public void setKeyWords(String newKeyword){
+        keyWords = newKeyword;
+    }
+    /*
+    temporary method to have user set their username to place it as the
+    admin of the new club they created.
+    para: string of username
+     */
+    public void setUserName(String admin){
+        userName = admin;
+    }
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getKeyWords() {
+        return keyWords;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    /*
+    sets description to string entered
+    para: new string for description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    /*
+    sets the new post for the club
+     */
+    public void setPost(String post) {
+        this.post = post;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_club_activity);
-
+        Spinner spinner = (Spinner) findViewById(R.id.keywordChooser); // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        R.array.keyword_list, android.R.layout.simple_spinner_item); // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        setKeyWords((String)spinner.getSelectedItem());
     }
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);

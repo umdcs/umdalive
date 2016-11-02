@@ -6,6 +6,14 @@
     <string name="key_word">This is a dummy.</string>
     <string name="post">This is a dummy post</string>
     <string name="hint_for_club_posts">Posts will go here</string>
-
-
+    <string name="movies">Movies</string>
+    <string name="video_games">VideoGames</string>
+    <string-array name="keyword_list">
+        <item name="academic">Academic</item>
+        <item name="athletic">Athletic</item>
+        <item name="intermurals">Intermurals</item>
+        <item name="fitness">Fitness</item>
+        <item name="food">Food</item>
+        <item name="religious">Religious</item>
+      </string-array>
 </resources>
