@@ -33,7 +33,7 @@ app.put('/newClub',function(req,res){
         //takes data from request and makes into new 'club' object
         //contains name, keywords, description and its posts
         var club = {clubname: req.body.clubname,
-                    admin: req.body.admin,
+                    username: req.body.username,
                     keywords: req.body.keywords,
                     description: req.body.description,
                     post: req.body.post};
@@ -49,6 +49,10 @@ app.put('/newClub',function(req,res){
 
 
         console.log("new club has been created: " + req.body.clubname);
+        console.log("administrator is: " + req.body.username);
+        console.log("keyword is: " + req.body.keywords);
+        console.log("description of club is: " + req.body.description);
+        console.log("initial post of club is: " + req.body.post);
 });
 
 app.listen(app.get("port"), function(){

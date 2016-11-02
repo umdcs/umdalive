@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,12 +32,13 @@ import java.net.URL;
 
 public class Club extends AppCompatActivity {
 
-    String clubName = "DummyClub";
-    String userName ="Dummy";
-    String keyWords = "#Dummy";
-    String description = "This is a dummy.";
-    String post = "This is a dummy post";
-    //Spinner spinner = (Spinner) findViewById(R.id.keywordChooser); // Create an ArrayAdapter using the string array and a default spinner layout
+    private String clubName = "DummyClub";
+    private String userName ="Dummy";
+    private String keyWords = "#Dummy";
+    private String description = "This is a dummy.";
+    private String post = "This is a dummy post";
+    private Object keywordItem = new Object();          //this item grabs from user
+
     public Club(){
         clubName = "default";
         userName = "default-user";
@@ -107,10 +110,25 @@ public class Club extends AppCompatActivity {
         R.array.keyword_list, android.R.layout.simple_spinner_item); // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        setKeyWords((String)spinner.getSelectedItem());
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                keywordItem = parent.getItemAtPosition(pos);
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        EditText newName = (EditText) findViewById(R.id.name_of_club);
+        setClubName(newName.getText().toString());
+        EditText admin = (EditText) findViewById(R.id.admin_of_club);
+        setUserName(admin.getText().toString());
+        EditText desription = (EditText) findViewById(R.id.description_of_club);
+        setDescription(desription.getText().toString());
+        EditText newPost = (EditText) findViewById(R.id.post_of_club);
+        setPost(newPost.getText().toString());
+        setKeyWords((String)keywordItem);
         startActivity(intent);
         restPUT(view);
     }
