@@ -7,5 +7,18 @@
     <string name="post">This is a dummy post</string>
     <string name="hint_for_club_posts">Posts will go here</string>
 
+    <string-array name="keyword_list">
+        <item name="academic">Academic</item>
+        <item name="athletic">Athletic</item>
+        <item name="intermurals">Intermurals</item>
+        <item name="fitness">Fitness</item>
+        <item name="food">Food</item>
+        <item name="religious">Religious</item>
+        <item name="movies">Movies</item>
+        <item name="video_games">VideoGames</item>
+      </string-array>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="action_settings">Settings</string>
 </resources>
