@@ -35,25 +35,25 @@ app.put('/newClub', function(req, res) {
 	// Takes data from request and makes a new object
 	var dataObject = {
 		clubname: req.body.clubname,
-		admin: req.body.admin,
+		username: req.body.username,
 		keywords: req.body.keywords,
 		description: req.body.description,
 		post: req.body.post
 	};
 
 	// Adds dataObject items to array
-	clubs.items.push(dataObject);
+var temp;
+temp = clubs.items.push(dataObject);
+console.log("temp: " + temp);
 
-	/* ??????????
 	var jsonResponse = {
 	//id: '123',
 	//status: 'updated'
 	id: '123', status: 'updated'
 };
 res.json(jsonResponse);
-*/
 
-res.sendStatus(200);
+//res.sendStatus(200);
 
 console.log("New club has been created: " + req.body.clubname);
 });
