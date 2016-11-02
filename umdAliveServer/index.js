@@ -21,44 +21,44 @@ var clubs = {
 };
 
 /*
- ************************
- * ROUTE SECTION
- ************************
- */
+************************
+* ROUTE SECTION
+************************
+*/
 
 app.put('/newClub', function(req, res) {
-        console.log("At start of newClub ");
+	console.log("At start of newClub ");
 
-        // If for some reason the JSON isn't parsed, return HTTP error 400
-        if (!req.body) return res.sendStatus(400);
+	// If for some reason the JSON isn't parsed, return HTTP error 400
+	if (!req.body) return res.sendStatus(400);
 
-				// Takes data from request and makes a new object
-				var dataObject = {
-					clubname: req.body.clubname,
-					admin: req.body.admin,
-					keywords: req.body.keywords,
-					description: req.body.description,
-					post: req.body.post
-				};
+	// Takes data from request and makes a new object
+	var dataObject = {
+		clubname: req.body.clubname,
+		admin: req.body.admin,
+		keywords: req.body.keywords,
+		description: req.body.description,
+		post: req.body.post
+	};
 
-        // Adds dataObject items to array
-				clubs.items.push(dataObject);
+	// Adds dataObject items to array
+	clubs.items.push(dataObject);
 
-				/* ??????????
-        var jsonResponse = {
-    	//id: '123',
-    	//status: 'updated'
-        id: '123', status: 'updated'
-        };
-        res.json(jsonResponse);
-				*/
+	/* ??????????
+	var jsonResponse = {
+	//id: '123',
+	//status: 'updated'
+	id: '123', status: 'updated'
+};
+res.json(jsonResponse);
+*/
 
-				res.sendStatus(200);
+res.sendStatus(200);
 
-        console.log("New club has been created: " + req.body.clubname);
+console.log("New club has been created: " + req.body.clubname);
 });
 
 app.listen(app.get("port"), function(){
-    console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));
+	console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));
 
 });
