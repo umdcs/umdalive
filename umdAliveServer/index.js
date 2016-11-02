@@ -42,9 +42,7 @@ app.put('/newClub', function(req, res) {
 	};
 
 	// Adds dataObject items to array
-var temp;
-temp = clubs.items.push(dataObject);
-console.log("temp: " + temp);
+	clubs.items.push(dataObject);
 
 	var jsonResponse = {
 	//id: '123',
