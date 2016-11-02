@@ -1,4 +1,3 @@
-
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -6,7 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // Set the port
-app.set("port",5000);
+app.set("port", 5000);
 
 // Support encoded bodies
 app.use(bodyParser.urlencoded({
@@ -17,7 +16,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Empty array for clubs to reside in
-var clubs = new Array();
+var clubs = {
+	items: []
+};
 
 /*
  ************************
@@ -31,28 +32,30 @@ app.put('/newClub', function(req, res) {
         // If for some reason the JSON isn't parsed, return HTTP error 400
         if (!req.body) return res.sendStatus(400);
 
-        //takes data from request and makes into new 'club' object
-        //contains name, keywords, description and its posts
-        var club = {clubname: req.body.clubname,
-                    admin: req.body.admin,
-                    keywords: req.body.keywords,
-                    description: req.body.description,
-                    post: req.body.post};
+				// Takes data from request and makes a new object
+				var dataObject = {
+					clubname: req.body.clubname,
+					admin: req.body.admin,
+					keywords: req.body.keywords,
+					description: req.body.description,
+					post: req.body.post
+				};
 
+        // Adds dataObject items to array
+				clubs.items.push(dataObject);
 
-				var club
-
-        clubs[clubs.length] = club; //adds new club to array of clubs
-
+				/* ??????????
         var jsonResponse = {
     	//id: '123',
     	//status: 'updated'
         id: '123', status: 'updated'
         };
         res.json(jsonResponse);
+				*/
 
+				res.sendStatus(200);
 
-        console.log("new club has been created: " + req.body.clubname);
+        console.log("New club has been created: " + req.body.clubname);
 });
 
 app.listen(app.get("port"), function(){
