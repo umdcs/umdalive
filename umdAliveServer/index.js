@@ -25,9 +25,8 @@ var clubs = {
 * ROUTE SECTION
 ************************
 */
-
+var count = 0;
 app.put('/newClub', function(req, res) {
-	console.log("At start of newClub ");
 
 	// If for some reason the JSON isn't parsed, return HTTP error 400
 	if (!req.body) return res.sendStatus(400);
@@ -42,18 +41,21 @@ app.put('/newClub', function(req, res) {
 	};
 
 	// Adds dataObject items to array
-	clubs.items.push(dataObject);
+count =	clubs.items.push(dataObject);
 
 	var jsonResponse = {
-	//id: '123',
-	//status: 'updated'
 	id: '123', status: 'updated'
 };
 res.json(jsonResponse);
 
-//res.sendStatus(200);
+
 
 console.log("New club has been created: " + req.body.clubname);
+console.log("Name of username/admin : " + req.body.username);
+console.log("Name of keyword/catagory : " + req.body.keywords);
+console.log("Name of description : " + req.body.description);
+console.log("Name of new post : " + req.body.post);
+console.log("total items in array : " + count);
 });
 
 app.listen(app.get("port"), function(){
