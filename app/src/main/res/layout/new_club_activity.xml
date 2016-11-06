@@ -27,18 +27,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/name_title"
-        android:hint='ex: "BBQ"'
-        android:textColor="@color/textColorPrimary"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/make_club"
-        android:layout_alignStart="@+id/make_club" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
         android:id="@+id/description_of_club"
@@ -157,6 +145,18 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="18dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name_title"
+        android:hint='ex: "BBQ"'
+        android:textColor="@color/textColorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
