@@ -8,7 +8,33 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kevin.umdalive.Club">
+    tools:context="com.example.kevin.umdalive.Club"
+    android:background="@color/colorAccent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name_title"
+        android:hint="Name of Club"
+        android:textColor="@color/textColorPrimary"
+        android:text="Name of Club:"
+        android:layout_below="@+id/editText2"
+        android:layout_toLeftOf="@+id/description_of_club"
+        android:layout_toStartOf="@+id/description_of_club" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name_title"
+        android:hint='ex: "BBQ"'
+        android:textColor="@color/textColorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/make_club"
+        android:layout_alignStart="@+id/make_club" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -16,53 +42,12 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/description_of_club"
-        android:hint="Description of club"
+        android:hint="ex: &quot;We enjoy fine BBQ's&quot;"
         android:layout_below="@+id/admin_of_club"
         android:layout_alignLeft="@+id/admin_of_club"
-        android:layout_alignStart="@+id/admin_of_club" />
+        android:layout_alignStart="@+id/admin_of_club"
+        android:textColor="@color/textColorPrimary" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_marginTop="66dp"
-        android:id="@+id/admin_of_club"
-        android:hint="Your Username"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/make_club"
-        android:layout_alignEnd="@+id/make_club" />
-
-    <Button
-        android:text="Make Club"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:id="@+id/make_club"
-        android:onClick="onClickMakeClub" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_marginTop="19dp"
-        android:id="@+id/name_of_club"
-        android:hint="Name of Club"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/admin_of_club"
-        android:layout_alignStart="@+id/admin_of_club" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/keywordChooser"
-        android:layout_below="@+id/post_of_club"
-        android:layout_alignLeft="@+id/post_of_club"
-        android:layout_alignStart="@+id/post_of_club"
-        android:layout_marginTop="57dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -70,10 +55,108 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/post_of_club"
-        android:hint="first post of club"
+        android:hint='ex: "BBQ this sunday!"'
         android:layout_below="@+id/description_of_club"
         android:layout_alignLeft="@+id/description_of_club"
-        android:layout_alignStart="@+id/description_of_club" />
+        android:layout_alignStart="@+id/description_of_club"
+        android:textColor="@color/textColorPrimary" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/admin_of_club"
+        android:hint='ex: "JohnDoe585"'
+        android:textColor="@color/textColorPrimary"
+        android:layout_below="@+id/name_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/admin_title"
+        android:hint="Name of Club"
+        android:textColor="@color/textColorPrimary"
+        android:text="Admin User:"
+        android:layout_alignBaseline="@+id/admin_of_club"
+        android:layout_alignBottom="@+id/admin_of_club"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/description_of_club"
+        android:layout_toStartOf="@+id/description_of_club" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/description_title"
+        android:hint="Name of Club"
+        android:textColor="@color/textColorPrimary"
+        android:text="Description:"
+        android:layout_alignBaseline="@+id/description_of_club"
+        android:layout_alignBottom="@+id/description_of_club"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/description_of_club"
+        android:layout_toStartOf="@+id/description_of_club" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/keywordChooser"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/colorPrimary"
+        android:layout_below="@+id/keyword_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="96dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/post_title"
+        android:hint="Name of Club"
+        android:textColor="@color/textColorPrimary"
+        android:text="Initial Club Post:"
+        android:layout_alignBaseline="@+id/post_of_club"
+        android:layout_alignBottom="@+id/post_of_club"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/description_of_club"
+        android:layout_toStartOf="@+id/description_of_club" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/keyword_title"
+        android:hint="Name of Club"
+        android:textColor="@color/textColorPrimary"
+        android:text="Catagory of Club:"
+        android:layout_below="@+id/post_of_club"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Create Club"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/make_club"
+        android:onClick="onClickMakeClub"
+        android:background="@color/colorPrimary"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:textColor="@color/colorAccent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="18dp" />
 
 
 </RelativeLayout>

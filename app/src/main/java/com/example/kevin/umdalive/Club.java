@@ -3,10 +3,8 @@ package com.example.kevin.umdalive;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -120,7 +118,7 @@ public class Club extends AppCompatActivity {
     }
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        EditText newName = (EditText) findViewById(R.id.name_of_club);
+        EditText newName = (EditText) findViewById(R.id.description_title);
         setClubName(newName.getText().toString());
         EditText admin = (EditText) findViewById(R.id.admin_of_club);
         setUserName(admin.getText().toString());
