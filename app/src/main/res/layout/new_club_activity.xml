@@ -14,19 +14,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/name_title"
-        android:hint="Name of Club"
-        android:textColor="@color/textColorPrimary"
-        android:text="Name of Club:"
-        android:layout_below="@+id/editText2"
-        android:layout_toLeftOf="@+id/description_of_club"
-        android:layout_toStartOf="@+id/description_of_club" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
         android:id="@+id/description_of_club"
@@ -36,18 +23,6 @@
         android:layout_alignStart="@+id/admin_of_club"
         android:textColor="@color/textColorPrimary" />
 
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/post_of_club"
-        android:hint='ex: "BBQ this sunday!"'
-        android:layout_below="@+id/description_of_club"
-        android:layout_alignLeft="@+id/description_of_club"
-        android:layout_alignStart="@+id/description_of_club"
-        android:textColor="@color/textColorPrimary" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,34 +39,19 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/admin_title"
-        android:hint="Name of Club"
-        android:textColor="@color/textColorPrimary"
-        android:text="Admin User:"
-        android:layout_alignBaseline="@+id/admin_of_club"
-        android:layout_alignBottom="@+id/admin_of_club"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/description_of_club"
-        android:layout_toStartOf="@+id/description_of_club" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:ems="10"
         android:id="@+id/description_title"
-        android:hint="Name of Club"
         android:textColor="@color/textColorPrimary"
         android:text="Description:"
         android:layout_alignBaseline="@+id/description_of_club"
         android:layout_alignBottom="@+id/description_of_club"
         android:layout_alignParentLeft="true"
+        android:editable="false"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/description_of_club"
-        android:layout_toStartOf="@+id/description_of_club" />
+        android:layout_toStartOf="@+id/description_of_club"
+        android:clickable="false" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -106,31 +66,16 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/post_title"
-        android:hint="Name of Club"
-        android:textColor="@color/textColorPrimary"
-        android:text="Initial Club Post:"
-        android:layout_alignBaseline="@+id/post_of_club"
-        android:layout_alignBottom="@+id/post_of_club"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/description_of_club"
-        android:layout_toStartOf="@+id/description_of_club" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:ems="10"
         android:id="@+id/keyword_title"
-        android:hint="Name of Club"
         android:textColor="@color/textColorPrimary"
         android:text="Catagory of Club:"
+        android:editable="false"
         android:layout_below="@+id/post_of_club"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:clickable="false" />
 
     <Button
         android:text="Create Club"
@@ -151,12 +96,74 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/name_title"
+        android:id="@+id/name_title_enter"
         android:hint='ex: "BBQ"'
         android:textColor="@color/textColorPrimary"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/name_title"
+        android:textColor="@color/textColorPrimary"
+        android:text="Name of Club:"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:editable="false"
+        android:clickable="false"
+        android:layout_toLeftOf="@+id/admin_of_club"
+        android:layout_toStartOf="@+id/admin_of_club" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/post_of_club"
+        android:hint='ex: "BBQ this sunday!"'
+        android:textColor="@color/textColorPrimary"
+        android:layout_below="@+id/description_of_club"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/admin_title"
+        android:textColor="@color/textColorPrimary"
+        android:text="Admin User:"
+        android:editable="false"
+        android:inputType="none"
+        android:clickable="false"
+        android:layout_alignBaseline="@+id/admin_of_club"
+        android:layout_alignBottom="@+id/admin_of_club"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/description_of_club"
+        android:layout_toStartOf="@+id/description_of_club" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/post_title"
+        android:textColor="@color/textColorPrimary"
+        android:text="Initial Post:"
+        android:editable="false"
+        android:clickable="false"
+        android:layout_alignBaseline="@+id/post_of_club"
+        android:layout_alignBottom="@+id/post_of_club"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/description_of_club"
+        android:layout_toStartOf="@+id/description_of_club" />
 
 
 </RelativeLayout>
