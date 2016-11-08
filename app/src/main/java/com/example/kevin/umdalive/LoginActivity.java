@@ -17,7 +17,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
     }
-
+    /*
+    This is the onClick for the Login button
+    current functionality: currently all this does is check for "@" symbol and go to next page.
+     */
     public void login(View view) {
         EditText emailEntry = (EditText) findViewById(R.id.email_input);
         String emailCheckTemp = emailEntry.getText().toString();
@@ -27,25 +30,29 @@ public class LoginActivity extends AppCompatActivity {
         }
         else Toast.makeText(getApplicationContext(),"Sorry, this is not a valid email.", Toast.LENGTH_SHORT).show();
     }
-
+    /*
+    This is the onClick for the signup button of the lower right corner.
+    current functionality: All this does is bring you to a new activity
+    that will help create a new user.
+     */
     public void signUpScreen(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
+    /*
+    Methods for Activity to inherit parent
+     */
     protected void onPause() {
         super.onPause();
     }
-
 
     protected void onResume() { //brings activity back to main screen.
         super.onResume();
     }
 
-
     protected void onStop() {
         super.onStop();
     }
-
 
     protected void onDestroy() {
         super.onDestroy();
@@ -53,12 +60,9 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
     }
-
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
 }
 

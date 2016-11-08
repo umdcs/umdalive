@@ -29,16 +29,24 @@ import java.net.URL;
  */
 
 public class SignUpActivity extends AppCompatActivity {
-    private String emailAddress = "";
-    private String user_password = "";
-    private String graduation_date = "";
-    private String major = "";
-    private Object graduationItem = new Object();
-    private Object majorItem = new Object();
+    /*
+    Instance variables to save the input from user
+    before they are sent to server.
+     */
+    private String emailAddress = "";               //holds email of user
+    private String user_password = "";              //holds password of user
+    private String graduation_date = "";            //holds graduation date as string
+    private String major = "";                      //holds major of user as string
+    private Object graduationItem = new Object();   //Object used to get item from the spinner containing graduation
+                                                    // date. (will later be converted to string and stored in graduation_date
+    private Object majorItem = new Object();        //Object used to get item from the spinner containing major
+                                                    //(will later be converted to string and stored in graduation_date
 
 
 
-
+    /*
+    onCreate method for signUpActivity class
+    */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_activity);
@@ -98,49 +106,43 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-
+    /*
+    get and set methods for instance variables
+    */
     public void setGraduationDate(String graduationDate) {this.graduation_date = graduationDate; }
-
     public void setEmailAddress(String emailAddress) {this.emailAddress = emailAddress;}
-
     public void setPassword(String password) {this.user_password = password;}
-
     public void setMajor(String major) {this.major = major;}
-
     public String getEmailAddress() { return emailAddress; }
-
     public String getGraduationDate() { return graduation_date;}
-
     public String getMajor() { return major;}
 
+    /*
+    Methods to inherit from parent class
+     */
     protected void onPause() {
         super.onPause();
     }
-
-
     protected void onResume() { //brings activity back to main screen.
         super.onResume();
     }
-
-
     protected void onStop() {
         super.onStop();
     }
-
-
     protected void onDestroy() {
         super.onDestroy();
     }
-
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
     }
-
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
+    /*
+    Class to send user data to server.
+    */
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override

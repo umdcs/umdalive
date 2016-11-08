@@ -99,7 +99,12 @@ public class Club extends AppCompatActivity {
     public void setPost(String post) {
         this.post = post;
     }
-
+    /*
+    onCreate method for Club class
+    Contains a spinner that will display the catagories for
+    the user to choose from to determine what catagory their
+    club fits into.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_club_activity);
@@ -116,6 +121,12 @@ public class Club extends AppCompatActivity {
             }
         });
     }
+    /*
+    onClick for make Club button
+    current functionality: currently this takes in the user input
+    of administrator, description, post, keyword/catagory, and
+    sends them to server to be saved.
+     */
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         EditText newName = (EditText) findViewById(R.id.description_title);
@@ -130,27 +141,22 @@ public class Club extends AppCompatActivity {
         startActivity(intent);
         restPUT(view);
     }
-
+/*
+Methods to tell Activity to inherit from parent and follow
+protocol of parent
+ */
     protected void onPause() {
         super.onPause();
     }
-
-
     protected void onResume() { //brings activity back to main screen.
     super.onResume();
     }
-
-
     protected void onStop() {
     super.onStop();
     }
-
-
     protected void onDestroy() {
     super.onDestroy();
     }
-
-
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
     }
@@ -159,7 +165,9 @@ public class Club extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     }
-
+/*
+This is private class used to send data to server.
+ */
 private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
     @Override
