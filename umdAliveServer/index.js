@@ -88,7 +88,7 @@ res.json(jsonResponse);
 console.log("Number of Users: " + countUsers);
 console.log("Email of user created: " + req.body.email);
 console.log("GraduationDate of user created: " + req.body.graduation_date);
-console.log("Major of new user" + req.body.major);
+console.log("Major of new user: " + req.body.major);
 });
 
 app.listen(app.get("port"), function(){
