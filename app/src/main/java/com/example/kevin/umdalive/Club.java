@@ -249,7 +249,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://10.0.2.2:4321/userData", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://10.0.2.2:5000/newClub", "POST", jsonParam.toString());
     }
 
     /**

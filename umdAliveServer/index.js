@@ -19,13 +19,21 @@ app.use(bodyParser.json());
 var clubs = {
 	items: []
 };
+var users = {
+    items: []
+};
+var mostRecentPosts = {
+    items: []
+};
+
 
 /*
 ************************
 * ROUTE SECTION
 ************************
 */
-var count = 0;
+var countClubs = 0;
+var countUsers = 0;
 app.put('/newClub', function(req, res) {
 
 	// If for some reason the JSON isn't parsed, return HTTP error 400
@@ -41,21 +49,46 @@ app.put('/newClub', function(req, res) {
 	};
 
 	// Adds dataObject items to array
-count =	clubs.items.push(dataObject);
+    countClubs = clubs.items.push(dataObject);
 
 	var jsonResponse = {
 	id: '123', status: 'updated'
 };
 res.json(jsonResponse);
 
-
-
 console.log("New club has been created: " + req.body.clubname);
 console.log("Name of username/admin : " + req.body.username);
 console.log("Name of keyword/catagory : " + req.body.keywords);
 console.log("Name of description : " + req.body.description);
 console.log("Name of new post : " + req.body.post);
-console.log("total items in array : " + count);
+console.log("total items in array : " + countClubs);
+});
+
+app.put('/userInformation', function(req, res) {
+
+    // If for some reason the JSON isn't parsed, return HTTP error 400
+    if (!req.body) return res.sendStatus(400);
+
+    // Takes data from request and makes a new object
+    var dataObject = {
+        email: req.body.emailAddress,
+        password: req.body.user_password,
+        graduation_date: req.body.graduation_date,
+        major: req.body.major,
+    };
+
+    // Adds dataObject items to array
+    countUsers = users.items.push(dataObject);
+
+    var jsonResponse = {
+    id: '123', status: 'updated'
+};
+res.json(jsonResponse);
+
+console.log("Number of Users: " + countUsers);
+console.log("Email of user created: " + req.body.email);
+console.log("GraduationDate of user created: " + req.body.graduation_date);
+console.log("Major of new user" + req.body.major);
 });
 
 app.listen(app.get("port"), function(){

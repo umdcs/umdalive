@@ -28,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         else Toast.makeText(getApplicationContext(),"Sorry, this is not a valid email.", Toast.LENGTH_SHORT).show();
     }
 
+    public void signUpScreen(View view){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
     protected void onPause() {
         super.onPause();
     }

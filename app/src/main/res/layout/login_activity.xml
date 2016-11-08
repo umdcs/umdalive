@@ -97,7 +97,8 @@
         android:layout_alignRight="@+id/UMD_Alive_Title"
         android:layout_alignEnd="@+id/UMD_Alive_Title"
         android:layout_marginRight="21dp"
-        android:layout_marginEnd="21dp" />
+        android:layout_marginEnd="21dp"
+        android:onClick="signUpScreen" />
 
     <TextView
         android:text="Sign Up Now"
