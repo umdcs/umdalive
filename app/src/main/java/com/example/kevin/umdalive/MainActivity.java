@@ -2,6 +2,8 @@ package com.example.kevin.umdalive;
 
 import android.content.Intent;
 import android.media.Image;
+import android.os.AsyncTask;
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -11,18 +13,35 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.String.*;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getUser(findViewById(R.id.userName));
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,6 +66,127 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpURLConnection serverConnection = null;
+            InputStream is = null;
+
+            Log.d("Debug:", "Attempting to connect to: " + params[0]);
+
+            try {
+                URL url = new URL( params[0] );
+                serverConnection = (HttpURLConnection) url.openConnection();
+                serverConnection.setRequestMethod(params[1]);
+                if (params[1].equals("POST") ||
+                        params[1].equals("PUT") ||
+                        params[1].equals("DELETE")) {
+                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
+                    serverConnection.setDoOutput(true);
+                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+                    // params[2] contains the JSON String to send, make sure we send the
+                    // content length to be the json string length
+                    serverConnection.setRequestProperty("Content-Length", "" +
+                            Integer.toString(params[2].toString().getBytes().length));
+
+                    // Send POST data that was provided.
+                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
+                    out.writeBytes(params[2].toString());
+                    out.flush();
+                    out.close();
+                }
+
+                int responseCode = serverConnection.getResponseCode();
+                Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
+                Log.d("Debug: ", "Response Code : " + responseCode);
+
+                is = serverConnection.getInputStream();
+
+                if (params[1] == "GET" || params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE") {
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+
+                    try {
+                        JSONObject jsonData = new JSONObject(sb.toString());
+                        return jsonData.toString();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                serverConnection.disconnect();
+            }
+
+            return "Should not get to this if the data has been sent/received correctly!";
+        }
+
+        /**
+         *
+         * @param result the result from the query
+         */
+        protected void onPostExecute(String result) {
+
+           updateUser(result);
+            Log.i("result: ", result);
+        }
+    }
+
+    public void getUser(View view){
+        new HTTPAsyncTask().execute("http://10.0.2.2:5000/userDataGet", "GET");
+        //will obtain json string from textview and take value out from string
+    }
+
+    /*
+     * function to get user data and update the UI with their info
+     */
+    public void updateUser(String str1){
+        //break the string up that resulted from the
+        String[] brokeUp = str1.split(",");
+        String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
+        String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
+        String password = brokeUp[2].substring(12,brokeUp[2].length() - 1);
+        String grad = brokeUp[3].substring(18, brokeUp[3].length() - 1);
+        String major = brokeUp[4].substring(9, brokeUp[4].length() - 2);
+
+        //log messages for testing
+        Log.d("Name: " , name);
+        Log.d("Email: " , email);
+        Log.d("Password: ", password);
+        Log.d("Graduation Date", grad);
+        Log.d("Major: ", major);
+
+        TextView emailView = (TextView) findViewById(R.id.userEmail);
+        emailView.setText(email);
+
+        TextView userNameView = (TextView) findViewById(R.id.userName);
+        userNameView.setText(name);
+
+    }
 
 
     public void onClickNewClub(View view) {
@@ -82,6 +222,10 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.refresh_user_data) {
+            getUser(findViewById(id));
             return true;
         }
 
