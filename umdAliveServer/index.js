@@ -106,18 +106,46 @@ countUsers = users.items.push(dummyUser1);
         console.log("total items in array : " + countClubs);
         });
 
+
+
+        app.get('/getAllClubs', function(req,res){
+
+                    var club_names = {
+                        items: []
+                    };
+                    for(var x = 0; x < clubs.length; x++)
+                    {
+                        club_names[0] = getClubName(x);
+                    }
+
+                    var stringArray = json.stringify(club_names);
+                    res.send(stringArray);
+
+                    });
+
+
+        function getClubName(var position) {
+                      return clubs[position].clubname;              /
+                 })
+
         app.put('/userInformation', function(req, res) {
 
             // If for some reason the JSON isn't parsed, return HTTP error 400
             if (!req.body) return res.sendStatus(400);
 
+
+            var users_clubs = {
+            	items: []
+            };
+
             // Takes data from request and makes a new object
             var dataObject = {
+                name: req.body.name,
                 email: req.body.emailAddress,
                 password: req.body.user_password,
                 graduation_date: req.body.graduation_date,
                 major: req.body.major,
-                clubs: ""
+                clubs: users_clubs,
             };
 
             // Adds dataObject items to array
@@ -133,6 +161,7 @@ countUsers = users.items.push(dummyUser1);
         console.log("GraduationDate of user created: " + req.body.graduation_date);
         console.log("Major of new user: " + req.body.major);
         });
+
 
 /*
 ************************
