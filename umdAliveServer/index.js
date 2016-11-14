@@ -123,7 +123,44 @@ countUsers = users.items.push(dummyUser1);
 
                     });
 
+        app.put('/subscribeUser', function(req, res) {
 
+                    // If for some reason the JSON isn't parsed, return HTTP error 400
+                    if (!req.body) return res.sendStatus(400);
+                    var tempUser = req.body.username;
+                    var tempClub = req.body.clubname;
+
+                    var user_position = getUserPosition(tempUser);
+                    var club_position = getClubPosition(tempClub);
+
+
+                    users[user_position].users_clubs.items.push(clubs[club_position])
+                    countClubs = clubs.items.push(dataObject);
+
+                    var jsonResponse = {
+                    id: '123', status: 'updated'
+                };
+                res.json(jsonResponse);
+                });
+
+
+        function getClubPosition(var clubname_temp){
+            for(var x = 0; x < clubs.length; x++)
+            {
+                if (clubs[x].body.clubname === clubname_temp)
+                                return x;
+            }
+            return -1;
+        }
+
+        function getUserPosition(var username_temp){
+            for(var x = 0; x < users.length; x++)
+            {
+                if (users[x].body.username === username_temp)
+                return x;
+            }
+            return -1;
+         }
         function getClubName(var position) {
                       return clubs[position].clubname;              /
                  })
