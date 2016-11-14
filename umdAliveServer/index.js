@@ -15,6 +15,33 @@ app.use(bodyParser.urlencoded({
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 
+var dummyClub1= {
+		clubname: "BBQ",
+		username: "umdAlive1",
+		keywords: "Food",
+		description: "we enjoy BBQ's",
+		post: "BBQ this sunday, 2 pm, bring your own food. Be there or your kicked out of the club."
+	};
+var dummyClub2 = {
+		clubname: "ACM",
+		username: "umdAlive2",
+		keywords: "Academic",
+		description: "we enjoy vast amounts of code not working",
+		post: "rewriting facebook this friday, meet at edu 115 3pm "
+	};
+var dummyClub3 = {
+		clubname: "UnderWaterBasketWeaving",
+		username: "umdAlive1",
+		keywords: "Athletic",
+		description: "We are the best under water basket weaving club in the northland",
+		post: "dryland this sunday, 2 pm, bring your own weights. Be there or no more basket weaving with us."
+	};
+var dummyUser1 = {
+        email: "umdAlive1",
+        password: "",
+        graduation_date: "2018"
+        major: "computer science"
+    };
 // Empty array for clubs to reside in
 var clubs = {
 	items: []
@@ -25,15 +52,20 @@ var users = {
 var mostRecentPosts = {
     items: []
 };
+var countClubs = 0;
+var countUsers = 0;
 
+countClubs = clubs.items.push(dummyClub1;
+countClubs = clubs.items.push(dummyClub2);
+countClubs = clubs.items.push(dummyClub3);
+countUsers = users.items.push(dummyUser1);
 
 /*
 ************************
 * ROUTE SECTION
 ************************
 */
-var countClubs = 0;
-var countUsers = 0;
+
 app.put('/newClub', function(req, res) {
 
 	// If for some reason the JSON isn't parsed, return HTTP error 400
@@ -75,6 +107,7 @@ app.put('/userInformation', function(req, res) {
         password: req.body.user_password,
         graduation_date: req.body.graduation_date,
         major: req.body.major,
+        clubs: ""
     };
 
     // Adds dataObject items to array
