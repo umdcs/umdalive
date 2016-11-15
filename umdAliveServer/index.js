@@ -39,12 +39,26 @@ app.use(bodyParser.json());
                     description: "We are the best under water basket weaving club in the northland",
                     post: "dryland this sunday, 2 pm, bring your own weights. Be there or no more basket weaving with us."
                 };
+            var dummyClub4 = {
+                    clubname: "Air Guitar Club",
+                    username: "umdAlive1",
+                    keywords: "Music",
+                    description: "We jam to songs and play air instruments",
+                    post: "Send email to umd.alive@gmail.com for questions about playlist"
+                };
             var dummyUser1 = {
                     name: "Billy Joe",
                     email: "umdAlive1@gmail.com",
                     password: "123abc",
                     graduationDate: "2018",
                     major: "computer science"
+                };
+            var dummyUser2 = {
+                    name: "Seemore Buts",
+                    email: "Seemore.Buts@gmail.com",
+                    password: "password",
+                    graduationDate: "2019",
+                    major: "mechanical engineering"
                 };
 
 /*///////////////////////////
@@ -68,7 +82,10 @@ var countUsers = 0;
 countClubs = clubs.items.push(dummyClub1);
 countClubs = clubs.items.push(dummyClub2);
 countClubs = clubs.items.push(dummyClub3);
+countClubs = clubs.items.push(dummyClub4);
+
 countUsers = users.items.push(dummyUser1);
+countUsers = users.items.push(dummyUser2);
 
 /*
 ************************
