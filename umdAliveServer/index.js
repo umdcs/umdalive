@@ -159,13 +159,13 @@ countUsers = users.items.push(dummyUser2);
         function getUserPosition(username_temp){
             for(var x = 0; x < users.length; x++)
             {
-                if (users[x].body.username === username_temp)
+                if (users.items[x].body.username === username_temp)
                 return x;
             }
             return -1;
          }
         function getClubName( position) {
-                      return clubs[position].clubname;
+                      return clubs.items[position].clubname;
          }
 
         app.put('/userInformation', function(req, res) {

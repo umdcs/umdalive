@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,10 +35,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static UserInformation this_user = new UserInformation();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +164,8 @@ public class MainActivity extends AppCompatActivity
             else
                 displayClubs(result);
             Log.i("result: ", result);
+
+
         }
     }
 
@@ -165,8 +175,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void getUser(View view){
-        new HTTPAsyncTask().execute("http://10.0.2.2:5000/userDataGet", "GET");
-        //will obtain json string from textview and take value out from string
+        try {
+            String userData = new HTTPAsyncTask().execute("http://10.0.2.2:5000/userDataGet", "GET").get();
+            Log.d("userData", userData);
+            //will obtain json string from textview and take value out from string
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+    public static UserInformation getUserInformation(){
+        return this_user;
     }
 
     /*
@@ -174,6 +194,14 @@ public class MainActivity extends AppCompatActivity
      */
     public void updateUser(String str1){
         //break the string up that resulted from the
+        /*
+        String[] brokeUp = str1.split(",");
+        String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
+        String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
+        String password = brokeUp[2].substring(12,brokeUp[2].length() - 1);
+        String grad = brokeUp[3].substring(18, brokeUp[3].length() - 1);
+        String major = brokeUp[4].substring(9, brokeUp[4].length() - 2);
+*/
         String[] brokeUp = str1.split(",");
         String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
         String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
@@ -227,7 +255,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -247,8 +274,28 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-            new HTTPAsyncTask().execute("http://10.0.2.2:5000/getAllClubs", "GET");
-
+            try {
+                String getClubNames;
+                getClubNames = new HTTPAsyncTask().execute("http://10.0.2.2:5000/getAllClubs", "GET").get();
+                try {
+                    // JSONObject club_names = new JSONObject(jsonString);
+                    ArrayList<String> list = new ArrayList<String>();
+                    JSONArray jsonArray = new JSONArray(getClubNames);
+                    if (jsonArray != null) {
+                        int len = jsonArray.length();
+                        for (int i=0;i<len;i++){
+                            list.add(jsonArray.get(i).toString());
+                        }
+                        this_user.setLocal_club_Names(list);
+                    }
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         } else if (id == R.id.calendar) {
 
         }  else if (id == R.id.tools) {
@@ -263,5 +310,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }
