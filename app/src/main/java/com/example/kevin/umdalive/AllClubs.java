@@ -13,4 +13,5 @@ public class AllClubs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_clubs);
     }
+
 }

@@ -150,10 +150,18 @@ public class MainActivity extends AppCompatActivity
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-
-           updateUser(result);
+            Log.i("substring: ", result.substring(0,8));
+            if(result.substring(0,8).equals( "{\"name\":"))
+                updateUser(result);
+            else
+                displayClubs(result);
             Log.i("result: ", result);
         }
+    }
+
+    public void displayClubs(String clubNames){
+        Intent intent = new Intent(this, AllClubs.class);
+        startActivity(intent);
     }
 
     public void getUser(View view){
@@ -239,6 +247,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
+            new HTTPAsyncTask().execute("http://10.0.2.2:5000/getAllClubs", "GET");
 
         } else if (id == R.id.calendar) {
 

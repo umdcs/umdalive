@@ -107,21 +107,6 @@ countUsers = users.items.push(dummyUser1);
         });
 
 
-    //cuntion to send array of all the clubs created
-        app.get('/getAllClubs', function(req,res){
-                    //array to which each club will be stored
-                    var club_names = {
-                        items: []
-                    };
-                    for(var x = 0; x < clubs.length; x++)
-                    {
-                        club_names[0] = getClubName(x);
-                    }
-
-                    var stringArray = json.stringify(club_names);
-                    res.send(stringArray);
-
-                    });
 
         app.put('/subscribeUser', function(req, res) {
 
@@ -211,6 +196,21 @@ countUsers = users.items.push(dummyUser1);
             * Function to get a specific users data, will eventually return a user info based on the name of them
             * for now it returns a fake user for testing purposes -Kevin
             */
+            //funtion to send array of all the clubs created
+            app.get('/getAllClubs', function(req,res){
+             //array to which each club will be stored
+               var club_names = {
+                     items: []
+               };
+               for(var x = 0; x < clubs.length; x++){
+                     club_names[0] = getClubName(x);
+               }
+
+                                var stringArray = JSON.stringify(club_names);
+                                res.send(stringArray);
+
+                                });
+
             app.get('/userDataGet', function(req,res){
 
             //console log for testing what data is being sent
