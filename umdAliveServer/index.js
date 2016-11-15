@@ -107,9 +107,9 @@ countUsers = users.items.push(dummyUser1);
         });
 
 
-
+    //cuntion to send array of all the clubs created
         app.get('/getAllClubs', function(req,res){
-
+                    //array to which each club will be stored
                     var club_names = {
                         items: []
                     };
@@ -144,16 +144,17 @@ countUsers = users.items.push(dummyUser1);
                 });
 
 
-        function getClubPosition(var clubname_temp){
+        function getClubPosition(clubname_temp){
+        //loop through array
             for(var x = 0; x < clubs.length; x++)
-            {
+            {//search for club name and return once found
                 if (clubs[x].body.clubname === clubname_temp)
                                 return x;
             }
             return -1;
         }
 
-        function getUserPosition(var username_temp){
+        function getUserPosition(username_temp){
             for(var x = 0; x < users.length; x++)
             {
                 if (users[x].body.username === username_temp)
@@ -161,9 +162,9 @@ countUsers = users.items.push(dummyUser1);
             }
             return -1;
          }
-        function getClubName(var position) {
-                      return clubs[position].clubname;              /
-                 })
+        function getClubName( position) {
+                      return clubs[position].clubname;
+         }
 
         app.put('/userInformation', function(req, res) {
 
