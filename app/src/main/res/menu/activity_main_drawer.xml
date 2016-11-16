@@ -17,7 +17,8 @@
             android:title="Tools" />
     </group>
     <item android:title="My Clubs">
-        <menu>
+        <menu
+            android:id="@+id/clubMenu">
             <item
                 android:id="@+id/nav_club1"
                 android:title="Club 1" />

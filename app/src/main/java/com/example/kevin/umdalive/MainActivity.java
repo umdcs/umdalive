@@ -1,5 +1,6 @@
 package com.example.kevin.umdalive;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //obtain the user info from server
         getUser(findViewById(R.id.userName));
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
 
@@ -216,6 +220,14 @@ public class MainActivity extends AppCompatActivity
         TextView userNameView = (TextView) findViewById(R.id.userName);
         userNameView.setText(name);
 
+        //function to add users clubs to menu
+        if(getUserInformation().getLocal_club_Names().size() != 0){
+            Menu sideMenu = (Menu) findViewById(R.id.clubMenu);
+            for(int i = 0; i < getUserInformation().getLocal_club_Names().size(); i++){
+                //MenuItem club = (MenuItem) new MenuItem(this);
+                //sideMenu.add(club);
+            }
+        }
     }
 
     public void onClickNewClub(View view) {
