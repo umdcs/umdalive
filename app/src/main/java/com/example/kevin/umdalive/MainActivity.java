@@ -36,6 +36,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -194,14 +195,7 @@ public class MainActivity extends AppCompatActivity
      */
     public void updateUser(String str1){
         //break the string up that resulted from the
-        /*
-        String[] brokeUp = str1.split(",");
-        String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
-        String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
-        String password = brokeUp[2].substring(12,brokeUp[2].length() - 1);
-        String grad = brokeUp[3].substring(18, brokeUp[3].length() - 1);
-        String major = brokeUp[4].substring(9, brokeUp[4].length() - 2);
-*/
+
         String[] brokeUp = str1.split(",");
         String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
         String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
@@ -223,7 +217,6 @@ public class MainActivity extends AppCompatActivity
         userNameView.setText(name);
 
     }
-
 
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
@@ -276,14 +269,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.allClubs) {
             try {
                 String getClubNames;
+                //get string of club names from server
                 getClubNames = new HTTPAsyncTask().execute("http://10.0.2.2:5000/getAllClubs", "GET").get();
-                /*
-                Log.d(getClubNames,getClubNames);
-                Log.d(getClubNames,getClubNames);
-                Log.d(getClubNames,getClubNames);
-                Log.d(getClubNames,getClubNames);
-                Log.d(getClubNames,getClubNames);
-                */
+
                 try {
                     // JSONObject club_names = new JSONObject(jsonString);
                     ArrayList<String> list = new ArrayList<String>();
@@ -295,6 +283,7 @@ public class MainActivity extends AppCompatActivity
                             list.add(jsonArray.get(i).toString());
                             Log.d(jsonArray.get(i).toString(),jsonArray.get(i).toString());
                         }
+                        Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
                         this_user.setLocal_club_Names(list);
                     }
                 } catch (JSONException e1) {

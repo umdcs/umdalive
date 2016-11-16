@@ -224,11 +224,10 @@ countUsers = users.items.push(dummyUser2);
                }
 
                                 var stringArray = JSON.stringify(club_names);
-                                console.log("please have string below this");
-                               console.log(stringArray);
+                                console.log( "clubs being sent to client: " + stringArray);
                                 res.send(stringArray);
 
-                                });
+             });
 
             app.get('/userDataGet', function(req,res){
 
