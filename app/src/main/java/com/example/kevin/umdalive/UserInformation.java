@@ -81,6 +81,9 @@ public class UserInformation {
     }
     public void setLocal_club_Names(ArrayList<String> names)
     {
+        for(String i : names){
+            local_club_Names.remove(i);
+        }
         for(String x : names){
             local_club_Names.add(x);
         }
@@ -162,7 +165,7 @@ public class UserInformation {
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            JSONObject getNames = new JSONObject();
+
         }
     }
 }

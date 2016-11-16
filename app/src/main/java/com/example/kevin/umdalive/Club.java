@@ -129,7 +129,7 @@ public class Club extends AppCompatActivity {
      */
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);
-        EditText newName = (EditText) findViewById(R.id.description_title);
+        EditText newName = (EditText) findViewById(R.id.name_title_enter);
         setClubName(newName.getText().toString());
         EditText admin = (EditText) findViewById(R.id.admin_of_club);
         setUserName(admin.getText().toString());
@@ -276,7 +276,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             jsonParam.put("username", userName );
             jsonParam.put("keywords", keyWords);
             jsonParam.put("description", description);
-            jsonParam.put("post",post);
+            jsonParam.put("post", post);
         } catch (JSONException e) {
             e.printStackTrace();
         }
