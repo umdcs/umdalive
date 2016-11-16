@@ -287,7 +287,8 @@ public class MainActivity extends AppCompatActivity
                 try {
                     // JSONObject club_names = new JSONObject(jsonString);
                     ArrayList<String> list = new ArrayList<String>();
-                    JSONArray jsonArray = new JSONArray(getClubNames);
+                    JSONObject object = new JSONObject(getClubNames);
+                    JSONArray jsonArray = object.getJSONArray("items");
                     if (jsonArray != null) {
                         int len = jsonArray.length();
                         for (int i=0;i<len;i++){
