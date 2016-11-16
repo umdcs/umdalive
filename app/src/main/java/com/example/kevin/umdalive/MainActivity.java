@@ -277,6 +277,13 @@ public class MainActivity extends AppCompatActivity
             try {
                 String getClubNames;
                 getClubNames = new HTTPAsyncTask().execute("http://10.0.2.2:5000/getAllClubs", "GET").get();
+                /*
+                Log.d(getClubNames,getClubNames);
+                Log.d(getClubNames,getClubNames);
+                Log.d(getClubNames,getClubNames);
+                Log.d(getClubNames,getClubNames);
+                Log.d(getClubNames,getClubNames);
+                */
                 try {
                     // JSONObject club_names = new JSONObject(jsonString);
                     ArrayList<String> list = new ArrayList<String>();
@@ -285,6 +292,7 @@ public class MainActivity extends AppCompatActivity
                         int len = jsonArray.length();
                         for (int i=0;i<len;i++){
                             list.add(jsonArray.get(i).toString());
+                            Log.d(jsonArray.get(i).toString(),jsonArray.get(i).toString());
                         }
                         this_user.setLocal_club_Names(list);
                     }

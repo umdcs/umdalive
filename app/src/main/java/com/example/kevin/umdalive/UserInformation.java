@@ -40,8 +40,8 @@ public class UserInformation {
 
     public UserInformation(){
         local_userName = "";
-        local_clubs_Subscibed = null;
-        local_club_Names = null;
+        local_clubs_Subscibed = new ArrayList<Club>();
+        local_club_Names = new ArrayList<String>();
     }
     /*
     get method for username of user.

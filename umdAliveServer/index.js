@@ -150,7 +150,7 @@ countUsers = users.items.push(dummyUser2);
         //loop through array
             for(var x = 0; x < clubs.length; x++)
             {//search for club name and return once found
-                if (clubs[x].body.clubname === clubname_temp)
+                if (clubs.items[x].body.clubname === clubname_temp)
                                 return x;
             }
             return -1;
@@ -164,7 +164,7 @@ countUsers = users.items.push(dummyUser2);
             }
             return -1;
          }
-        function getClubName( position) {
+        function getClubName(position) {
                       return clubs.items[position].clubname;
          }
 
@@ -219,11 +219,13 @@ countUsers = users.items.push(dummyUser2);
                var club_names = {
                      items: []
                };
-               for(var x = 0; x < clubs.length; x++){
-                     club_names[0] = getClubName(x);
+               for(var x = 0; x < clubs.items.length; x++){
+                     club_names.items[x] = getClubName(x);
                }
 
                                 var stringArray = JSON.stringify(club_names);
+                                console.log("please have string below this");
+                               console.log(stringArray);
                                 res.send(stringArray);
 
                                 });

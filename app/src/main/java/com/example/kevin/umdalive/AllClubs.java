@@ -21,10 +21,10 @@ public class AllClubs extends ListActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.all_clubs);
         ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
-  /*      String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2" };
-*/
+        //String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+         //       "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+           //     "Linux", "OS/2" };
+
         try {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1, values);
