@@ -3,22 +3,30 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/allClubs"
+            android:icon="@drawable/ic_pages_black_24dp"
+            android:title="All clubs" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/calendar"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="Calendar" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/tools"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
     </group>
+    <item android:title="My Clubs">
+        <menu
+            android:id="@+id/clubMenu">
+            <item
+                android:id="@+id/nav_club1"
+                android:title="Club 1" />
+            <item
+                android:id="@+id/nav_club2"
+                android:title="Club 2" />
+        </menu>
+    </item>
 
     <item android:title="Communicate">
         <menu>

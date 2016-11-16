@@ -1,0 +1,22 @@
+{
+  "name": "umdaliveserver",
+  "version": "1.0.0",
+  "description": "server to run umd alive app",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.umn.edu:cs4531/umdalive.git"
+  },
+  "keywords": [
+    "umdalive"
+  ],
+  "author": "Kevin S",
+  "license": "ISC"
+}
