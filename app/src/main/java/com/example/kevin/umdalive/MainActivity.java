@@ -23,11 +23,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.String.*;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -36,6 +36,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static UserInformation this_user = new UserInformation();
 
+
+    UserInformation local_user_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity
                     out.flush();
                     out.close();
                 }
+
 
                 int responseCode = serverConnection.getResponseCode();
                 Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
@@ -230,11 +234,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
         startActivity(intent);
         // display toast in long period of time
-        Toast.makeText(getApplicationContext(),"Make a New Club!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Make a New Club!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -322,4 +327,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+
 }
+
