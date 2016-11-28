@@ -52,14 +52,16 @@ app.use(bodyParser.json());
                     email: "umdAlive1@gmail.com",
                     password: "123abc",
                     graduationDate: "2018",
-                    major: "computer science"
+                    major: "computer science",
+                    users_clubs: []
                 };
             var dummyUser2 = {
                     name: "Seemore Buts",
                     email: "Seemore.Buts@gmail.com",
                     password: "password",
                     graduationDate: "2019",
-                    major: "mechanical engineering"
+                    major: "mechanical engineering",
+                    users_clubs: []
                 };
 
 /*///////////////////////////
@@ -78,6 +80,7 @@ var mostRecentPosts = {
 };
 var countClubs = 0;
 var countUsers = 0;
+var countDummy1SubscribedClubs = 0;
 
 
 countClubs = clubs.items.push(dummyClub1);
@@ -87,7 +90,12 @@ countClubs = clubs.items.push(dummyClub4);
 
 countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
+dummyUser1.users_clubs.push(dummyClub1);
+dummyUser1.users_clubs.push(dummyClub2);
 
+countDummy1SubscribedClubs = dummyUser1.users_clubs.push(dummyClub3);
+
+console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
 /*
 ************************
 * PUT ROUTE SECTION
@@ -176,9 +184,6 @@ countUsers = users.items.push(dummyUser2);
             if (!req.body) return res.sendStatus(400);
 
 
-            var users_clubs = {
-            	items: []
-            };
 
             // Takes data from request and makes a new object
             var dataObject = {
@@ -187,7 +192,7 @@ countUsers = users.items.push(dummyUser2);
                 password: req.body.user_password,
                 graduation_date: req.body.graduation_date,
                 major: req.body.major,
-                clubs: users_clubs,
+                users_clubs: [],
             };
 
             // Adds dataObject items to array
