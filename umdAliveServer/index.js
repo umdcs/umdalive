@@ -47,13 +47,30 @@ app.use(bodyParser.json());
                     description: "We jam to songs and play air instruments",
                     post: "Send email to umd.alive@gmail.com for questions about playlist"
                 };
+
+            // Empty array for clubs to reside in
+            var clubs = {
+            	items: []
+            };
+            var countClubs = 0;
+            countClubs = clubs.items.push(dummyClub1);
+            countClubs = clubs.items.push(dummyClub2);
+            countClubs = clubs.items.push(dummyClub3);
+            countClubs = clubs.items.push(dummyClub4);
+
+            var stringArray = JSON.stringify(clubs);
+
+
             var dummyUser1 = {
                     name: "Billy Joe",
                     email: "umdAlive1@gmail.com",
                     password: "123abc",
                     graduationDate: "2018",
-                    major: "computer science"
+                    major: "computer science",
+                    clubs: []
                 };
+            dummyUser1.clubs[0] = dummyClub1;
+            dummyUser1.clubs[1] = dummyClub2;
             var dummyUser2 = {
                     name: "Seemore Buts",
                     email: "Seemore.Buts@gmail.com",
@@ -66,24 +83,18 @@ app.use(bodyParser.json());
 *   End of dummy users/clubs
 *////////////////////////////
 
-// Empty array for clubs to reside in
-var clubs = {
-	items: []
-};
+
 var users = {
     items: []
 };
 var mostRecentPosts = {
     items: []
 };
-var countClubs = 0;
+
 var countUsers = 0;
 
 
-countClubs = clubs.items.push(dummyClub1);
-countClubs = clubs.items.push(dummyClub2);
-countClubs = clubs.items.push(dummyClub3);
-countClubs = clubs.items.push(dummyClub4);
+
 
 countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
@@ -190,6 +201,7 @@ countUsers = users.items.push(dummyUser2);
                 clubs: users_clubs,
             };
 
+
             // Adds dataObject items to array
             countUsers = users.items.push(dataObject);
 
@@ -238,7 +250,8 @@ countUsers = users.items.push(dummyUser2);
                                                     + "\n Email: " + dummyUser1.email
                                                     + "\n Password: " + dummyUser1.password
                                                     + "\n Graduation Date: " + dummyUser1.graduationDate
-                                                    + "\n Major: " + dummyUser1.major)
+                                                    + "\n Major: " + dummyUser1.major
+                                                    + "\n UserClubs:" + dummyUser1.clubs)
             //respose message from server
             res.send(JSON.stringify(dummyUser1));
 

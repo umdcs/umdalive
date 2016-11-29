@@ -33,6 +33,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -41,23 +42,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.Inflater;
 
 import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static UserInformation this_user = new UserInformation();
+    private static UserInformation this_user;
+    private static ArrayList<String>  allClubs; //array of strings to represent clubs, will be club objects soon
 
 
-    UserInformation local_user_info;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //obtain the user info from server
-        getUser(findViewById(R.id.userName));
+
         setContentView(R.layout.activity_main);
+
+        getUser();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,6 +84,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
     }
 
@@ -167,13 +174,8 @@ public class MainActivity extends AppCompatActivity
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            Log.i("substring: ", result.substring(0,8));
-            if(result.substring(0,8).equals( "{\"name\":"))
-                updateUser(result);
-            else
-                displayClubs(result);
-            Log.i("result: ", result);
 
+        updateUser();
 
         }
     }
@@ -183,12 +185,39 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void getUser(View view){
+    public static ArrayList<String> getAllClubs(){
+        return allClubs;
+    }
+    public void getUser(){
         try {
+            //gets string from server
             String userData = new HTTPAsyncTask().execute("http://10.0.2.2:5000/userDataGet", "GET").get();
+            //string is turned into a jsonobject
+            JSONObject user = new JSONObject(userData);
+            ArrayList<String> list = new ArrayList<String>();
+            JSONArray jArray = user.getJSONArray("clubs");
+            //creation of an array list from json so user can be created
+            if (jArray != null) {
+                int len = jArray.length();
+                for (int i=0;i<len;i++){
+
+                }
+                Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
+
+            }
+            this_user = new UserInformation(user.getString("name"),
+                                                  user.getString("major"),
+                                                  user.getString("email"),
+                                                  user.getString("graduationDate"),
+                                                  list);
+
             Log.d("userData", userData);
             //will obtain json string from textview and take value out from string
-        } catch (InterruptedException e) {
+
+        }
+        catch (JSONException e1){
+            e1.printStackTrace();
+        }catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -201,45 +230,27 @@ public class MainActivity extends AppCompatActivity
     /*
      * function to get user data and update the UI with their info
      */
-    public void updateUser(String str1){
-        //break the string up that resulted from the
+    public void updateUser(){
 
-        String[] brokeUp = str1.split(",");
-        String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
-        String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
-        String password = brokeUp[2].substring(12,brokeUp[2].length() - 1);
-        String grad = brokeUp[3].substring(18, brokeUp[3].length() - 1);
-        String major = brokeUp[4].substring(9, brokeUp[4].length() - 2);
 
-        //log messages for testing
-        Log.d("Name: " , name);
-        Log.d("Email: " , email);
-        Log.d("Password: ", password);
-        Log.d("Graduation Date", grad);
-        Log.d("Major: ", major);
+        //gets the userers email and sets the menu's email to theirs
 
         TextView emailView = (TextView) findViewById(R.id.userEmail);
-        emailView.setText(email);
+        emailView.setText(this_user.getEmail());
 
+        //gets the users name and sets menu to their name
         TextView userNameView = (TextView) findViewById(R.id.userName);
-        userNameView.setText(name);
+        userNameView.setText(this_user.getLocalUsername());
 
-        //function to add users clubs to menu
-        if(getUserInformation().getLocal_club_Names().size() != 0){
-            Menu sideMenu = (Menu) findViewById(R.id.clubMenu);
-            for(int i = 0; i < getUserInformation().getLocal_club_Names().size(); i++){
-                //MenuItem club = (MenuItem) new MenuItem(this);
-                //sideMenu.add(club);
-            }
-        }
     }
 
+
+    public String getUserName(){return this_user.getLocalUsername();}
 
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
         startActivity(intent);
-        // display toast in long period of time
-        Toast.makeText(getApplicationContext(), "Make a New Club!", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -270,7 +281,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.refresh_user_data) {
-            getUser(findViewById(id));
+            updateUser();
             return true;
         }
 
@@ -290,18 +301,21 @@ public class MainActivity extends AppCompatActivity
                 getClubNames = new HTTPAsyncTask().execute("http://10.0.2.2:5000/getAllClubs", "GET").get();
 
                 try {
-                    // JSONObject club_names = new JSONObject(jsonString);
+                    //make json array and extract clubs from it
                     ArrayList<String> list = new ArrayList<String>();
                     JSONObject object = new JSONObject(getClubNames);
                     JSONArray jsonArray = object.getJSONArray("items");
+
                     if (jsonArray != null) {
                         int len = jsonArray.length();
                         for (int i=0;i<len;i++){
                             list.add(jsonArray.get(i).toString());
-                            Log.d(jsonArray.get(i).toString(),jsonArray.get(i).toString());
+
                         }
+                        //sort club names alphabetically
                         Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
-                        this_user.setLocal_club_Names(list);
+                        allClubs = list;
+                        displayClubs(allClubs.toString());
                     }
                 } catch (JSONException e1) {
                     e1.printStackTrace();
@@ -311,6 +325,7 @@ public class MainActivity extends AppCompatActivity
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+
         } else if (id == R.id.calendar) {
 
         }  else if (id == R.id.tools) {

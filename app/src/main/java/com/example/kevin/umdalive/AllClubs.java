@@ -19,11 +19,9 @@ public class AllClubs extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.all_clubs);
-        ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
-        //String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-         //       "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-           //     "Linux", "OS/2" };
+
+        //gets array of club names from main
+        ArrayList<String> values = MainActivity.getAllClubs();
 
         try {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -33,12 +31,15 @@ public class AllClubs extends ListActivity {
         {
 
         }
+
+
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String item = (String) getListAdapter().getItem(position);
         Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+
     }
     }
 
