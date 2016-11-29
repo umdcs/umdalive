@@ -80,6 +80,7 @@ var mostRecentPosts = {
 };
 var countClubs = 0;
 var countUsers = 0;
+var countPosts = 0;
 var countDummy1SubscribedClubs = 0;
 
 
@@ -119,7 +120,10 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
 
             // Adds dataObject items to array
             countClubs = clubs.items.push(dataObject);
+            countPosts = mostRecentPosts.items.push(req.body.post);
 
+            //print post to server for testing
+            console.log(req.body.post);
             var jsonResponse = {
             id: '123', status: 'updated'
         };
@@ -131,6 +135,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
         console.log("Name of description : " + req.body.description);
         console.log("Name of new post : " + req.body.post);
         console.log("total items in array : " + countClubs);
+        console.log("total posts saved on server: " + countPosts);
         });
 
 
@@ -230,9 +235,9 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                      club_names.items[x] = getClubName(x);
                }
 
-                                var stringArray = JSON.stringify(club_names);
-                                console.log( "clubs being sent to client: " + stringArray);
-                                res.send(stringArray);
+                var stringArray = JSON.stringify(club_names);
+                console.log( "clubs being sent to client: " + stringArray);
+                res.send(stringArray);
 
              });
 
@@ -248,6 +253,20 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
             res.send(JSON.stringify(dummyUser1));
 
             });
+
+            app.get('/mostRecentPosts', function(req,res){
+
+                        var mostRecentPostsTemp = {
+                                           items: []
+                                     };
+                        for(var x = 0; x < mostRecentPosts.items.length; x++){
+                        mostRecentPostsTemp.items[x] = mostRecentPosts.items[x];
+                         }
+
+                          var stringArray = JSON.stringify(mostRecentPostsTemp);
+                          console.log( "posts being sent to client: " + stringArray);
+                          res.send(stringArray);
+                        });
 
 
 app.listen(app.get("port"), function(){

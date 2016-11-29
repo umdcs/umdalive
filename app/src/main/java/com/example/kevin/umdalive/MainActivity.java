@@ -3,6 +3,7 @@ package com.example.kevin.umdalive;
 import android.content.ClipData;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +25,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import org.json.JSONArray;
 
 import org.json.JSONException;
@@ -44,12 +50,18 @@ import java.util.concurrent.TimeUnit;
 
 import static android.R.attr.data;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static UserInformation this_user = new UserInformation();
 
 
     UserInformation local_user_info;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,18 +92,46 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
 
 
     @Override
     public void onStart() {
-        super.onStart();
+        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
     @Override
     public void onStop() {
-        super.onStop();
+        super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
+// See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.disconnect();
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Main Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
     }
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
@@ -105,7 +145,7 @@ public class MainActivity extends AppCompatActivity
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
             try {
-                URL url = new URL( params[0] );
+                URL url = new URL(params[0]);
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
                 if (params[1].equals("POST") ||
@@ -163,12 +203,11 @@ public class MainActivity extends AppCompatActivity
         }
 
         /**
-         *
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            Log.i("substring: ", result.substring(0,8));
-            if(result.substring(0,8).equals( "{\"name\":"))
+            Log.i("substring: ", result.substring(0, 8));
+            if (result.substring(0, 8).equals("{\"name\":"))
                 updateUser(result);
             else
                 displayClubs(result);
@@ -178,12 +217,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void displayClubs(String clubNames){
+    public void displayClubs(String clubNames) {
         Intent intent = new Intent(this, AllClubs.class);
         startActivity(intent);
     }
 
-    public void getUser(View view){
+    public void getUser(View view) {
         try {
             String userData = new HTTPAsyncTask().execute("http://10.0.2.2:5000/userDataGet", "GET").get();
             Log.d("userData", userData);
@@ -194,26 +233,27 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
     }
-    public static UserInformation getUserInformation(){
+
+    public static UserInformation getUserInformation() {
         return this_user;
     }
 
     /*
      * function to get user data and update the UI with their info
      */
-    public void updateUser(String str1){
+    public void updateUser(String str1) {
         //break the string up that resulted from the
 
         String[] brokeUp = str1.split(",");
-        String name = brokeUp[0].substring(9,brokeUp[0].length() - 1);
-        String email = brokeUp[1].substring(9,brokeUp[1].length() - 1);
-        String password = brokeUp[2].substring(12,brokeUp[2].length() - 1);
+        String name = brokeUp[0].substring(9, brokeUp[0].length() - 1);
+        String email = brokeUp[1].substring(9, brokeUp[1].length() - 1);
+        String password = brokeUp[2].substring(12, brokeUp[2].length() - 1);
         String grad = brokeUp[3].substring(18, brokeUp[3].length() - 1);
         String major = brokeUp[4].substring(9, brokeUp[4].length() - 2);
 
         //log messages for testing
-        Log.d("Name: " , name);
-        Log.d("Email: " , email);
+        Log.d("Name: ", name);
+        Log.d("Email: ", email);
         Log.d("Password: ", password);
         Log.d("Graduation Date", grad);
         Log.d("Major: ", major);
@@ -225,9 +265,9 @@ public class MainActivity extends AppCompatActivity
         userNameView.setText(name);
 
         //function to add users clubs to menu
-        if(getUserInformation().getLocal_club_Names().size() != 0){
+        if (getUserInformation().getLocal_club_Names().size() != 0) {
             Menu sideMenu = (Menu) findViewById(R.id.clubMenu);
-            for(int i = 0; i < getUserInformation().getLocal_club_Names().size(); i++){
+            for (int i = 0; i < getUserInformation().getLocal_club_Names().size(); i++) {
                 //MenuItem club = (MenuItem) new MenuItem(this);
                 //sideMenu.add(club);
             }
@@ -235,6 +275,41 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /*
+    onclick for refreshing most recent posts
+     */
+    public void refreshPosts() throws JSONException {
+        String mostRecentPosts = null;
+        try {
+            mostRecentPosts = new HTTPAsyncTask().execute("http://10.0.2.2:5000/mostRecentPosts", "GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> list = new ArrayList<String>();
+        JSONObject object = new JSONObject(mostRecentPosts);
+        JSONArray jsonArray = object.getJSONArray("items");
+        if (jsonArray != null) {
+            int len = jsonArray.length();
+            for (int i = 0; i < len; i++) {
+                list.add(jsonArray.get(i).toString());
+                Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+            }
+            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+            this_user.setLocalPosts(list);
+            String displayPosts = "";
+            for (int i = 0; i < len; i++) {
+                displayPosts = displayPosts + "/n" + list.get(i);
+            }
+            //EditText displayPostsText = findViewById(R.id.main_Posts);
+        }
+    }
+
+    /*
+    onclick for making a new club
+     */
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
         startActivity(intent);
@@ -296,11 +371,11 @@ public class MainActivity extends AppCompatActivity
                     JSONArray jsonArray = object.getJSONArray("items");
                     if (jsonArray != null) {
                         int len = jsonArray.length();
-                        for (int i=0;i<len;i++){
+                        for (int i = 0; i < len; i++) {
                             list.add(jsonArray.get(i).toString());
-                            Log.d(jsonArray.get(i).toString(),jsonArray.get(i).toString());
+                            Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                         }
-                        Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
+                        Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
                         this_user.setLocal_club_Names(list);
                     }
                 } catch (JSONException e1) {
@@ -313,7 +388,7 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (id == R.id.calendar) {
 
-        }  else if (id == R.id.tools) {
+        } else if (id == R.id.tools) {
 
         } else if (id == R.id.nav_share) {
 
@@ -325,8 +400,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
 }

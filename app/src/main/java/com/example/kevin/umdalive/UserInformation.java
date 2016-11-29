@@ -27,6 +27,8 @@ public class UserInformation {
     private String local_userName;
 
     private ArrayList<Club> local_clubs_Subscibed;
+    private ArrayList<String> local_posts_Subscibed;
+
     private ArrayList<String> local_club_Names;
 
 
@@ -35,7 +37,8 @@ public class UserInformation {
      */
     public UserInformation(String temp_local_username, String temp_major, String temp_graduationDate, Club[] temp_clubs_subscribed){
         local_userName = temp_local_username;
- local_clubs_Subscibed = new ArrayList<Club>();
+        local_clubs_Subscibed = new ArrayList<Club>();
+        local_posts_Subscibed = new ArrayList<String>();
         for(Club x : temp_clubs_subscribed)
         {
             local_clubs_Subscibed.add(x);
@@ -68,6 +71,22 @@ public class UserInformation {
     public void setLocal_userName(String name)
     {
     local_userName = name;
+    }
+    /*
+        Takes in a new arraylist of most recent posts then
+        Removes all current posts and then replaces objects in arraylist temp
+        and addes them to local array list
+         */
+    public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
+    {
+
+        for(String x : local_posts_Subscibed){
+            local_posts_Subscibed.remove(x);
+        }
+        for(String x : temp_posts_subscribed)
+        {
+            local_posts_Subscibed.add(x);
+        }
     }
     /*
     Takes in a new arraylist of clubs then
