@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity
             this_user.setLocalPosts(list);
             String displayPosts = "";
             for (int i = 0; i < len; i++) {
-                displayPosts = displayPosts + "\r\n" + list.get(i);
+                displayPosts = displayPosts + " \n " + list.get(i);
             }
             TextView displayPostsText = (TextView) findViewById(R.id.main_Posts);
             displayPostsText.setText(displayPosts, TextView.BufferType.EDITABLE);
