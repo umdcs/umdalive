@@ -49,6 +49,7 @@ public class UserInformation {
         local_userName = "";
         local_clubs_Subscibed = new ArrayList<Club>();
         local_club_Names = new ArrayList<String>();
+        local_posts_Subscibed = new ArrayList<String>();
     }
     /*
     get method for username of user.
@@ -79,7 +80,6 @@ public class UserInformation {
          */
     public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
     {
-
         for(String x : local_posts_Subscibed){
             local_posts_Subscibed.remove(x);
         }

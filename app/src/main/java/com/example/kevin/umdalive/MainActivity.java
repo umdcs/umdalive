@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity
     /*
     onclick for refreshing most recent posts
      */
-    public void refreshPosts() throws JSONException {
+    public void refreshPosts(View view) throws JSONException {
         String mostRecentPosts = null;
         try {
             mostRecentPosts = new HTTPAsyncTask().execute("http://10.0.2.2:5000/mostRecentPosts", "GET").get();
@@ -301,9 +301,11 @@ public class MainActivity extends AppCompatActivity
             this_user.setLocalPosts(list);
             String displayPosts = "";
             for (int i = 0; i < len; i++) {
-                displayPosts = displayPosts + "/n" + list.get(i);
+                displayPosts = displayPosts + "\r\n" + list.get(i);
             }
-            //EditText displayPostsText = findViewById(R.id.main_Posts);
+            TextView displayPostsText = (TextView) findViewById(R.id.main_Posts);
+            displayPostsText.setText(displayPosts, TextView.BufferType.EDITABLE);
+
         }
     }
 
