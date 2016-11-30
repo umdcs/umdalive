@@ -55,8 +55,6 @@ app.use(bodyParser.json());
             var countClubs = 0;
             countClubs = clubs.items.push(dummyClub1);
             countClubs = clubs.items.push(dummyClub2);
-            countClubs = clubs.items.push(dummyClub3);
-            countClubs = clubs.items.push(dummyClub4);
 
             var stringArray = JSON.stringify(clubs);
 
@@ -67,7 +65,9 @@ app.use(bodyParser.json());
                     password: "123abc",
                     graduationDate: "2018",
                     major: "computer science",
+
                     clubs: []
+
                 };
             dummyUser1.clubs[0] = dummyClub1;
             dummyUser1.clubs[1] = dummyClub2;
@@ -76,7 +76,8 @@ app.use(bodyParser.json());
                     email: "Seemore.Buts@gmail.com",
                     password: "password",
                     graduationDate: "2019",
-                    major: "mechanical engineering"
+                    major: "mechanical engineering",
+                    users_clubs: []
                 };
 
 /*///////////////////////////
@@ -92,6 +93,8 @@ var mostRecentPosts = {
 };
 
 var countUsers = 0;
+var countPosts = 0;
+var countDummy1SubscribedClubs = 0;
 
 
 
@@ -99,6 +102,10 @@ var countUsers = 0;
 countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
 
+
+
+
+console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
 /*
 ************************
 * PUT ROUTE SECTION
@@ -122,7 +129,10 @@ countUsers = users.items.push(dummyUser2);
 
             // Adds dataObject items to array
             countClubs = clubs.items.push(dataObject);
+            countPosts = mostRecentPosts.items.push(req.body.post);
 
+            //print post to server for testing
+            console.log(req.body.post);
             var jsonResponse = {
             id: '123', status: 'updated'
         };
@@ -134,6 +144,7 @@ countUsers = users.items.push(dummyUser2);
         console.log("Name of description : " + req.body.description);
         console.log("Name of new post : " + req.body.post);
         console.log("total items in array : " + countClubs);
+        console.log("total posts saved on server: " + countPosts);
         });
 
 
@@ -187,9 +198,6 @@ countUsers = users.items.push(dummyUser2);
             if (!req.body) return res.sendStatus(400);
 
 
-            var users_clubs = {
-            	items: []
-            };
 
             // Takes data from request and makes a new object
             var dataObject = {
@@ -198,7 +206,7 @@ countUsers = users.items.push(dummyUser2);
                 password: req.body.user_password,
                 graduation_date: req.body.graduation_date,
                 major: req.body.major,
-                clubs: users_clubs,
+                users_clubs: [],
             };
 
 
@@ -230,16 +238,16 @@ countUsers = users.items.push(dummyUser2);
             //funtion to send array of all the clubs created
             app.get('/getAllClubs', function(req,res){
              //array to which each club will be stored
-               var club_names = {
+               /*var club_names = {
                      items: []
                };
                for(var x = 0; x < clubs.items.length; x++){
                      club_names.items[x] = getClubName(x);
                }
 
-                                var stringArray = JSON.stringify(club_names);
-                                console.log( "clubs being sent to client: " + stringArray);
-                                res.send(stringArray);
+                var stringArray = JSON.stringify(club_names);*/
+                console.log( "clubs being sent to client: " + stringArray);
+                res.send(clubs);
 
              });
 
@@ -256,6 +264,20 @@ countUsers = users.items.push(dummyUser2);
             res.send(JSON.stringify(dummyUser1));
 
             });
+
+            app.get('/mostRecentPosts', function(req,res){
+
+                        var mostRecentPostsTemp = {
+                                           items: []
+                                     };
+                        for(var x = 0; x < mostRecentPosts.items.length; x++){
+                        mostRecentPostsTemp.items[x] = mostRecentPosts.items[x];
+                         }
+
+                          var stringArray = JSON.stringify(mostRecentPostsTemp);
+                          console.log( "posts being sent to client: " + stringArray);
+                          res.send(stringArray);
+                        });
 
 
 app.listen(app.get("port"), function(){

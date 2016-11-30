@@ -29,19 +29,25 @@ public class UserInformation {
     private String major;
     private String gradDate;
 
+
     private ArrayList<String> local_clubs_Subscibed;
+    private ArrayList<String> local_posts_Subscibed;
+
+
     private ArrayList<String> local_club_Names;
 
 
     /*
     Sets the local data that the app will run off of, will use this method when user signs in
      */
+
     public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<String> temp_clubs_subscribed){
         name = temp_local_username;
         email = emai;
         major = temp_major;
         gradDate = temp_graduationDate;
         local_clubs_Subscibed = temp_clubs_subscribed;
+
 
     }
 
@@ -58,6 +64,21 @@ public class UserInformation {
     public String getGradDate(){return gradDate;}
     public ArrayList<String> getLocalClubs(){return local_clubs_Subscibed;}
 
+    /*
+        Takes in a new arraylist of most recent posts then
+        Removes all current posts and then replaces objects in arraylist temp
+        and addes them to local array list
+         */
+    public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
+    {
+        for(String x : local_posts_Subscibed){
+            local_posts_Subscibed.remove(x);
+        }
+        for(String x : temp_posts_subscribed)
+        {
+            local_posts_Subscibed.add(x);
+        }
+    }
     /*
     Takes in a new arraylist of clubs then
     Removes all current clubs and then replaces objects in arraylist temp

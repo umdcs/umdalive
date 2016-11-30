@@ -3,6 +3,7 @@ package com.example.kevin.umdalive;
 import android.content.ClipData;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 import org.json.JSONArray;
@@ -46,11 +48,16 @@ import java.util.zip.Inflater;
 
 import static android.R.attr.data;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static UserInformation this_user;
     private static ArrayList<String>  allClubs; //array of strings to represent clubs, will be club objects soon
 
+
+
+
+    UserInformation local_user_info;
 
 
 
@@ -86,20 +93,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
     }
-
 
 
     @Override
     public void onStart() {
-        super.onStart();
+        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
+
     }
 
     @Override
     public void onStop() {
-        super.onStop();
+
     }
+
+
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -112,7 +120,7 @@ public class MainActivity extends AppCompatActivity
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
             try {
-                URL url = new URL( params[0] );
+                URL url = new URL(params[0]);
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
                 if (params[1].equals("POST") ||
@@ -170,7 +178,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         /**
-         *
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
@@ -180,10 +187,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void displayClubs(String clubNames){
+    public void displayClubs(String clubNames) {
         Intent intent = new Intent(this, AllClubs.class);
+        setContentView(R.layout.all_clubs);
         startActivity(intent);
     }
+
 
     public static ArrayList<String> getAllClubs(){
         return allClubs;
@@ -223,17 +232,17 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
     }
-    public static UserInformation getUserInformation(){
+
+    public static UserInformation getUserInformation() {
         return this_user;
     }
 
     /*
      * function to get user data and update the UI with their info
      */
-    public void updateUser(){
 
+    public void updateUser() {
 
-        //gets the userers email and sets the menu's email to theirs
 
         TextView emailView = (TextView) findViewById(R.id.userEmail);
         emailView.setText(this_user.getEmail());
@@ -246,6 +255,47 @@ public class MainActivity extends AppCompatActivity
 
 
     public String getUserName(){return this_user.getLocalUsername();}
+
+
+
+
+    /*
+    onclick for refreshing most recent posts
+     */
+    public void refreshPosts(View view) throws JSONException {
+        String mostRecentPosts = null;
+        try {
+            mostRecentPosts = new HTTPAsyncTask().execute("http://10.0.2.2:5000/mostRecentPosts", "GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<String> list = new ArrayList<String>();
+        JSONObject object = new JSONObject(mostRecentPosts);
+        JSONArray jsonArray = object.getJSONArray("items");
+        if (jsonArray != null) {
+            int len = jsonArray.length();
+            for (int i = 0; i < len; i++) {
+                list.add(jsonArray.get(i).toString());
+                Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+            }
+            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+            this_user.setLocalPosts(list);
+            String displayPosts = "";
+            for (int i = 0; i < len; i++) {
+                displayPosts = displayPosts + " \n " + list.get(i);
+            }
+            TextView displayPostsText = (TextView) findViewById(R.id.main_Posts);
+            displayPostsText.setText(displayPosts, TextView.BufferType.EDITABLE);
+
+        }
+    }
+
+    /*
+    onclick for making a new club
+     */
 
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
@@ -308,14 +358,16 @@ public class MainActivity extends AppCompatActivity
 
                     if (jsonArray != null) {
                         int len = jsonArray.length();
-                        for (int i=0;i<len;i++){
+                        for (int i = 0; i < len; i++) {
                             list.add(jsonArray.get(i).toString());
+
 
                         }
                         //sort club names alphabetically
                         Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
                         allClubs = list;
                         displayClubs(allClubs.toString());
+
                     }
                 } catch (JSONException e1) {
                     e1.printStackTrace();
@@ -328,7 +380,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.calendar) {
 
-        }  else if (id == R.id.tools) {
+        } else if (id == R.id.tools) {
 
         } else if (id == R.id.nav_share) {
 
@@ -340,8 +392,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 
 
 }
