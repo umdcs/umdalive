@@ -213,8 +213,7 @@ public class MainActivity extends AppCompatActivity
             Log.i("substring: ", result.substring(0, 8));
             if (result.substring(0, 8).equals("{\"name\":"))
                 updateUser(result);
-            else
-               // displayClubs(result);
+
             Log.i("result: ", result);
 
 
@@ -387,6 +386,7 @@ public class MainActivity extends AppCompatActivity
                         }
                         Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
                         this_user.setLocal_club_Names(list);
+                        displayClubs(getClubNames);
                     }
                 } catch (JSONException e1) {
                     e1.printStackTrace();
