@@ -122,7 +122,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
 
             // Adds dataObject items to array
             countClubs = clubs.items.push(dataObject);
-            countPosts = mostRecentPosts.items.push(req.body.post);
+            countPosts = mostRecentPosts.items.push(req.body.clubname + ": \n" + req.body.post);
 
             //print post to server for testing
             console.log(req.body.post);

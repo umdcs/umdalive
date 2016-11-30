@@ -70,7 +70,8 @@
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/make_a_club"
         android:minLines="25"
-        android:gravity="top|left" />
+        android:gravity="top|left"
+        android:textColor="@color/colorPrimary" />
 
 
 </RelativeLayout>
