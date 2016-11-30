@@ -80,8 +80,8 @@ public class UserInformation {
          */
     public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
     {
-        for(String x : local_posts_Subscibed){
-            local_posts_Subscibed.remove(x);
+        while(local_posts_Subscibed.size() !=0){
+            local_posts_Subscibed.remove(0);
         }
         for(String x : temp_posts_subscribed)
         {

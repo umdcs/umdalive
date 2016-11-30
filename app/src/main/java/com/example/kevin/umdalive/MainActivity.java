@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
 
 
     UserInformation local_user_info;
+    EditText posts;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -95,6 +96,9 @@ public class MainActivity extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        posts = (EditText)findViewById(R.id.mainPosts);
+        posts.setMaxLines(20);
     }
 
 
@@ -210,7 +214,7 @@ public class MainActivity extends AppCompatActivity
             if (result.substring(0, 8).equals("{\"name\":"))
                 updateUser(result);
             else
-                displayClubs(result);
+               // displayClubs(result);
             Log.i("result: ", result);
 
 
@@ -278,7 +282,7 @@ public class MainActivity extends AppCompatActivity
     /*
     onclick for refreshing most recent posts
      */
-    public void refreshPosts(View view) throws JSONException {
+    public void refreshPosts(View view){
         String mostRecentPosts = null;
         try {
             mostRecentPosts = new HTTPAsyncTask().execute("http://10.0.2.2:5000/mostRecentPosts", "GET").get();
@@ -289,23 +293,27 @@ public class MainActivity extends AppCompatActivity
         }
 
         ArrayList<String> list = new ArrayList<String>();
-        JSONObject object = new JSONObject(mostRecentPosts);
-        JSONArray jsonArray = object.getJSONArray("items");
-        if (jsonArray != null) {
-            int len = jsonArray.length();
-            for (int i = 0; i < len; i++) {
-                list.add(jsonArray.get(i).toString());
-                Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-            }
-            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-            this_user.setLocalPosts(list);
-            String displayPosts = "";
-            for (int i = 0; i < len; i++) {
-                displayPosts = displayPosts + " \n " + list.get(i);
-            }
-            TextView displayPostsText = (TextView) findViewById(R.id.main_Posts);
-            displayPostsText.setText(displayPosts, TextView.BufferType.EDITABLE);
+        JSONObject object = null;
+        try {
+            object = new JSONObject(mostRecentPosts);
+            JSONArray jsonArray = object.getJSONArray("items");
+            if (jsonArray != null) {
+                int len = jsonArray.length();
+                for (int i = 0; i < len; i++) {
+                    list.add(jsonArray.get(i).toString());
+                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                }
+                Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+                this_user.setLocalPosts(list);
+                String displayPosts = "";
+                for (int i = 0; i < len; i++) {
+                    displayPosts += " \n" + list.get(i);
+                }
+                posts.setText(displayPosts);
 
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

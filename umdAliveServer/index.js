@@ -94,6 +94,8 @@ countUsers = users.items.push(dummyUser2);
 dummyUser1.users_clubs.push(dummyClub1);
 dummyUser1.users_clubs.push(dummyClub2);
 
+
+
 countDummy1SubscribedClubs = dummyUser1.users_clubs.push(dummyClub3);
 
 console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
@@ -166,7 +168,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
             for(var x = 0; x < clubs.length; x++)
             {//search for club name and return once found
                 if (clubs.items[x].body.clubname === clubname_temp)
-                                return x;
+                return x;
             }
             return -1;
         }
