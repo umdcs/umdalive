@@ -257,7 +257,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://10.0.2.2:5000/newClub", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute("http://131.212.41.7:5001/newClub", "POST", jsonParam.toString());
     }
 
     /**
@@ -281,7 +281,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         Log.d("DEBUG [PUT]:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://10.0.2.2:5000/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+        new HTTPAsyncTask().execute("http://131.212.41.7:5001/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
     }
 
 }
