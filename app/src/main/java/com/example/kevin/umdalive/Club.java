@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import com.example.kevin.umdalive.MainActivity;
 
 /**
  * Created by user on 10/25/2016.
@@ -30,12 +31,14 @@ import java.net.URL;
 
 public class Club extends AppCompatActivity {
 
+    private UserInformation  this_user = new UserInformation();
     private String clubName = "DummyClub";
     private String userName ="Dummy";
     private String keyWords = "#Dummy";
     private String description = "This is a dummy.";
     private String post = "This is a dummy post";
     private Object keywordItem = new Object();          //this item grabs from user
+
 
     public Club(){
         clubName = "default";
@@ -257,7 +260,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://131.212.41.7:5001/newClub", "POST", jsonParam.toString());
+        new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "POST", jsonParam.toString());
     }
 
     /**
@@ -281,7 +284,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
             e.printStackTrace();
         }
         Log.d("DEBUG [PUT]:", jsonParam.toString());
-        new HTTPAsyncTask().execute("http://131.212.41.7:5001/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+        new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
     }
 
 }

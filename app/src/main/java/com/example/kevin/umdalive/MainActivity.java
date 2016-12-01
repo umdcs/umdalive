@@ -53,6 +53,7 @@ import static android.R.attr.data;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     private static UserInformation this_user = new UserInformation();
 
 
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity
 
     public void getUser(View view) {
         try {
-            String userData = new HTTPAsyncTask().execute("http://131.212.41.7:5001/userDataGet", "GET").get();
+            String userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
             Log.d("userData", userData);
             //will obtain json string from textview and take value out from string
         } catch (InterruptedException e) {
@@ -284,7 +285,7 @@ public class MainActivity extends AppCompatActivity
     public void refreshPosts(View view){
         String mostRecentPosts = null;
         try {
-            mostRecentPosts = new HTTPAsyncTask().execute("http://131.212.41.7:5001/mostRecentPosts", "GET").get();
+            mostRecentPosts = new HTTPAsyncTask().execute(this_user.serverAddress + "/mostRecentPosts", "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -371,7 +372,7 @@ public class MainActivity extends AppCompatActivity
             try {
                 String getClubNames;
                 //get string of club names from server
-                getClubNames = new HTTPAsyncTask().execute("http://131.212.41.7:5001/getAllClubs", "GET").get();
+                getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
                 try {
                     // JSONObject club_names = new JSONObject(jsonString);
