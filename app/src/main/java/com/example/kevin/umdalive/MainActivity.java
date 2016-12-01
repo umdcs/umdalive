@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onStop() {
-
+    super.onStop();
     }
 
 
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-
+        Log.d("in on post execute",".");
         updateUser();
 
         }
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity
 
     public void displayClubs(String clubNames) {
         Intent intent = new Intent(this, AllClubs.class);
-        setContentView(R.layout.all_clubs);
+
         startActivity(intent);
     }
 
