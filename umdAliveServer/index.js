@@ -266,7 +266,6 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
             });
 
             app.get('/mostRecentPosts', function(req,res){
-
                         var mostRecentPostsTemp = {
                                            items: []
                                      };
@@ -277,7 +276,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                           var stringArray = JSON.stringify(mostRecentPostsTemp);
                           console.log( "posts being sent to client: " + stringArray);
                           res.send(stringArray);
-                        });
+            });
 
 
 app.listen(app.get("port"), function(){

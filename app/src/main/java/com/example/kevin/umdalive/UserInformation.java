@@ -30,9 +30,8 @@ public class UserInformation {
     private String gradDate;
 
 
-    private ArrayList<String> local_clubs_Subscibed;
-    private ArrayList<String> local_posts_Subscibed;
-
+    private ArrayList<Club> local_clubs_subscribed;
+    private ArrayList<String> local_posts_subscribed;
 
     private ArrayList<String> local_club_Names;
 
@@ -41,13 +40,13 @@ public class UserInformation {
     Sets the local data that the app will run off of, will use this method when user signs in
      */
 
-    public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<String> temp_clubs_subscribed){
+    public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<Club> temp_clubs_subscribed){
         name = temp_local_username;
         email = emai;
         major = temp_major;
         gradDate = temp_graduationDate;
-        local_clubs_Subscibed = temp_clubs_subscribed;
-
+        local_posts_subscribed = new ArrayList<String>();
+        local_clubs_subscribed = temp_clubs_subscribed;
 
     }
 
@@ -62,7 +61,7 @@ public class UserInformation {
     public String getEmail(){return email;}
     public String getMajor(){return major;}
     public String getGradDate(){return gradDate;}
-    public ArrayList<String> getLocalClubs(){return local_clubs_Subscibed;}
+    public ArrayList<Club> getLocalClubs(){return local_clubs_subscribed;}
 
     /*
         Takes in a new arraylist of most recent posts then
@@ -71,16 +70,16 @@ public class UserInformation {
          */
     public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
     {
-        for(String x : local_posts_Subscibed){
-            local_posts_Subscibed.remove(x);
+        while(local_clubs_subscribed.size() !=0 && local_clubs_subscribed != null){
+            local_posts_subscribed.remove(0);
         }
         for(String x : temp_posts_subscribed)
         {
-            local_posts_Subscibed.add(x);
+            local_posts_subscribed.add(x);
         }
     }
-    /*
-    Takes in a new arraylist of clubs then
+
+    /*Takes in a new arraylist of clubs then
     Removes all current clubs and then replaces objects in arraylist temp
     and addes them to local array list
 
@@ -108,8 +107,8 @@ public class UserInformation {
     {
         return local_club_Names;
     }
+
+
     */
-
-
 
 }

@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static UserInformation this_user;
     private static ArrayList<String>  allClubs; //array of strings to represent clubs, will be club objects soon
-
+    EditText posts;
 
 
 
@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        posts = (EditText)findViewById(R.id.mainPosts);
+        posts.setMaxLines(20);
 
     }
 
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-        Log.d("in on post execute",".");
+
         updateUser();
 
         }
@@ -203,7 +205,7 @@ public class MainActivity extends AppCompatActivity
             String userData = new HTTPAsyncTask().execute("http://10.0.2.2:5000/userDataGet", "GET").get();
             //string is turned into a jsonobject
             JSONObject user = new JSONObject(userData);
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<Club> list = new ArrayList<Club>();
             JSONArray jArray = user.getJSONArray("clubs");
             //creation of an array list from json so user can be created
             if (jArray != null) {
@@ -211,7 +213,7 @@ public class MainActivity extends AppCompatActivity
                 for (int i=0;i<len;i++){
 
                 }
-                Collections.sort(list,String.CASE_INSENSITIVE_ORDER);
+
 
             }
             this_user = new UserInformation(user.getString("name"),
@@ -271,26 +273,30 @@ public class MainActivity extends AppCompatActivity
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
         ArrayList<String> list = new ArrayList<String>();
-        JSONObject object = new JSONObject(mostRecentPosts);
-        JSONArray jsonArray = object.getJSONArray("items");
-        if (jsonArray != null) {
-            int len = jsonArray.length();
-            for (int i = 0; i < len; i++) {
-                list.add(jsonArray.get(i).toString());
-                Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-            }
-            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-            this_user.setLocalPosts(list);
-            String displayPosts = "";
-            for (int i = 0; i < len; i++) {
-                displayPosts = displayPosts + " \n " + list.get(i);
-            }
-            TextView displayPostsText = (TextView) findViewById(R.id.main_Posts);
-            displayPostsText.setText(displayPosts, TextView.BufferType.EDITABLE);
+        JSONObject object = null;
+        try {
+            object = new JSONObject(mostRecentPosts);
+            JSONArray jsonArray = object.getJSONArray("items");
+            if (jsonArray != null) {
+                int len = jsonArray.length();
+                for (int i = 0; i < len; i++) {
+                    list.add(jsonArray.get(i).toString());
+                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                }
 
+                this_user.setLocalPosts(list);
+                String displayPosts = "";
+                for (int i = 0; i < len; i++) {
+                    displayPosts += " \n" + list.get(i);
+                }
+                posts.setText(displayPosts);
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+
     }
 
     /*
@@ -356,10 +362,15 @@ public class MainActivity extends AppCompatActivity
                     JSONObject object = new JSONObject(getClubNames);
                     JSONArray jsonArray = object.getJSONArray("items");
 
+                    String clubName;
                     if (jsonArray != null) {
                         int len = jsonArray.length();
                         for (int i = 0; i < len; i++) {
-                            list.add(jsonArray.get(i).toString());
+                            //gets the club object from the array of clubs
+                            JSONObject club = jsonArray.getJSONObject(i);
+                            //gets the name of that club and adds to the list of club names to display
+                            clubName = club.getString("clubname");
+                            list.add(clubName);
 
 
                         }
