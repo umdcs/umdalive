@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_pages_black_24dp"
             android:title="All clubs" />
         <item
+            android:id="@+id/Post"
+            android:icon="@drawable/ic_pages_black_24dp"
+            android:title="Post For Your Club" />
+        <item
             android:id="@+id/calendar"
             android:icon="@drawable/ic_event_note_black_24dp"
             android:title="Calendar" />

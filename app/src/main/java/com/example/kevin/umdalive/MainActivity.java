@@ -226,6 +226,12 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void displayClubsForPost(String clubNames)
+    {
+        Intent intent = new Intent(this, PostForClubActivity.class);
+        startActivity(intent);
+    }
+
     public void getUser(View view) {
         try {
             String userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
@@ -397,6 +403,36 @@ public class MainActivity extends AppCompatActivity
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+        } else if (id == R.id.Post) {
+            try {
+                String getClubNames;
+                //get string of club names from server
+                getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+
+                try {
+                    // JSONObject club_names = new JSONObject(jsonString);
+                    ArrayList<String> list = new ArrayList<String>();
+                    JSONObject object = new JSONObject(getClubNames);
+                    JSONArray jsonArray = object.getJSONArray("items");
+                    if (jsonArray != null) {
+                        int len = jsonArray.length();
+                        for (int i = 0; i < len; i++) {
+                            list.add(jsonArray.get(i).toString());
+                            Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                        }
+                        Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+                        this_user.setLocal_club_Names(list);
+                        displayClubsForPost(getClubNames);
+                    }
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
         } else if (id == R.id.calendar) {
 
         } else if (id == R.id.tools) {
