@@ -28,7 +28,8 @@ public class UserInformation {
 
     private ArrayList<Club> local_clubs_Subscibed;
     private ArrayList<String> local_posts_Subscibed;
-    public final String serverAddress = "https://lempo.d.umn.edu:5001";
+    //public final String serverAddress = "https://lempo.d.umn.edu:5001";
+    public final String serverAddress = "http:10.0.2.2:5000";
     private ArrayList<String> local_club_Names;
 
 

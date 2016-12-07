@@ -30,8 +30,9 @@ import java.net.URL;
 
 public class PostingActivity extends AppCompatActivity {
 
-    private String post;
+    private String postToDisplay;
     private static String clubToPost;
+    private EditText newPost;
     UserInformation this_user = MainActivity.getUserInformation();
 
     public PostingActivity(){
@@ -46,18 +47,18 @@ public class PostingActivity extends AppCompatActivity {
     }
 
     private void setPost(String post){
-    this.post = post;
+    postToDisplay = post;
     }
 
     public String getPost(){
-        return this.post;
+        return postToDisplay;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
-        EditText newPost = (EditText) findViewById(R.id.post_entry_box);
-        setPost(newPost.getText().toString());
+        newPost = (EditText) findViewById(R.id.post_entry_box);
+
     }
 
 
@@ -79,8 +80,15 @@ public class PostingActivity extends AppCompatActivity {
 
     public void sendPost(View view){
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        setPost(newPost.getText().toString());
+        Log.d(postToDisplay, postToDisplay);
+        Log.d(postToDisplay, postToDisplay);
+        Log.d(postToDisplay, postToDisplay);
+        Log.d(postToDisplay, postToDisplay);
+
+        Log.d(clubToPost,clubToPost);
         restPUT(view);
+        startActivity(intent);
     }
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -162,8 +170,8 @@ public class PostingActivity extends AppCompatActivity {
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
-            jsonParam.put("clubToPost:", clubToPost);
-            jsonParam.put("post",post);
+            jsonParam.put("clubToPost", clubToPost);
+            jsonParam.put("postToDisplay",postToDisplay);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -183,8 +191,8 @@ public class PostingActivity extends AppCompatActivity {
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
-            jsonParam.put("club:", clubToPost);
-            jsonParam.put("post", post);
+            jsonParam.put("clubToPost", clubToPost);
+            jsonParam.put("postToDisplay", postToDisplay);
         } catch (JSONException e) {
             e.printStackTrace();
         }
