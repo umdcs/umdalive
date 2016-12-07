@@ -172,7 +172,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                             var post = clubs.items[position].post;
                             var description = clubs.items[position].description;
                             var username = clubs.items[position].username;
-                            var keyword = clubs.items[position].keyword;
+                            var keywords = clubs.items[position].keywords;
                             var jsonResponse = {
                             //id: '123', status: 'updated'
                         };
@@ -180,14 +180,14 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                         console.log(post);
                         console.log(description);
                         console.log(username);
-                        console.log(keyword);
+                        console.log(keywords);
 
                         var jsonResponse = {
                           club: clubname,
                           post: post,
                           description: description,
                           username: username,
-                          keyword: keyword
+                          keywords: keywords
                            };
                         res.json(jsonResponse);
                         });

@@ -28,10 +28,6 @@ public class PostForClubActivity extends Activity {
         setContentView(R.layout.post_for_club_select);
         listView = (ListView) findViewById(R.id.list);
         ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
-        for(int x = 0; x < values.size(); x++){
-
-            Log.d(values.get(x),values.get(x));
-        }
         try {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1, values);
@@ -44,7 +40,7 @@ public class PostForClubActivity extends Activity {
 
 
                     // ListView Clicked item index
-                    int itemPosition     = position;
+                    int itemPosition = position;
 
                     // ListView Clicked item value
                     String  itemValue  = (String) listView.getItemAtPosition(position);
@@ -65,13 +61,6 @@ public class PostForClubActivity extends Activity {
         {
         }}
 
-
-    public void postButtonOnClick(){
-        Intent intent = new Intent(this, PostingActivity.class);
-        String message = "abc";
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
 
     protected void onPause() {
         super.onPause();
