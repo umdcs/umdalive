@@ -57,7 +57,15 @@ public class DisplayClub extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_club);
+        EditText clubnameEditText = (EditText) findViewById(R.id.display_club_name);
+        EditText discriptionEditText = (EditText) findViewById(R.id.display_club_description);
+        EditText keywordEditText = (EditText) findViewById(R.id.display_clubs_keyword);
+        EditText administratorEditText = (EditText) findViewById(R.id.display_clubs_administator);
 
+        clubnameEditText.setText(clubName);
+        discriptionEditText.setText(description);
+        keywordEditText.setText(keywords);
+        administratorEditText.setText(administrator);
     }
 
 

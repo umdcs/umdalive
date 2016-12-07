@@ -74,6 +74,11 @@ public class AllClubs extends Activity {
                         String descriptionFromServer = object.getString("description");
                         String userNameFromServer = object.getString("username");
                         String keywordFromServer = object.getString("keywords");
+                        DisplayClub.setClubName(clubFromServer);
+                        DisplayClub.setAdministrator(userNameFromServer);
+                        DisplayClub.setDescription(descriptionFromServer);
+                        DisplayClub.setKeywords(keywordFromServer);
+
                         Log.d(clubFromServer,clubFromServer);
                         Log.d(descriptionFromServer,descriptionFromServer);
                         Log.d(userNameFromServer,userNameFromServer);
