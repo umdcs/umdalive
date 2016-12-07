@@ -47,7 +47,8 @@ public class PostForClubActivity extends Activity {
                     int itemPosition     = position;
 
                     // ListView Clicked item value
-                    String  itemValue    = (String) listView.getItemAtPosition(position);
+                    String  itemValue  = (String) listView.getItemAtPosition(position);
+                    PostingActivity.setClub(itemValue);
                     Intent intent = new Intent(PostForClubActivity.this, PostingActivity.class);
                     startActivity(intent);
 

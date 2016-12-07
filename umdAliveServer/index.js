@@ -140,6 +140,21 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
         console.log("total posts saved on server: " + countPosts);
         });
 
+        app.put('/newPost', function(req, res) {
+
+                    // If for some reason the JSON isn't parsed, return HTTP error 400
+                    if (!req.body) return res.sendStatus(400);
+
+                    // Adds dataObject items to array
+                    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
+
+                    //print post to server for testing
+                    console.log(req.body.post);
+                    var jsonResponse = {
+                    id: '123', status: 'updated'
+                };
+                res.json(jsonResponse);
+                });
 
 
         app.put('/subscribeUser', function(req, res) {
