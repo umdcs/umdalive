@@ -161,6 +161,37 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                 res.json(jsonResponse);
                 });
 
+        app.put('/getClubObject', function(req, res) {
+
+                            // If for some reason the JSON isn't parsed, return HTTP error 400
+                            if (!req.body) return res.sendStatus(400);
+                            var position = getClubPosition(req.body.club);
+                            console.log(position);
+
+                            var clubname = clubs.items[position].clubname;
+                            var post = clubs.items[position].post;
+                            var description = clubs.items[position].description;
+                            var username = clubs.items[position].username;
+                            var keyword = clubs.items[position].keyword;
+                            var jsonResponse = {
+                            //id: '123', status: 'updated'
+                        };
+                        console.log(clubname);
+                        console.log(post);
+                        console.log(description);
+                        console.log(username);
+                        console.log(keyword);
+
+                        var jsonResponse = {
+                          club: clubname,
+                          post: post,
+                          description: description,
+                          username: username,
+                          keyword: keyword
+                           };
+                        res.json(jsonResponse);
+                        });
+
 
         app.put('/subscribeUser', function(req, res) {
 
@@ -185,9 +216,12 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
 
         function getClubPosition(clubname_temp){
         //loop through array
-            for(var x = 0; x < clubs.length; x++)
+        //console.log(clubname_temp);
+
+            for(var x = 0; x < clubs.items.length; x++)
             {//search for club name and return once found
-                if (clubs.items[x].body.clubname === clubname_temp)
+          //  console.log(clubs.items[x].clubname);
+                if (clubs.items[x].clubname === clubname_temp)
                 return x;
             }
             return -1;
