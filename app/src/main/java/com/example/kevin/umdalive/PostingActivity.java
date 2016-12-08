@@ -162,7 +162,7 @@ public class PostingActivity extends AppCompatActivity {
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(),"Data attempting update", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }
     public void restPOST(View view) {

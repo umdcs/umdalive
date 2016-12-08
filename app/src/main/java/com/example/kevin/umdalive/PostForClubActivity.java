@@ -49,9 +49,7 @@ public class PostForClubActivity extends Activity {
                     startActivity(intent);
 
                     // Show Alert
-                    Toast.makeText(getApplicationContext(),
-                            "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                            .show();
+
 
                 }
 
