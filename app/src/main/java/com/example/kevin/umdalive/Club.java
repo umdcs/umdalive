@@ -32,14 +32,21 @@ import com.example.kevin.umdalive.MainActivity;
 public class Club extends AppCompatActivity {
 
     private UserInformation  this_user = new UserInformation();
-    private String clubName = "DummyClub";
-    private String userName ="Dummy";
-    private String keyWords = "#Dummy";
-    private String description = "This is a dummy.";
-    private String post = "This is a dummy post";
+    private String clubName;
+    private String userName;
+    private String keyWords;
+    private String description;
+    private String post;
+
     private Object keywordItem = new Object();          //this item grabs from user
 
-
+    public Club(String cb, String un, String desc, String p, String key){
+        clubName = cb;
+        userName = un;
+        keyWords = key;
+        description = desc;
+        post = p;
+    }
     public Club(){
         clubName = "default";
         userName = "default-user";
@@ -54,6 +61,7 @@ public class Club extends AppCompatActivity {
     public void setClubName(String name){
         clubName = name;
     }
+
     /*
     this resets the keyword to a new word
      para: string of new keyword with '#' in front of it
@@ -132,10 +140,13 @@ public class Club extends AppCompatActivity {
      */
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        //get name of club from edit text
         EditText newName = (EditText) findViewById(R.id.name_title_enter);
         setClubName(newName.getText().toString());
+        //get name of admin who created club
         EditText admin = (EditText) findViewById(R.id.admin_of_club);
         setUserName(admin.getText().toString());
+        //get description of club
         EditText desription = (EditText) findViewById(R.id.description_of_club);
         setDescription(desription.getText().toString());
         EditText newPost = (EditText) findViewById(R.id.post_of_club);
@@ -243,7 +254,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
      * @param result the result from the query
      */
     protected void onPostExecute(String result) {
-        Toast.makeText(getApplicationContext(),"Data attempting update", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Data transfer sucessful", Toast.LENGTH_SHORT).show();
     }
 }
     public void restPOST(View view) {

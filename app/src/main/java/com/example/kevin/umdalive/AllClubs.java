@@ -40,9 +40,7 @@ public class AllClubs extends Activity {
         setContentView(R.layout.all_clubs);
         listView = (ListView) findViewById(R.id.list2);
         ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
-        //String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-         //       "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-           //     "Linux", "OS/2" };
+
 
         try {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -68,7 +66,7 @@ public class AllClubs extends Activity {
                             //Create JSONObject here
                             jsonParam = new JSONObject();
                             jsonParam.put("club", itemValue);
-                        String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getClubObject", "PUT", jsonParam.toString()).get();
+                        String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "PUT", jsonParam.toString()).get();
                         JSONObject object = new JSONObject(jsonResponse);
                         String clubFromServer = object.getString("club");
                         String descriptionFromServer = object.getString("description");

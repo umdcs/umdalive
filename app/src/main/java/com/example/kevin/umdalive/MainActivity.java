@@ -59,18 +59,14 @@ public class MainActivity extends AppCompatActivity
 
     UserInformation local_user_info;
     EditText posts;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //obtain the user info from server
-        getUser(findViewById(R.id.userName));
+        getUser();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -94,9 +90,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         posts = (EditText)findViewById(R.id.mainPosts);
         posts.setMaxLines(20);
@@ -105,39 +98,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onStart() {
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+        super.onStart();
+
     }
 
     @Override
     public void onStop() {
-        super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.disconnect();
+        super.onStop();
     }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Main Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
@@ -211,12 +180,7 @@ public class MainActivity extends AppCompatActivity
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            Log.i("substring: ", result.substring(0, 8));
-            if (result.substring(0, 8).equals("{\"name\":"))
                 updateUser(result);
-
-            Log.i("result: ", result);
-
 
         }
     }
@@ -232,12 +196,45 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void getUser(View view) {
+    public void getUser() {
         try {
+            //gets string from server
             String userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
+            //string is turned into a jsonobject
+            JSONObject user = new JSONObject(userData);
+            ArrayList<Club> list = new ArrayList<Club>();
+            JSONArray jArray = user.getJSONArray("clubs");
+
+            if (jArray != null) {
+                int len = jArray.length();
+                for (int i=0;i<len;i++){
+                    JSONObject clubObject = jArray.getJSONObject(i);
+                    //create new club object from server data
+                    Club tempClub = new Club(clubObject.get("clubname").toString(),
+                                             clubObject.get("username").toString(),
+                                             clubObject.get("keywords").toString(),
+                                             clubObject.get("description").toString(),
+                                             clubObject.get("post").toString());
+                    Log.d("club name: ", clubObject.get("clubname").toString());
+                    //add new club object to array
+                    list.add(tempClub);
+                }
+
+
+            }
+            this_user = new UserInformation(user.getString("name"),
+                    user.getString("major"),
+                    user.getString("email"),
+                    user.getString("graduationDate"),
+                    list);
+
             Log.d("userData", userData);
             //will obtain json string from textview and take value out from string
-        } catch (InterruptedException e) {
+
+        }
+        catch (JSONException e1){
+            e1.printStackTrace();
+        }catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -252,36 +249,12 @@ public class MainActivity extends AppCompatActivity
      * function to get user data and update the UI with their info
      */
     public void updateUser(String str1) {
-        //break the string up that resulted from the
-
-        String[] brokeUp = str1.split(",");
-        String name = brokeUp[0].substring(9, brokeUp[0].length() - 1);
-        String email = brokeUp[1].substring(9, brokeUp[1].length() - 1);
-        String password = brokeUp[2].substring(12, brokeUp[2].length() - 1);
-        String grad = brokeUp[3].substring(18, brokeUp[3].length() - 1);
-        String major = brokeUp[4].substring(9, brokeUp[4].length() - 2);
-
-        //log messages for testing
-        Log.d("Name: ", name);
-        Log.d("Email: ", email);
-        Log.d("Password: ", password);
-        Log.d("Graduation Date", grad);
-        Log.d("Major: ", major);
-
         TextView emailView = (TextView) findViewById(R.id.userEmail);
-        emailView.setText(email);
+        emailView.setText(this_user.getEmail());
 
+        //gets the users name and sets menu to their name
         TextView userNameView = (TextView) findViewById(R.id.userName);
-        userNameView.setText(name);
-
-        //function to add users clubs to menu
-        if (getUserInformation().getLocal_club_Names().size() != 0) {
-            Menu sideMenu = (Menu) findViewById(R.id.clubMenu);
-            for (int i = 0; i < getUserInformation().getLocal_club_Names().size(); i++) {
-                //MenuItem club = (MenuItem) new MenuItem(this);
-                //sideMenu.add(club);
-            }
-        }
+        userNameView.setText(this_user.getLocalUsername());
     }
 
 
@@ -329,8 +302,6 @@ public class MainActivity extends AppCompatActivity
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
         startActivity(intent);
-        // display toast in long period of time
-        Toast.makeText(getApplicationContext(), "Make a New Club!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -361,7 +332,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.refresh_user_data) {
-            getUser(findViewById(id));
+            getUser();
             return true;
         }
 
@@ -375,26 +346,28 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-            try {
-                String getClubNames;
-                //get string of club names from server
-                getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+
 
                 try {
-                    // JSONObject club_names = new JSONObject(jsonString);
-                    ArrayList<String> list = new ArrayList<String>();
-                    JSONObject object = new JSONObject(getClubNames);
-                    JSONArray jsonArray = object.getJSONArray("items");
-                    if (jsonArray != null) {
-                        int len = jsonArray.length();
-                        for (int i = 0; i < len; i++) {
-                            list.add(jsonArray.get(i).toString());
-                            Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                    String getClubNames;
+                    //get string of club names from server
+                    getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+
+                    try {
+                        // JSONObject club_names = new JSONObject(jsonString);
+                        ArrayList<String> list = new ArrayList<String>();
+                        JSONObject object = new JSONObject(getClubNames);
+                        JSONArray jsonArray = object.getJSONArray("items");
+                        if (jsonArray != null) {
+                            int len = jsonArray.length();
+                            for (int i = 0; i < len; i++) {
+                                list.add(jsonArray.get(i).toString());
+                                Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                            }
+                            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+                            this_user.setLocal_club_Names(list);
+                            displayClubs(getClubNames);
                         }
-                        Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                        this_user.setLocal_club_Names(list);
-                        displayClubs(getClubNames);
-                    }
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                 }

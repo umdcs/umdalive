@@ -47,15 +47,33 @@ app.use(bodyParser.json());
                     description: "We jam to songs and play air instruments",
                     post: "Send email to umd.alive@gmail.com for questions about playlist"
                 };
+
+            // Empty array for clubs to reside in
+            var clubs = {
+            	items: []
+            };
+            var countClubs = 0;
+            countClubs = clubs.items.push(dummyClub1);
+            countClubs = clubs.items.push(dummyClub2);
+            countClubs = clubs.items.push(dummyClub3);
+            countClubs = clubs.items.push(dummyClub4);
+
+
+            var stringArray = JSON.stringify(clubs);
+
+
             var dummyUser1 = {
                     name: "Billy Joe",
                     email: "umdAlive1@gmail.com",
                     password: "123abc",
                     graduationDate: "2018",
                     major: "computer science",
-                    users_clubs: []
+
+                    clubs: []
 
                 };
+            dummyUser1.clubs[0] = dummyClub1;
+            dummyUser1.clubs[1] = dummyClub2;
             var dummyUser2 = {
                     name: "Seemore Buts",
                     email: "Seemore.Buts@gmail.com",
@@ -70,32 +88,23 @@ app.use(bodyParser.json());
 *////////////////////////////
 
 // Empty array for clubs to reside in
-var clubs = {
-	items: []
-};
 var users = {
     items: []
 };
 var mostRecentPosts = {
     items: []
 };
-var countClubs = 0;
+
 var countUsers = 0;
 var countPosts = 0;
 var countDummy1SubscribedClubs = 0;
 
 
-countClubs = clubs.items.push(dummyClub1);
-countClubs = clubs.items.push(dummyClub2);
-countClubs = clubs.items.push(dummyClub3);
-countClubs = clubs.items.push(dummyClub4);
+
 
 countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
 
-
-
-countDummy1SubscribedClubs = dummyUser1.users_clubs.push(dummyClub3);
 
 
 
@@ -120,6 +129,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                 description: req.body.description,
                 post: req.body.post
             };
+
 
             // Adds dataObject items to array
             countClubs = clubs.items.push(dataObject);
@@ -284,7 +294,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
             */
             //funtion to send array of all the clubs created
             app.get('/getAllClubs', function(req,res){
-             //array to which each club will be stored
+            //array to which each club will be stored
                var club_names = {
                      items: []
                };
