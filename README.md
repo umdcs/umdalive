@@ -28,7 +28,7 @@ There is currently no options for deleting anything. This should be one of the f
 
 Currently the whole application signs in a “dummy user.” Moving forward it would be essential to implement a way to sign up which creates a new user and then when they login it would go and grab the clubs they are subscribed.
 
-Current State of Project
+Overview of Activities
 -------------
 
 **AllCubs**
