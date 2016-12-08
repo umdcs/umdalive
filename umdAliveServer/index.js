@@ -54,6 +54,8 @@ app.use(bodyParser.json());
                     graduationDate: "2018",
                     major: "computer science",
                     users_clubs: []
+                    clubs: []
+
                 };
             var dummyUser2 = {
                     name: "Seemore Buts",
@@ -91,12 +93,12 @@ countClubs = clubs.items.push(dummyClub4);
 
 countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
-dummyUser1.users_clubs.push(dummyClub1);
-dummyUser1.users_clubs.push(dummyClub2);
 
 
 
 countDummy1SubscribedClubs = dummyUser1.users_clubs.push(dummyClub3);
+
+
 
 console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
 /*
@@ -304,7 +306,8 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                                                     + "\n Email: " + dummyUser1.email
                                                     + "\n Password: " + dummyUser1.password
                                                     + "\n Graduation Date: " + dummyUser1.graduationDate
-                                                    + "\n Major: " + dummyUser1.major)
+                                                    + "\n Major: " + dummyUser1.major
+                                                    + "\n UserClubs:" + dummyUser1.clubs)
             //respose message from server
             res.send(JSON.stringify(dummyUser1));
 
@@ -322,7 +325,7 @@ console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Club
                           var stringArray = JSON.stringify(mostRecentPostsTemp);
                           console.log( "posts being sent to client: " + stringArray);
                           res.send(stringArray);
-                        });
+            });
 
 
 app.listen(app.get("port"), function(){
