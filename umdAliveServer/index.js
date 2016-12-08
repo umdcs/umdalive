@@ -54,7 +54,6 @@ app.use(bodyParser.json());
                     graduationDate: "2018",
                     major: "computer science",
                     users_clubs: []
-                    clubs: []
 
                 };
             var dummyUser2 = {
