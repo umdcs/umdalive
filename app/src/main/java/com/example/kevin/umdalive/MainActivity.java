@@ -50,10 +50,14 @@ import java.util.concurrent.TimeUnit;
 
 import static android.R.attr.data;
 
-
+/*
+Lots of server connections
+fix that
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Variable name consistency
     private static UserInformation this_user = new UserInformation();
 
 
@@ -66,11 +70,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         //obtain the user info from server
-        getUser();
+        getUser(); // calls server
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Understand this fab better
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +86,11 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        //this is a sidebar thing check layout for better idea
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.setDrawerListener(toggle); //depricated thing
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -95,11 +101,14 @@ public class MainActivity extends AppCompatActivity
         posts.setMaxLines(20);
     }
 
+/*
+ * consistancy with curly braces and one line functions
+ */
+
 
     @Override
     public void onStart() {
         super.onStart();
-
     }
 
     @Override
@@ -107,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         super.onStop();
     }
 
-
+//MVP Get AsyncTask out of Activity
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -176,20 +185,23 @@ public class MainActivity extends AppCompatActivity
             return "Should not get to this if the data has been sent/received correctly!";
         }
 
-        /**
-         * @param result the result from the query
-         */
-        protected void onPostExecute(String result) {
-                updateUser(result);
+    /**
+     * @param result the result from the query
+     */
+    protected void onPostExecute(String result) {
+        updateUser(result);
 
-        }
     }
+}
 
+
+    // starts display Club Activity
     public void displayClubs(String clubNames) {
         Intent intent = new Intent(this, AllClubs.class);
         startActivity(intent);
     }
 
+    // starts display Cluba for post Activity
     public void displayClubsForPost(String clubNames)
     {
         Intent intent = new Intent(this, PostForClubActivity.class);
@@ -260,6 +272,8 @@ public class MainActivity extends AppCompatActivity
 
     /*
     onclick for refreshing most recent posts
+
+    MVP
      */
     public void refreshPosts(View view){
         String mostRecentPosts = null;
@@ -339,6 +353,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //MVP
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

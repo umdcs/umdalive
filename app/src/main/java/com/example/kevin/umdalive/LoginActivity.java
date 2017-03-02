@@ -20,6 +20,9 @@ public class LoginActivity extends AppCompatActivity {
     /*
     This is the onClick for the Login button
     current functionality: currently all this does is check for "@" symbol and go to next page.
+    The next page is the Main Activity.
+
+    Replace with OAuth
      */
     public void login(View view) {
         EditText emailEntry = (EditText) findViewById(R.id.email_input);
@@ -30,10 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         }
         else Toast.makeText(getApplicationContext(),"Sorry, this is not a valid email.", Toast.LENGTH_SHORT).show();
     }
+
     /*
     This is the onClick for the signup button of the lower right corner.
     current functionality: All this does is bring you to a new activity
     that will help create a new user.
+
+    This brings you to SignUpActivity
      */
     public void signUpScreen(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
