@@ -38,21 +38,45 @@ public class PostingActivity extends AppCompatActivity {
     public PostingActivity(){
     }
 
+    /**
+     * method takes in a club name interms of a string and sets it to private clubToPost
+     * @param club the name of the club that is being psoted
+     */
     public static void setClub(String club){
         clubToPost = club;
     }
 
+    /**
+     *
+     * @return club name that the post is directed too
+     */
     public static String getClub(){
         return clubToPost;
     }
 
+
+    /**
+     * takes in the post that the author enters, and sets to the private postToDisplay
+     * @param post string containing the mesage to be posted
+     */
     private void setPost(String post){
     postToDisplay = post;
     }
 
+
+    /**
+     *
+     * @return returns the text that is being posted
+     */
+
     public String getPost(){
         return postToDisplay;
     }
+
+    /**
+     * Starts the activity and initializes the layout
+     * @param savedInstanceState
+     */
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +85,9 @@ public class PostingActivity extends AppCompatActivity {
 
     }
 
-
+/*
+Life cycle methods
+ */
     protected void onPause() {
         super.onPause();
     }
@@ -78,6 +104,11 @@ public class PostingActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
+
+    /**
+     * this method responds to send button in the posting_activity.xml. When clicked it send the user back to the main activity
+     * @param view 
+     */
     public void sendPost(View view){
         Intent intent = new Intent(this, MainActivity.class);
         setPost(newPost.getText().toString());
