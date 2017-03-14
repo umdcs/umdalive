@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Kevin on 11/14/2016.
+ * This is the activity that displays the list of all clubs.
  */
 
 public class AllClubs extends Activity {

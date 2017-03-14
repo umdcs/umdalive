@@ -26,7 +26,9 @@ import java.net.URL;
 import com.example.kevin.umdalive.MainActivity;
 
 /**
- * Created by user on 10/25/2016.
+ * This is the activity that is used for creating a new club.
+ *
+ * Thankfully this was already commented pretty well so I just added some clarification here and there.
  */
 
 public class Club extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class Club extends AppCompatActivity {
 
     private Object keywordItem = new Object();          //this item grabs from user
 
+    //constructors
     public Club(String cb, String un, String desc, String p, String key){
         clubName = cb;
         userName = un;
@@ -112,18 +115,20 @@ public class Club extends AppCompatActivity {
     }
     /*
     onCreate method for Club class
-    Contains a spinner that will display the catagories for
-    the user to choose from to determine what catagory their
+    Contains a spinner that will display the categories for
+    the user to choose from to determine what category their
     club fits into.
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_club_activity);
         Spinner spinner = (Spinner) findViewById(R.id.keywordChooser); // Create an ArrayAdapter using the string array and a default spinner layout
+        //keyword_list is the list of all the club categories. We should probably expand this at some point and add on "other" option.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
         R.array.keyword_list, android.R.layout.simple_spinner_item); // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        //dealing with the selected option of the spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 keywordItem = parent.getItemAtPosition(pos);
@@ -182,6 +187,8 @@ protocol of parent
 /*
 This is private class used to send data to server.
  */
+
+//looks like they just copy and pasted this like they did in most other instances in this project...
 private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
     @Override
@@ -257,6 +264,7 @@ private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
         Toast.makeText(getApplicationContext(),"Data transfer sucessful", Toast.LENGTH_SHORT).show();
     }
 }
+//dont know why this was created, i dont think its ever used...
     public void restPOST(View view) {
         JSONObject jsonParam = null;
         try {
