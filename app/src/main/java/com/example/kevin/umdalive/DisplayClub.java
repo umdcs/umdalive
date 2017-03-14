@@ -29,7 +29,7 @@ public class DisplayClub extends AppCompatActivity {
     private static String administrator;
     private static String keywords;
 
-    //these set methods are all called by AllClubs activity when the user selects an activity. 
+    //these set methods are all called by AllClubs activity when the user selects an activity.
     public static void setDescription(String tempDescription){
         description = tempDescription;
     }
