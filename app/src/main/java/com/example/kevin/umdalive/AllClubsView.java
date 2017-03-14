@@ -1,8 +1,7 @@
 package com.example.kevin.umdalive;
 
-/**
- * Created by Jennacide on 3/14/2017.
- */
+import android.support.v7.app.AppCompatActivity;
 
-public class AllClubsView {
+
+public class AllClubsView extends AppCompatActivity {
 }

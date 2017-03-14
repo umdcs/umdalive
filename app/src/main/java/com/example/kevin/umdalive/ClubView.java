@@ -1,5 +1,7 @@
 package com.example.kevin.umdalive;
 
 
-public class ClubView {
+import android.support.v7.app.AppCompatActivity;
+
+public class ClubView  extends AppCompatActivity {
 }

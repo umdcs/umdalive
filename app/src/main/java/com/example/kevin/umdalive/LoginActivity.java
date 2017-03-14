@@ -12,7 +12,7 @@ import android.widget.Toast;
  */
 
 public class LoginActivity extends AppCompatActivity {
-
+//probably will be moved to te view
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
@@ -24,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     Replace with OAuth
      */
+
+    //This function will be moved to the view
     public void login(View view) {
         EditText emailEntry = (EditText) findViewById(R.id.email_input);
         String emailCheckTemp = emailEntry.getText().toString();
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
     This brings you to SignUpActivity
      */
+    //stays here
     public void signUpScreen(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);

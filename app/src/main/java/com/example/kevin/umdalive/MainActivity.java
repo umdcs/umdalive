@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, PostForClubActivity.class);
         startActivity(intent);
     }
-
+//Will stay here in the model
     public void getUser() {
         try {
             //gets string from server
@@ -253,6 +253,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //will stay in model
     public static UserInformation getUserInformation() {
         return this_user;
     }
@@ -260,6 +261,7 @@ public class MainActivity extends AppCompatActivity
     /*
      * function to get user data and update the UI with their info
      */
+    //will move to view
     public void updateUser(String str1) {
         TextView emailView = (TextView) findViewById(R.id.userEmail);
         emailView.setText(this_user.getEmail());
@@ -275,6 +277,8 @@ public class MainActivity extends AppCompatActivity
 
     MVP
      */
+
+    //will probobably stay in Model(here) (TBD)
     public void refreshPosts(View view){
         String mostRecentPosts = null;
         try {
@@ -313,12 +317,14 @@ public class MainActivity extends AppCompatActivity
     /*
     onclick for making a new club
      */
+    //move to view
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, Club.class);
         startActivity(intent);
     }
 
     @Override
+    //move to view
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -329,6 +335,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    //stay here in model
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -336,6 +343,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    //stay in model
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
