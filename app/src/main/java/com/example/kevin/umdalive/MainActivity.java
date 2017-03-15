@@ -116,85 +116,6 @@ public class MainActivity extends AppCompatActivity
         super.onStop();
     }
 
-//MVP Get AsyncTask out of Activity
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpURLConnection serverConnection = null;
-            InputStream is = null;
-
-            Log.d("Debug:", "Attempting to connect to: " + params[0]);
-
-            try {
-                URL url = new URL(params[0]);
-                serverConnection = (HttpURLConnection) url.openConnection();
-                serverConnection.setRequestMethod(params[1]);
-                if (params[1].equals("POST") ||
-                        params[1].equals("PUT") ||
-                        params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
-                    serverConnection.setDoOutput(true);
-                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-                    // params[2] contains the JSON String to send, make sure we send the
-                    // content length to be the json string length
-                    serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
-
-                    // Send POST data that was provided.
-                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2].toString());
-                    out.flush();
-                    out.close();
-                }
-
-
-                int responseCode = serverConnection.getResponseCode();
-                Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
-                Log.d("Debug: ", "Response Code : " + responseCode);
-
-                is = serverConnection.getInputStream();
-
-                if (params[1] == "GET" || params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE") {
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line);
-                    }
-
-                    try {
-                        JSONObject jsonData = new JSONObject(sb.toString());
-                        return jsonData.toString();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                serverConnection.disconnect();
-            }
-
-            return "Should not get to this if the data has been sent/received correctly!";
-        }
-
-    /**
-     * @param result the result from the query
-     */
-    protected void onPostExecute(String result) {
-        updateUser(result);
-
-    }
-}
-
-
     // starts display Club Activity
     public void displayClubs(String clubNames) {
         Intent intent = new Intent(this, AllClubs.class);
@@ -210,8 +131,8 @@ public class MainActivity extends AppCompatActivity
 //Will stay here in the model
     public void getUser() {
         try {
-            //gets string from server
-            String userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
+            //make userData equal getUserData from RestModel
+            String userData = null;
             //string is turned into a jsonobject
             JSONObject user = new JSONObject(userData);
             ArrayList<Club> list = new ArrayList<Club>();
@@ -244,12 +165,8 @@ public class MainActivity extends AppCompatActivity
             //will obtain json string from textview and take value out from string
 
         }
-        catch (JSONException e1){
+        catch (JSONException e1) {
             e1.printStackTrace();
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         }
     }
 
@@ -262,6 +179,7 @@ public class MainActivity extends AppCompatActivity
      * function to get user data and update the UI with their info
      */
     //will move to view
+    //was originally called in onPostExecute in Async. Will figure out how to rework this later.
     public void updateUser(String str1) {
         TextView emailView = (TextView) findViewById(R.id.userEmail);
         emailView.setText(this_user.getEmail());
@@ -280,14 +198,8 @@ public class MainActivity extends AppCompatActivity
 
     //will probobably stay in Model(here) (TBD)
     public void refreshPosts(View view){
+        //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
         String mostRecentPosts = null;
-        try {
-            mostRecentPosts = new HTTPAsyncTask().execute(this_user.serverAddress + "/mostRecentPosts", "GET").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
         ArrayList<String> list = new ArrayList<String>();
         JSONObject object = null;

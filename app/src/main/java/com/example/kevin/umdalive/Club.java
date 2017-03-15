@@ -160,7 +160,7 @@ public class Club extends AppCompatActivity {
         setKeyWords((String)keywordItem);
         startActivity(intent);
         //call the model version of this with the presenter this through the presenter
-        restPUT(view);
+        //restPUT(view); replace this
     }
 /*
 Methods to tell Activity to inherit from parent and follow

@@ -51,6 +51,7 @@ public class RestModel {
     /**
      * Taken from AllClubs.java
      * I dont think they ever made it so this is actually displayed when a club is clicked so work on that...
+     * Some of this stuff should be done in the AllClubs model class, make sure we fix that at some point.
      * @param parent
      * @param view
      * @param position
@@ -105,24 +106,33 @@ public class RestModel {
     }
 
     /**
-     * Note to self- taken from Club.java
-     * @param view
+     * From MainActivity refreshPosts function.
+     *
+     * @return
      */
-    public void restPOST(View view) {
-        JSONObject jsonParam = null;
+    public String mostRecentPostsGET(){
+        String mostRecentPosts = null;
         try {
-            //Create JSONObject here
-            jsonParam = new JSONObject();
-            jsonParam.put("clubname",clubName);
-            jsonParam.put("username", userName );
-            jsonParam.put("keywords", keyWords);
-            jsonParam.put("description", description);
-            jsonParam.put("post",post);
-        } catch (JSONException e) {
+            mostRecentPosts = new HTTPAsyncTask().execute(this_user.serverAddress + "/mostRecentPosts", "GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        Log.d("DEBUG:", jsonParam.toString());
-        new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "POST", jsonParam.toString());
+        return mostRecentPosts;
+    }
+    public String userDataGET(){
+        String userData;
+        try {
+            userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            userData = null;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            userData = null;
+        }
+        return userData;
     }
 
     /**
@@ -133,7 +143,7 @@ public class RestModel {
      *
      * @param view
      */
-    public void restPUT(View view) {
+    public void newClubPUT(View view) {
 
         JSONObject jsonParam = null;
         try {
