@@ -49,6 +49,7 @@ public class Club extends AppCompatActivity {
         keyWords = key;
         description = desc;
         post = p;
+        //send this info to the presenter to send to the RestModel
     }
     public Club(){
         clubName = "default";
@@ -158,6 +159,7 @@ public class Club extends AppCompatActivity {
         setPost(newPost.getText().toString());
         setKeyWords((String)keywordItem);
         startActivity(intent);
+        //call the model version of this with the presenter this through the presenter
         restPUT(view);
     }
 /*
@@ -184,10 +186,5 @@ protocol of parent
     protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     }
-/*
-This is private class used to send data to server.
- */
-
-
 
 }

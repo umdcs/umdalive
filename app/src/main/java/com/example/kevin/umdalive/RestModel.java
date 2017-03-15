@@ -1,9 +1,12 @@
 package com.example.kevin.umdalive;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -17,14 +20,26 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Andrew on 3/15/2017.
  */
 
 public class RestModel {
+    private UserInformation  this_user = new UserInformation();
+    private String clubName;
+    private String userName;
+    private String keyWords;
+    private String description;
+    private String post;
     private Context context;
 
+    /**
+     * The context is needed for the toast message in onPostExecute (for debugging).
+     * @param context
+     */
     public RestModel(Context context){
         this.context = context;
     }
@@ -33,8 +48,110 @@ public class RestModel {
         this.context = context;
     }
 
+    /**
+     * Taken from AllClubs.java
+     * I dont think they ever made it so this is actually displayed when a club is clicked so work on that...
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     * @param listView
+     * @return
+     */
+    public Intent getClub(AdapterView<?> parent, View view, int position, long id, ListView listView){
+        // ListView Clicked item index
+        int itemPosition = position;
 
-    //typical AsyncTask stuff. Probably shouldnt be controlled by the view...
+        // ListView Clicked item value
+        String  itemValue  = (String) listView.getItemAtPosition(position);
+        DisplayClub.setClubName(itemValue);
+        //Gets the info of the club to display on the DisplayClub activity
+        try {
+            JSONObject jsonParam = null;
+            //Create JSONObject
+            jsonParam = new JSONObject();
+            //adds the name of the club into the JSON object
+            jsonParam.put("club", itemValue);
+            //not sure why they used PUT here... shouldn't it be GET? Nothing is being added to the club/list of clubs at this point.
+            String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "PUT", jsonParam.toString()).get();
+            JSONObject object = new JSONObject(jsonResponse);
+            //gets off the club info from the jsonResponse
+            String clubFromServer = object.getString("club");
+            String descriptionFromServer = object.getString("description");
+            String userNameFromServer = object.getString("username");
+            String keywordFromServer = object.getString("keywords");
+            //sets the club parameters on the DisplayClub view
+            DisplayClub.setClubName(clubFromServer);
+            DisplayClub.setAdministrator(userNameFromServer);
+            DisplayClub.setDescription(descriptionFromServer);
+            DisplayClub.setKeywords(keywordFromServer);
+
+            Log.d(clubFromServer,clubFromServer);
+            Log.d(descriptionFromServer,descriptionFromServer);
+            Log.d(userNameFromServer,userNameFromServer);
+            Log.d(keywordFromServer,keywordFromServer);
+            Log.d(jsonResponse,jsonResponse);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // Show Alert (I think this is for debugging, idk why the user would need to see this)
+        Toast.makeText(context,
+                "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                .show();
+    }
+
+    /**
+     * Note to self- taken from Club.java
+     * @param view
+     */
+    public void restPOST(View view) {
+        JSONObject jsonParam = null;
+        try {
+            //Create JSONObject here
+            jsonParam = new JSONObject();
+            jsonParam.put("clubname",clubName);
+            jsonParam.put("username", userName );
+            jsonParam.put("keywords", keyWords);
+            jsonParam.put("description", description);
+            jsonParam.put("post",post);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG:", jsonParam.toString());
+        new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "POST", jsonParam.toString());
+    }
+
+    /**
+     * Acts as the onClick callback for the REST PUT Button. The code will generate a REST PUT
+     * action to the REST Server.
+     *
+     * Note to self- Taken from Club.java
+     *
+     * @param view
+     */
+    public void restPUT(View view) {
+
+        JSONObject jsonParam = null;
+        try {
+            //Create JSONObject here
+            jsonParam = new JSONObject();
+            jsonParam.put("clubname",clubName);
+            jsonParam.put("username", userName );
+            jsonParam.put("keywords", keyWords);
+            jsonParam.put("description", description);
+            jsonParam.put("post", post);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG [PUT]:", jsonParam.toString());
+        new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+    }
+
+
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -109,6 +226,4 @@ public class RestModel {
             Toast.makeText(context, "Data transfer sucessful", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }
