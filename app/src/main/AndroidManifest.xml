@@ -25,7 +25,7 @@ package="com.example.kevin.umdalive">
         android:theme="@style/AppTheme.NoActionBar">
 
     </activity>
-    <activity android:name=".CreateClub">
+    <activity android:name=".CreateClubView">
 
     </activity>
     <activity android:name=".AllClubs">
