@@ -31,7 +31,7 @@ import com.example.kevin.umdalive.MainActivity;
  * Thankfully this was already commented pretty well so I just added some clarification here and there.
  */
 
-public class Club extends AppCompatActivity {
+public class CreateClub extends AppCompatActivity {
 
     private UserInformation  this_user = new UserInformation();
     private String clubName;
@@ -43,14 +43,14 @@ public class Club extends AppCompatActivity {
     private Object keywordItem = new Object();          //this item grabs from user
 
     //constructors
-    public Club(String cb, String un, String desc, String p, String key){
+    public CreateClub(String cb, String un, String desc, String p, String key){
         clubName = cb;
         userName = un;
         keyWords = key;
         description = desc;
         post = p;
     }
-    public Club(){
+    public CreateClub(){
         clubName = "default";
         userName = "default-user";
         keyWords = "#default";
@@ -114,7 +114,7 @@ public class Club extends AppCompatActivity {
         this.post = post;
     }
     /*
-    onCreate method for Club class
+    onCreate method for CreateClub class
     Contains a spinner that will display the categories for
     the user to choose from to determine what category their
     club fits into.
@@ -138,7 +138,7 @@ public class Club extends AppCompatActivity {
         });
     }
     /*
-    onClick for make Club button
+    onClick for make CreateClub button
     current functionality: currently this takes in the user input
     of administrator, description, post, keyword/catagory, and
     sends them to server to be saved.

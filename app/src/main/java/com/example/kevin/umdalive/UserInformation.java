@@ -1,21 +1,6 @@
 package com.example.kevin.umdalive;
 
 
-import android.os.AsyncTask;
-import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import java.util.ArrayList;
 
 /**
@@ -30,7 +15,7 @@ public class UserInformation {
     private String gradDate;
 
 
-    private ArrayList<Club> local_clubs_subscribed;
+    private ArrayList<CreateClub> local_clubs_subscribed;
     private ArrayList<String> local_posts_subscribed;
 
     //public final String serverAddress = "https://lempo.d.umn.edu:5001";
@@ -44,7 +29,7 @@ public class UserInformation {
     /*
     Sets the local data that the app will run off of, will use this method when user signs in
      */
-    public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<Club> temp_clubs_subscribed){
+    public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<CreateClub> temp_clubs_subscribed){
         name = temp_local_username;
         email = emai;
         major = temp_major;
@@ -56,7 +41,7 @@ public class UserInformation {
 
     public UserInformation(){
         name = "";
-        local_clubs_subscribed = new ArrayList<Club>();
+        local_clubs_subscribed = new ArrayList<CreateClub>();
         local_club_Names = new ArrayList<String>();
         local_posts_subscribed = new ArrayList<String>();
     }
@@ -67,7 +52,7 @@ public class UserInformation {
     public String getEmail(){return email;}
     public String getMajor(){return major;}
     public String getGradDate(){return gradDate;}
-    public ArrayList<Club> getLocalClubs(){return local_clubs_subscribed;}
+    public ArrayList<CreateClub> getLocalClubs(){return local_clubs_subscribed;}
 
     /*
         Takes in a new arraylist of most recent posts then
