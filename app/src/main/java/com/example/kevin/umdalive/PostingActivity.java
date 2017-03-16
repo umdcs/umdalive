@@ -111,7 +111,10 @@ Life cycle methods
      */
     public void sendPost(View view){
         Intent intent = new Intent(this, MainActivity.class);
+        //sets the post
         setPost(newPost.getText().toString());
+
+        //logcat messages
         Log.d(postToDisplay, postToDisplay);
         Log.d(postToDisplay, postToDisplay);
         Log.d(postToDisplay, postToDisplay);
@@ -121,6 +124,10 @@ Life cycle methods
         restPUT(view);
         startActivity(intent);
     }
+
+    /**
+     * Async tasks with HTTP protocol
+     */
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -131,6 +138,8 @@ Life cycle methods
 
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
+
+            //REST API to connect  to serrver.
             try {
                 URL url = new URL( params[0] );
                 serverConnection = (HttpURLConnection) url.openConnection();

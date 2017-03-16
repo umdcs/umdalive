@@ -21,17 +21,29 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
  */
 
 public class PostForClubActivity extends Activity {
+
     ListView listView;
 
+    /**
+     * method initializes this view.
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_for_club_select);
         listView = (ListView) findViewById(R.id.list);
+
+        //Calls the getLocal_club_Names from the main activity and assigns it into an arry
         ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
+
         try {
+
+            //Assigns the ArrayList Values to List view using the adapter
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1, values);
             listView.setAdapter(adapter);
+
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
@@ -58,7 +70,7 @@ public class PostForClubActivity extends Activity {
         }catch (Exception e)
         {
         }}
-
+//life cycle methods
 
     protected void onPause() {
         super.onPause();
