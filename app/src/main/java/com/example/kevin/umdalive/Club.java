@@ -162,6 +162,25 @@ public class Club extends AppCompatActivity {
         //call the model version of this with the presenter this through the presenter
         //restPUT(view); replace this
     }
+
+    public void restPUT(View view) {
+
+        JSONObject jsonParam = null;
+        try {
+            //Create JSONObject here
+            jsonParam = new JSONObject();
+            jsonParam.put("clubname",clubName);
+            jsonParam.put("username", userName );
+            jsonParam.put("keywords", keyWords);
+            jsonParam.put("description", description);
+            jsonParam.put("post", post);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG [PUT]:", jsonParam.toString());
+        //pass to
+        //new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+    }
 /*
 Methods to tell Activity to inherit from parent and follow
 protocol of parent

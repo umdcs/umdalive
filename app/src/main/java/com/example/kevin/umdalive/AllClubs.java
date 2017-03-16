@@ -55,26 +55,67 @@ public class AllClubs extends Activity {
             /*
              * The following is what happens when a user selects something the ListView
              */
-
-
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
 
-                    //PASS listView, parent, view, position, id INTO getClub FUNCTION IN MODEL USING THE PRESENTER
 
+                    // ListView Clicked item index
+                    int itemPosition = position;
+
+                    // ListView Clicked item value
+                    String  itemValue  = (String) listView.getItemAtPosition(position);
+                    DisplayClub.setClubName(itemValue);
                     //creates an intent that will become the view of the selected club
                     Intent intent = new Intent(AllClubs.this, DisplayClub.class);
+                    //Gets the info of the club to display on the DisplayClub activity
+                    try {
+                        JSONObject jsonParam = null;
+                        //Create JSONObject
+                        jsonParam = new JSONObject();
+                        //adds the name of the club into the JSON object
+                        jsonParam.put("club", itemValue);
+                        //moved to RestModel
+                        String jsonResponse = null;
+                        //String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
+                        //be sure to pass itemValue
+                        JSONObject object = new JSONObject(jsonResponse);
+                        //gets off the club info from the jsonResponse
+                        String clubFromServer = object.getString("club");
+                        String descriptionFromServer = object.getString("description");
+                        String userNameFromServer = object.getString("username");
+                        String keywordFromServer = object.getString("keywords");
+                        //sets the club parameters on the DisplayClub view
+                        DisplayClub.setClubName(clubFromServer);
+                        DisplayClub.setAdministrator(userNameFromServer);
+                        DisplayClub.setDescription(descriptionFromServer);
+                        DisplayClub.setKeywords(keywordFromServer);
+
+                        Log.d(clubFromServer,clubFromServer);
+                        Log.d(descriptionFromServer,descriptionFromServer);
+                        Log.d(userNameFromServer,userNameFromServer);
+                        Log.d(keywordFromServer,keywordFromServer);
+                        Log.d(jsonResponse,jsonResponse);
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                     startActivity(intent);
+
+                    // Show Alert (I think this is for debugging, idk why the user would need to see this)
+                    Toast.makeText(getApplicationContext(),
+                            "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                            .show();
 
                 }
 
             });
 
-        }catch (Exception e){}
-        }
+        }catch (Exception e)
+        {
+        }}
 
     protected void onPause() {
         super.onPause();

@@ -29,20 +29,17 @@ import java.util.concurrent.ExecutionException;
 
 public class RestModel {
     private UserInformation  this_user = new UserInformation();
-    private String clubName;
-    private String userName;
-    private String keyWords;
-    private String description;
-    private String post;
     private Context context;
 
     /**
-     * The context is needed for the toast message in onPostExecute (for debugging).
+     * The context might be used later debugging with toast messages. Right now it is not needed though.
      * @param context
      */
     public RestModel(Context context){
         this.context = context;
     }
+
+    public RestModel(){}
 
     public void setContext(Context context){
         this.context = context;
@@ -52,57 +49,19 @@ public class RestModel {
      * Taken from AllClubs.java
      * I dont think they ever made it so this is actually displayed when a club is clicked so work on that...
      * Some of this stuff should be done in the AllClubs model class, make sure we fix that at some point.
-     * @param parent
-     * @param view
-     * @param position
-     * @param id
-     * @param listView
-     * @return
+     *
+     * @return String of JSON response
      */
-    public Intent getClub(AdapterView<?> parent, View view, int position, long id, ListView listView){
-        // ListView Clicked item index
-        int itemPosition = position;
-
-        // ListView Clicked item value
-        String  itemValue  = (String) listView.getItemAtPosition(position);
-        DisplayClub.setClubName(itemValue);
-        //Gets the info of the club to display on the DisplayClub activity
-        try {
-            JSONObject jsonParam = null;
-            //Create JSONObject
-            jsonParam = new JSONObject();
-            //adds the name of the club into the JSON object
-            jsonParam.put("club", itemValue);
-            //not sure why they used PUT here... shouldn't it be GET? Nothing is being added to the club/list of clubs at this point.
-            String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "PUT", jsonParam.toString()).get();
-            JSONObject object = new JSONObject(jsonResponse);
-            //gets off the club info from the jsonResponse
-            String clubFromServer = object.getString("club");
-            String descriptionFromServer = object.getString("description");
-            String userNameFromServer = object.getString("username");
-            String keywordFromServer = object.getString("keywords");
-            //sets the club parameters on the DisplayClub view
-            DisplayClub.setClubName(clubFromServer);
-            DisplayClub.setAdministrator(userNameFromServer);
-            DisplayClub.setDescription(descriptionFromServer);
-            DisplayClub.setKeywords(keywordFromServer);
-
-            Log.d(clubFromServer,clubFromServer);
-            Log.d(descriptionFromServer,descriptionFromServer);
-            Log.d(userNameFromServer,userNameFromServer);
-            Log.d(keywordFromServer,keywordFromServer);
-            Log.d(jsonResponse,jsonResponse);
-        } catch (InterruptedException e) {
+    public String getAllClubs(JSONObject jsonParam){
+        try{
+            return new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-        // Show Alert (I think this is for debugging, idk why the user would need to see this)
-        Toast.makeText(context,
-                "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                .show();
+        return null;
     }
 
     /**
@@ -121,6 +80,11 @@ public class RestModel {
         }
         return mostRecentPosts;
     }
+
+    /**
+     *
+     * @return
+     */
     public String userDataGET(){
         String userData;
         try {
@@ -136,32 +100,17 @@ public class RestModel {
     }
 
     /**
-     * Acts as the onClick callback for the REST PUT Button. The code will generate a REST PUT
-     * action to the REST Server.
+     * Taken from Club.java
      *
-     * Note to self- Taken from Club.java
-     *
-     * @param view
+     * @param jsonParam
      */
-    public void newClubPUT(View view) {
-
-        JSONObject jsonParam = null;
-        try {
-            //Create JSONObject here
-            jsonParam = new JSONObject();
-            jsonParam.put("clubname",clubName);
-            jsonParam.put("username", userName );
-            jsonParam.put("keywords", keyWords);
-            jsonParam.put("description", description);
-            jsonParam.put("post", post);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.d("DEBUG [PUT]:", jsonParam.toString());
+    public void newClubPUT(JSONObject jsonParam) {
         new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
     }
 
-
+    /**
+     * The previous group just copy and pasted all this. At some point we make it better.
+     */
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
