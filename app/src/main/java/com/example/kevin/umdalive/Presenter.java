@@ -14,24 +14,28 @@ public class Presenter {
 
     public Presenter (View incomingView) {
     view = incomingView;
-    //restModel = new restModel(this);
+    //restModel = new restModel();
 
     }
 
-    public void restPost() {
-        //restModel.restPost();
+    public String restPost(String task, String data) {
+        //restModel.restPost(task, data);
+        return "restPost()String";
     }
 
-    public void restPut() {
-        //restModel.restPut();
+    public String restPut(String task, String data) {
+        //restModel.restPut(task, data);
+        return "restPut()String";
     }
 
-    public void restDelete() {
-        //restModel.restDelete();
+    public String restDelete(String task, String toDelete) {
+        //restModel.restDelete(task, toDelete);
+        return "restDelete()String";
     }
 
-    public void restGet() {
-        //restModel.restGet();
+    public String restGet(String task, String toGet) {
+        //restModel.restGet(task, toGet);
+        return "restGet()String";
     }
 
     public void setUserInfo(String name, String password, String email, String major, String gradDate) {
