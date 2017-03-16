@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity
      */
     //move to view
     public void onClickNewClub(View view) {
-        Intent intent = new Intent(this, CreateClub.class);
+        Intent intent = new Intent(this, CreateClubView.class);
         startActivity(intent);
     }
 
