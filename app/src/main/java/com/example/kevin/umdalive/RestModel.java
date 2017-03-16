@@ -235,6 +235,7 @@ public class RestModel {
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
+            Log.d("onPostExecute JSON: ", result);
             //Toast.makeText(context, "Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }
