@@ -3,6 +3,7 @@ package com.example.kevin.umdalive;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +34,7 @@ public class RestModel {
 
     /**
      * The context might be used later debugging with toast messages. Right now it is not needed though.
-     * @param context
+     * @param context for toast
      */
     public RestModel(Context context){
         this.context = context;
@@ -82,25 +83,21 @@ public class RestModel {
      *
      * @return String of JSON response
      */
-    public String getClub(String data){
+    private String getClub(String data){
         try{
             return new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET", data).get();
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public String getAllClubs(){
+    private String getAllClubs(){
         try{
             return new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET").get();
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return null;
@@ -109,15 +106,13 @@ public class RestModel {
     /**
      * From MainActivity refreshPosts function.
      *
-     * @return
+     * @return JSON data of recent posts
      */
-    public String getRecentPosts(){
+    private String getRecentPosts(){
         String mostRecentPosts = null;
         try {
             mostRecentPosts = new HTTPAsyncTask().execute(thisUser.serverAddress + "/mostRecentPosts", "GET").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return mostRecentPosts;
@@ -125,16 +120,13 @@ public class RestModel {
 
     /**
      * From MainActivity
-     * @return
+     * @return JSON data of user info
      */
-    public String getUserData(){
+    private String getUserData(){
         String userData;
         try {
             userData = new HTTPAsyncTask().execute(thisUser.serverAddress + "/userDataGet", "GET").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            userData = null;
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             userData = null;
         }
@@ -143,21 +135,21 @@ public class RestModel {
 
     /**
      * Taken from Club.java
-     * @param data
+     * @param data name of the club being fetched
      */
-    public void putNewClub(String data) {
+    private void putNewClub(String data) {
         new HTTPAsyncTask().execute(thisUser.serverAddress + "/newClub", "PUT", data); //Makes sure data is sent to server
     }
 
     /**
      * Taken from PostingActivity
-     * @param data
+     * @param data the post to be made
      */
-    public void putNewPost(String data){
+    private void putNewPost(String data){
         new HTTPAsyncTask().execute(thisUser.serverAddress + "/newPost", "PUT", data);
     }
 
-    public void putNewUser(String data){
+    private void putNewUser(String data){
         new HTTPAsyncTask().execute(thisUser.serverAddress + "/userInformation", "PUT", data);
     }
 
@@ -170,7 +162,7 @@ public class RestModel {
         protected String doInBackground(String... params) {
 
             HttpURLConnection serverConnection = null;
-            InputStream is = null;
+            InputStream is;
 
             Log.d("Debug:", "Attempting to connect to: " + params[0]);
 
@@ -188,11 +180,11 @@ public class RestModel {
                     // params[2] contains the JSON String to send, make sure we send the
                     // content length to be the json string length
                     serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
+                            Integer.toString(params[2].getBytes().length));
 
                     // Send POST data that was provided.
                     DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2].toString());
+                    out.writeBytes(params[2]);
                     out.flush();
                     out.close();
                 }
@@ -203,7 +195,7 @@ public class RestModel {
 
                 is = serverConnection.getInputStream();
 
-                if (params[1] == "GET" || params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE") {
+                if (params[1].equals("GET") || params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -218,13 +210,10 @@ public class RestModel {
                         e.printStackTrace();
                     }
                 }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                assert serverConnection != null;
                 serverConnection.disconnect();
             }
 
