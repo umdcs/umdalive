@@ -34,9 +34,9 @@ public class Presenter {
         //restModel.restGet();
     }
 
-    public void setUserInfo(String name, String email, String major, String gradDate) {
+    public void setUserInfo(String name, String password, String email, String major, String gradDate) {
 
-        userInformation = new UserInformationModel(name, email, major, gradDate);
+        userInformation = new UserInformationModel(name, password, email, major, gradDate);
 
     }
 
