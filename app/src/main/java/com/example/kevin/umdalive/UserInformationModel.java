@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class UserInformationModel extends AppCompatActivity {
 
     private String name;
+    private String password;
     private String email;
     private String major;
     private String gradDate;
@@ -44,8 +45,9 @@ public class UserInformationModel extends AppCompatActivity {
      * @param gradDate
      *
      */
-    public UserInformationModel(String name, String major, String email, String gradDate) {//, ArrayList<Club> temp_clubs_subscribed){
+    public UserInformationModel(String name, String password, String major, String email, String gradDate) {//, ArrayList<Club> temp_clubs_subscribed){
         this.name = name;
+        this.password = password;
         this.email = email;
         this.major = major;
         this.gradDate = gradDate;
