@@ -69,7 +69,7 @@ public class RestModel {
      *
      * @return
      */
-    public String mostRecentPostsGET(){
+    public String getRecentPosts(){
         String mostRecentPosts = null;
         try {
             mostRecentPosts = new HTTPAsyncTask().execute(this_user.serverAddress + "/mostRecentPosts", "GET").get();
@@ -82,10 +82,10 @@ public class RestModel {
     }
 
     /**
-     *
+     * From MainActivity
      * @return
      */
-    public String userDataGET(){
+    public String getUserData(){
         String userData;
         try {
             userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
@@ -104,7 +104,7 @@ public class RestModel {
      *
      * @param jsonParam
      */
-    public void newClubPUT(JSONObject jsonParam) {
+    public void putNewClub(JSONObject jsonParam) {
         new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
     }
 
