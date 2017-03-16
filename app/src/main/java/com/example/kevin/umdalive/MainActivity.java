@@ -281,12 +281,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-
-
-                try {
                     String getClubNames;
                     //get string of club names from server
-                    getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+                    getClubNames = null;
+                    //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
                     try {
                         // JSONObject club_names = new JSONObject(jsonString);
@@ -306,16 +304,12 @@ public class MainActivity extends AppCompatActivity
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
             }
-        } else if (id == R.id.Post) {
-            try {
+        else if (id == R.id.Post) {
                 String getClubNames;
                 //get string of club names from server
-                getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+                //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+                getClubNames = null;
 
                 try {
                     // JSONObject club_names = new JSONObject(jsonString);
@@ -335,13 +329,8 @@ public class MainActivity extends AppCompatActivity
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
             }
-
-        } else if (id == R.id.calendar) {
+        else if (id == R.id.calendar) {
 
         } else if (id == R.id.tools) {
 

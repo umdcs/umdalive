@@ -45,16 +45,40 @@ public class RestModel {
         this.context = context;
     }
 
+    public String restGET(String getString){
+        switch(getString){
+            case "getAllClubs": return getAllClubs();
+        }
+        return null;
+    }
+
+    public void restPOST(String postString, String data){}
+
+    public void restPUT(String putString, String data){}
+
+    public void restDELETE(String deleteString, String data){}
+
     /**
      * Taken from AllClubs.java
-     * I dont think they ever made it so this is actually displayed when a club is clicked so work on that...
-     * Some of this stuff should be done in the AllClubs model class, make sure we fix that at some point.
+     * Not really sure why they sent the jsonParam through, look into that.
      *
      * @return String of JSON response
      */
     public String getAllClubs(JSONObject jsonParam){
         try{
             return new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getAllClubs(){
+        try{
+            return new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
         }
         catch (InterruptedException e) {
             e.printStackTrace();
