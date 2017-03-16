@@ -1,9 +1,6 @@
 package com.example.kevin.umdalive;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.os.AsyncTask;
 
 import android.support.design.widget.FloatingActionButton;
@@ -20,15 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 
@@ -46,9 +36,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import static android.R.attr.data;
 
 /*
 Lots of server connections
@@ -195,7 +182,7 @@ public class MainActivity extends AppCompatActivity
 }
 
 
-    // starts display Club Activity
+    // starts display CreateClub Activity
     public void displayClubs(String clubNames) {
         Intent intent = new Intent(this, AllClubs.class);
         startActivity(intent);
@@ -207,14 +194,14 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, PostForClubActivity.class);
         startActivity(intent);
     }
-
+//Will stay here in the model
     public void getUser() {
         try {
             //gets string from server
             String userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
             //string is turned into a jsonobject
             JSONObject user = new JSONObject(userData);
-            ArrayList<Club> list = new ArrayList<Club>();
+            ArrayList<CreateClub> list = new ArrayList<CreateClub>();
             JSONArray jArray = user.getJSONArray("clubs");
 
             if (jArray != null) {
@@ -222,7 +209,7 @@ public class MainActivity extends AppCompatActivity
                 for (int i=0;i<len;i++){
                     JSONObject clubObject = jArray.getJSONObject(i);
                     //create new club object from server data
-                    Club tempClub = new Club(clubObject.get("clubname").toString(),
+                    CreateClub tempClub = new CreateClub(clubObject.get("clubname").toString(),
                                              clubObject.get("username").toString(),
                                              clubObject.get("keywords").toString(),
                                              clubObject.get("description").toString(),
@@ -253,6 +240,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //will stay in model
     public static UserInformation getUserInformation() {
         return this_user;
     }
@@ -260,6 +248,7 @@ public class MainActivity extends AppCompatActivity
     /*
      * function to get user data and update the UI with their info
      */
+    //will move to view
     public void updateUser(String str1) {
         TextView emailView = (TextView) findViewById(R.id.userEmail);
         emailView.setText(this_user.getEmail());
@@ -275,6 +264,8 @@ public class MainActivity extends AppCompatActivity
 
     MVP
      */
+
+    //will probobably stay in Model(here) (TBD)
     public void refreshPosts(View view){
         String mostRecentPosts = null;
         try {
@@ -313,12 +304,14 @@ public class MainActivity extends AppCompatActivity
     /*
     onclick for making a new club
      */
+    //move to view
     public void onClickNewClub(View view) {
-        Intent intent = new Intent(this, Club.class);
+        Intent intent = new Intent(this, CreateClubView.class);
         startActivity(intent);
     }
 
     @Override
+    //move to view
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -329,6 +322,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    //stay here in model
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -336,6 +330,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    //stay in model
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

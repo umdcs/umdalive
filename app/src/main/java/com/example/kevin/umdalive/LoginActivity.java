@@ -12,11 +12,14 @@ import android.widget.Toast;
  */
 
 public class LoginActivity extends AppCompatActivity {
+//probably will be moved to te view
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
-    }
+
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.login_activity);
+//    }
+//
     /*
     This is the onClick for the Login button
     current functionality: currently all this does is check for "@" symbol and go to next page.
@@ -24,15 +27,19 @@ public class LoginActivity extends AppCompatActivity {
 
     Replace with OAuth
      */
-    public void login(View view) {
-        EditText emailEntry = (EditText) findViewById(R.id.email_input);
-        String emailCheckTemp = emailEntry.getText().toString();
-        if(emailCheckTemp.indexOf('@') != -1) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-        else Toast.makeText(getApplicationContext(),"Sorry, this is not a valid email.", Toast.LENGTH_SHORT).show();
-    }
+
+    //This function will be moved to the view
+//
+//    public void login(View view) {
+//        EditText emailEntry = (EditText) findViewById(R.id.email_input);
+//        String emailCheckTemp = emailEntry.getText().toString();
+//        if(emailCheckTemp.indexOf('@') != -1) {
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//        }
+//        else Toast.makeText(getApplicationContext(),"Sorry, this is not a valid email.", Toast.LENGTH_SHORT).show();
+//    }
+
 
     /*
     This is the onClick for the signup button of the lower right corner.
@@ -41,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
 
     This brings you to SignUpActivity
      */
+    //stays here
+
+
     public void signUpScreen(View view){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
