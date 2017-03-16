@@ -45,7 +45,7 @@ public class RestModel {
         this.context = context;
     }
 
-    public String restGET(String getString, String data){
+    public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
             case "getClub": return getClub(data);
@@ -55,11 +55,11 @@ public class RestModel {
         }
     }
 
-    public String restPOST(String postString, String data){
+    public String restPost(String postString, String data){
         return null;
     }
 
-    public String restPUT(String putString, String data){
+    public String restPut(String putString, String data){
         switch(putString){
             case "putNewClub": putNewClub(data);
                 break;
@@ -72,7 +72,7 @@ public class RestModel {
         return null;
     }
 
-    public String restDELETE(String deleteString, String data){
+    public String restDelete(String deleteString, String data){
         return null;
     }
 

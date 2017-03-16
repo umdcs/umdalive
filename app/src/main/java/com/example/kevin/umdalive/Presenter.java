@@ -9,7 +9,7 @@ import android.view.View;
 
 public class Presenter {
     private View view;
-    //private RestModel restModel;
+    private RestModel restModel;
     private UserInformationModel userInformation;
 
 
@@ -21,7 +21,7 @@ public class Presenter {
      */
     public Presenter (View incomingView) {
     view = incomingView;
-    //restModel = new restModel();
+    restModel = new RestModel();
 
     }
 
@@ -33,7 +33,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restPost(String task, String data) {
-        //restModel.restPost(task, data);
+        restModel.restPost(task, data);
         return "restPost()String";
     }
 
@@ -45,7 +45,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restPut(String task, String data) {
-        //restModel.restPut(task, data);
+        restModel.restPut(task, data);
         return "restPut()String";
     }
 
@@ -57,7 +57,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restDelete(String task, String toDelete) {
-        //restModel.restDelete(task, toDelete);
+        restModel.restDelete(task, toDelete);
         return "restDelete()String";
     }
 
@@ -69,7 +69,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restGet(String task, String toGet) {
-        //restModel.restGet(task, toGet);
+        restModel.restGet(task, toGet);
         return "restGet()String";
     }
 
