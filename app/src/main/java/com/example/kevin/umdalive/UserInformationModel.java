@@ -5,6 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+/**
+ * Questioning this files usage
+ *
+ * not currently sure if it is necessary
+ */
 public class UserInformationModel extends AppCompatActivity {
 
     private String name;
@@ -14,9 +19,8 @@ public class UserInformationModel extends AppCompatActivity {
     private String gradDate;
 
 
-    /**
-     * not using these three fields yet to keep things simple
-     */
+
+     // not using these three fields copied from "old code" yet to keep things simple
 
     //private ArrayList<String> localClubNames;
     //private ArrayList<Club> localClubsSubscribed;
@@ -39,10 +43,11 @@ public class UserInformationModel extends AppCompatActivity {
      * constructor for user info
      *
      * not currently using post and clubs subscribed for simplicity
-     * @param name
-     * @param major
-     * @param email
-     * @param gradDate
+     * @param name of user
+     * @param password of user
+     * @param major of user
+     * @param email of user
+     * @param gradDate of user
      *
      */
     public UserInformationModel(String name, String password, String major, String email, String gradDate) {//, ArrayList<Club> temp_clubs_subscribed){
