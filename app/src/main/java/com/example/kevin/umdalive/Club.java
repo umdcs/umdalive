@@ -177,9 +177,10 @@ public class Club extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("DEBUG [PUT]:", jsonParam.toString());
+        String jsonString = jsonParam.toString();
+        Log.d("DEBUG [PUT]:", jsonString);
         //pass to
-        //new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+        //new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonString); //Makes sure data is sent to server
     }
 /*
 Methods to tell Activity to inherit from parent and follow

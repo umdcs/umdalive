@@ -78,6 +78,7 @@ public class AllClubs extends Activity {
                         //adds the name of the club into the JSON object
                         jsonParam.put("club", itemValue);
                         //moved to RestModel
+                        String jsonString = jsonParam.toString();
                         String jsonResponse = null;
                         //String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
                         //be sure to pass itemValue

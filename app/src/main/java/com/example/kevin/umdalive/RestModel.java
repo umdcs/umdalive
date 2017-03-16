@@ -28,7 +28,7 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class RestModel {
-    private UserInformation  this_user = new UserInformation();
+    private UserInformation  thisUser = new UserInformation();
     private Context context;
 
     /**
@@ -45,18 +45,36 @@ public class RestModel {
         this.context = context;
     }
 
-    public String restGET(String getString){
+    public String restGET(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
+            case "getClub": return getClub(data);
+            case "getRecentPosts": return getRecentPosts();
+            case "getUserData": return getUserData();
+            default: return null;
+        }
+    }
+
+    public String restPOST(String postString, String data){
+        return null;
+    }
+
+    public String restPUT(String putString, String data){
+        switch(putString){
+            case "putNewClub": putNewClub(data);
+                break;
+            case "putNewPost": putNewPost(data);
+                break;
+            case "putNewUser": putNewUser(data);
+                break;
+            default: break;
         }
         return null;
     }
 
-    public void restPOST(String postString, String data){}
-
-    public void restPUT(String putString, String data){}
-
-    public void restDELETE(String deleteString, String data){}
+    public String restDELETE(String deleteString, String data){
+        return null;
+    }
 
     /**
      * Taken from AllClubs.java
@@ -64,9 +82,9 @@ public class RestModel {
      *
      * @return String of JSON response
      */
-    public String getAllClubs(JSONObject jsonParam){
+    public String getClub(String data){
         try{
-            return new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
+            return new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET", data).get();
         }
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -78,7 +96,7 @@ public class RestModel {
 
     public String getAllClubs(){
         try{
-            return new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+            return new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET").get();
         }
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -96,7 +114,7 @@ public class RestModel {
     public String getRecentPosts(){
         String mostRecentPosts = null;
         try {
-            mostRecentPosts = new HTTPAsyncTask().execute(this_user.serverAddress + "/mostRecentPosts", "GET").get();
+            mostRecentPosts = new HTTPAsyncTask().execute(thisUser.serverAddress + "/mostRecentPosts", "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -112,7 +130,7 @@ public class RestModel {
     public String getUserData(){
         String userData;
         try {
-            userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
+            userData = new HTTPAsyncTask().execute(thisUser.serverAddress + "/userDataGet", "GET").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
             userData = null;
@@ -125,11 +143,22 @@ public class RestModel {
 
     /**
      * Taken from Club.java
-     *
-     * @param jsonParam
+     * @param data
      */
-    public void putNewClub(JSONObject jsonParam) {
-        new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonParam.toString()); //Makes sure data is sent to server
+    public void putNewClub(String data) {
+        new HTTPAsyncTask().execute(thisUser.serverAddress + "/newClub", "PUT", data); //Makes sure data is sent to server
+    }
+
+    /**
+     * Taken from PostingActivity
+     * @param data
+     */
+    public void putNewPost(String data){
+        new HTTPAsyncTask().execute(thisUser.serverAddress + "/newPost", "PUT", data);
+    }
+
+    public void putNewUser(String data){
+        new HTTPAsyncTask().execute(thisUser.serverAddress + "/userInformation", "PUT", data);
     }
 
     /**
@@ -206,7 +235,7 @@ public class RestModel {
          * @param result the result from the query
          */
         protected void onPostExecute(String result) {
-            Toast.makeText(context, "Data transfer sucessful", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }
 }
