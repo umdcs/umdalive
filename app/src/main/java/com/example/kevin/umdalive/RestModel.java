@@ -34,11 +34,9 @@ import java.util.concurrent.ExecutionException;
 
 public class RestModel {
     public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
-
     //public final String serverAddress = "https://lempo.d.umn.edu:5001"; //To be used for a real address
-    //private UserInformation  thisUser = new UserInformation(); Unnecessary
-    private Context context;
 
+    private Context context;
     /**
      * The context might be used later debugging with toast messages. Right now it is not needed though.
      * @param context for toast
@@ -148,7 +146,7 @@ public class RestModel {
      * @param data name of the club being fetched
      */
     private void putNewClub(String data) {
-        new HTTPAsyncTask().execute(serverAddress + "/newClub", "PUT", data); //Makes sure data is sent to server
+        new HTTPAsyncTask().execute(serverAddress + "/newClub", "PUT", data);
     }
 
     /**
@@ -180,18 +178,14 @@ public class RestModel {
                 URL url = new URL(params[0]);
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
-                if (params[1].equals("POST") ||
-                        params[1].equals("PUT") ||
-                        params[1].equals("DELETE")) {
+                if (params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
                     Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
                     serverConnection.setDoOutput(true);
                     serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
                     // params[2] contains the JSON String to send, make sure we send the
                     // content length to be the json string length
                     serverConnection.setRequestProperty("Content-Length", "" +
                             Integer.toString(params[2].getBytes().length));
-
                     // Send POST data that was provided.
                     DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
                     out.writeBytes(params[2]);
@@ -202,7 +196,6 @@ public class RestModel {
                 int responseCode = serverConnection.getResponseCode();
                 Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
                 Log.d("Debug: ", "Response Code : " + responseCode);
-
                 is = serverConnection.getInputStream();
 
                 if (params[1].equals("GET") || params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
@@ -212,7 +205,6 @@ public class RestModel {
                     while ((line = br.readLine()) != null) {
                         sb.append(line);
                     }
-
                     try {
                         JSONObject jsonData = new JSONObject(sb.toString());
                         return jsonData.toString();
@@ -226,7 +218,6 @@ public class RestModel {
                 assert serverConnection != null;
                 serverConnection.disconnect();
             }
-
             return "Should not get to this if the data has been sent/received correctly!";
         }
 
