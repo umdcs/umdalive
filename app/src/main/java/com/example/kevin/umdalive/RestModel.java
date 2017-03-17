@@ -26,6 +26,10 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Andrew on 3/15/2017.
+ *
+ * Rest Class to perform all server interaction
+ *
+ * communication is done from view to presenter to RestModel.
  */
 
 public class RestModel {
