@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle); //depricated thing
+        drawer.setDrawerListener(toggle); //deprecated thing
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -103,84 +103,6 @@ public class MainActivity extends AppCompatActivity
         super.onStop();
     }
 
-//MVP Get AsyncTask out of Activity
-    private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpURLConnection serverConnection = null;
-            InputStream is = null;
-
-            Log.d("Debug:", "Attempting to connect to: " + params[0]);
-
-            try {
-                URL url = new URL(params[0]);
-                serverConnection = (HttpURLConnection) url.openConnection();
-                serverConnection.setRequestMethod(params[1]);
-                if (params[1].equals("POST") ||
-                        params[1].equals("PUT") ||
-                        params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
-                    serverConnection.setDoOutput(true);
-                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-
-                    // params[2] contains the JSON String to send, make sure we send the
-                    // content length to be the json string length
-                    serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].toString().getBytes().length));
-
-                    // Send POST data that was provided.
-                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2].toString());
-                    out.flush();
-                    out.close();
-                }
-
-
-                int responseCode = serverConnection.getResponseCode();
-                Log.d("Debug:", "\nSending " + params[1] + " request to URL : " + params[0]);
-                Log.d("Debug: ", "Response Code : " + responseCode);
-
-                is = serverConnection.getInputStream();
-
-                if (params[1] == "GET" || params[1] == "POST" || params[1] == "PUT" || params[1] == "DELETE") {
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line);
-                    }
-
-                    try {
-                        JSONObject jsonData = new JSONObject(sb.toString());
-                        return jsonData.toString();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                serverConnection.disconnect();
-            }
-
-            return "Should not get to this if the data has been sent/received correctly!";
-        }
-
-    /**
-     * @param result the result from the query
-     */
-    protected void onPostExecute(String result) {
-        updateUser(result);
-
-    }
-}
-
 
     // starts display CreateClub Activity
     public void displayClubs(String clubNames) {
@@ -194,14 +116,14 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, PostForClubActivity.class);
         startActivity(intent);
     }
-//Will stay here in the model
+    //Will stay here in the model
     public void getUser() {
         try {
-            //gets string from server
-            String userData = new HTTPAsyncTask().execute(this_user.serverAddress + "/userDataGet", "GET").get();
+            //make userData equal getUserData from RestModel
+            String userData = null;
             //string is turned into a jsonobject
             JSONObject user = new JSONObject(userData);
-            ArrayList<CreateClub> list = new ArrayList<CreateClub>();
+            ArrayList<ClubInformation> list = new ArrayList<ClubInformation>();
             JSONArray jArray = user.getJSONArray("clubs");
 
             if (jArray != null) {
@@ -209,11 +131,11 @@ public class MainActivity extends AppCompatActivity
                 for (int i=0;i<len;i++){
                     JSONObject clubObject = jArray.getJSONObject(i);
                     //create new club object from server data
-                    CreateClub tempClub = new CreateClub(clubObject.get("clubname").toString(),
-                                             clubObject.get("username").toString(),
-                                             clubObject.get("keywords").toString(),
-                                             clubObject.get("description").toString(),
-                                             clubObject.get("post").toString());
+                    ClubInformation tempClub = new ClubInformation(clubObject.get("clubname").toString(),
+                            clubObject.get("username").toString(),
+                            clubObject.get("keywords").toString(),
+                            clubObject.get("description").toString(),
+                            clubObject.get("post").toString());
                     Log.d("club name: ", clubObject.get("clubname").toString());
                     //add new club object to array
                     list.add(tempClub);
@@ -231,12 +153,8 @@ public class MainActivity extends AppCompatActivity
             //will obtain json string from textview and take value out from string
 
         }
-        catch (JSONException e1){
+        catch (JSONException e1) {
             e1.printStackTrace();
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         }
     }
 
@@ -264,17 +182,9 @@ public class MainActivity extends AppCompatActivity
 
     MVP
      */
-
-    //will probobably stay in Model(here) (TBD)
     public void refreshPosts(View view){
+        //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
         String mostRecentPosts = null;
-        try {
-            mostRecentPosts = new HTTPAsyncTask().execute(this_user.serverAddress + "/mostRecentPosts", "GET").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
         ArrayList<String> list = new ArrayList<String>();
         JSONObject object = null;
@@ -356,67 +266,56 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
+            String getClubNames;
+            //get string of club names from server
+            getClubNames = null;
+            //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
-
-                try {
-                    String getClubNames;
-                    //get string of club names from server
-                    getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
-
-                    try {
-                        // JSONObject club_names = new JSONObject(jsonString);
-                        ArrayList<String> list = new ArrayList<String>();
-                        JSONObject object = new JSONObject(getClubNames);
-                        JSONArray jsonArray = object.getJSONArray("items");
-                        if (jsonArray != null) {
-                            int len = jsonArray.length();
-                            for (int i = 0; i < len; i++) {
-                                list.add(jsonArray.get(i).toString());
-                                Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                            }
-                            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                            this_user.setLocal_club_Names(list);
-                            displayClubs(getClubNames);
-                        }
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        } else if (id == R.id.Post) {
             try {
-                String getClubNames;
-                //get string of club names from server
-                getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
-
-                try {
-                    // JSONObject club_names = new JSONObject(jsonString);
-                    ArrayList<String> list = new ArrayList<String>();
-                    JSONObject object = new JSONObject(getClubNames);
-                    JSONArray jsonArray = object.getJSONArray("items");
-                    if (jsonArray != null) {
-                        int len = jsonArray.length();
-                        for (int i = 0; i < len; i++) {
-                            list.add(jsonArray.get(i).toString());
-                            Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                        }
-                        Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                        this_user.setLocal_club_Names(list);
-                        displayClubsForPost(getClubNames);
+                // JSONObject club_names = new JSONObject(jsonString);
+                ArrayList<String> list = new ArrayList<String>();
+                JSONObject object = new JSONObject(getClubNames);
+                JSONArray jsonArray = object.getJSONArray("items");
+                if (jsonArray != null) {
+                    int len = jsonArray.length();
+                    for (int i = 0; i < len; i++) {
+                        list.add(jsonArray.get(i).toString());
+                        Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                     }
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
+                    Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+                    this_user.setLocal_club_Names(list);
+                    displayClubs(getClubNames);
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+            } catch (JSONException e1) {
+                e1.printStackTrace();
             }
+        }
+        else if (id == R.id.Post) {
+            String getClubNames;
+            //get string of club names from server
+            //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
+            getClubNames = null;
 
-        } else if (id == R.id.calendar) {
+            try {
+                // JSONObject club_names = new JSONObject(jsonString);
+                ArrayList<String> list = new ArrayList<String>();
+                JSONObject object = new JSONObject(getClubNames);
+                JSONArray jsonArray = object.getJSONArray("items");
+                if (jsonArray != null) {
+                    int len = jsonArray.length();
+                    for (int i = 0; i < len; i++) {
+                        list.add(jsonArray.get(i).toString());
+                        Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                    }
+                    Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+                    this_user.setLocal_club_Names(list);
+                    displayClubsForPost(getClubNames);
+                }
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+        }
+        else if (id == R.id.calendar) {
 
         } else if (id == R.id.tools) {
 
@@ -430,7 +329,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }
+
 

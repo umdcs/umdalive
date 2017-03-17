@@ -4,6 +4,7 @@ package com.example.kevin.umdalive;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,7 +16,7 @@ public class SignUpActivityView extends AppCompatActivity {
 
     // private Presenter presenter;
 
-    private   EditText email;
+    private EditText email;
     private EditText Password;
     private Spinner gradDate;
     private Spinner Major;
@@ -24,8 +25,7 @@ public class SignUpActivityView extends AppCompatActivity {
     private String Email;
 
     private String graduation;
-    private  String major;
-
+    private String major;
 
 
     /**
@@ -38,26 +38,22 @@ public class SignUpActivityView extends AppCompatActivity {
         setContentView(R.layout.sign_up_activity);
 
 
-
-       gradDate= (Spinner) findViewById(R.id.graduationYear_input);
+        gradDate = (Spinner) findViewById(R.id.graduationYear_input);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> gradDateAdapter = ArrayAdapter.createFromResource(this,
                 R.array.graduation_date, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         gradDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-       gradDate.setAdapter(gradDateAdapter);
-
-
-
+        gradDate.setAdapter(gradDateAdapter);
 
 
 //---------------------------------------------------------------------Spinner for the Major
-      Major=(Spinner) findViewById(R.id.major_input);
+        Major = (Spinner) findViewById(R.id.major_input);
 
 
         //creating the major adapter for the spinner
-        ArrayAdapter<CharSequence> majorAdapter=ArrayAdapter.createFromResource(this, R.array.major_list, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> majorAdapter = ArrayAdapter.createFromResource(this, R.array.major_list, android.R.layout.simple_spinner_item);
 
 //turning the major spinner object into a dropdown list
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,58 +69,66 @@ public class SignUpActivityView extends AppCompatActivity {
      * when the button is clicked this method sends that data to the presenter
      * all data is converted to strings for the presenter class
      */
-    protected void signUp(ModelViewPresenterComponents.View view){
+    protected void signUp(View view) {
 
         //retrieving email adress from the EditText object and converting it to a string
-        email=(EditText) findViewById(R.id.new_email_input);
-        String emailText= email.getText().toString();
+        email = (EditText) findViewById(R.id.new_email_input);
+        String emailText = email.getText().toString();
         //retrieving password and converting it to string
-        Password=(EditText) findViewById(R.id.new_password_input);
-        String passwordText=Password.getText().toString();
+        Password = (EditText) findViewById(R.id.new_password_input);
+        String passwordText = Password.getText().toString();
 /**
  * if the emailadress entered has an '@' symbol
  * then use the setter to set private datafields
  */
 
-        if(emailText.indexOf('@') != -1){
-          //setting the graduation date
+        if (emailText.indexOf('@') != -1) {
+            //setting the graduation date
             setGraduation(gradDate.getSelectedItem().toString());
-             setMajor(Major.getSelectedItem().toString());
+            setMajor(Major.getSelectedItem().toString());
             setEmail(emailText);
             setPassword(passwordText);
-
-           System.out.println(getMajor());
-            Log.d(getMajor(),getMajor());
-            Log.d(getGraduation(),getGraduation());
-
-
-
-
+            System.out.println(getMajor());
+            Log.d(getMajor(), getMajor());
+            Log.d(getGraduation(), getGraduation());
         }
-
-
-
-
-
-
-
-
-
     }
 
 
     //setters and getters
 
-    public void setGraduation(String grad){this.graduation=grad;}
-    public void setMajor(String mess){this.major=mess;}
-    public void setEmail(String mess){this.Email=mess;}
-    public void setPassword(String mess){this.password=mess;}
+    public void setGraduation(String grad) {
+        this.graduation = grad;
+    }
+
+    public void setMajor(String mess) {
+        this.major = mess;
+    }
+
+    public void setEmail(String mess) {
+        this.Email = mess;
+    }
+
+    public void setPassword(String mess) {
+        this.password = mess;
+    }
 
 
-    public String getPassword(){return password;}
-    public String getEmail(){return Email;}
-    public String getGraduation(){return graduation;}
-    public String getMajor(){return major;}
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public String getGraduation() {
+        return graduation;
+    }
+
+    public String getMajor() {
+        return major;
+    }
 
 
 }
