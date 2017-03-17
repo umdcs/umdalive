@@ -46,6 +46,9 @@ public class RestModel {
         this.context = context;
     }
 
+    /**
+     * Constructor for RestModel
+     */
     public RestModel(){}
 
     public void setContext(Context context){

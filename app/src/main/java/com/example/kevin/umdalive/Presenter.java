@@ -4,6 +4,7 @@ import android.view.View;
 
 /**
  * Created by rgebh_000 on 3/15/2017.
+ *
  * Presenter class to communicate between views and models
  */
 
@@ -14,7 +15,7 @@ public class Presenter {
 
 
     /**
-     * constructor for presenter
+     * Constructor for presenter
      * @param incomingView view that created presenter.
      *
      * creates a RestModel for node communication
@@ -23,6 +24,13 @@ public class Presenter {
     view = incomingView;
     restModel = new RestModel();
 
+    }
+
+    /**
+     * Constructor for testing RestModel that requires no view
+     */
+    public Presenter() {
+        restModel = new RestModel();
     }
 
     /**
@@ -50,7 +58,7 @@ public class Presenter {
     }
 
     /**
-     *  Rest Function sends parameters to RestModel where they are dealt with using switch statement.
+     * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
      *
      * @param task to be performed
      * @param toDelete what will be deleted
@@ -62,7 +70,7 @@ public class Presenter {
     }
 
     /**
-     *  Rest Function sends parameters to RestModel where they are dealt with using switch statement.
+     * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
      *
      * @param task to be performed
      * @param toGet data to get
@@ -77,7 +85,7 @@ public class Presenter {
     /**
      * Sets user info called from signUpActivityView
      *
-     * sets by using constructor from UserInformationModel
+     * Sets by using constructor from UserInformationModel
      *
      * not sure if this is the appropriate way to do all this.
      *
