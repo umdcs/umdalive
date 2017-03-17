@@ -17,14 +17,7 @@ public class UserInformation {
 
     private ArrayList<CreateClub> local_clubs_subscribed;
     private ArrayList<String> local_posts_subscribed;
-
-    //public final String serverAddress = "https://lempo.d.umn.edu:5001";
-    public final String serverAddress = "http://10.0.2.2:5000";
     private ArrayList<String> local_club_Names;
-
-    public String getServerAddress(){
-        return serverAddress;
-    }
 
     /*
     Sets the local data that the app will run off of, will use this method when user signs in
