@@ -29,7 +29,9 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class RestModel {
-    private UserInformation  thisUser = new UserInformation();
+    public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
+    //public final String serverAddress = ""; //To be used for a real address
+    //private UserInformation  thisUser = new UserInformation(); Unnecessary
     private Context context;
 
     /**
@@ -85,7 +87,7 @@ public class RestModel {
      */
     private String getClub(String data){
         try{
-            return new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET", data).get();
+            return new HTTPAsyncTask().execute(serverAddress + "/getAllClubs", "GET", data).get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -95,7 +97,7 @@ public class RestModel {
 
     private String getAllClubs(){
         try{
-            return new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET").get();
+            return new HTTPAsyncTask().execute(serverAddress + "/getAllClubs", "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -111,7 +113,7 @@ public class RestModel {
     private String getRecentPosts(){
         String mostRecentPosts = null;
         try {
-            mostRecentPosts = new HTTPAsyncTask().execute(thisUser.serverAddress + "/mostRecentPosts", "GET").get();
+            mostRecentPosts = new HTTPAsyncTask().execute(serverAddress + "/mostRecentPosts", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -125,7 +127,7 @@ public class RestModel {
     private String getUserData(){
         String userData;
         try {
-            userData = new HTTPAsyncTask().execute(thisUser.serverAddress + "/userDataGet", "GET").get();
+            userData = new HTTPAsyncTask().execute(serverAddress + "/userDataGet", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             userData = null;
@@ -138,7 +140,7 @@ public class RestModel {
      * @param data name of the club being fetched
      */
     private void putNewClub(String data) {
-        new HTTPAsyncTask().execute(thisUser.serverAddress + "/newClub", "PUT", data); //Makes sure data is sent to server
+        new HTTPAsyncTask().execute(serverAddress + "/newClub", "PUT", data); //Makes sure data is sent to server
     }
 
     /**
@@ -146,11 +148,11 @@ public class RestModel {
      * @param data the post to be made
      */
     private void putNewPost(String data){
-        new HTTPAsyncTask().execute(thisUser.serverAddress + "/newPost", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/newPost", "PUT", data);
     }
 
     private void putNewUser(String data){
-        new HTTPAsyncTask().execute(thisUser.serverAddress + "/userInformation", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/userInformation", "PUT", data);
     }
 
     /**
