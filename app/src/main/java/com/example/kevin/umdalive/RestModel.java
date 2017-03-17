@@ -34,7 +34,8 @@ import java.util.concurrent.ExecutionException;
 
 public class RestModel {
     public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
-    //public final String serverAddress = ""; //To be used for a real address
+
+    //public final String serverAddress = "https://lempo.d.umn.edu:5001"; //To be used for a real address
     //private UserInformation  thisUser = new UserInformation(); Unnecessary
     private Context context;
 
