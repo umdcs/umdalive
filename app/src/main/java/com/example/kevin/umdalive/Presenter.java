@@ -11,8 +11,6 @@ import android.view.View;
 public class Presenter {
     private View view;
     private RestModel restModel;
-    private UserInformationModel userInformation;
-
 
     /**
      * Constructor for presenter
@@ -21,9 +19,8 @@ public class Presenter {
      * creates a RestModel for node communication
      */
     public Presenter (View incomingView) {
-    view = incomingView;
-    restModel = new RestModel();
-
+        restModel = new RestModel();
+        view = incomingView;
     }
 
     /**
@@ -81,7 +78,6 @@ public class Presenter {
         return "restGet()String";
     }
 
-
     /**
      * Sets user info called from signUpActivityView
      *
@@ -96,9 +92,50 @@ public class Presenter {
      * @param gradDate of new user
      */
     public void setUserInfo(String name, String password, String email, String major, String gradDate) {
-
-        userInformation = new UserInformationModel(name, password, email, major, gradDate);
-
+        UserInformationModel newUser = new UserInformationModel(name, password, email, major, gradDate);
+        //send to rest function and then to server to store data
+        //confirmation to user?
     }
 
+    /**
+     * Sets club info called from createClubView
+     *
+     * @param clubName name of club
+     * @param userName name of user creating club
+     * @param keyWords keywords to be used in tag (#rocketry or #MPIRG)
+     * @param description brief description of the club
+     */
+    public void setClubInfo(String clubName, String userName, String keyWords, String description) {
+       ClubInformationModel  newClub = new ClubInformationModel(clubName, userName, keyWords, description);
+        //send to rest function and then to server to store data
+        //confirmation to user?
+    }
+
+    /**
+     * Stubbed function to communicate with server and retrieve list of all clubs
+     */
+    public void getListOfAllClubs(){
+        //get from server list of all clubs
+        //send to view a list of all clubs
+    }
+
+    /**
+     * Stubbed function to communicate with server and retrieve one club by name
+     *
+     * @param clubName to retrieve info of
+     */
+    public void getClub(String clubName){
+        //get info from server of club
+        //send to view all data made by club
+    }
+
+    /**
+     * Stubbed function to communicate with server and retrieve all posts from one club by name
+     *
+     * @param clubName to retrieve posts of
+     */
+    public void getClubsPosts(String clubName) {
+        //get info from server of all posts made by one club
+        //send to view a list of all posts.
+    }
 }

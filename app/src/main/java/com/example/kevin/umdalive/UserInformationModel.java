@@ -28,9 +28,7 @@ public class UserInformationModel extends AppCompatActivity {
     //private ArrayList<String> localClubNames;
     //private ArrayList<Club> localClubsSubscribed;
     //private ArrayList<String> localPostsSubscribed;
-
-
-    /**
+    /*
      * Copied from old code
      * not sure if needed
 
@@ -42,9 +40,8 @@ public class UserInformationModel extends AppCompatActivity {
     }
      */
 
-
     /**
-     * constructor for user info
+     * constructor
      *
      * not currently using post and clubs subscribed for simplicity
      * @param name of user
@@ -85,7 +82,7 @@ public class UserInformationModel extends AppCompatActivity {
     /**
      * getter for password
      *
-     * @return
+     * @return password
      */
     public String getPassword() {
         return password;
@@ -94,7 +91,7 @@ public class UserInformationModel extends AppCompatActivity {
     /**
      * setter for password
      *
-     * @param password
+     * @param password to be set
      */
     public void setPassword(String password) {
         this.password = password;

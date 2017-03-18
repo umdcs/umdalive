@@ -20,18 +20,21 @@ public class ClubInformationModel {
     private String description;
     private String post;
 
-    private Object keywordItem = new Object(); //this item grabs from user WTF is this?
+    //private Object keywordItem = new Object(); //this item grabs from user WTF is this?
 
     /**
-     * Constructor requiring club name to create
+     * constructor
      *
-     * @param clubName
+     * @param clubName name of club
+     * @param userName usre creating club
+     * @param keyWords keywords to id club
+     * @param description of club
      */
-    public ClubInformationModel(String clubName) {
+    public ClubInformationModel(String clubName, String userName, String keyWords, String description) {
         this.clubName = clubName;
-        userName = "";
-        keyWords = "";
-        description = "";
+        this.userName = userName;
+        this.keyWords = keyWords;
+        this.description = description;
         post = "";
     }
 
@@ -142,7 +145,7 @@ public class ClubInformationModel {
             jsonString.put("username", userName);
             jsonString.put("keywords", keyWords);
             jsonString.put("description", description);
-            jsonString.put("post", post);
+            jsonString.put("post", post); //IDK if this is needed. I think it should be separate because there can be multiple posts for one club.
         } catch (JSONException e) {
             e.printStackTrace();
         }
