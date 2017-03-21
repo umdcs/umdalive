@@ -15,7 +15,7 @@ import java.lang.reflect.Array;
 public class SignUpActivityView extends AppCompatActivity {
 
 
-    // private Presenter presenter;
+    private Presenter presenter;
 
     private   EditText email;
     private EditText Password;
@@ -109,7 +109,7 @@ public class SignUpActivityView extends AppCompatActivity {
             Log.d(getMajor(),getMajor());
             Log.d(getGraduation(),getGraduation());
 
-            //presenter.setUserInfo(this.getUserName(),this.getPassword(),this.getEmail(),this.getMajor(),this.getGraduation());
+            presenter.setUserInfo(this.getUserName(),this.getPassword(),this.getEmail(),this.getMajor(),this.getGraduation());
 
 
         }
