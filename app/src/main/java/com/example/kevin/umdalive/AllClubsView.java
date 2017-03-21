@@ -56,7 +56,7 @@ public class AllClubsView extends AppCompatActivity {
                     String  itemValue  = (String) listView.getItemAtPosition(position);
                     DisplayClub.setClubName(itemValue);
                     //creates an intent that will become the view of the selected club
-                    Intent intent = new Intent(AllClubsView.this, DisplayClub.class);
+                    Intent intent = new Intent(AllClubs.this, DisplayClub.class);
                     //Gets the info of the club to display on the DisplayClub activity
                     try {
                         JSONObject jsonParam = null;
@@ -64,8 +64,11 @@ public class AllClubsView extends AppCompatActivity {
                         jsonParam = new JSONObject();
                         //adds the name of the club into the JSON object
                         jsonParam.put("club", itemValue);
-                        //not sure why they used PUT here... shouldn't it be GET? Nothing is being added to the club/list of clubs at this point.
-                        String jsonResponse = new AllClubs.HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "PUT", jsonParam.toString()).get();
+                        //moved to RestModel
+                        String jsonString = jsonParam.toString();
+                        String jsonResponse = null;
+                        //String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
+                        //be sure to pass itemValue
                         JSONObject object = new JSONObject(jsonResponse);
                         //gets off the club info from the jsonResponse
                         String clubFromServer = object.getString("club");
@@ -83,11 +86,7 @@ public class AllClubsView extends AppCompatActivity {
                         Log.d(userNameFromServer,userNameFromServer);
                         Log.d(keywordFromServer,keywordFromServer);
                         Log.d(jsonResponse,jsonResponse);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
+                    }catch (JSONException e) {
                         e.printStackTrace();
                     }
 
