@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 
 public class AllClubsView extends AppCompatActivity {
-
+    Presenter presenter;
     ListView listView;
     //Presenter presenter;  //will be used when presenter class is merged
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +56,11 @@ public class AllClubsView extends AppCompatActivity {
                     String  itemValue  = (String) listView.getItemAtPosition(position);
                     DisplayClub.setClubName(itemValue);
                     //creates an intent that will become the view of the selected club
-                    Intent intent = new Intent(AllClubs.this, DisplayClub.class);
+                    Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
                     //Gets the info of the club to display on the DisplayClub activity
 
                     //will be replaced with a one-line call to the presenter; this will go in the model
+
                     try {
                         JSONObject jsonParam = null;
                         //Create JSONObject

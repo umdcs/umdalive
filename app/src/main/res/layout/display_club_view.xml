@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent">
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -17,7 +17,7 @@
         android:textColor="@color/colorPrimary"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -31,7 +31,7 @@
         android:inputType="none"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -45,7 +45,7 @@
         android:layout_alignParentStart="true"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -60,7 +60,7 @@
         android:layout_toEndOf="@+id/display_club_administrator_title"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="none"
@@ -76,7 +76,7 @@
         tools:inputType="none"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -90,7 +90,7 @@
         android:layout_alignParentStart="true"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Keywords"
@@ -104,7 +104,7 @@
         android:layout_alignEnd="@+id/display_club_description_title"
         android:background="@android:color/transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"

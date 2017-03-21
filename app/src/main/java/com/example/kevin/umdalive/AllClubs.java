@@ -69,7 +69,7 @@ public class AllClubs extends Activity {
 //                    String  itemValue  = (String) listView.getItemAtPosition(position);
 //                    DisplayClub.setClubName(itemValue);
 //                    //creates an intent that will become the view of the selected club
-//                    Intent intent = new Intent(AllClubs.this, DisplayClub.class);
+//                    Intent intent = new Intent(AllClubs.this, DisplayClubView.class);
 //                    //Gets the info of the club to display on the DisplayClub activity
 //                    try {
 //                        JSONObject jsonParam = null;

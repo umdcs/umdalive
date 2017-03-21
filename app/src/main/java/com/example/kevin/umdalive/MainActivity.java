@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity
     //Will stay here in the model
     public void getUser() {
         try {
+
             //make userData equal getUserData from RestModel
             String userData = null;
             //string is turned into a jsonobject
