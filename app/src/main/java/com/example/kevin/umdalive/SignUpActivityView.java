@@ -15,20 +15,16 @@ public class SignUpActivityView extends AppCompatActivity {
 
     private Presenter presenter;
 
-    private   EditText emailEditText;
+    private EditText emailEditText;
     private EditText passwordEditText;
     private EditText userNameEditText;
     private Spinner gradDate;
     private Spinner majorSpinner;
-
-
-
     private String password;
     private String email;
     private String userName;
-
     private String graduation;
-    private  String major;
+    private String major;
 
 
 
@@ -121,6 +117,31 @@ public class SignUpActivityView extends AppCompatActivity {
 
 
     }
+
+
+    /*
+    Methods to inherit from parent class
+     */
+    protected void onPause() {
+        super.onPause();
+    }
+    protected void onResume() { //brings activity back to main screen.
+        super.onResume();
+    }
+    protected void onStop() {
+        super.onStop();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
 
 
     //setters and getters
