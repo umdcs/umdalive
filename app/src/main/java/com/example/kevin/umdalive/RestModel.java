@@ -157,6 +157,9 @@ public class RestModel {
         new HTTPAsyncTask().execute(serverAddress + "/newPost", "PUT", data);
     }
 
+
+
+
     private void putNewUser(String data){
         new HTTPAsyncTask().execute(serverAddress + "/userInformation", "PUT", data);
     }

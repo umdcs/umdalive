@@ -15,20 +15,16 @@ public class SignUpActivityView extends AppCompatActivity {
 
     private Presenter presenter;
 
-    private   EditText emailEditText;
+    private EditText emailEditText;
     private EditText passwordEditText;
     private EditText userNameEditText;
     private Spinner gradDate;
     private Spinner majorSpinner;
-
-
-
     private String password;
     private String email;
     private String userName;
-
     private String graduation;
-    private  String major;
+    private String major;
 
 
 
