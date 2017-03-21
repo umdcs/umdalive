@@ -58,6 +58,8 @@ public class AllClubsView extends AppCompatActivity {
                     //creates an intent that will become the view of the selected club
                     Intent intent = new Intent(AllClubsView.this, DisplayClub.class);
                     //Gets the info of the club to display on the DisplayClub activity
+
+                    //will be replaced with a one-line call to the presenter; this will go in the model
                     try {
                         JSONObject jsonParam = null;
                         //Create JSONObject
