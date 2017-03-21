@@ -4,6 +4,7 @@ package com.example.kevin.umdalive;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -73,7 +74,7 @@ public class SignUpActivityView extends AppCompatActivity {
      * when the button is clicked this method sends that data to the presenter
      * all data is converted to strings for the presenter class
      */
-    protected void signUp(ModelViewPresenterComponents.View view){
+    protected void signUp(View view){
 
         //retrieving email adress from the EditText object and converting it to a string
         email=(EditText) findViewById(R.id.new_email_input);
