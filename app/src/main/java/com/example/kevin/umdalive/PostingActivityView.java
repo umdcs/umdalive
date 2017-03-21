@@ -45,7 +45,7 @@ public class PostingActivityView extends AppCompatActivity {
 
         Log.d(clubToPost, clubToPost);
         //sending the post and the club to post too, to the presenter
-        presenter.restGet(getClub(), getPost());
+        presenter.restGet(clubToPost, postToDisplay);
 //starts new activity
         startActivity(intent);
     }
