@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Luke on 11/8/2016.
  */
 
-public class UserInformation {
+public class userInformationModel {
 
     private String name;
     private String email;

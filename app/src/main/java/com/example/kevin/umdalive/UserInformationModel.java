@@ -60,6 +60,8 @@ public class UserInformationModel extends AppCompatActivity {
         //localPostsSubscribed = new ArrayList<String>();
         //localClubsSubscribed = temp_clubs_subscribed;
     }
+// Default constructor
+
 
     /**
      * getter for name
