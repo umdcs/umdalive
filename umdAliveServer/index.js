@@ -56,7 +56,7 @@ app.use(bodyParser.json());
             countClubs = clubs.items.push(dummyClub1);
             countClubs = clubs.items.push(dummyClub2);
             countClubs = clubs.items.push(dummyClub3);
-            countClubs = clubs.items.push(dummyClu4);
+            countClubs = clubs.items.push(dummyClub4);
 
 
             var stringArray = JSON.stringify(clubs);
