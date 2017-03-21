@@ -33,25 +33,26 @@ import com.example.kevin.umdalive.MainActivity;
 
 public class CreateClub extends AppCompatActivity {
 
-    private UserInformation  this_user = new UserInformation();
+    private UserInformation this_user = new UserInformation();
     private String clubName;
     private String userName;
     private String keyWords;
     private String description;
     private String post;
 
-  //moved to view
+    //moved to view
     //  private Object keywordItem = new Object();          //this item grabs from user
 
     //constructors
-    public CreateClub(String cb, String un, String desc, String p, String key){
+    public CreateClub(String cb, String un, String desc, String p, String key) {
         clubName = cb;
         userName = un;
         keyWords = key;
         description = desc;
         post = p;
     }
-    public CreateClub(){
+
+    public CreateClub() {
         clubName = "default";
         userName = "default-user";
         keyWords = "#default";
@@ -80,7 +81,7 @@ public class CreateClub extends AppCompatActivity {
     admin of the new club they created.
     para: string of username
      */
- //Moved to view
+    //Moved to view
 //    //   public void setUserName(String admin){
 //        userName = admin;
 //    }
@@ -104,6 +105,7 @@ public class CreateClub extends AppCompatActivity {
     public String getUserName() {
         return userName;
     }
+
     /*
     sets description to string entered
     para: new string for description
@@ -174,22 +176,26 @@ protocol of parent
     protected void onPause() {
         super.onPause();
     }
+
     protected void onResume() { //brings activity back to main screen.
-    super.onResume();
+        super.onResume();
     }
+
     protected void onStop() {
-    super.onStop();
+        super.onStop();
     }
+
     protected void onDestroy() {
-    super.onDestroy();
+        super.onDestroy();
     }
+
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-    super.onRestoreInstanceState(savedInstanceState);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
 
     protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
 
@@ -199,8 +205,8 @@ protocol of parent
         try {
             //Create JSONObject here
             jsonParam = new JSONObject();
-            jsonParam.put("clubname",clubName);
-            jsonParam.put("username", userName );
+            jsonParam.put("clubname", clubName);
+            jsonParam.put("username", userName);
             jsonParam.put("keywords", keyWords);
             jsonParam.put("description", description);
             jsonParam.put("post", post);
@@ -212,3 +218,4 @@ protocol of parent
         //pass jsonString to restModel
         //new HTTPAsyncTask().execute(this_user.serverAddress + "/newClub", "PUT", jsonString); //Makes sure data is sent to server
     }
+}

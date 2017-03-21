@@ -37,7 +37,7 @@ package="com.example.kevin.umdalive">
     <activity android:name=".PostingActivity">
 
     </activity>
-    <activity android:name=".DisplayClub">
+    <activity android:name=".DisplayClubView">
 
     </activity>
     <meta-data

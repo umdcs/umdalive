@@ -45,13 +45,10 @@ public class PostingActivityView extends AppCompatActivity {
 
         Log.d(clubToPost, clubToPost);
         //sending the post and the club to post too, to the presenter
-        presenter.restGet(clubToPost, postToDisplay);
+        presenter.restPost(clubToPost,postToDisplay);
 //starts new activity
         startActivity(intent);
     }
-
-
-
     /*
 Life cycle methods
  */
@@ -70,11 +67,6 @@ Life cycle methods
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
-
-
-
-
-
     /**
      * method takes in a club name interms of a string and sets it to private clubToPost
      *
@@ -100,7 +92,6 @@ Life cycle methods
     private void setPost(String post) {
         postToDisplay = post;
     }
-
 
     /**
      * @return returns the text that is being posted
