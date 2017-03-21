@@ -18,9 +18,9 @@ public class PostingActivityView extends AppCompatActivity {
     UserInformation this_user = MainActivity.getUserInformation();
 
 
-
     /**
      * Starts the activity and initializes the layout
+     *
      * @param savedInstanceState
      */
 
@@ -32,9 +32,7 @@ public class PostingActivityView extends AppCompatActivity {
     }
 
 
-
-
-    public void sendPost(View view){
+    public void sendPost(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         //sets the post
         setPost(newPost.getText().toString());
@@ -45,48 +43,47 @@ public class PostingActivityView extends AppCompatActivity {
         Log.d(postToDisplay, postToDisplay);
         Log.d(postToDisplay, postToDisplay);
 
-        Log.d(clubToPost,clubToPost);
+        Log.d(clubToPost, clubToPost);
         //sending the post and the club to post too, to the presenter
-        presenter.restGet(getClub(),getPost());
+        presenter.restGet(getClub(), getPost());
 //starts new activity
         startActivity(intent);
     }
 
 
-
-
     /**
      * method takes in a club name interms of a string and sets it to private clubToPost
+     *
      * @param club the name of the club that is being psoted
      */
-    public static void setClub(String club){
+    public static void setClub(String club) {
         clubToPost = club;
     }
 
     /**
-     *
      * @return club name that the post is directed too
      */
-    public static String getClub(){
+    public static String getClub() {
         return clubToPost;
     }
 
 
     /**
      * takes in the post that the author enters, and sets to the private postToDisplay
+     *
      * @param post string containing the mesage to be posted
      */
-    private void setPost(String post){
+    private void setPost(String post) {
         postToDisplay = post;
     }
 
 
     /**
-     *
      * @return returns the text that is being posted
      */
 
-    public String getPost(){
+    public String getPost() {
         return postToDisplay;
     }
 
+}
