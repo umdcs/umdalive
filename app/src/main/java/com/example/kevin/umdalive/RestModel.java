@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Andrew on 3/15/2017.
+ * Created by Andrew Miller on 3/15/2017.
  *
  * Rest Class to perform all server interaction
  *

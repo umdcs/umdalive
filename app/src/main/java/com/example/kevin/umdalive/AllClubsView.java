@@ -1,91 +1,65 @@
 package com.example.kevin.umdalive;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
- * Created by Kevin on 11/14/2016.
+ * Created by Andrew Miller 3/21/2017
+ *
+ * This is a view that displays all club names. When a user selects a club, DisplayClubView is launched with the correct club info.
  */
-
-public class AllClubs extends Activity {
+public class AllClubsView extends Activity {
     ListView listView;
-    UserInformation this_user = new UserInformation();
     Presenter presenter;
+    boolean launch = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         presenter = new Presenter();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_clubs);
         listView = (ListView) findViewById(R.id.list2);
-
-        ArrayList<String> values = presenter.getClubNames();
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // ListView Clicked item index
-                    int itemPosition = position;
-                    // ListView Clicked item value
-                    String  itemValue  = (String) listView.getItemAtPosition(position);
-                    DisplayClub.setClubName(itemValue);
-                    Intent intent = new Intent(AllClubs.this, DisplayClub.class);
-                    String jsonResponse = presenter.restGet(new String("getAllClubs"), new String(""));
-                    presenter.getDisplayClubInfo(jsonResponse, itemValue);
-
-                    JSONObject object = new JSONObject(jsonResponse);
-                    String clubFromServer = object.getString("club");
-                    String descriptionFromServer = object.getString("description");
-                    String userNameFromServer = object.getString("username");
-                    String keywordFromServer = object.getString("keywords");
-                    DisplayClub.setClubName(clubFromServer);
-                    DisplayClub.setAdministrator(userNameFromServer);
-                    DisplayClub.setDescription(descriptionFromServer);
-                    DisplayClub.setKeywords(keywordFromServer);
-
-                    Log.d(clubFromServer, clubFromServer);
-                    Log.d(descriptionFromServer, descriptionFromServer);
-                    Log.d(userNameFromServer, userNameFromServer);
-                    Log.d(keywordFromServer, keywordFromServer);
-                    Log.d(jsonResponse, jsonResponse);
-
-
-                    startActivity(intent);
-
-                    // Show Alert
-                    Toast.makeText(getApplicationContext(),
-                            "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                            .show();
-
-                }
-
-            });
+        Intent intent = new Intent(this, DisplayClub.class);
+        setView();
+        //launch is changed to true once a club is clicked on.
+        if(launch){
+            startActivity(intent);
         }
+    }
+
+    /**
+     * Sets up the view.
+     *
+     * For clarification, an ArrayAdapter is used to take the contents of clubNames and display
+     * it on a default layout provided by Android(simple_list_item_1).
+     *
+     * The listener is used to check if a club has been clicked. Once clicked, we send a get request to the server
+     * and the club info is received in the response. The response is used to set the info for DisplayClubView before it is launched.
+     * I don't like the way the previous group implemented this part, mainly because it doesn't work lol.
+     * We will have to fix it(setDisplayClubInfo(String) in the presenter).
+     */
+    private void setView(){
+        ArrayList<String> clubNames = presenter.getClubNames();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                launch = true;
+                int itemPosition = position;
+                String itemValue = (String) listView.getItemAtPosition(position);
+                String jsonResponse = presenter.restGet(new String("getClub"), itemValue);
+                presenter.setDisplayClubInfo(jsonResponse);
+                Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     protected void onPause() {
         super.onPause();
