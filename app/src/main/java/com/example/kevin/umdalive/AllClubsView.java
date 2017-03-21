@@ -1,6 +1,9 @@
 package com.example.kevin.umdalive;
 
+import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,86 +16,68 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Created by Kevin on 11/14/2016.
+ */
 
-public class AllClubsView extends AppCompatActivity {
-
+public class AllClubs extends Activity {
     ListView listView;
-    //Presenter presenter;  //will be used when presenter class is merged
-    protected void onCreate(Bundle savedInstanceState) {
+    UserInformation this_user = new UserInformation();
+    Presenter presenter;
 
+    protected void onCreate(Bundle savedInstanceState) {
+        presenter = new Presenter();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_clubs);
-        //this is the ListView for the all clubs activity listing all of the clubs
         listView = (ListView) findViewById(R.id.list2);
-        //gets the list of clubs
-        ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
 
+        ArrayList<String> values = presenter.getClubNames();
 
-        try {
-            /* Im not entirely sure but I think the way that this works is it uses a default Android list layout(simple_list_item_1)
-             * to fill in the space of the listView with the contents of values.
-             */
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1, values);
-            //applies the adapter we just created to the ListView
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
             listView.setAdapter(adapter);
-            /*
-             * The following is what happens when a user selects something the ListView
-             */
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-
-
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     // ListView Clicked item index
                     int itemPosition = position;
-
                     // ListView Clicked item value
                     String  itemValue  = (String) listView.getItemAtPosition(position);
                     DisplayClub.setClubName(itemValue);
-                    //creates an intent that will become the view of the selected club
                     Intent intent = new Intent(AllClubs.this, DisplayClub.class);
-                    //Gets the info of the club to display on the DisplayClub activity
-                    try {
-                        JSONObject jsonParam = null;
-                        //Create JSONObject
-                        jsonParam = new JSONObject();
-                        //adds the name of the club into the JSON object
-                        jsonParam.put("club", itemValue);
-                        //moved to RestModel
-                        String jsonString = jsonParam.toString();
-                        String jsonResponse = null;
-                        //String jsonResponse = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET", jsonParam.toString()).get();
-                        //be sure to pass itemValue
-                        JSONObject object = new JSONObject(jsonResponse);
-                        //gets off the club info from the jsonResponse
-                        String clubFromServer = object.getString("club");
-                        String descriptionFromServer = object.getString("description");
-                        String userNameFromServer = object.getString("username");
-                        String keywordFromServer = object.getString("keywords");
-                        //sets the club parameters on the DisplayClub view
-                        DisplayClub.setClubName(clubFromServer);
-                        DisplayClub.setAdministrator(userNameFromServer);
-                        DisplayClub.setDescription(descriptionFromServer);
-                        DisplayClub.setKeywords(keywordFromServer);
+                    String jsonResponse = presenter.restGet(new String("getAllClubs"), new String(""));
+                    presenter.getDisplayClubInfo(jsonResponse, itemValue);
 
-                        Log.d(clubFromServer,clubFromServer);
-                        Log.d(descriptionFromServer,descriptionFromServer);
-                        Log.d(userNameFromServer,userNameFromServer);
-                        Log.d(keywordFromServer,keywordFromServer);
-                        Log.d(jsonResponse,jsonResponse);
-                    }catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    JSONObject object = new JSONObject(jsonResponse);
+                    String clubFromServer = object.getString("club");
+                    String descriptionFromServer = object.getString("description");
+                    String userNameFromServer = object.getString("username");
+                    String keywordFromServer = object.getString("keywords");
+                    DisplayClub.setClubName(clubFromServer);
+                    DisplayClub.setAdministrator(userNameFromServer);
+                    DisplayClub.setDescription(descriptionFromServer);
+                    DisplayClub.setKeywords(keywordFromServer);
+
+                    Log.d(clubFromServer, clubFromServer);
+                    Log.d(descriptionFromServer, descriptionFromServer);
+                    Log.d(userNameFromServer, userNameFromServer);
+                    Log.d(keywordFromServer, keywordFromServer);
+                    Log.d(jsonResponse, jsonResponse);
+
 
                     startActivity(intent);
 
-                    // Show Alert (I think this is for debugging, idk why the user would need to see this)
+                    // Show Alert
                     Toast.makeText(getApplicationContext(),
                             "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
                             .show();
@@ -100,8 +85,24 @@ public class AllClubsView extends AppCompatActivity {
                 }
 
             });
+        }
 
-        }catch (Exception e)
-        {
-        }}
+    protected void onPause() {
+        super.onPause();
+    }
+    protected void onResume() { //brings activity back to main screen.
+        super.onResume();
+    }
+    protected void onStop() {
+        super.onStop();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

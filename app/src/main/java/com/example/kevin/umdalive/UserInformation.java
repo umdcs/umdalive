@@ -22,9 +22,9 @@ public class UserInformation {
     /*
     Sets the local data that the app will run off of, will use this method when user signs in
      */
-    public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<CreateClub> temp_clubs_subscribed){
+    public UserInformation(String temp_local_username, String temp_major, String email, String temp_graduationDate, ArrayList<CreateClub> temp_clubs_subscribed){
         name = temp_local_username;
-        email = emai;
+        email = email;
         major = temp_major;
         gradDate = temp_graduationDate;
         local_posts_subscribed = new ArrayList<String>();
