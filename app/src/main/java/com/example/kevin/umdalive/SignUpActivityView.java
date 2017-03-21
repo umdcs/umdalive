@@ -123,6 +123,31 @@ public class SignUpActivityView extends AppCompatActivity {
     }
 
 
+    /*
+    Methods to inherit from parent class
+     */
+    protected void onPause() {
+        super.onPause();
+    }
+    protected void onResume() { //brings activity back to main screen.
+        super.onResume();
+    }
+    protected void onStop() {
+        super.onStop();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+
+
     //setters and getters
 
     public void setGraduation(String grad){this.graduation=grad;}

@@ -51,6 +51,30 @@ public class PostingActivityView extends AppCompatActivity {
     }
 
 
+
+    /*
+Life cycle methods
+ */
+    protected void onPause() {
+        super.onPause();
+    }
+    protected void onResume() { //brings activity back to main screen.
+        super.onResume();
+    }
+    protected void onStop() {
+        super.onStop();
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+
+
+
+
     /**
      * method takes in a club name interms of a string and sets it to private clubToPost
      *
