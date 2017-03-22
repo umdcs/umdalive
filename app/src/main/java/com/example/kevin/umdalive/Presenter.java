@@ -6,6 +6,7 @@ import android.view.View;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -86,6 +87,23 @@ public class Presenter {
         restModel.restGet(task, toGet);
         return "restGet()String";
     }
+
+
+
+
+    /**
+     * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
+     *
+     * @param task to be performed
+     * @param toGet data to get
+     * @return Currently returns a string to represent what could be returned
+     */
+    public ArrayList<String> restGet(String task, String toGet) {
+        restModel.restGet(task, toGet);
+        return "restGet()String";
+    }
+
+
 
     /**
      * Sets user info called from signUpActivityView
@@ -174,9 +192,6 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
-
-    public String getRecentPosts(){
-        restModel.get
 
     }
 

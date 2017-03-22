@@ -117,7 +117,7 @@ Presenter presenter;
     public void refreshPosts(View view){
         //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
 
-        ArrayList<String> list = presenter.getClubsPosts();
+
 
                 Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 
