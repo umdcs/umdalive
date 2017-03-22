@@ -85,16 +85,16 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
         }
 
 
-        // starts display CreateClub Activity
+        // starts display CreateClub Activity View
     public void displayClubs(String clubNames) {
-        Intent intent = new Intent(this, AllClubs.class);
+        Intent intent = new Intent(this, AllClubsView.class);
         startActivity(intent);
     }
 
-    // starts display Cluba for post Activity
+    // starts display Cluba for post Activity View
     public void displayClubsForPost(String clubNames)
     {
-        Intent intent = new Intent(this, PostForClubActivity.class);
+        Intent intent = new Intent(this, PostForClubActivityView.class);
         startActivity(intent);
     }
 
