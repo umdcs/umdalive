@@ -265,9 +265,9 @@ Presenter presenter;
 
         //comparess the item id number to the all clubs id number
         if (id == R.id.allClubs) {
-            String getClubNames;
+            ArrayList<String> getClubNames;
             //get string of club names from server
-            getClubNames = null;
+            getClubNames = presenter.getClubNames();
             //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
             try {
