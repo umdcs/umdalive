@@ -142,7 +142,7 @@ public class Presenter {
     }
 
     /**
-     *
+     *gets all the club names
      */
     public ArrayList<String> getClubNames(){
         return allClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));

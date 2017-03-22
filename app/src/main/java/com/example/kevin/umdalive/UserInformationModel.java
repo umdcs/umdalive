@@ -24,21 +24,19 @@ public class UserInformationModel extends AppCompatActivity {
     private String major;
     private String gradDate;
 
-    // not using these three fields copied from "old code" yet to keep things simple
-    //private ArrayList<String> localClubNames;
-    //private ArrayList<Club> localClubsSubscribed;
-    //private ArrayList<String> localPostsSubscribed;
-    /*
-     * Copied from old code
-     * not sure if needed
+
+    private ArrayList<String> localClubNames;
+    private ArrayList<String> localClubsSubscribed;
+    private ArrayList<String> localPostsSubscribed;
+
 
     public UserInformationModel(){
         name = "";
-        //localClubsSubscribed = new ArrayList<Club>();
-        //localClubNames = new ArrayList<String>();
-        //localPostsSubscribed = new ArrayList<String>();
+        localClubsSubscribed = new ArrayList<String>();
+        localClubNames = new ArrayList<String>();
+        localPostsSubscribed = new ArrayList<String>();
     }
-     */
+
 
     /**
      * constructor
@@ -51,14 +49,14 @@ public class UserInformationModel extends AppCompatActivity {
      * @param gradDate of user
      *
      */
-    public UserInformationModel(String name, String password, String major, String email, String gradDate) {//, ArrayList<Club> temp_clubs_subscribed){
+    public UserInformationModel(String name, String password, String major, String email, String gradDate, ArrayList<Club> temp_clubs_subscribed){
         this.name = name;
         this.password = password;
         this.email = email;
         this.major = major;
         this.gradDate = gradDate;
-        //localPostsSubscribed = new ArrayList<String>();
-        //localClubsSubscribed = temp_clubs_subscribed;
+        localPostsSubscribed = new ArrayList<String>();
+        localClubsSubscribed = temp_clubs_subscribed;
     }
 
     /**
