@@ -99,11 +99,8 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
-    /*
-     * function to get user data and update the UI with their info
-     */
-    //will move to view
-    public void updateUser(String str1) {
+   
+    public void updateUser() {
         TextView emailView = (TextView) findViewById(R.id.userEmail);
         emailView.setText(thisUser.getEmail());
 
