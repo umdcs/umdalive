@@ -29,7 +29,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
 Presenter presenter;
 
-    private static UserInformation thisUser = new UserInformation();
+    private static UserInformationModel thisUser = new UserInformationModel();
 
     EditText posts;
 
