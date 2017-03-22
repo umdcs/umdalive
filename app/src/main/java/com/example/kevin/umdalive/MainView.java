@@ -27,7 +27,7 @@ import java.util.Collections;
 
 public class MainView  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
+Presenter presenter;
 
         UserInformationModel thisUser;
         EditText posts;
@@ -260,9 +260,10 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // takes in the id of the navigation item
         int id = item.getItemId();
 
+        //comparess the item id number to the all clubs id number
         if (id == R.id.allClubs) {
             String getClubNames;
             //get string of club names from server
