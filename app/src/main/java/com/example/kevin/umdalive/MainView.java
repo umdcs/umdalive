@@ -131,7 +131,10 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
                     Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                 }
                 Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                this_user.setLocalPosts(list);
+
+                //we are not implementing the local post in the userInformationModel
+                //this_user.setLocalPosts(list);
+
                 String displayPosts = "";
                 for (int i = 0; i < len; i++) {
                     displayPosts += " \n" + list.get(i);
@@ -164,13 +167,14 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
-    @Override
+  /**  @Override
     //stay here in model
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
 
     @Override
     //stay in model
@@ -190,6 +194,67 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+    //Will stay here in the model
+    public void getUser() {
+    try {
+
+    //make userData equal getUserData from RestModel
+    String userData = null;
+    //string is turned into a jsonobject
+    JSONObject user = new JSONObject(userData);
+    ArrayList<ClubInformation> list = new ArrayList<ClubInformation>();
+    JSONArray jArray = user.getJSONArray("clubs");
+
+    if (jArray != null) {
+    int len = jArray.length();
+    for (int i=0;i<len;i++){
+    JSONObject clubObject = jArray.getJSONObject(i);
+    //create new club object from server data
+    ClubInformation tempClub = new ClubInformation(clubObject.get("clubname").toString(),
+    clubObject.get("username").toString(),
+    clubObject.get("keywords").toString(),
+    clubObject.get("description").toString(),
+    clubObject.get("post").toString());
+    Log.d("club name: ", clubObject.get("clubname").toString());
+    //add new club object to array
+    list.add(tempClub);
+    }
+
+
+    }
+    this_user = new UserInformation(user.getString("name"),
+    user.getString("major"),
+    user.getString("email"),
+    user.getString("graduationDate"),
+    list);
+
+    Log.d("userData", userData);
+    //will obtain json string from textview and take value out from string
+
+    }
+    catch (JSONException e1) {
+    e1.printStackTrace();
+    }
+    }
+
+    //will stay in model
+    public static UserInformation getUserInformation() {
+    return this_user;
+    }
+
+
+
+   **/
+
+
+    /**
+     * this method responds to what the user selects on the menu
+     * @param item the item the user selected
+     * @return true or false if the item was succesfully received
+     */
 
     //MVP
     @SuppressWarnings("StatementWithEmptyBody")
