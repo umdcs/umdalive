@@ -116,24 +116,33 @@ Presenter presenter;
      */
     public void refreshPosts(View view){
         //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
-
-
-
+        String mostRecentPosts = presenter.restGet("getRecentPosts","");
+        ArrayList<String> list = new ArrayList<String>();
+        //converting Json string to ArrayList
+        try {
+            JSONObject object = new JSONObject(mostRecentPosts);
+            JSONArray jsonArray = object.getJSONArray("items");
+            if (jsonArray != null) {
+                int len = jsonArray.length();
+                for (int i = 0; i < len; i++) {
+                    list.add(jsonArray.get(i).toString());
+                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                }
                 Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-
-                this_user.setLocalPosts(list);
-
+                thisUser.setLocalPosts(list);
                 String displayPosts = "";
                 for (int i = 0; i < len; i++) {
                     displayPosts += " \n" + list.get(i);
                 }
                 posts.setText(displayPosts);
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
+
 
     /*
     onclick for making a new club
@@ -155,7 +164,7 @@ Presenter presenter;
         }
     }
 
-  /**  @Override
+   @Override
     //stay here in model
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

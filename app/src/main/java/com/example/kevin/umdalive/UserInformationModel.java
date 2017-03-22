@@ -59,6 +59,28 @@ public class UserInformationModel extends AppCompatActivity {
         localClubsSubscribed = temp_clubs_subscribed;
     }
 
+
+
+    /*
+       Takes in a new arraylist of most recent posts then
+       Removes all current posts and then replaces objects in arraylist temp
+       and addes them to local array list
+   */
+    public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
+    {
+        while(localPostsSubscribed.size() !=0){
+            localPostsSubscribed.remove(0);
+        }
+        for(String x : temp_posts_subscribed)
+        {
+            localPostsSubscribed.add(x);
+        }
+    }
+
+
+
+
+
     /**
      * getter for name
      *

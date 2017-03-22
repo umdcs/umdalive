@@ -83,7 +83,7 @@ public class Presenter {
      * @param toGet data to get
      * @return Currently returns a string to represent what could be returned
      */
-    public String restGet(String task, String toGet) {
+    public  String restGet(String task, String toGet) {
         restModel.restGet(task, toGet);
         return "restGet()String";
     }
@@ -91,17 +91,7 @@ public class Presenter {
 
 
 
-    /**
-     * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
-     *
-     * @param task to be performed
-     * @param toGet data to get
-     * @return Currently returns a string to represent what could be returned
-     */
-    public ArrayList<String> restGet(String task, String toGet) {
-        restModel.restGet(task, toGet);
-        return "restGet()String";
-    }
+
 
 
 
