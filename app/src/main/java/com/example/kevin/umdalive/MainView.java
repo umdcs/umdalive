@@ -131,8 +131,7 @@ Presenter presenter;
                 }
                 Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 
-                //we are not implementing the local post in the userInformationModel
-                //this_user.setLocalPosts(list);
+                this_user.setLocalPosts(list);
 
                 String displayPosts = "";
                 for (int i = 0; i < len; i++) {
@@ -269,19 +268,11 @@ Presenter presenter;
             getClubNames = presenter.getClubNames();
             //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
+            //arranging the club names in ascending order
             try {
-                // JSONObject club_names = new JSONObject(jsonString);
-                ArrayList<String> list = new ArrayList<String>();
-                JSONObject object = new JSONObject(getClubNames);
-                JSONArray jsonArray = object.getJSONArray("items");
-                if (jsonArray != null) {
-                    int len = jsonArray.length();
-                    for (int i = 0; i < len; i++) {
-                        list.add(jsonArray.get(i).toString());
-                        Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                    }
-                    Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                    this_user.setLocal_club_Names(list);
+
+                    Collections.sort(getClubNames, String.CASE_INSENSITIVE_ORDER);
+                    //thisUser.setLocal_club_Names(list);
                     displayClubs(getClubNames);
                 }
             } catch (JSONException e1) {

@@ -101,7 +101,12 @@ public class Presenter {
      * @param gradDate of new user
      */
     public void setUserInfo(String name, String password, String email, String major, String gradDate) {
-        UserInformationModel newUser = new UserInformationModel(name, password, email, major, gradDate);
+        //geting loocal post subscribed
+
+        ArrayList<String> localPostSubscribed= this.getClubNames();
+
+
+        UserInformationModel newUser = new UserInformationModel(name, password, email, major, gradDate,localPostSubscribed);
         //send to rest function and then to server to store data
         //confirmation to user?
     }
@@ -143,7 +148,7 @@ public class Presenter {
     }
 
     /**
-     *
+     *gets all the club names
      */
     public ArrayList<String> getClubNames(){
         return allClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
