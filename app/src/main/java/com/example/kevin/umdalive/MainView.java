@@ -29,8 +29,9 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
 Presenter presenter;
 
-        UserInformationModel thisUser;
-        EditText posts;
+    private static UserInformation thisUser = new UserInformation();
+
+    EditText posts;
 
 
         @Override
@@ -210,7 +211,7 @@ Presenter presenter;
     for (int i=0;i<len;i++){
 
         JSONObject clubObject = jArray.getJSONObject(i);
-    String x= clubObject.get("clubname").toString();
+
 
         //create new club object from server data
     ClubInformationModel tempClub = new ClubInformationModel( clubObject.get("clubname").toString(),
@@ -230,7 +231,8 @@ Presenter presenter;
 
     }
 
-    thisUser = new UserInformationModel(user.getString("name"),user.getString()
+    thisUser = new UserInformationModel(user.getString("name"),user.getString("major"),
+            user.getString("email"), user.getString("graduationDate"),list);
 
     Log.d("userData", userData);
     //will obtain json string from textview and take value out from string
@@ -243,7 +245,7 @@ Presenter presenter;
 
     //will stay in model
     public static UserInformation getUserInformation() {
-    return this_user;
+    return thisUser;
     }
 
 

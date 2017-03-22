@@ -26,13 +26,13 @@ public class UserInformationModel extends AppCompatActivity {
 
 
     private ArrayList<String> localClubNames;
-    private ArrayList<String> localClubsSubscribed;
+    private ArrayList<ClubInformationModel> localClubsSubscribed;
     private ArrayList<String> localPostsSubscribed;
 
 
     public UserInformationModel(){
         name = "";
-        localClubsSubscribed = new ArrayList<String>();
+        localClubsSubscribed = new ArrayList<ClubInformationModel>();
         localClubNames = new ArrayList<String>();
         localPostsSubscribed = new ArrayList<String>();
     }
@@ -49,7 +49,7 @@ public class UserInformationModel extends AppCompatActivity {
      * @param gradDate of user
      *
      */
-    public UserInformationModel(String name, String password, String major, String email, String gradDate, ArrayList<String> temp_clubs_subscribed){
+    public UserInformationModel(String name, String password, String major, String email, String gradDate, ArrayList<ClubInformationModel> temp_clubs_subscribed){
         this.name = name;
         this.password = password;
         this.email = email;
@@ -59,7 +59,7 @@ public class UserInformationModel extends AppCompatActivity {
         localClubsSubscribed = temp_clubs_subscribed;
     }
 
-    public UserInformationModel(String name, String major, String email, String gradDate, ArrayList<String> temp_clubs_subscribed){
+    public UserInformationModel(String name, String major, String email, String gradDate, ArrayList<ClubInformationModel> temp_clubs_subscribed){
         this.name = name;
 
         this.email = email;
