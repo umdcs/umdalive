@@ -86,13 +86,13 @@ Presenter presenter;
 
 
         // starts display CreateClub Activity View
-    public void displayClubs() {
+    public void displayClubs(String clubNamess) {
         Intent intent = new Intent(this, AllClubsView.class);
         startActivity(intent);
     }
 
     // starts display Cluba for post Activity View
-    public void displayClubsForPost()
+    public void displayClubsForPost(String clubNames)
     {
         Intent intent = new Intent(this, PostForClubActivityView.class);
         startActivity(intent);
@@ -253,21 +253,31 @@ Presenter presenter;
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // takes in the id of the navigation item
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        //comparess the item id number to the all clubs id number
         if (id == R.id.allClubs) {
-            ArrayList<String> getClubNames;
-            //get string of club names from server
-            getClubNames = presenter.getClubNames();
-            //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
-            //arranging the club names in ascending order
+            //getting Json string of club names from server
+            String getClubNames= presenter.restGet("getClub","");
+
+
+
             try {
+                // JSONObject club_names = new JSONObject(jsonString);
+                ArrayList<String> list = new ArrayList<String>();
+                JSONObject object = new JSONObject(getClubNames);
+                JSONArray jsonArray = object.getJSONArray("items");
+                if (jsonArray != null) {
+                    int len = jsonArray.length();
+                    for (int i = 0; i < len; i++) {
+                        list.add(jsonArray.get(i).toString());
+                        Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                    }
+                    Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+                    thisUser.setLocalClubNames(list);
 
-                    Collections.sort(getClubNames, String.CASE_INSENSITIVE_ORDER);
-                    //thisUser.setLocal_club_Names(list);
+
                     displayClubs(getClubNames);
                 }
             } catch (JSONException e1) {
@@ -292,7 +302,7 @@ Presenter presenter;
                         Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                     }
                     Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                    this_user.setLocal_club_Names(list);
+                    thisUser.setLocalClubNames(list);
                     displayClubsForPost(getClubNames);
                 }
             } catch (JSONException e1) {
