@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AllClubsView extends Activity {
     ListView listView;
     Presenter presenter;
-    boolean launch = false;
+    boolean launchActivity = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +28,7 @@ public class AllClubsView extends Activity {
         Intent intent = new Intent(this, DisplayClub.class);
         setView();
         //launch is changed to true once a club is clicked on.
-        if(launch){
+        if(launchActivity){
             startActivity(intent);
         }
     }
@@ -51,7 +51,7 @@ public class AllClubsView extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launch = true;
+                launchActivity = true;
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
                 String jsonResponse = presenter.restGet(new String("getClub"), itemValue);
