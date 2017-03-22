@@ -199,7 +199,7 @@ Presenter presenter;
     try {
 
     //make userData equal getUserData from RestModel
-    String userData = null;
+    String userData = presenter.restGet("getUserData", "");
     //string is turned into a jsonobject
     JSONObject user = new JSONObject(userData);
     ArrayList<ClubInformationModel> list = new ArrayList<ClubInformationModel>();
@@ -208,13 +208,20 @@ Presenter presenter;
     if (jArray != null) {
     int len = jArray.length();
     for (int i=0;i<len;i++){
-    JSONObject clubObject = jArray.getJSONObject(i);
-    //create new club object from server data
-    ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubname").toString(),
-    clubObject.get("username").toString(),
-    clubObject.get("keywords").toString(),
-    clubObject.get("description").toString(),
-    clubObject.get("post").toString());
+
+        JSONObject clubObject = jArray.getJSONObject(i);
+    String x= clubObject.get("clubname").toString();
+
+        //create new club object from server data
+    ClubInformationModel tempClub = new ClubInformationModel( clubObject.get("clubname").toString(),
+            clubObject.get("username").toString(),clubObject.get("keywords").toString(),
+            clubObject.get("description").toString());
+
+
+
+
+
+
     Log.d("club name: ", clubObject.get("clubname").toString());
     //add new club object to array
     list.add(tempClub);
@@ -222,7 +229,8 @@ Presenter presenter;
 
 
     }
-    this_user = new UserInformation(user.getString("name"),
+
+    thisUser = new UserInformationModel(user.getString("name"),
     user.getString("major"),
     user.getString("email"),
     user.getString("graduationDate"),
