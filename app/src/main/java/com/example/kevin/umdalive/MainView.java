@@ -37,8 +37,8 @@ Presenter presenter;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //obtain the user info from server
-           // getUser(); // calls server
+            presenter = new Presenter(this);
+            getUser(); // calls server
             setContentView(R.layout.activity_main);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
