@@ -27,10 +27,9 @@ import java.util.Collections;
 
 public class MainView  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-        //Variable name consistency
-        private static UserInformationModel thisUser;
 
 
+        UserInformationModel thisUser;
         EditText posts;
 
 
@@ -39,7 +38,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
             super.onCreate(savedInstanceState);
 
             //obtain the user info from server
-            getUser(); // calls server
+           // getUser(); // calls server
             setContentView(R.layout.activity_main);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
@@ -98,52 +97,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
         Intent intent = new Intent(this, PostForClubActivity.class);
         startActivity(intent);
     }
-    //Will stay here in the model
-    public void getUser() {
-        try {
-            //make userData equal getUserData from RestModel
-            String userData = null;
-            //string is turned into a jsonobject
-            JSONObject user = new JSONObject(userData);
-            ArrayList<ClubInformation> list = new ArrayList<ClubInformation>();
-            JSONArray jArray = user.getJSONArray("clubs");
 
-            if (jArray != null) {
-                int len = jArray.length();
-                for (int i=0;i<len;i++){
-                    JSONObject clubObject = jArray.getJSONObject(i);
-                    //create new club object from server data
-                    ClubInformation tempClub = new ClubInformation(clubObject.get("clubname").toString(),
-                            clubObject.get("username").toString(),
-                            clubObject.get("keywords").toString(),
-                            clubObject.get("description").toString(),
-                            clubObject.get("post").toString());
-                    Log.d("club name: ", clubObject.get("clubname").toString());
-                    //add new club object to array
-                    list.add(tempClub);
-                }
-
-
-            }
-            thisUser = new UserInformationModel(user.getString("name"),
-                    user.getString("major"),
-                    user.getString("email"),
-                    user.getString("graduationDate"),
-                    list);
-
-            Log.d("userData", userData);
-            //will obtain json string from textview and take value out from string
-
-        }
-        catch (JSONException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    //will stay in model
-    public static UserInformation getUserInformation() {
-        return thisUser;
-    }
 
     /*
      * function to get user data and update the UI with their info
@@ -155,7 +109,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
         //gets the users name and sets menu to their name
         TextView userNameView = (TextView) findViewById(R.id.userName);
-        userNameView.setText(thisUser.getLocalUsername());
+        userNameView.setText(thisUser.getName());
     }
 
 
@@ -180,7 +134,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
                     Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                 }
                 Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                thisUser.setLocalPosts(list);
+                this_user.setLocalPosts(list);
                 String displayPosts = "";
                 for (int i = 0; i < len; i++) {
                     displayPosts += " \n" + list.get(i);
@@ -251,7 +205,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
             String getClubNames;
             //get string of club names from server
             getClubNames = null;
-            //getClubNames = new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET").get();
+            //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
 
             try {
                 // JSONObject club_names = new JSONObject(jsonString);
@@ -265,7 +219,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
                         Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                     }
                     Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                    thisUser.setLocal_club_Names(list);
+                    this_user.setLocal_club_Names(list);
                     displayClubs(getClubNames);
                 }
             } catch (JSONException e1) {
@@ -275,7 +229,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
         else if (id == R.id.Post) {
             String getClubNames;
             //get string of club names from server
-            //getClubNames = new HTTPAsyncTask().execute(thisUser.serverAddress + "/getAllClubs", "GET").get();
+            //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
             getClubNames = null;
 
             try {
@@ -290,7 +244,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
                         Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                     }
                     Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                    thisUser.setLocal_club_Names(list);
+                    this_user.setLocal_club_Names(list);
                     displayClubsForPost(getClubNames);
                 }
             } catch (JSONException e1) {
@@ -311,8 +265,5 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
-
-
-
-

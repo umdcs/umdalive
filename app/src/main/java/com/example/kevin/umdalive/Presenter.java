@@ -2,6 +2,11 @@ package com.example.kevin.umdalive;
 
 import android.view.View;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by rgebh_000 on 3/15/2017.
  *
@@ -11,6 +16,7 @@ import android.view.View;
 public class Presenter {
     private View view;
     private RestModel restModel;
+    private AllClubs allClubs;
 
     /**
      * Constructor for presenter
@@ -20,6 +26,7 @@ public class Presenter {
      */
     public Presenter (View incomingView) {
         restModel = new RestModel();
+        allClubs = new AllClubs();
         view = incomingView;
     }
 
@@ -27,6 +34,7 @@ public class Presenter {
      * Constructor for testing RestModel that requires no view
      */
     public Presenter() {
+        allClubs = new AllClubs();
         restModel = new RestModel();
     }
 
@@ -98,6 +106,28 @@ public class Presenter {
     }
 
     /**
+     * Sets the infomation from the user selected club(in AllClubsView) that is to be displayed in DisplayClubView
+     * !!!!This was just copy/pasted from AllClubsView, will need to be changed at some point!!!! -Andy
+     * @param jsonString
+     */
+    public void setDisplayClubInfo(String jsonString){
+        try {
+            JSONObject object = new JSONObject(jsonString);
+            String clubFromServer = object.getString("club");
+            String descriptionFromServer = object.getString("description");
+            String userNameFromServer = object.getString("username");
+            String keywordFromServer = object.getString("keywords");
+
+            DisplayClub.setClubName(clubFromServer);
+            DisplayClub.setAdministrator(userNameFromServer);
+            DisplayClub.setDescription(descriptionFromServer);
+            DisplayClub.setKeywords(keywordFromServer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Sets club info called from createClubView
      *
      * @param clubName name of club
@@ -112,11 +142,10 @@ public class Presenter {
     }
 
     /**
-     * Stubbed function to communicate with server and retrieve list of all clubs
+     *
      */
-    public void getListOfAllClubs(){
-        //get from server list of all clubs
-        //send to view a list of all clubs
+    public ArrayList<String> getClubNames(){
+        return allClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
     }
 
     /**
@@ -138,4 +167,8 @@ public class Presenter {
         //get info from server of all posts made by one club
         //send to view a list of all posts.
     }
+
+
+
+
 }
