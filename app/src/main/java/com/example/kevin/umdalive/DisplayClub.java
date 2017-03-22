@@ -56,22 +56,22 @@ public class DisplayClub extends AppCompatActivity {
     }
 
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.display_club);
-        // idk why someone decided to make these EditTexts... The user should not be able to edit this stuff.
-        // These should just be TextViews and there should be an EditText next to it that allows a user to put info there.
-        // ALSO, nothing the user puts in here saves at this point so thats something that definitely should be fixed.
-        EditText clubnameEditText = (EditText) findViewById(R.id.display_club_name);
-        EditText discriptionEditText = (EditText) findViewById(R.id.display_club_description);
-        EditText keywordEditText = (EditText) findViewById(R.id.display_clubs_keyword);
-        EditText administratorEditText = (EditText) findViewById(R.id.display_clubs_administator);
-
-        clubnameEditText.setText(clubName);
-        discriptionEditText.setText(description);
-        keywordEditText.setText(keywords);
-        administratorEditText.setText(administrator);
-    }
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.display_club_view);
+//        // idk why someone decided to make these EditTexts... The user should not be able to edit this stuff.
+//        // These should just be TextViews and there should be an EditText next to it that allows a user to put info there.
+//        // ALSO, nothing the user puts in here saves at this point so thats something that definitely should be fixed.
+//        EditText clubnameEditText = (EditText) findViewById(R.id.display_club_name);
+//        EditText discriptionEditText = (EditText) findViewById(R.id.display_club_description);
+//        EditText keywordEditText = (EditText) findViewById(R.id.display_clubs_keyword);
+//        EditText administratorEditText = (EditText) findViewById(R.id.display_clubs_administator);
+//
+//        clubnameEditText.setText(clubName);
+//        discriptionEditText.setText(description);
+//        keywordEditText.setText(keywords);
+//        administratorEditText.setText(administrator);
+//    }
 
 
 }

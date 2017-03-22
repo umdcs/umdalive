@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Luke on 11/8/2016.
  */
 
-public class userInformationModel {
+public class UserInformation {
 
     private String name;
     private String email;
@@ -22,9 +22,9 @@ public class userInformationModel {
     /*
     Sets the local data that the app will run off of, will use this method when user signs in
      */
-    public UserInformation(String temp_local_username, String temp_major, String emai, String temp_graduationDate, ArrayList<CreateClub> temp_clubs_subscribed){
+    public UserInformation(String temp_local_username, String temp_major, String email, String temp_graduationDate, ArrayList<CreateClub> temp_clubs_subscribed){
         name = temp_local_username;
-        email = emai;
+        email = email;
         major = temp_major;
         gradDate = temp_graduationDate;
         local_posts_subscribed = new ArrayList<String>();
