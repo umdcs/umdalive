@@ -1,5 +1,6 @@
 package com.example.kevin.umdalive;
 
+import android.app.Activity;
 import android.view.View;
 
 import org.json.JSONException;
@@ -14,20 +15,20 @@ import java.util.ArrayList;
  */
 
 public class Presenter {
-    private View view;
+    private Activity activity;
     private RestModel restModel;
     private AllClubs allClubs;
 
     /**
      * Constructor for presenter
-     * @param incomingView view that created presenter.
+     * @param incomingActivity view that created presenter.
      *
      * creates a RestModel for node communication
      */
-    public Presenter (View incomingView) {
+    public Presenter (Activity incomingActivity) {
         restModel = new RestModel();
         allClubs = new AllClubs();
-        view = incomingView;
+        activity = incomingActivity;
     }
 
     /**

@@ -21,7 +21,6 @@ public class AllClubsView extends Activity {
     boolean launch = false;
 
     protected void onCreate(Bundle savedInstanceState) {
-        presenter = new Presenter();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_clubs);
         listView = (ListView) findViewById(R.id.list2);
