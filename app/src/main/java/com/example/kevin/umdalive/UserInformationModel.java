@@ -49,7 +49,7 @@ public class UserInformationModel extends AppCompatActivity {
      * @param gradDate of user
      *
      */
-    public UserInformationModel(String name, String password, String major, String email, String gradDate, ArrayList<Club> temp_clubs_subscribed){
+    public UserInformationModel(String name, String password, String major, String email, String gradDate, ArrayList<String> temp_clubs_subscribed){
         this.name = name;
         this.password = password;
         this.email = email;
