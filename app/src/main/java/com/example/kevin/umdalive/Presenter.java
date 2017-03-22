@@ -167,4 +167,8 @@ public class Presenter {
         //get info from server of all posts made by one club
         //send to view a list of all posts.
     }
+
+
+
+
 }
