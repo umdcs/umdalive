@@ -22,6 +22,7 @@ public class AllClubsView extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new Presenter(this);
         setContentView(R.layout.all_clubs);
         listView = (ListView) findViewById(R.id.list2);
         Intent intent = new Intent(this, DisplayClub.class);
