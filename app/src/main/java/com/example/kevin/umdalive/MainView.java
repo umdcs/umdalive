@@ -36,7 +36,6 @@ Presenter presenter;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-
             //obtain the user info from server
            // getUser(); // calls server
             setContentView(R.layout.activity_main);
