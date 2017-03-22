@@ -202,7 +202,7 @@ Presenter presenter;
     String userData = null;
     //string is turned into a jsonobject
     JSONObject user = new JSONObject(userData);
-    ArrayList<ClubInformation> list = new ArrayList<ClubInformation>();
+    ArrayList<ClubInformationModel> list = new ArrayList<ClubInformationModel>();
     JSONArray jArray = user.getJSONArray("clubs");
 
     if (jArray != null) {
@@ -210,7 +210,7 @@ Presenter presenter;
     for (int i=0;i<len;i++){
     JSONObject clubObject = jArray.getJSONObject(i);
     //create new club object from server data
-    ClubInformation tempClub = new ClubInformation(clubObject.get("clubname").toString(),
+    ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubname").toString(),
     clubObject.get("username").toString(),
     clubObject.get("keywords").toString(),
     clubObject.get("description").toString(),
