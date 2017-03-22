@@ -59,6 +59,16 @@ public class UserInformationModel extends AppCompatActivity {
         localClubsSubscribed = temp_clubs_subscribed;
     }
 
+    public UserInformationModel(String name, String major, String email, String gradDate, ArrayList<String> temp_clubs_subscribed){
+        this.name = name;
+
+        this.email = email;
+        this.major = major;
+        this.gradDate = gradDate;
+        localPostsSubscribed = new ArrayList<String>();
+        localClubsSubscribed = temp_clubs_subscribed;
+    }
+
 
 
     /*

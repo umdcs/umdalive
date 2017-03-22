@@ -230,11 +230,7 @@ Presenter presenter;
 
     }
 
-    thisUser = new UserInformationModel(user.getString("name"),
-    user.getString("major"),
-    user.getString("email"),
-    user.getString("graduationDate"),
-    list);
+    thisUser = new UserInformationModel(user.getString("name"),user.getString()
 
     Log.d("userData", userData);
     //will obtain json string from textview and take value out from string
@@ -252,7 +248,7 @@ Presenter presenter;
 
 
 
-   **/
+
 
 
     /**
