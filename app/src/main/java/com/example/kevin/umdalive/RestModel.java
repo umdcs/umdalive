@@ -232,4 +232,7 @@ public class RestModel {
             //Toast.makeText(context, "Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public String get
+
 }

@@ -175,6 +175,12 @@ public class Presenter {
     }
 
 
+    public String getRecentPosts(){
+        restModel.get
+
+    }
+
+
 
 
 }

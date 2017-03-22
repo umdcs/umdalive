@@ -25,6 +25,7 @@ public class PostingActivityView extends AppCompatActivity {
      */
 
     protected void onCreate(Bundle savedInstanceState) {
+        presenter= new Presenter();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
         newPost = (EditText) findViewById(R.id.post_entry_box);

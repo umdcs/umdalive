@@ -117,19 +117,9 @@ Presenter presenter;
      */
     public void refreshPosts(View view){
         //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
-        String mostRecentPosts = null;
 
-        ArrayList<String> list = new ArrayList<String>();
-        JSONObject object = null;
-        try {
-            object = new JSONObject(mostRecentPosts);
-            JSONArray jsonArray = object.getJSONArray("items");
-            if (jsonArray != null) {
-                int len = jsonArray.length();
-                for (int i = 0; i < len; i++) {
-                    list.add(jsonArray.get(i).toString());
-                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                }
+        ArrayList<String> list = presenter.getClubsPosts();
+
                 Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 
                 this_user.setLocalPosts(list);
