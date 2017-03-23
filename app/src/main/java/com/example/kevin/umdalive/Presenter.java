@@ -97,8 +97,31 @@ public class Presenter {
         return CreateClub.makeClub(clubName, userName, keyWords, description, initialPost);
     }
 
+    /**
+     * For MainActivity
+     * @param userData
+     * @return
+     */
     public UserInformationModel getMainUser(String userData){
         return MainActivity.getUser(userData);
+    }
+
+    /**
+     * For MainActivity
+     * @param jsonString
+     * @return
+     */
+    public ArrayList<String> refreshPosts(String jsonString) {
+        return MainActivity.refreshPosts(jsonString);
+    }
+
+    /**
+     * For MainActivity
+     * @param posts
+     * @return
+     */
+    public String displayPosts(ArrayList<String> posts){
+        return MainActivity.displayPosts(posts);
     }
 
     /**

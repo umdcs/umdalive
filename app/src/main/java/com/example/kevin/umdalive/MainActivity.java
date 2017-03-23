@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity{
 
@@ -37,6 +38,34 @@ public class MainActivity{
             e1.printStackTrace();
             return null;
         }
+    }
+
+    public static ArrayList<String> refreshPosts(String jsonString){
+        ArrayList<String> list = new ArrayList<String>();
+        //converting Json string to ArrayList
+        try {
+            JSONObject object = new JSONObject(jsonString);
+            JSONArray jsonArray = object.getJSONArray("items");
+            if (jsonArray != null) {
+                int len = jsonArray.length();
+                for (int i = 0; i < len; i++) {
+                    list.add(jsonArray.get(i).toString());
+                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                }
+                Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static String displayPosts(ArrayList<String> list){
+        String displayPosts = "";
+        for (int i = 0; i < list.size(); i++) {
+            displayPosts += " \n" + list.get(i);
+        }
+        return displayPosts;
     }
 }
 

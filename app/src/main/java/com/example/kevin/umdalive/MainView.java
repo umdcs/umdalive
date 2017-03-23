@@ -30,38 +30,38 @@ Presenter presenter;
 
     EditText posts;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            presenter = new Presenter(this);
-            getUser(); // calls server
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new Presenter(this);
+        getUser(); // calls server
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //Understand this fab better
+        //I believe it says "Replace with your own action" because the last group copy/pasted this from the internet
+        //lololololololololololololllolololol
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
-            //Understand this fab better
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
+        //this is a sidebar thing check layout for better idea
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle); //deprecated thing
+        toggle.syncState();
 
-            //this is a sidebar thing check layout for better idea
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.setDrawerListener(toggle); //deprecated thing
-            toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
-
-            posts = (EditText)findViewById(R.id.mainPosts);
-            posts.setMaxLines(20);
-        }
+        posts = (EditText) findViewById(R.id.mainPosts);
+        posts.setMaxLines(20);
+    }
 
 /*
  * consistancy with curly braces and one line functions
@@ -84,7 +84,7 @@ Presenter presenter;
         startActivity(intent);
     }
 
-    // starts display Cluba for post Activity View
+    // starts display Clubs for post Activity View
     public void displayClubsForPost(String clubNames)
     {
         Intent intent = new Intent(this, PostForClubActivityView.class);
@@ -108,28 +108,9 @@ Presenter presenter;
     public void refreshPosts(View view){
         //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
         String mostRecentPosts = presenter.restGet("getRecentPosts","");
-        ArrayList<String> list = new ArrayList<String>();
-        //converting Json string to ArrayList
-        try {
-            JSONObject object = new JSONObject(mostRecentPosts);
-            JSONArray jsonArray = object.getJSONArray("items");
-            if (jsonArray != null) {
-                int len = jsonArray.length();
-                for (int i = 0; i < len; i++) {
-                    list.add(jsonArray.get(i).toString());
-                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                }
-                Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                thisUser.setLocalPosts(list);
-                String displayPosts = "";
-                for (int i = 0; i < len; i++) {
-                    displayPosts += " \n" + list.get(i);
-                }
-                posts.setText(displayPosts);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
+        thisUser.setLocalPosts(recentPosts);
+        posts.setText(presenter.displayPosts(recentPosts));
     }
 
     /*
