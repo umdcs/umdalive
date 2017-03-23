@@ -29,16 +29,7 @@ public class LoginActivity extends AppCompatActivity {
      */
 
     //This function will be moved to the view
-//
-//    public void login(View view) {
-//        EditText emailEntry = (EditText) findViewById(R.id.email_input);
-//        String emailCheckTemp = emailEntry.getText().toString();
-//        if(emailCheckTemp.indexOf('@') != -1) {
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
-//        }
-//        else Toast.makeText(getApplicationContext(),"Sorry, this is not a valid email.", Toast.LENGTH_SHORT).show();
-//    }
+
 
 
     /*
