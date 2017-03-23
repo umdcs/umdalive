@@ -1,12 +1,14 @@
 package com.example.kevin.umdalive;
 
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
+/**
+ * This class is supposed to display the club that is selected from all clubs but the previous group never did that so it's just
+ * blank spaces.
+ */
 public class DisplayClubView extends AppCompatActivity {
 
     private static String clubName;
