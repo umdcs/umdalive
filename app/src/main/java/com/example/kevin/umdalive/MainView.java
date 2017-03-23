@@ -67,18 +67,18 @@ Presenter presenter;
  * consistancy with curly braces and one line functions
  */
 
-     @Override
-        public void onStart() {
-            super.onStart();
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
-        @Override
-        public void onStop() {
-            super.onStop();
-        }
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
 
 
-        // starts display CreateClub Activity View
+    // starts display CreateClub Activity View
     public void displayClubs(String clubNamess) {
         Intent intent = new Intent(this, AllClubsView.class);
         startActivity(intent);
@@ -191,7 +191,7 @@ Presenter presenter;
     //Will stay here in the model
     public void getUser() {
     try {
-        //make userData equal getUserData from RestModel
+        //will probably use the second parameter in the future for specific users..
     String userData = presenter.restGet("getUserData", "");
     //string is turned into a jsonobject
     JSONObject user = new JSONObject(userData);
@@ -199,19 +199,18 @@ Presenter presenter;
     JSONArray jArray = user.getJSONArray("clubs");
 
     if (jArray != null) {
-    int len = jArray.length();
-    for (int i=0;i<len;i++){
-        JSONObject clubObject = jArray.getJSONObject(i);
-        //create new club object from server data
-    ClubInformationModel tempClub = new ClubInformationModel( clubObject.get("clubname").toString(),
+        int len = jArray.length();
+        for (int i = 0; i < len; i++) {
+            JSONObject clubObject = jArray.getJSONObject(i);
+            //create new club object from server data
+            ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubname").toString(),
+                    clubObject.get("username").toString(), clubObject.get("keywords").toString(),
+                    clubObject.get("description").toString());
 
-            clubObject.get("username").toString(),clubObject.get("keywords").toString(),
-            clubObject.get("description").toString());
-
-    Log.d("club name: ", clubObject.get("clubname").toString());
-    //add new club object to array
-    list.add(tempClub);
-    }
+            Log.d("club name: ", clubObject.get("clubname").toString());
+            //add new club object to array
+            list.add(tempClub);
+        }
     }
 
     thisUser = new UserInformationModel(user.getString("name"),user.getString("major"),

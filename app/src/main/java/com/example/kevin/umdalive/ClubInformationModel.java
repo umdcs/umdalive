@@ -38,6 +38,13 @@ public class ClubInformationModel {
         this.post = initialPost;
     }
 
+    public ClubInformationModel(String clubName, String userName, String keyWords, String description) {
+        this.clubName = clubName;
+        this.userName = userName;
+        this.keyWords = keyWords;
+        this.description = description;
+    }
+
     /**
      * setter for clubName
      *

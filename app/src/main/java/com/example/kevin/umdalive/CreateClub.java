@@ -1,10 +1,5 @@
 package com.example.kevin.umdalive;
 
-import android.widget.EditText;
-
-import static com.example.kevin.umdalive.DisplayClub.setClubName;
-import static com.example.kevin.umdalive.DisplayClub.setDescription;
-
 /**
  * This is the model class for CreateClubView
  */

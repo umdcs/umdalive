@@ -134,10 +134,10 @@ public class Presenter {
             String userNameFromServer = object.getString("username");
             String keywordFromServer = object.getString("keywords");
 
-            DisplayClub.setClubName(clubFromServer);
-            DisplayClub.setAdministrator(userNameFromServer);
-            DisplayClub.setDescription(descriptionFromServer);
-            DisplayClub.setKeywords(keywordFromServer);
+//            DisplayClub.setClubName(clubFromServer);
+//            DisplayClub.setAdministrator(userNameFromServer);
+//            DisplayClub.setDescription(descriptionFromServer);
+//            DisplayClub.setKeywords(keywordFromServer);
         } catch (JSONException e) {
             e.printStackTrace();
         }
