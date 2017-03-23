@@ -1,6 +1,5 @@
 package com.example.kevin.umdalive;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,11 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -32,7 +29,6 @@ Presenter presenter;
     private static UserInformationModel thisUser = new UserInformationModel();
 
     EditText posts;
-
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +49,6 @@ Presenter presenter;
                 }
             });
 
-
             //this is a sidebar thing check layout for better idea
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,7 +59,6 @@ Presenter presenter;
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
 
-
             posts = (EditText)findViewById(R.id.mainPosts);
             posts.setMaxLines(20);
         }
@@ -73,8 +67,7 @@ Presenter presenter;
  * consistancy with curly braces and one line functions
  */
 
-
-        @Override
+     @Override
         public void onStart() {
             super.onStart();
         }

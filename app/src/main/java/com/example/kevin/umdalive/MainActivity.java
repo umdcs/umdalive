@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        presenter.restGet("getRecentPosts", "");
+
         //this is a sidebar thing check layout for better idea
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

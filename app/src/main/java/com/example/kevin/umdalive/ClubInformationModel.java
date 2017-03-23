@@ -30,12 +30,12 @@ public class ClubInformationModel {
      * @param keyWords keywords to id club
      * @param description of club
      */
-    public ClubInformationModel(String clubName, String userName, String keyWords, String description) {
+    public ClubInformationModel(String clubName, String userName, String keyWords, String description, String initialPost) {
         this.clubName = clubName;
         this.userName = userName;
         this.keyWords = keyWords;
         this.description = description;
-        post = "";
+        this.post = initialPost;
     }
 
     /**
@@ -145,7 +145,7 @@ public class ClubInformationModel {
             jsonString.put("username", userName);
             jsonString.put("keywords", keyWords);
             jsonString.put("description", description);
-            jsonString.put("post", post); //IDK if this is needed. I think it should be separate because there can be multiple posts for one club.
+            jsonString.put("post", post);
         } catch (JSONException e) {
             e.printStackTrace();
         }

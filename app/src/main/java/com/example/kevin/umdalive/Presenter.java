@@ -1,12 +1,8 @@
 package com.example.kevin.umdalive;
 
 import android.app.Activity;
-import android.view.View;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -88,12 +84,18 @@ public class Presenter {
         return "restGet()String";
     }
 
-
-
-
-
-
-
+    /**
+     * Used to create a new club object to be sent to the server.
+     * @param clubName name of club
+     * @param userName name of admin
+     * @param keyWords tags
+     * @param description description of club
+     * @param initialPost first post
+     * @return string version of the JSON package.
+     */
+    public String makeClub(String clubName, String userName, String keyWords, String description, String initialPost){
+        return CreateClub.makeClub(clubName, userName, keyWords, description, initialPost);
+    }
 
     /**
      * Sets user info called from signUpActivityView
@@ -122,7 +124,7 @@ public class Presenter {
     /**
      * Sets the infomation from the user selected club(in AllClubsView) that is to be displayed in DisplayClubView
      * !!!!This was just copy/pasted from AllClubsView, will need to be changed at some point!!!! -Andy
-     * @param jsonString
+     * @param jsonString string o json data
      */
     public void setDisplayClubInfo(String jsonString){
         try {
@@ -139,20 +141,6 @@ public class Presenter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Sets club info called from createClubView
-     *
-     * @param clubName name of club
-     * @param userName name of user creating club
-     * @param keyWords keywords to be used in tag (#rocketry or #MPIRG)
-     * @param description brief description of the club
-     */
-    public void setClubInfo(String clubName, String userName, String keyWords, String description) {
-       ClubInformationModel  newClub = new ClubInformationModel(clubName, userName, keyWords, description);
-        //send to rest function and then to server to store data
-        //confirmation to user?
     }
 
     /**
