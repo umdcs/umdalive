@@ -36,47 +36,8 @@ Presenter presenter;
         presenter = new Presenter(this);
         getUser(); // calls server
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //Understand this fab better
-        //I believe it says "Replace with your own action" because the last group copy/pasted this from the internet
-        //lololololololololololololllolololol
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        //this is a sidebar thing check layout for better idea
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle); //deprecated thing
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        posts = (EditText) findViewById(R.id.mainPosts);
-        posts.setMaxLines(20);
+        viewSetup();
     }
-
-/*
- * consistancy with curly braces and one line functions
- */
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
 
     // starts display CreateClub Activity View
     public void displayClubs(String clubNamess) {
@@ -100,10 +61,9 @@ Presenter presenter;
         userNameView.setText(thisUser.getName());
     }
 
-    /*
-    onclick for refreshing most recent posts
-
-    MVP
+    /**
+     * Refreshes the posts.
+     * @param view the button handles this
      */
     public void refreshPosts(View view){
         //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
@@ -113,17 +73,16 @@ Presenter presenter;
         posts.setText(presenter.displayPosts(recentPosts));
     }
 
-    /*
-    onclick for making a new club
+    /**
+     * Starts CreateClubView
+     * @param view button handles this
      */
-    //move to view
     public void onClickNewClub(View view) {
         Intent intent = new Intent(this, CreateClubView.class);
         startActivity(intent);
     }
 
     @Override
-    //move to view
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -134,7 +93,6 @@ Presenter presenter;
     }
 
    @Override
-    //stay here in model
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -142,7 +100,6 @@ Presenter presenter;
     }
 
     @Override
-    //stay in model
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -186,12 +143,8 @@ Presenter presenter;
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-
             //getting Json string of club names from server
             String getClubNames= presenter.restGet("getClub","");
-
-
-
             try {
                 // JSONObject club_names = new JSONObject(jsonString);
                 ArrayList<String> list = new ArrayList<String>();
@@ -247,10 +200,50 @@ Presenter presenter;
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
+     */
+    private void viewSetup(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //Understand this fab better
+        //I believe it says "Replace with your own action" because the last group copy/pasted this from the internet
+        //lololololololololololololllolololol
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        //this is a sidebar thing check layout for better idea
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle); //deprecated thing
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        posts = (EditText) findViewById(R.id.mainPosts);
+        posts.setMaxLines(20);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
 }
