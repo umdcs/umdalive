@@ -24,41 +24,34 @@ import java.util.Collections;
 
 public class MainView  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-Presenter presenter;
-
-    private static UserInformationModel thisUser = new UserInformationModel();
-
+    Presenter presenter;
+    private static UserInformationModel thisUser;
     EditText posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new Presenter(this);
-        getUser(); // calls server
+        thisUser = new UserInformationModel();
+        setUser(); // calls server
         setContentView(R.layout.activity_main);
         viewSetup();
     }
 
-    // starts display CreateClub Activity View
-    public void displayClubs(String clubNamess) {
+    /**
+     * starts display CreateClub Activity View
+     */
+    public void displayClubs() {
         Intent intent = new Intent(this, AllClubsView.class);
         startActivity(intent);
     }
 
-    // starts display Clubs for post Activity View
-    public void displayClubsForPost(String clubNames)
-    {
+    /**
+     * starts display Clubs for post Activity View
+     */
+    public void displayClubsForPost() {
         Intent intent = new Intent(this, PostForClubActivityView.class);
         startActivity(intent);
-    }
-
-    public void updateUser() {
-        TextView emailView = (TextView) findViewById(R.id.userEmail);
-        emailView.setText(thisUser.getEmail());
-
-        //gets the users name and sets menu to their name
-        TextView userNameView = (TextView) findViewById(R.id.userName);
-        userNameView.setText(thisUser.getName());
     }
 
     /**
@@ -82,6 +75,9 @@ Presenter presenter;
         startActivity(intent);
     }
 
+    /**
+     * Makes it so pressing back when drawer is open will take the user back to the main screen
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -92,33 +88,40 @@ Presenter presenter;
         }
     }
 
+    /**
+     * Inflate the menu; this adds items to the action bar if it is present.
+     * @param menu menu being used
+     * @return true
+     */
    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * Handle action bar item clicks here.
+     * @param item item selected
+     * @return true if success
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
         if (id == R.id.refresh_user_data) {
-            getUser();
+            setUser();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    //Will stay here in the model
-    public void getUser() {
+
+    /**
+     * Sets up the users profile info
+     */
+    public void setUser() {
             //will probably use the second parameter in the future for specific users..
             String userData = presenter.restGet("getUserData", "");
             thisUser = presenter.getMainUser(userData);
@@ -135,7 +138,13 @@ Presenter presenter;
      * @return true or false if the item was succesfully received
      */
 
-    //MVP
+    /**
+     * This keeps track of whats happens when things are selected on the side bar.
+     * The previous group had it so the MainView would fetch and setup all the activities here but it makes
+     * more sense to do it in the respective activities(see AllClubsView for example).
+     * @param item the menu item selected
+     * @return true if success
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -143,55 +152,10 @@ Presenter presenter;
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-            //getting Json string of club names from server
-            String getClubNames= presenter.restGet("getClub","");
-            try {
-                // JSONObject club_names = new JSONObject(jsonString);
-                ArrayList<String> list = new ArrayList<String>();
-                JSONObject object = new JSONObject(getClubNames);
-                JSONArray jsonArray = object.getJSONArray("items");
-                if (jsonArray != null) {
-                    int len = jsonArray.length();
-                    for (int i = 0; i < len; i++) {
-                        list.add(jsonArray.get(i).toString());
-                        Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                    }
-                    Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                    thisUser.setLocalClubNames(list);
-
-
-                    displayClubs(getClubNames);
-                }
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
-        }
-        else if (id == R.id.Post) {
-            String getClubNames;
-            //get string of club names from server
-            //getClubNames = new HTTPAsyncTask().execute(this_user.serverAddress + "/getAllClubs", "GET").get();
-            getClubNames = null;
-
-            try {
-                // JSONObject club_names = new JSONObject(jsonString);
-                ArrayList<String> list = new ArrayList<String>();
-                JSONObject object = new JSONObject(getClubNames);
-                JSONArray jsonArray = object.getJSONArray("items");
-                if (jsonArray != null) {
-                    int len = jsonArray.length();
-                    for (int i = 0; i < len; i++) {
-                        list.add(jsonArray.get(i).toString());
-                        Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
-                    }
-                    Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
-                    thisUser.setLocalClubNames(list);
-                    displayClubsForPost(getClubNames);
-                }
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
-        }
-        else if (id == R.id.calendar) {
+            displayClubs();
+        } else if (id == R.id.Post) {
+            displayClubsForPost();
+        } else if (id == R.id.calendar) {
 
         } else if (id == R.id.tools) {
 
