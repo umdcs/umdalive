@@ -34,7 +34,11 @@ public class PostForClubActivity extends Activity {
         listView = (ListView) findViewById(R.id.list);
 
         //Calls the getLocal_club_Names from the main activity and assigns it into an arry
-        ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
+        //This doesnt exist anymore, will need to get the clubs on its own like AllClubs does
+
+        //ArrayList<String> values = MainActivity.getUserInformation().getLocal_club_Names();
+        //change null to equal the actual values.
+        ArrayList<String> values = null;
 
         try {
 
