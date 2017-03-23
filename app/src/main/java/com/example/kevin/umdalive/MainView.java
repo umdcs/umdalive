@@ -206,7 +206,7 @@ Presenter presenter;
     ClubInformationModel tempClub = new ClubInformationModel( clubObject.get("clubname").toString(),
 
             clubObject.get("username").toString(),clubObject.get("keywords").toString(),
-            clubObject.get("description").toString());
+            clubObject.get("description").toString(), clubObject.get("post").toString()));
 
     Log.d("club name: ", clubObject.get("clubname").toString());
     //add new club object to array
