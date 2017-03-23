@@ -91,8 +91,6 @@ Presenter presenter;
         startActivity(intent);
     }
 
-
-
     public void updateUser() {
         TextView emailView = (TextView) findViewById(R.id.userEmail);
         emailView.setText(thisUser.getEmail());
@@ -101,7 +99,6 @@ Presenter presenter;
         TextView userNameView = (TextView) findViewById(R.id.userName);
         userNameView.setText(thisUser.getName());
     }
-
 
     /*
     onclick for refreshing most recent posts
@@ -135,9 +132,6 @@ Presenter presenter;
         }
     }
 
-
-
-
     /*
     onclick for making a new club
      */
@@ -166,7 +160,6 @@ Presenter presenter;
         return true;
     }
 
-
     @Override
     //stay in model
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -186,54 +179,17 @@ Presenter presenter;
         return super.onOptionsItemSelected(item);
     }
 
-
-
     //Will stay here in the model
     public void getUser() {
-    try {
-        //will probably use the second parameter in the future for specific users..
-    String userData = presenter.restGet("getUserData", "");
-    //string is turned into a jsonobject
-    JSONObject user = new JSONObject(userData);
-    ArrayList<ClubInformationModel> list = new ArrayList<ClubInformationModel>();
-    JSONArray jArray = user.getJSONArray("clubs");
-
-    if (jArray != null) {
-        int len = jArray.length();
-        for (int i = 0; i < len; i++) {
-            JSONObject clubObject = jArray.getJSONObject(i);
-            //create new club object from server data
-            ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubname").toString(),
-                    clubObject.get("username").toString(), clubObject.get("keywords").toString(),
-                    clubObject.get("description").toString());
-
-            Log.d("club name: ", clubObject.get("clubname").toString());
-            //add new club object to array
-            list.add(tempClub);
-        }
-    }
-
-    thisUser = new UserInformationModel(user.getString("name"),user.getString("major"),
-            user.getString("email"), user.getString("graduationDate"),list);
-
-    Log.d("userData", userData);
-    //will obtain json string from textview and take value out from string
-
-    }
-    catch (JSONException e1) {
-    e1.printStackTrace();
-    }
+            //will probably use the second parameter in the future for specific users..
+            String userData = presenter.restGet("getUserData", "");
+            thisUser = presenter.getMainUser(userData);
     }
 
     //will stay in model
     public static UserInformationModel getUserInformation() {
     return thisUser;
     }
-
-
-
-
-
 
     /**
      * this method responds to what the user selects on the menu

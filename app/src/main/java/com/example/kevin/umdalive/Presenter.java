@@ -97,6 +97,10 @@ public class Presenter {
         return CreateClub.makeClub(clubName, userName, keyWords, description, initialPost);
     }
 
+    public UserInformationModel getMainUser(String userData){
+        return MainActivity.getUser(userData);
+    }
+
     /**
      * Sets user info called from signUpActivityView
      *

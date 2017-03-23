@@ -33,7 +33,7 @@ public class PostingActivity extends AppCompatActivity {
     private String postToDisplay;
     private static String clubToPost;
     private EditText newPost;
-    UserInformation this_user = MainActivity.getUserInformation();
+    //UserInformation this_user = MainActivity.getUserInformation();
 
     public PostingActivity(){
     }
