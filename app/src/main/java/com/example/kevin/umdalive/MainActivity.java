@@ -1,19 +1,20 @@
 package com.example.kevin.umdalive;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity{
+public class MainActivity {
 
-    //Will stay here in the model
     public static UserInformationModel getUser(String userData) {
         try {
             JSONObject user = new JSONObject(userData);
-            ArrayList<ClubInformationModel> list = new ArrayList<ClubInformationModel>();
+            ArrayList<ClubInformationModel> list = new ArrayList<>();
             JSONArray jArray = user.getJSONArray("clubs");
 
             if (jArray != null) {
@@ -40,8 +41,8 @@ public class MainActivity{
         }
     }
 
-    public static ArrayList<String> refreshPosts(String jsonString){
-        ArrayList<String> list = new ArrayList<String>();
+    public static ArrayList<String> refreshPosts(String jsonString) {
+        ArrayList<String> list = new ArrayList<>();
         //converting Json string to ArrayList
         try {
             JSONObject object = new JSONObject(jsonString);
@@ -60,7 +61,7 @@ public class MainActivity{
         return list;
     }
 
-    public static String displayPosts(ArrayList<String> list){
+    public static String displayPosts(ArrayList<String> list) {
         String displayPosts = "";
         for (int i = 0; i < list.size(); i++) {
             displayPosts += " \n" + list.get(i);

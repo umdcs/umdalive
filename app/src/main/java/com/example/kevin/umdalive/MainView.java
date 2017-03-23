@@ -10,19 +10,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.Collections;
 
-public class MainView  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+
+public class MainView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Presenter presenter;
     private static UserInformationModel thisUser;
@@ -56,11 +51,12 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
     /**
      * Refreshes the posts.
+     *
      * @param view the button handles this
      */
-    public void refreshPosts(View view){
+    public void refreshPosts(View view) {
         //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
-        String mostRecentPosts = presenter.restGet("getRecentPosts","");
+        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
         ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
         thisUser.setLocalPosts(recentPosts);
         posts.setText(presenter.displayPosts(recentPosts));
@@ -68,6 +64,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
     /**
      * Starts CreateClubView
+     *
      * @param view button handles this
      */
     public void onClickNewClub(View view) {
@@ -90,10 +87,11 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
     /**
      * Inflate the menu; this adds items to the action bar if it is present.
+     *
      * @param menu menu being used
      * @return true
      */
-   @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -101,6 +99,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
 
     /**
      * Handle action bar item clicks here.
+     *
      * @param item item selected
      * @return true if success
      */
@@ -122,26 +121,16 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
      * Sets up the users profile info
      */
     public void setUser() {
-            //will probably use the second parameter in the future for specific users..
-            String userData = presenter.restGet("getUserData", "");
-            thisUser = presenter.getMainUser(userData);
+        //will probably use the second parameter in the future for specific users..
+        String userData = presenter.restGet("getUserData", "");
+        thisUser = presenter.getMainUser(userData);
     }
-
-    //will stay in model
-    public static UserInformationModel getUserInformation() {
-    return thisUser;
-    }
-
-    /**
-     * this method responds to what the user selects on the menu
-     * @param item the item the user selected
-     * @return true or false if the item was succesfully received
-     */
 
     /**
      * This keeps track of whats happens when things are selected on the side bar.
      * The previous group had it so the MainView would fetch and setup all the activities here but it makes
      * more sense to do it in the respective activities(see AllClubsView for example).
+     *
      * @param item the menu item selected
      * @return true if success
      */
@@ -172,7 +161,7 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
     /**
      * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
      */
-    private void viewSetup(){
+    private void viewSetup() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Understand this fab better
@@ -190,7 +179,8 @@ public class MainView  extends AppCompatActivity implements NavigationView.OnNav
         //this is a sidebar thing check layout for better idea
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle); //deprecated thing
+        //commented out because it's deprecated. If it turns out we need it we'll figure it out later.
+        //drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
