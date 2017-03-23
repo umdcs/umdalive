@@ -93,7 +93,8 @@ public class UserInformationModel extends AppCompatActivity {
     {
         localClubNames = names;
     }
-    public ArrayList<String> getLocal_club_Names()
+    public ArrayList<String> getLocalClubNames()
+
     {
         return localClubNames;
     }
