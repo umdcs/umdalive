@@ -47,14 +47,14 @@ public class CreateClubView extends AppCompatActivity {
         sends them to server to be saved.
          */
     public void onClickMakeClub(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainView.class);
 
         EditText newName = (EditText) findViewById(R.id.name_title_enter);
         EditText admin = (EditText) findViewById(R.id.admin_of_club);
         EditText description = (EditText) findViewById(R.id.description_of_club);
         EditText newPost = (EditText) findViewById(R.id.post_of_club);
 
-        String jsonString = presenter.makeClub(newName.toString(), admin.toString(), (String)keywordItem, description.toString(), newPost.toString());
+        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(), (String)keywordItem, description.getText().toString(), newPost.getText().toString());
 
         startActivity(intent);
         presenter.restPut("putNewClub", jsonString);
