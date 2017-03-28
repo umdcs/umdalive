@@ -8,10 +8,22 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 public class LoginView extends AppCompatActivity {
 
     //Presenter presenter; //there shouldn't be an error here after merging with the Presenter branch to gain the presenter class
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
