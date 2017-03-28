@@ -25,12 +25,7 @@ public class AllClubsView extends Activity {
         presenter = new Presenter(this);
         setContentView(R.layout.all_clubs);
         listView = (ListView) findViewById(R.id.list2);
-        Intent intent = new Intent(this, DisplayClub.class);
         setView();
-        //launch is changed to true once a club is clicked on.
-        if(launchActivity){
-            startActivity(intent);
-        }
     }
 
     /**
