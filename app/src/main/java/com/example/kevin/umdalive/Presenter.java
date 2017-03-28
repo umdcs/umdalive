@@ -44,8 +44,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restPost(String task, String data) {
-        restModel.restPost(task, data);
-        return "restPost()String";
+        return restModel.restPost(task, data);
     }
 
     /**
@@ -56,8 +55,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restPut(String task, String data) {
-        restModel.restPut(task, data);
-        return "restPut()String";
+        return restModel.restPut(task, data);
     }
 
     /**
@@ -68,8 +66,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public String restDelete(String task, String toDelete) {
-        restModel.restDelete(task, toDelete);
-        return "restDelete()String";
+        return restModel.restDelete(task, toDelete);
     }
 
     /**
@@ -80,8 +77,7 @@ public class Presenter {
      * @return Currently returns a string to represent what could be returned
      */
     public  String restGet(String task, String toGet) {
-        restModel.restGet(task, toGet);
-        return "restGet()String";
+        return restModel.restGet(task, toGet);
     }
 
     /**
