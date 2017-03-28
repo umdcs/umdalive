@@ -35,20 +35,6 @@ public class AllClubs {
                 Collections.sort(clubList, String.CASE_INSENSITIVE_ORDER);
             }
 
-
-//        ArrayList<String> clubArray = new ArrayList<>();
-//
-//        try {
-//            JSONArray jsonArray = new JSONArray(jsonResponse);
-//            for(int i = 0; !jsonArray.isNull(i); ++i){
-//                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
-//                clubArray.add(jsonObject.getString("club"));
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        return clubArray;
-//    }
         } catch (JSONException e) {
             e.printStackTrace();
         }
