@@ -34,9 +34,9 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     /**
-     * starts display CreateClub Activity View
+     * starts display CreateClub Activity View //I think this should say display AllClubsView
      */
-    public void displayClubs() {
+    public void displayAllClubs() {
         Intent intent = new Intent(this, AllClubsView.class);
         startActivity(intent);
     }
@@ -48,6 +48,15 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         Intent intent = new Intent(this, PostForClubActivityView.class);
         startActivity(intent);
     }
+
+    /**
+     * starts DisplayClubView
+     */
+    public void displayClub() {
+        Intent intent = new Intent(this, DisplayClubView.class);
+        startActivity(intent);
+    }
+
 
     /**
      * Refreshes the posts.
@@ -141,12 +150,16 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-            displayClubs();
+            displayAllClubs();
         } else if (id == R.id.Post) {
             displayClubsForPost();
         } else if (id == R.id.calendar) {
 
         } else if (id == R.id.tools) {
+
+        } else if (id == R.id.nav_club1) {
+            displayClub();
+        } else if (id == R.id.nav_club2) {
 
         } else if (id == R.id.nav_share) {
 
