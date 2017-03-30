@@ -101,23 +101,16 @@ var countUsers = 0;
 var countPosts = 0;
 var countDummy1SubscribedClubs = 0;
 
-
-
-
 countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
 
-
-
-
 console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
+
 /*
  ************************
  * PUT ROUTE SECTION
  ************************
  */
-
-
 app.put('/newClub', function (req, res) {
 
     // If for some reason the JSON isn't parsed, return HTTP error 400
@@ -155,10 +148,8 @@ app.put('/newClub', function (req, res) {
 });
 
 app.put('/newPost', function (req, res) {
-
     // If for some reason the JSON isn't parsed, return HTTP error 400
-    if (!req.body)
-        return res.sendStatus(400);
+    if (!req.body) return res.sendStatus(400);
 
     var dataObject = {
         clubToPost: req.body.clubToPost,
@@ -175,39 +166,6 @@ app.put('/newPost', function (req, res) {
     };
     res.json(jsonResponse);
 });
-
-app.put('/getClubObject', function (req, res) {
-
-    // If for some reason the JSON isn't parsed, return HTTP error 400
-    if (!req.body)
-        return res.sendStatus(400);
-    var position = getClubPosition(req.body.club);
-    console.log(position);
-
-    var clubname = clubs.items[position].clubname;
-    var post = clubs.items[position].post;
-    var description = clubs.items[position].description;
-    var username = clubs.items[position].username;
-    var keywords = clubs.items[position].keywords;
-    var jsonResponse = {
-        //id: '123', status: 'updated'
-    };
-    console.log(clubname);
-    console.log(post);
-    console.log(description);
-    console.log(username);
-    console.log(keywords);
-
-    var jsonResponse = {
-        club: clubname,
-        post: post,
-        description: description,
-        username: username,
-        keywords: keywords
-    };
-    res.json(jsonResponse);
-});
-
 
 app.put('/subscribeUser', function (req, res) {
 
@@ -229,32 +187,6 @@ app.put('/subscribeUser', function (req, res) {
     };
     res.json(jsonResponse);
 });
-
-
-function getClubPosition(clubname_temp) {
-    //loop through array
-    //console.log(clubname_temp);
-
-    for (var x = 0; x < clubs.items.length; x++)
-    {//search for club name and return once found
-        //  console.log(clubs.items[x].clubname);
-        if (clubs.items[x].clubname === clubname_temp)
-            return x;
-    }
-    return -1;
-}
-
-function getUserPosition(username_temp) {
-    for (var x = 0; x < users.length; x++)
-    {
-        if (users.items[x].body.username === username_temp)
-            return x;
-    }
-    return -1;
-}
-function getClubName(position) {
-    return clubs.items[position].clubname;
-}
 
 app.put('/currentClub', function (req, res) {
     if (!req.body)
@@ -310,7 +242,6 @@ app.put('/userInformation', function (req, res) {
  * Function to get a specific users data, will eventually return a user info based on the name of them
  * for now it returns a fake user for testing purposes -Kevin
  */
-//funtion to send array of all the clubs created
 app.get('/getAllClubs', function (req, res) {
     //array to which each club will be stored
     var clubNames = {
@@ -319,7 +250,6 @@ app.get('/getAllClubs', function (req, res) {
     for (var x = 0; x < clubs.items.length; x++) {
         clubNames.items[x] = getClubName(x);
     }
-
     var stringArray = JSON.stringify(clubNames);
     console.log("clubs being sent to client: " + stringArray);
     res.send(stringArray);
@@ -354,25 +284,47 @@ app.get('/userDataGet', function (req, res) {
             + "\n Graduation Date: " + dummyUser1.graduationDate
             + "\n Major: " + dummyUser1.major
             + "\n UserClubs:" + dummyUser1.clubs)
-    //respose message from server
+    //response message from server
     res.send(JSON.stringify(dummyUser1));
-
 });
 
 app.get('/mostRecentPosts', function (req, res) {
-
     var mostRecentPostsTemp = {
         items: []
     };
     for (var x = 0; x < mostRecentPosts.items.length; x++) {
         mostRecentPostsTemp.items[x] = mostRecentPosts.items[x];
     }
-
     var stringArray = JSON.stringify(mostRecentPostsTemp);
     console.log("posts being sent to client: " + stringArray);
     res.send(stringArray);
 });
 
+function getClubPosition(clubname_temp) {
+    //loop through array
+    //console.log(clubname_temp);
+
+    for (var x = 0; x < clubs.items.length; x++)
+    {//search for club name and return once found
+        //  console.log(clubs.items[x].clubname);
+        if (clubs.items[x].clubname === clubname_temp)
+            return x;
+    }
+    return -1;
+}
+
+function getUserPosition(username_temp) {
+    for (var x = 0; x < users.length; x++)
+    {
+        if (users.items[x].body.username === username_temp)
+            return x;
+    }
+    return -1;
+}
+
+function getClubName(position) {
+    return clubs.items[position].clubname;
+}
 
 app.listen(app.get("port"), function () {
     console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));

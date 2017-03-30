@@ -57,7 +57,7 @@ public class RestModel {
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
-            case "getClub": return getClub();
+            case "getClub": return getCurrentClub();
             case "getRecentPosts": return getRecentPosts();
             case "getUserData": return getUserData();
             default: return null;
@@ -90,7 +90,7 @@ public class RestModel {
     /**
      *
      */
-    private String getClub(){
+    private String getCurrentClub(){
         try{
             return new HTTPAsyncTask().execute(serverAddress + "/currentClub", "GET").get();
         }
