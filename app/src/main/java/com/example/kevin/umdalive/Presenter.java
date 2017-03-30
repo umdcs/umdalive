@@ -173,25 +173,24 @@ public class Presenter {
         return allClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
     }
 
+
     /**
      * Stubbed function to communicate with server and retrieve one club by name
      *
      * @param clubName to retrieve info of
      */
-    public void getClub(String clubName){
+    //public void getClub(String clubName){
         //get info from server of club
-        //send to view all data made by club
-    }
+        //send to view all data made by club}
 
     /**
      * Stubbed function to communicate with server and retrieve all posts from one club by name
      *
      * @param clubName to retrieve posts of
      */
-    public void getClubsPosts(String clubName) {
+    //public void getClubsPosts(String clubName) {
         //get info from server of all posts made by one club
-        //send to view a list of all posts.
-    }
+        //send to view a list of all posts.}
 
 
     }

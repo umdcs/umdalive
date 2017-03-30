@@ -31,6 +31,7 @@ public class DisplayClubView extends AppCompatActivity {
         TextView administratorSetText = (TextView) findViewById(R.id.display_clubs_administator);
 
 
+        //presenter.getClub();
         clubNameSetText.setText(clubName);
         descriptionSetText.setText(description);
         keywordSetText.setText(keywords);
