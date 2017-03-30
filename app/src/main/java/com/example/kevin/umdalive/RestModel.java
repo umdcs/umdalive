@@ -57,7 +57,7 @@ public class RestModel {
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
-            case "getClub": return getClub(data);
+            case "getClub": return getClub();
             case "getRecentPosts": return getRecentPosts();
             case "getUserData": return getUserData();
             default: return null;
@@ -88,14 +88,11 @@ public class RestModel {
     }
 
     /**
-     * Taken from AllClubs.java
-     * Not really sure why they sent the jsonParam through, look into that.
      *
-     * @return String of JSON response
      */
-    private String getClub(String data){
+    private String getClub(){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/getAllClubs", "GET", data).get();
+            return new HTTPAsyncTask().execute(serverAddress + "/currentClub", "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();

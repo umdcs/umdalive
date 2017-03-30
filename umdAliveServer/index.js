@@ -53,7 +53,7 @@ var clubs = {
     items: []
 };
 
-var currentClub = "";
+var currentClub;
 
 var countClubs = 0;
 countClubs = clubs.items.push(dummyClub1);
@@ -263,6 +263,11 @@ app.put('/currentClub', function (req, res) {
     currentClub = req.body.clubname;
     
     console.log("Club selected: " + currentClub);
+
+    var jsonResponse = {
+            id: '123', status: 'updated'
+        };
+    res.json(jsonResponse);
 });
 
 app.put('/userInformation', function (req, res) {
@@ -308,17 +313,36 @@ app.put('/userInformation', function (req, res) {
 //funtion to send array of all the clubs created
 app.get('/getAllClubs', function (req, res) {
     //array to which each club will be stored
-    var club_names = {
+    var clubNames = {
         items: []
     };
     for (var x = 0; x < clubs.items.length; x++) {
-        club_names.items[x] = getClubName(x);
+        clubNames.items[x] = getClubName(x);
     }
 
-    var stringArray = JSON.stringify(club_names);
+    var stringArray = JSON.stringify(clubNames);
     console.log("clubs being sent to client: " + stringArray);
     res.send(stringArray);
 
+});
+
+app.get('/currentClub', function (req,res) {
+    var success = false; 
+    var club;
+    console.log("Looking for " + currentClub);
+
+    var pos = getClubPosition(currentClub);
+
+    if(pos !== -1){
+        console.log("SUCCESS: " + currentClub + " WAS FOUND");
+        club = clubs.items[pos];
+        var stringArray = JSON.stringify(club);
+        res.send(stringArray);
+    }
+
+    else{
+        console.log("ERROR: " + currentClub + " NOT FOUND.");
+    }
 });
 
 app.get('/userDataGet', function (req, res) {

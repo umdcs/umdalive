@@ -22,7 +22,7 @@ public class Presenter {
      *
      * creates a RestModel for node communication
      */
-    public Presenter (Activity incomingActivity) {
+    public Presenter(Activity incomingActivity) {
         restModel = new RestModel();
         allClubs = new AllClubs();
         activity = incomingActivity;
