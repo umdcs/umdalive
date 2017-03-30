@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class PostingActivityView extends AppCompatActivity {
 
 
@@ -17,38 +20,43 @@ public class PostingActivityView extends AppCompatActivity {
     private EditText newPost;
 
     protected void onCreate(Bundle savedInstanceState) {
-        presenter= new Presenter();
+        presenter = new Presenter(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
         newPost = (EditText) findViewById(R.id.post_entry_box);
-
     }
 
     public void sendPost(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        //sets the post
-        setPost(newPost.getText().toString());
-
-        //logcat messages
-        Log.d(postToDisplay, postToDisplay);
-        Log.d(clubToPost, clubToPost);
-        //sending the post and the club to post too, to the presenter
-        presenter.restPost(clubToPost,postToDisplay);
+        String curClub = presenter.restGet("getClub", "");
+        try {
+            JSONObject club = new JSONObject(curClub);
+            String clubName = club.get("clubname").toString();
+            presenter.putPost(clubName, newPost.getText().toString());
+            Log.d("Club posting: " + clubName, "New post: " + newPost.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, MainView.class);
         startActivity(intent);
     }
 
     protected void onPause() {
         super.onPause();
     }
+
     protected void onResume() { //brings activity back to main screen.
         super.onResume();
     }
+
     protected void onStop() {
         super.onStop();
     }
+
     protected void onDestroy() {
         super.onDestroy();
     }
+
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
+}

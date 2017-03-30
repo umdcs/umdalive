@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 public class PostingActivity{
 
-    public String jsonRequest(String club, String post){
+    public static String jsonRequest(String club, String post){
         JSONObject jsonParam = null;
         try {
             //Create JSONObject here

@@ -148,6 +148,10 @@ public class Presenter {
         restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
     }
 
+    public void putPost(String club, String post){
+        restPut("putNewPost", PostingActivity.jsonRequest(club, post));
+    }
+
     /**
      *gets all the club names
      */
