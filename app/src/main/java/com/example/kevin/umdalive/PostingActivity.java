@@ -10,7 +10,6 @@ public class PostingActivity{
     public static String jsonRequest(String club, String post){
         JSONObject jsonParam = null;
         try {
-            //Create JSONObject here
             jsonParam = new JSONObject();
             jsonParam.put("clubToPost", club);
             jsonParam.put("postToDisplay", post);

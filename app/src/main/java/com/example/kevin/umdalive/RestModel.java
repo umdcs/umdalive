@@ -88,7 +88,7 @@ public class RestModel {
     }
 
     /**
-     *
+     * Used by DisplayClub and PostingActivity to fetch the club selected by the user in the previous view
      */
     private String getCurrentClub(){
         try{
@@ -169,9 +169,6 @@ public class RestModel {
         new HTTPAsyncTask().execute(serverAddress + "/currentClub", "PUT", data);
     }
 
-    /**
-     * The previous group just copy and pasted all this. At some point we make it better.
-     */
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -186,15 +183,12 @@ public class RestModel {
                 URL url = new URL(params[0]);
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
-                if (params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
+                if (params[1].equals("PUT")) {
+                    Log.d("DEBUG PUT:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
                     serverConnection.setDoOutput(true);
                     serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-                    // params[2] contains the JSON String to send, make sure we send the
-                    // content length to be the json string length
                     serverConnection.setRequestProperty("Content-Length", "" +
                             Integer.toString(params[2].getBytes().length));
-                    // Send POST data that was provided.
                     DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
                     out.writeBytes(params[2]);
                     out.flush();
@@ -206,7 +200,7 @@ public class RestModel {
                 Log.d("Debug: ", "Response Code : " + responseCode);
                 is = serverConnection.getInputStream();
 
-                if (params[1].equals("GET") || params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
+                if (params[1].equals("GET") || params[1].equals("POST")) {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -228,13 +222,8 @@ public class RestModel {
             }
             return "Should not get to this if the data has been sent/received correctly!";
         }
-
-        /**
-         * @param result the result from the query
-         */
         protected void onPostExecute(String result) {
             Log.d("onPostExecute JSON: ", result);
-            //Toast.makeText(context, "Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }
 
