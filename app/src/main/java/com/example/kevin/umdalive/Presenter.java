@@ -144,7 +144,7 @@ public class Presenter {
         //confirmation to user?
     }
 
-    public void setDisplayClubInfo(String itemValue){
+    public void setCurrentClub(String itemValue){
         restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
     }
 

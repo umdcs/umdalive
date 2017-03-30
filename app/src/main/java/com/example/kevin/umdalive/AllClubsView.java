@@ -49,7 +49,7 @@ public class AllClubsView extends Activity {
                 launchActivity = true;
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                presenter.setDisplayClubInfo(itemValue);
+                presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
                 startActivity(intent);

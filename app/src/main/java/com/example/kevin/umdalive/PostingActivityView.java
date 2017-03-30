@@ -15,14 +15,6 @@ public class PostingActivityView extends AppCompatActivity {
     private String postToDisplay;
     private static String clubToPost;
     private EditText newPost;
-    //UserInformation this_user = MainActivity.getUserInformation();
-
-
-    /**
-     * Starts the activity and initializes the layout
-     *
-     * @param savedInstanceState
-     */
 
     protected void onCreate(Bundle savedInstanceState) {
         presenter= new Presenter();
@@ -32,7 +24,6 @@ public class PostingActivityView extends AppCompatActivity {
 
     }
 
-
     public void sendPost(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         //sets the post
@@ -40,19 +31,12 @@ public class PostingActivityView extends AppCompatActivity {
 
         //logcat messages
         Log.d(postToDisplay, postToDisplay);
-        Log.d(postToDisplay, postToDisplay);
-        Log.d(postToDisplay, postToDisplay);
-        Log.d(postToDisplay, postToDisplay);
-
         Log.d(clubToPost, clubToPost);
         //sending the post and the club to post too, to the presenter
         presenter.restPost(clubToPost,postToDisplay);
-//starts new activity
         startActivity(intent);
     }
-    /*
-Life cycle methods
- */
+
     protected void onPause() {
         super.onPause();
     }
@@ -68,38 +52,3 @@ Life cycle methods
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
-    /**
-     * method takes in a club name interms of a string and sets it to private clubToPost
-     *
-     * @param club the name of the club that is being psoted
-     */
-    public static void setClub(String club) {
-        clubToPost = club;
-    }
-
-    /**
-     * @return club name that the post is directed too
-     */
-    public static String getClub() {
-        return clubToPost;
-    }
-
-
-    /**
-     * takes in the post that the author enters, and sets to the private postToDisplay
-     *
-     * @param post string containing the mesage to be posted
-     */
-    private void setPost(String post) {
-        postToDisplay = post;
-    }
-
-    /**
-     * @return returns the text that is being posted
-     */
-
-    public String getPost() {
-        return postToDisplay;
-    }
-
-}
