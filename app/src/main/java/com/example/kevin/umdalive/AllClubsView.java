@@ -49,8 +49,7 @@ public class AllClubsView extends Activity {
                 launchActivity = true;
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                String jsonResponse = presenter.restGet(new String("getClub"), itemValue);
-                presenter.setDisplayClubInfo(jsonResponse);
+                presenter.setDisplayClubInfo(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
                 startActivity(intent);

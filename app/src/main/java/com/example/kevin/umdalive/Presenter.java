@@ -144,26 +144,8 @@ public class Presenter {
         //confirmation to user?
     }
 
-    /**
-     * Sets the infomation from the user selected club(in AllClubsView) that is to be displayed in DisplayClubView
-     * !!!!This was just copy/pasted from AllClubsView, will need to be changed at some point!!!! -Andy
-     * @param jsonString string o json data
-     */
-    public void setDisplayClubInfo(String jsonString){
-        try {
-            JSONObject object = new JSONObject(jsonString);
-            String clubFromServer = object.getString("club");
-            String descriptionFromServer = object.getString("description");
-            String userNameFromServer = object.getString("username");
-            String keywordFromServer = object.getString("keywords");
-
-//            DisplayClub.setClubName(clubFromServer);
-//            DisplayClub.setAdministrator(userNameFromServer);
-//            DisplayClub.setDescription(descriptionFromServer);
-//            DisplayClub.setKeywords(keywordFromServer);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void setDisplayClubInfo(String itemValue){
+        restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
     }
 
     /**

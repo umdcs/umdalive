@@ -76,6 +76,8 @@ public class RestModel {
                 break;
             case "putNewUser": putNewUser(data);
                 break;
+            case "putCurrentClub": putCurrentClub(data);
+                break;
             default: break;
         }
         return null;
@@ -157,11 +159,17 @@ public class RestModel {
         new HTTPAsyncTask().execute(serverAddress + "/newPost", "PUT", data);
     }
 
-
-
-
     private void putNewUser(String data){
         new HTTPAsyncTask().execute(serverAddress + "/userInformation", "PUT", data);
+    }
+
+    /**
+     * For AllClubsView to set the club that display club will use.
+     * The club name will be set in the currentClub string of the server's user info object
+     * @param data the selected club name
+     */
+    private void putCurrentClub(String data){
+        new HTTPAsyncTask().execute(serverAddress + "/currentClub", "PUT", data);
     }
 
     /**
