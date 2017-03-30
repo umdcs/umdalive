@@ -7,6 +7,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+//import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+
 /**
  * Created by Luke on 11/7/2016.
  */
@@ -42,9 +54,20 @@ public class LoginActivity extends AppCompatActivity {
     //stays here
 
 
+
+
+
+
+
+
+
+
+
+
+
     public void signUpScreen(View view){
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, SignUpActivity.class);
+        //startActivity(intent);
     }
     /*
     Methods for Activity to inherit parent
