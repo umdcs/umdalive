@@ -145,7 +145,7 @@ public class Presenter {
     }
 
     /**
-     * Sets the infomation from the user selected club(in AllClubsView) that is to be displayed in DisplayClubView
+     * Sets the information from the user selected club(in AllClubsView) that is to be displayed in DisplayClubView
      * !!!!This was just copy/pasted from AllClubsView, will need to be changed at some point!!!! -Andy
      * @param jsonString string o json data
      */
