@@ -26,21 +26,20 @@ import com.google.android.gms.common.api.Status;
 
 public class LoginActivity extends AppCompatActivity {
     private GoogleApiClient mGoogleApiClient;
+
     /**
      * this method builds the google sign-in api client.
-     *
      */
-    public void GoogleApiBuilder(){}
+    public void GoogleApiBuilder() {
+    }
 
 
     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build();
     // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
-    mGoogleApiClient = new GoogleApiClient.Builder(this)
-            .enableAutoManage(this /* FragmentActivity */, (GoogleApiClient.OnConnectionFailedListener) this /* OnConnectionFailedListener */)
-            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+    
+}
 
 
 
