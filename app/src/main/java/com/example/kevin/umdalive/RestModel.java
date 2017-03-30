@@ -34,7 +34,9 @@ import java.util.concurrent.ExecutionException;
 
 public class RestModel {
     //public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
-    public final String serverAddress = "https://lempo.d.umn.edu:5001"; //To be used for a real address
+    //public final String serverAddress = "https://lempo.d.umn.edu:5001"; //To be used for a real address
+    public final String serverAddress = "http://192.168.1.128"; // Ryan's ip
+    private String userData; // made this so I could set it in the onPostExecute
 
     private Context context;
     /**
@@ -131,7 +133,7 @@ public class RestModel {
      * @return JSON data of user info
      */
     private String getUserData(){
-        String userData;
+
         try {
             userData = new HTTPAsyncTask().execute(serverAddress + "/userDataGet", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
@@ -229,6 +231,7 @@ public class RestModel {
          */
         protected void onPostExecute(String result) {
             Log.d("onPostExecute JSON: ", result);
+//            userData = result; // we need to set the result here. idk how to properly.
             //Toast.makeText(context, "Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }

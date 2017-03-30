@@ -54,7 +54,8 @@ public class CreateClubView extends AppCompatActivity {
         EditText description = (EditText) findViewById(R.id.description_of_club);
         EditText newPost = (EditText) findViewById(R.id.post_of_club);
 
-        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(), (String)keywordItem, description.getText().toString(), newPost.getText().toString());
+        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
+                (String)keywordItem, description.getText().toString(), newPost.getText().toString());
 
         startActivity(intent);
         presenter.restPut("putNewClub", jsonString);
