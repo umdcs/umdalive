@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 
 //import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -24,6 +25,23 @@ import com.google.android.gms.common.api.Status;
  */
 
 public class LoginActivity extends AppCompatActivity {
+
+
+    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build();
+    // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
+    mGoogleApiClient = new GoogleApiClient.Builder(this)
+            .enableAutoManage(this /* FragmentActivity */, (GoogleApiClient.OnConnectionFailedListener) this /* OnConnectionFailedListener */)
+            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+
+
+
+
+
 //probably will be moved to te view
 
 
