@@ -14,7 +14,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class LoginView extends AppCompatActivity {
 
-    private GoogleApiClient mGoogleApiClient;
+
 
 
 

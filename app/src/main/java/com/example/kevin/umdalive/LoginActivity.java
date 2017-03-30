@@ -25,6 +25,12 @@ import com.google.android.gms.common.api.Status;
  */
 
 public class LoginActivity extends AppCompatActivity {
+    private GoogleApiClient mGoogleApiClient;
+    /**
+     * this method builds the google sign-in api client.
+     *
+     */
+    public void GoogleApiBuilder(){}
 
 
     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
