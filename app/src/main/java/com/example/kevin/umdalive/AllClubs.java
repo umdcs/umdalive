@@ -40,6 +40,17 @@ public class AllClubs {
         }
         return clubList;
     }
+
+    public static String jsonStringify(String clubName){
+        JSONObject jsonString = null;
+        try {
+            jsonString = new JSONObject();
+            jsonString.put("clubname", clubName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonString.toString();
+    }
 }
 
 

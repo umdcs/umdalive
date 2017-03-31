@@ -22,7 +22,7 @@ public class Presenter {
      *
      * creates a RestModel for node communication
      */
-    public Presenter (Activity incomingActivity) {
+    public Presenter(Activity incomingActivity) {
         restModel = new RestModel();
         allClubs = new AllClubs();
         activity = incomingActivity;
@@ -144,26 +144,12 @@ public class Presenter {
         //confirmation to user?
     }
 
-    /**
-     * Sets the information from the user selected club(in AllClubsView) that is to be displayed in DisplayClubView
-     * !!!!This was just copy/pasted from AllClubsView, will need to be changed at some point!!!! -Andy
-     * @param jsonString string o json data
-     */
-    public void setDisplayClubInfo(String jsonString){
-        try {
-            JSONObject object = new JSONObject(jsonString);
-            String clubFromServer = object.getString("club");
-            String descriptionFromServer = object.getString("description");
-            String userNameFromServer = object.getString("username");
-            String keywordFromServer = object.getString("keywords");
+    public void setCurrentClub(String itemValue){
+        restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
+    }
 
-//            DisplayClub.setClubName(clubFromServer);
-//            DisplayClub.setAdministrator(userNameFromServer);
-//            DisplayClub.setDescription(descriptionFromServer);
-//            DisplayClub.setKeywords(keywordFromServer);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void putPost(String club, String post){
+        restPut("putNewPost", PostingActivity.jsonRequest(club, post));
     }
 
     /**
@@ -173,24 +159,25 @@ public class Presenter {
         return allClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
     }
 
-
     /**
      * Stubbed function to communicate with server and retrieve one club by name
      *
      * @param clubName to retrieve info of
      */
-    //public void getClub(String clubName){
+    public void getClub(String clubName){
         //get info from server of club
-        //send to view all data made by club}
+        //send to view all data made by club
+    }
 
     /**
      * Stubbed function to communicate with server and retrieve all posts from one club by name
      *
      * @param clubName to retrieve posts of
      */
-    //public void getClubsPosts(String clubName) {
+    public void getClubsPosts(String clubName) {
         //get info from server of all posts made by one club
-        //send to view a list of all posts.}
+        //send to view a list of all posts.
+    }
 
 
     }

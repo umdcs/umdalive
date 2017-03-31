@@ -25,12 +25,7 @@ public class AllClubsView extends Activity {
         presenter = new Presenter(this);
         setContentView(R.layout.all_clubs);
         listView = (ListView) findViewById(R.id.list2);
-        Intent intent = new Intent(this, DisplayClub.class);
         setView();
-        //launch is changed to true once a club is clicked on.
-        if(launchActivity){
-            startActivity(intent);
-        }
     }
 
     /**
@@ -54,8 +49,7 @@ public class AllClubsView extends Activity {
                 launchActivity = true;
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                String jsonResponse = presenter.restGet(new String("getClub"), itemValue);
-                presenter.setDisplayClubInfo(jsonResponse);
+                presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
                 startActivity(intent);

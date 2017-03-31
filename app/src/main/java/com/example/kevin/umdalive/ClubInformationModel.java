@@ -146,7 +146,6 @@ public class ClubInformationModel {
     public String jsonStringify() {
         JSONObject jsonString = null;
         try {
-            //Create JSONObject here
             jsonString = new JSONObject();
             jsonString.put("clubname", clubName);
             jsonString.put("username", userName);

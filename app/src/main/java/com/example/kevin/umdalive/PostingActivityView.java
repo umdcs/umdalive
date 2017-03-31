@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class PostingActivityView extends AppCompatActivity {
 
 
@@ -15,91 +18,45 @@ public class PostingActivityView extends AppCompatActivity {
     private String postToDisplay;
     private static String clubToPost;
     private EditText newPost;
-    //UserInformation this_user = MainActivity.getUserInformation();
-
-
-    /**
-     * Starts the activity and initializes the layout
-     *
-     * @param savedInstanceState
-     */
 
     protected void onCreate(Bundle savedInstanceState) {
-        presenter= new Presenter();
+        presenter = new Presenter(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
         newPost = (EditText) findViewById(R.id.post_entry_box);
-
     }
-
 
     public void sendPost(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        //sets the post
-        setPost(newPost.getText().toString());
-
-        //logcat messages
-        Log.d(postToDisplay, postToDisplay);
-        Log.d(postToDisplay, postToDisplay);
-        Log.d(postToDisplay, postToDisplay);
-        Log.d(postToDisplay, postToDisplay);
-
-        Log.d(clubToPost, clubToPost);
-        //sending the post and the club to post too, to the presenter
-        presenter.restPost(clubToPost,postToDisplay);
-//starts new activity
+        String curClub = presenter.restGet("getClub", "");
+        try {
+            JSONObject club = new JSONObject(curClub);
+            String clubName = club.get("clubname").toString();
+            presenter.putPost(clubName, newPost.getText().toString());
+            Log.d("Club posting: " + clubName, "New post: " + newPost.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, MainView.class);
         startActivity(intent);
     }
-    /*
-Life cycle methods
- */
+
     protected void onPause() {
         super.onPause();
     }
+
     protected void onResume() { //brings activity back to main screen.
         super.onResume();
     }
+
     protected void onStop() {
         super.onStop();
     }
+
     protected void onDestroy() {
         super.onDestroy();
     }
+
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
-    /**
-     * method takes in a club name interms of a string and sets it to private clubToPost
-     *
-     * @param club the name of the club that is being psoted
-     */
-    public static void setClub(String club) {
-        clubToPost = club;
-    }
-
-    /**
-     * @return club name that the post is directed too
-     */
-    public static String getClub() {
-        return clubToPost;
-    }
-
-
-    /**
-     * takes in the post that the author enters, and sets to the private postToDisplay
-     *
-     * @param post string containing the mesage to be posted
-     */
-    private void setPost(String post) {
-        postToDisplay = post;
-    }
-
-    /**
-     * @return returns the text that is being posted
-     */
-
-    public String getPost() {
-        return postToDisplay;
-    }
-
 }

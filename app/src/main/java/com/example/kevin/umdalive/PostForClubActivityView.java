@@ -25,12 +25,7 @@ public class PostForClubActivityView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_for_club_select);
         listView = (ListView) findViewById(R.id.list);
-        Intent intent = new Intent(this, PostingActivity.class);
         setView();
-        //launch is changed to true once a club is clicked on.
-        if(launchActivity){
-            startActivity(intent);
-        }
     }
 
 
@@ -55,9 +50,10 @@ public class PostForClubActivityView extends Activity {
                 launchActivity = true;
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                String jsonResponse = presenter.restGet(new String("getClub"), itemValue);
-                presenter.setDisplayClubInfo(jsonResponse);
+                presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(PostForClubActivityView.this, PostingActivityView.class);
+                startActivity(intent);
             }
         });
     }

@@ -34,9 +34,8 @@ import java.util.concurrent.ExecutionException;
 
 public class RestModel {
     //public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
-    //public final String serverAddress = "https://lempo.d.umn.edu:5000"; //To be used for a real address
-    public final String serverAddress = "http://131.212.202.26:5000"; // Ryan's ip
-    //private String userData; // made this so I could set it in the onPostExecute
+    //public final String serverAddress = "https://lempo.d.umn.edu:5001"; //To be used for a real address
+    public final String serverAddress = "http://192.168.1.128:5000"; //Ryan IP
 
     private Context context;
     /**
@@ -59,7 +58,7 @@ public class RestModel {
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
-            case "getClub": return getClub(data);
+            case "getClub": return getCurrentClub();
             case "getRecentPosts": return getRecentPosts();
             case "getUserData": return getUserData();
             default: return null;
@@ -78,6 +77,8 @@ public class RestModel {
                 break;
             case "putNewUser": putNewUser(data);
                 break;
+            case "putCurrentClub": putCurrentClub(data);
+                break;
             default: break;
         }
         return null;
@@ -88,14 +89,11 @@ public class RestModel {
     }
 
     /**
-     * Taken from AllClubs.java
-     * Not really sure why they sent the jsonParam through, look into that.
-     *
-     * @return String of JSON response
+     * Used by DisplayClub and PostingActivity to fetch the club selected by the user in the previous view
      */
-    private String getClub(String data){
+    private String getCurrentClub(){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/getAllClubs", "GET", data).get();
+            return new HTTPAsyncTask().execute(serverAddress + "/currentClub", "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -159,16 +157,19 @@ public class RestModel {
         new HTTPAsyncTask().execute(serverAddress + "/newPost", "PUT", data);
     }
 
-
-
-
     private void putNewUser(String data){
         new HTTPAsyncTask().execute(serverAddress + "/userInformation", "PUT", data);
     }
 
     /**
-     * The previous group just copy and pasted all this. At some point we make it better.
+     * For AllClubsView to set the club that display club will use.
+     * The club name will be set in the currentClub string of the server's user info object
+     * @param data the selected club name
      */
+    private void putCurrentClub(String data){
+        new HTTPAsyncTask().execute(serverAddress + "/currentClub", "PUT", data);
+    }
+
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -183,15 +184,12 @@ public class RestModel {
                 URL url = new URL(params[0]);
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
-                if (params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
-                    Log.d("DEBUG POST/PUT/DELETE:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
+                if (params[1].equals("PUT")) {
+                    Log.d("DEBUG PUT:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
                     serverConnection.setDoOutput(true);
                     serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-                    // params[2] contains the JSON String to send, make sure we send the
-                    // content length to be the json string length
                     serverConnection.setRequestProperty("Content-Length", "" +
                             Integer.toString(params[2].getBytes().length));
-                    // Send POST data that was provided.
                     DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
                     out.writeBytes(params[2]);
                     out.flush();
@@ -203,7 +201,7 @@ public class RestModel {
                 Log.d("Debug: ", "Response Code : " + responseCode);
                 is = serverConnection.getInputStream();
 
-                if (params[1].equals("GET") || params[1].equals("POST") || params[1].equals("PUT") || params[1].equals("DELETE")) {
+                if (params[1].equals("GET") || params[1].equals("POST")) {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -225,14 +223,8 @@ public class RestModel {
             }
             return "Should not get to this if the data has been sent/received correctly!";
         }
-
-        /**
-         * @param result the result from the query
-         */
         protected void onPostExecute(String result) {
             Log.d("onPostExecute JSON: ", result);
-            //userData = result; // we need to set the result here? idk how to properly.
-            //Toast.makeText(context, "Data transfer successful", Toast.LENGTH_SHORT).show();
         }
     }
 
