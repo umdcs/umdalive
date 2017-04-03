@@ -39,5 +39,15 @@
         android:layout_below="@+id/UMD_Alive_Title"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/btn_sign_out"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/btn_logout_from_google"
+        android:visibility="gone" />
+
+
+
 
 </RelativeLayout>

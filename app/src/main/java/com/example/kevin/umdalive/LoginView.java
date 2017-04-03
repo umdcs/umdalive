@@ -52,18 +52,14 @@ public class LoginView extends AppCompatActivity implements GoogleApiClient.OnCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        // presenter = new Presenter(this);
+         presenter = new Presenter(this);
+
+        //calling the presenter to build the googlesignclient
+        presenter.googleSignIn();
     }
 
 
-    public void signUp() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-
-
-
-    }
 
 
 

@@ -198,7 +198,9 @@ public class Presenter {
     }
 
     public void googleSignIn(){
-log.onCreate();
+log.GoogleSignInitializer();
+
+        log.signUp();
 
     }
 

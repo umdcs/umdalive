@@ -6,7 +6,7 @@
     <string name="key_word">This is a dummy.</string>
     <string name="post">This is a dummy post</string>
     <string name="hint_for_club_posts">Posts will go here</string>
-
+    <string name="btn_logout_from_google">Logout from Google</string>
     <string-array name="keyword_list">
         <item name="academic">Academic</item>
         <item name="athletic">Athletic</item>
