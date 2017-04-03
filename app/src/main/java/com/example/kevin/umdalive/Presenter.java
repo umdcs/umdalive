@@ -1,6 +1,9 @@
 package com.example.kevin.umdalive;
 
 import android.app.Activity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -193,6 +196,9 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
+    public GoogleSignInResult getLoginResult(GoogleSignInResult result) {
+        handleSignInResult(result);
+    }
 
     }
 

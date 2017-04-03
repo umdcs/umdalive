@@ -3,6 +3,7 @@ package com.example.kevin.umdalive;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,39 +26,44 @@ import com.google.android.gms.common.api.Status;
  */
 
 public class LoginActivity extends AppCompatActivity {
-
-    private static final int RC_SIGN_IN = 5; // used for sending request too google services
-    private  GoogleApiClient mGoogleApiClient;
-
-
-
+    private GoogleApiClient mGoogleApiClient;
+    private static final String TAG = "SignInActivity";
+    private static final int RC_SIGN_IN = 9001;
     /**
      * this method builds the google sign-in api client.
-     *
      */
-    public void  GoogleApiBuilder() {
+    public void GoogleApiBuilder() {
 
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, (GoogleApiClient.OnConnectionFailedListener) this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
+    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build();
+    // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
 
     }
 
-    public void googleLogin(View v){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+    }
 
-
-
-
+    private void handleSignInResult(GoogleSignInResult result) {
+        //needs to be modified to MVP
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            updateUI(true); //will need to be a function in the view
+        } else {
+            // Signed out, show unauthenticated UI.
+            updateUI(false);
+        }
     }
 
 
@@ -65,52 +71,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-//probably will be moved to te view
 
 
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.login_activity);
-//    }
-//
-    /*
-    This is the onClick for the Login button
-    current functionality: currently all this does is check for "@" symbol and go to next page.
-    The next page is the Main Activity.
-
-    Replace with OAuth
-     */
-
-    //This function will be moved to the view
-
-
-
-    /*
-    This is the onClick for the signup button of the lower right corner.
-    current functionality: All this does is bring you to a new activity
-    that will help create a new user.
-
-    This brings you to SignUpActivity
-     */
-    //stays here
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void signUpScreen(View view){
-        //Intent intent = new Intent(this, SignUpActivity.class);
-        //startActivity(intent);
-    }
-    /*
+/*
     Methods for Activity to inherit parent
      */
     protected void onPause() {
