@@ -28,8 +28,26 @@ public class LoginView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this.)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
             // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);

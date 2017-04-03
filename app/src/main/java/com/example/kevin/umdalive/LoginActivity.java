@@ -2,6 +2,7 @@ package com.example.kevin.umdalive;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,14 +26,64 @@ import com.google.android.gms.common.api.Status;
  * Created by Luke on 11/7/2016.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+
+
+        // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+
+     /**   super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Button listeners
+        findViewById(R.id.sign_in_button).setOnClickListener((View.OnClickListener) this);
+        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        // Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+
+
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_activity);
+
+        // presenter = new Presenter(this);
+      */
+    }
+
+
+
+
+
+
+
     /**
      * this method builds the google sign-in api client.
      */
-    public void GoogleApiBuilder() {
+    public GoogleApiClient GoogleApiBuilder() {
 
     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -97,6 +148,11 @@ public class LoginActivity extends AppCompatActivity {
     }
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        
     }
 }
 
