@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Presenter {
-    private LoginActivity log;
+private LoginActivity log;
     private Activity activity;
     private RestModel restModel;
     private AllClubs allClubs;
@@ -204,6 +204,8 @@ log.GoogleSignInitializer();
 
 
     }
+
+
 
     }
 

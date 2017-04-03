@@ -8,7 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,16 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
-public class LoginView extends AppCompatActivity  {
+public class LoginView extends AppCompatActivity {
 
-    private static final String TAG ="SignInActivity" ;
-    String mFullName;
-    String mEmail;
-    private static final int RC_SIGN_IN = 9001;
-    private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
-    private ProgressDialog mProgressDialog;
+
 
 
     Presenter presenter; //there shouldn't be an error here after merging with the Presenter branch to gain the presenter class
@@ -38,8 +36,6 @@ public class LoginView extends AppCompatActivity  {
 
 
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
 
 
@@ -48,8 +44,17 @@ public class LoginView extends AppCompatActivity  {
 
          presenter = new Presenter(this);
 
-        //calling the presenter to build the googlesignclient
         presenter.googleSignIn();
+    }
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -74,4 +79,4 @@ public class LoginView extends AppCompatActivity  {
 
 
 
-}
+
