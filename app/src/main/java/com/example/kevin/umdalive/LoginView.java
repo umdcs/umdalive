@@ -134,6 +134,10 @@ public class LoginView extends AppCompatActivity implements GoogleApiClient.OnCo
             mFullName=acct.getDisplayName();
             mEmail=acct.getEmail();
 
+            Intent intent= new Intent(this, MainView.class);
+            startActivity(intent);
+
+
 
 
 
@@ -195,7 +199,7 @@ public class LoginView extends AppCompatActivity implements GoogleApiClient.OnCo
     // [END signOut]
 
 
-  
+
 
     /**
      * Called when a view has been clicked.
