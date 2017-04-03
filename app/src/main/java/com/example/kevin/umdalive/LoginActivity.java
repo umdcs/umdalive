@@ -105,10 +105,16 @@ private RelativeLayout Rlayout;
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            updateUI(true);
+                    // Signed in successfully, show authenticated UI.
+                    GoogleSignInAccount acct = result.getSignInAccount();
+        mFullName=acct.getDisplayName();
+            mEmail=acct.getEmail();
+
+
+
+
+
+                    updateUI(true);
         } else {
             // Signed out, show unauthenticated UI.
             updateUI(false);
@@ -181,7 +187,7 @@ signedOutButton.setVisibility(View.GONE);
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case R.id.btn_sign_out;
+            case R.id.btn_sign_out:
                 signOut();
                 break;
 

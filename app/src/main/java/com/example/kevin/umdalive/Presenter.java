@@ -198,9 +198,10 @@ public class Presenter {
     }
 
     public void googleSignIn(){
+        log.initializeButtons();
 log.GoogleSignInitializer();
 
-        log.signUp();
+
 
     }
 
