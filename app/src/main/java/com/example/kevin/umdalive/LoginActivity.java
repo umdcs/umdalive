@@ -1,12 +1,13 @@
 package com.example.kevin.umdalive;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
@@ -16,12 +17,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 /**
  * Created by osumo on 4/3/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+
+   private Button signedOutButton;
+  private  SignInButton signInButton;
+private RelativeLayout Rlayout;
 
     private static final String TAG ="SignInActivity" ;
     String mFullName;
@@ -30,6 +37,20 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
+
+    public void initializeButtons(){
+        signedOutButton = (Button) findViewById(R.id.btn_sign_out);
+        signInButton= (SignInButton) findViewById(R.id.sign_in_button);
+        Rlayout=(RelativeLayout) findViewById(R.id.RLayout);
+
+
+
+         signedOutButton.setOnClickListener(this);
+        signInButton.setOnClickListener(this);
+
+
+    }
+
 
 
     public void GoogleSignInitializer(){
@@ -94,16 +115,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    //this function gets called in the model, so it needs to be linked up via presenter
+    /**
+     * this method determines whether or not the sign in or sign out button is visible based on the param
+     * @param signedIn whether or not the user is signed in
+     */
     private void updateUI(boolean signedIn) {
         if (signedIn) {
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } else {
-            mStatusTextView.setText(R.string.signed_out);
+           signInButton.setVisibility(View.GONE);
+            signInButton.setVisibility(View.VISIBLE);
+        }
 
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+        else {
+
+            signInButton.setVisibility(View.VISIBLE);
+signedOutButton.setVisibility(View.GONE);
+
         }
     }
 
@@ -114,5 +140,55 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // An unresolvable error has occurred and Google APIs (including Sign-In) will not
         // be available.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
+
+
+    // [START signIn]
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    // [END signIn]
+
+    // [START signOut]
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        // [START_EXCLUDE]
+                        updateUI(false);
+                        // [END_EXCLUDE]
+                    }
+                });
+    }
+    // [END signOut]
+
+
+
+
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+
+
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                signIn();
+                break;
+            case R.id.btn_sign_out;
+                signOut();
+                break;
+
+        }
+
+
+
+
     }
 }
