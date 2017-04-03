@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Presenter {
+    private LoginActivity log;
     private Activity activity;
     private RestModel restModel;
     private AllClubs allClubs;
@@ -196,8 +197,9 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
-    public GoogleSignInResult getLoginResult(GoogleSignInResult result) {
-        handleSignInResult(result);
+    public void googleSignIn(){
+log.onCreate();
+
     }
 
     }
