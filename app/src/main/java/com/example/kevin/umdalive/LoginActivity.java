@@ -34,20 +34,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
-
-
         // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
-
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -55,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
 
-     /**   super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Button listeners
@@ -71,26 +63,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.login_activity);
 
         // presenter = new Presenter(this);
-      */
-    }
-
-
-
-
-
-
-
-    /**
-     * this method builds the google sign-in api client.
-     */
-    public GoogleApiClient GoogleApiBuilder() {
-
-    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build();
-    // Build a GoogleApiClient with access to GoogleSignIn.API and the options above.
 
     }
+
+
+
+
+
+
+
+public void signUP() {
+Intent signInIntent= Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -103,18 +88,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void handleSignInResult(GoogleSignInResult result) {
-        //needs to be modified to MVP
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
-            updateUI(true); //will need to be a function in the view
-        } else {
-            // Signed out, show unauthenticated UI.
-            updateUI(false);
-        }
     }
 
 
@@ -152,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        
+
     }
 }
 
