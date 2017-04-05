@@ -10,12 +10,13 @@
     <string-array name="keyword_list">
         <item name="academic">Academic</item>
         <item name="athletic">Athletic</item>
-        <item name="intermurals">Intermurals</item>
+        <item name="intramurals">Intramurals</item>
         <item name="fitness">Fitness</item>
         <item name="food">Food</item>
         <item name="religious">Religious</item>
         <item name="movies">Movies</item>
         <item name="video_games">VideoGames</item>
+        <item name="free">free</item>
       </string-array>
 
     <string-array name="graduation_date">

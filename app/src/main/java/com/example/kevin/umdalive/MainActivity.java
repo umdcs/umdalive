@@ -53,11 +53,10 @@ public class MainActivity {
             JSONArray jsonArray = object.getJSONArray("items");
             if (jsonArray != null) {
                 int len = jsonArray.length();
-                for (int i = 0; i < len; i++) {
+                for (int i = len - 1; i >= 0; i--) {
                     list.add(jsonArray.get(i).toString());
                     Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                 }
-                Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
             }
         } catch (JSONException e) {
             e.printStackTrace();
