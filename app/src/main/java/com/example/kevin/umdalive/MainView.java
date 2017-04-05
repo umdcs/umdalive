@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,8 +28,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     Presenter presenter;
     private static UserInformationModel thisUser;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<String> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         presenter = new Presenter(this);
         thisUser = new UserInformationModel();
         layoutManager = new LinearLayoutManager(this);
-        setUser();
         setContentView(R.layout.activity_main);
+        Log.d("DEBUG: ", "Setting up view");
         viewSetup();
     }
 
@@ -176,21 +177,26 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void displayPosts(){
-        //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
-        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
-        ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
-        thisUser.setLocalPosts(recentPosts);
-        adapter = presenter.getPostAdapter(recentPosts);
-        recyclerView.setAdapter(adapter);
+
     }
+
+    private void setPosts(){
+        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
+        posts = presenter.refreshPosts(mostRecentPosts);
+        thisUser.setLocalPosts(posts);
+    }
+
 
     /**
      * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
      */
     private void viewSetup() {
+        setPosts();
+        setUser();
         recyclerView = (RecyclerView) findViewById(R.id.mainPosts);
         recyclerView.setLayoutManager(layoutManager);
-        displayPosts();
+        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
+        recyclerView.setAdapter(adapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

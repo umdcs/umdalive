@@ -70,6 +70,10 @@ public class MainActivity {
 class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<String> postData;
 
+    public PostAdapter(ArrayList<String> postData) {
+        this.postData = postData;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
         public ViewHolder(TextView tView) {
@@ -78,15 +82,11 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
-    public PostAdapter(ArrayList<String> postData) {
-        this.postData = postData;
-    }
-
-    // Create new views (invoked by the layout manager)
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView tView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.content_main, parent, false);
-        // set the view's size, margins, paddings and layout parameters
+        TextView tView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.text_view, parent, false);
+        // set the TextView's settings here
+        tView.setTextSize(15);
         ViewHolder viewHolder = new ViewHolder(tView);
         return viewHolder;
     }
