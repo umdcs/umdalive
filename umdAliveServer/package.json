@@ -7,7 +7,9 @@
     "body-parser": "^1.16.1",
     "express": "^4.14.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "module-js": "^5.15.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

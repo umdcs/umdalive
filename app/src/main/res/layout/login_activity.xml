@@ -12,9 +12,7 @@
         android:id="@+id/welcome_title"
         android:textColor="@color/textColorPrimary"
         android:textSize="@android:dimen/app_icon_size"
-        android:layout_above="@+id/sign_up_title"
-        android:layout_alignRight="@+id/email_input"
-        android:layout_alignEnd="@+id/email_input"
+
         android:layout_marginBottom="40dp" />
 
     <TextView
