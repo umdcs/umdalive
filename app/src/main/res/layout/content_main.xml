@@ -57,21 +57,35 @@
         android:layout_alignParentEnd="true"
         android:onClick="refreshPosts" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainPosts"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:inputType="textMultiLine"
-        android:ems="10"
+        android:layout_above="@+id/make_a_club"
         android:layout_below="@+id/refresh_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/mainPosts"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/make_a_club"
-        android:minLines="25"
-        android:gravity="top|left"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary"/>
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:ems="10"-->
+        <!--android:layout_below="@+id/refresh_button"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_above="@+id/make_a_club"-->
+        <!--android:minLines="25"-->
+        <!--android:gravity="top|left"-->
+        <!--android:textColor="@color/colorPrimary" />-->
 
 
 </RelativeLayout>
