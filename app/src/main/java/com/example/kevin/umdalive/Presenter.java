@@ -170,7 +170,9 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
-
+    public PostAdapter getPostAdapter(ArrayList<String> posts){
+        return new PostAdapter(posts);
+    }
     }
 
 

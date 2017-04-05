@@ -12,10 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,7 +29,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private String posts[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         presenter = new Presenter(this);
         thisUser = new UserInformationModel();
         layoutManager = new LinearLayoutManager(this);
-        adapter = presenter.getPostAdaptor();
         setUser();
         setContentView(R.layout.activity_main);
         viewSetup();
@@ -179,7 +180,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         String mostRecentPosts = presenter.restGet("getRecentPosts", "");
         ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
         thisUser.setLocalPosts(recentPosts);
-        adapter.setView(posts);
+        adapter = presenter.getPostAdapter(recentPosts);
+        recyclerView.setAdapter(adapter);
     }
 
     /**
@@ -188,7 +190,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     private void viewSetup() {
         recyclerView = (RecyclerView) findViewById(R.id.mainPosts);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
         displayPosts();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

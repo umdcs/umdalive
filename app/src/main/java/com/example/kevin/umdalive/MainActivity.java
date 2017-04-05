@@ -1,6 +1,10 @@
 package com.example.kevin.umdalive;
 
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,5 +66,42 @@ public class MainActivity {
     }
 
 }
+
+class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+    private ArrayList<String> postData;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textView;
+        public ViewHolder(TextView tView) {
+            super(tView);
+            textView = tView;
+        }
+    }
+
+    public PostAdapter(ArrayList<String> postData) {
+        this.postData = postData;
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TextView tView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.content_main, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ViewHolder viewHolder = new ViewHolder(tView);
+        return viewHolder;
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.textView.setText(postData.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return postData.size();
+    }
+}
+
 
 
