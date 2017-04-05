@@ -112,15 +112,6 @@ public class Presenter {
     }
 
     /**
-     * For MainActivity
-     * @param posts
-     * @return
-     */
-    public String displayPosts(ArrayList<String> posts){
-        return MainActivity.displayPosts(posts);
-    }
-
-    /**
      * Sets user info called from signUpActivityView
      *
      * Sets by using constructor from UserInformationModel

@@ -9,6 +9,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,14 +23,19 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
     Presenter presenter;
     private static UserInformationModel thisUser;
-    EditText posts;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private String posts[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new Presenter(this);
         thisUser = new UserInformationModel();
-        setUser(); // calls server
+        layoutManager = new LinearLayoutManager(this);
+        adapter = presenter.getPostAdaptor();
+        setUser();
         setContentView(R.layout.activity_main);
         viewSetup();
     }
@@ -64,11 +71,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
      * @param view the button handles this
      */
     public void refreshPosts(View view) {
-        //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
-        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
-        ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
-        thisUser.setLocalPosts(recentPosts);
-        posts.setText(presenter.displayPosts(recentPosts));
+        displayPosts();
     }
 
     /**
@@ -171,15 +174,25 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    private void displayPosts(){
+        //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
+        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
+        ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
+        thisUser.setLocalPosts(recentPosts);
+        adapter.setView(posts);
+    }
+
     /**
      * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
      */
     private void viewSetup() {
+        recyclerView = (RecyclerView) findViewById(R.id.mainPosts);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        displayPosts();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Understand this fab better
-        //I believe it says "Replace with your own action" because the last group copy/pasted this from the internet
-        //lololololololololololololllolololol
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,18 +202,12 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
-        //this is a sidebar thing check layout for better idea
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //commented out because it's deprecated. If it turns out we need it we'll figure it out later.
-        //drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        posts = (EditText) findViewById(R.id.mainPosts);
-        posts.setMaxLines(20);
     }
 
     @Override

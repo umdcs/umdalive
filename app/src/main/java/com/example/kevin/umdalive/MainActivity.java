@@ -61,13 +61,6 @@ public class MainActivity {
         return list;
     }
 
-    public static String displayPosts(ArrayList<String> list) {
-        String displayPosts = "";
-        for (int i = 0; i < list.size(); i++) {
-            displayPosts += " \n" + list.get(i);
-        }
-        return displayPosts;
-    }
 }
 
 
