@@ -32,7 +32,7 @@
         <item name="computer_science">Computer Science</item>
         <item name="finance">Finance</item>
         <item name="chemistry">Chemistry</item>
-        <item name="mathmatics">Mathmatics</item>
+        <item name="mathematics">Mathematics</item>
         <item name="english">English</item>
         <item name="history">History</item>
     </string-array>
@@ -42,4 +42,5 @@
 
     <string name="action_settings">Settings</string>
     <string name="refresh_settings">Refresh User Data </string>
+    <string name="version"> 0.5.2b</string>
 </resources>
