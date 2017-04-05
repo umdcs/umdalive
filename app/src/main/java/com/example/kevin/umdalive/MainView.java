@@ -177,12 +177,13 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void displayPosts(){
-
+        posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
+        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
+        recyclerView.swapAdapter(adapter, true);
     }
 
     private void setPosts(){
-        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
-        posts = presenter.refreshPosts(mostRecentPosts);
+        posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
         thisUser.setLocalPosts(posts);
     }
 

@@ -85,16 +85,15 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         TextView tView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.text_view, parent, false);
-        // set the TextView's settings here
         tView.setTextSize(15);
         ViewHolder viewHolder = new ViewHolder(tView);
         return viewHolder;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.textView.setText(postData.get(position));
+        Log.d("SET TEXTVIEW: ", postData.get(position) + " at position " + Integer.toString(position));
     }
 
     @Override
