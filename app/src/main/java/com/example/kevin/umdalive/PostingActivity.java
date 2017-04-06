@@ -7,8 +7,11 @@ import org.json.JSONObject;
 
 public class PostingActivity{
 
-    public static String jsonRequest(String club, String post){
+    public static String jsonRequest(String club, String title, String time, String date, String location){
         JSONObject jsonParam = null;
+
+        String post = title + time + date + location;
+
         try {
             jsonParam = new JSONObject();
             jsonParam.put("clubToPost", club);
