@@ -30,16 +30,19 @@ public class PostingActivityView extends AppCompatActivity {
         time = (EditText) findViewById(R.id.event_time);
         date = (EditText) findViewById(R.id.event_date);
         location = (EditText) findViewById(R.id.event_location);
-
-
     }
 
     public void sendPost(View view) {
         String curClub = presenter.restGet("getClub", "");
+        String tempTitle = title.getText().toString();
+        String tempTime = time.getText().toString();
+        String tempDate = date.getText().toString();
+        String tempLocation = location.getText().toString();
+
         try {
             JSONObject club = new JSONObject(curClub);
             String clubName = club.get("clubname").toString();
-            presenter.putPost(clubName, title.getText().toString());
+            presenter.putPost(clubName, tempTitle, tempTime, tempDate, tempLocation);
             Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
