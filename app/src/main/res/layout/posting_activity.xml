@@ -24,15 +24,58 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/post_entry_box"
+        android:id="@+id/event_title"
         android:layout_weight="1"
-        android:hint="Enter Post Here"
+        android:hint="Enter Title of Event Here"
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary"
+        android:layout_marginTop="21dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/event_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Enter Time of Event Here"
+        android:inputType="time"
+        android:layout_below="@+id/event_title"
+        android:layout_alignLeft="@+id/event_date"
+        android:layout_alignStart="@+id/event_date"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/event_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:hint="Enter Date of Event Here"
+        android:ems="10"
+        android:inputType="date"
+        android:layout_below="@+id/event_time"
+        android:layout_alignLeft="@+id/event_location"
+        android:layout_alignStart="@+id/event_location"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/event_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="Enter Location of Event Here"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/event_date"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

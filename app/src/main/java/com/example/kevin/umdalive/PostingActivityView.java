@@ -17,13 +17,21 @@ public class PostingActivityView extends AppCompatActivity {
     Presenter presenter;
     private String postToDisplay;
     private static String clubToPost;
-    private EditText newPost;
+    private EditText title;
+    private EditText location;
+    private EditText time;
+    private EditText date;
 
     protected void onCreate(Bundle savedInstanceState) {
         presenter = new Presenter(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
-        newPost = (EditText) findViewById(R.id.post_entry_box);
+        title = (EditText) findViewById(R.id.event_title);
+        time = (EditText) findViewById(R.id.event_time);
+        date = (EditText) findViewById(R.id.event_date);
+        location = (EditText) findViewById(R.id.event_location);
+
+
     }
 
     public void sendPost(View view) {
@@ -31,8 +39,8 @@ public class PostingActivityView extends AppCompatActivity {
         try {
             JSONObject club = new JSONObject(curClub);
             String clubName = club.get("clubname").toString();
-            presenter.putPost(clubName, newPost.getText().toString());
-            Log.d("Club posting: " + clubName, "New post: " + newPost.getText().toString());
+            presenter.putPost(clubName, title.getText().toString());
+            Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
