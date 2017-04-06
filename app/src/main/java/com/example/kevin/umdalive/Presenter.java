@@ -139,8 +139,8 @@ public class Presenter {
         restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
     }
 
-    public void putPost(String club, String post){
-        restPut("putNewPost", PostingActivity.jsonRequest(club, post));
+    public void putPost(String club, String title, String time, String date, String location){
+        restPut("putNewPost", PostingActivity.jsonRequest(club, title, time, date, location));
     }
 
     /**
