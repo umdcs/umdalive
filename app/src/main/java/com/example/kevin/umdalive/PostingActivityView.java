@@ -34,6 +34,8 @@ public class PostingActivityView extends AppCompatActivity {
 
     public void sendPost(View view) {
         String curClub = presenter.restGet("getClub", "");
+
+        // temps to keep .putPost() call clean looking - Ryan
         String tempTitle = title.getText().toString();
         String tempTime = time.getText().toString();
         String tempDate = date.getText().toString();
@@ -43,7 +45,7 @@ public class PostingActivityView extends AppCompatActivity {
             JSONObject club = new JSONObject(curClub);
             String clubName = club.get("clubname").toString();
             presenter.putPost(clubName, tempTitle, tempTime, tempDate, tempLocation);
-            Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
+            Log.d("Club posting: " + clubName, "New post: " + title.getText().toString()); // forgot to alter this - Ryan
         } catch (JSONException e) {
             e.printStackTrace();
         }

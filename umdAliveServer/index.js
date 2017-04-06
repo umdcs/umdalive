@@ -94,7 +94,7 @@ var users = {
     items: []
 };
 var mostRecentPosts = {
-    items: []
+    items: [] // thinking we should add a variable for each (event title, time, date, and location - Ryan
 };
 
 var countUsers = 0;
@@ -156,9 +156,11 @@ app.put('/newPost', function (req, res) {
         postToDisplay: req.body.postToDisplay
     };
     // Adds dataObject items to array
+    // this would have to be altered to handle new parameters event title, time, date, and location. - Ryan
     countPosts = mostRecentPosts.items.push(req.body.clubToPost + ": " + req.body.postToDisplay);
 
     //print post to server for testing
+    // alter this too - Ryan
     console.log(req.body.clubToPost);
     console.log(req.body.postToDisplay);
     var jsonResponse = {
