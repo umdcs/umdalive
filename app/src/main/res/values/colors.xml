@@ -3,9 +3,11 @@
     <color name="colorPrimary">#ffd700</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#962f2a</color>
-    <color name="cardColor">#e6ddbc</color>
     <color name="textColorPrimary">#ead84c</color>
     <color name="black">#000 </color>
     <color name="white">#ffffff </color>
+    <color name="cardTitleBar">#32262525</color>
     <color name="moreInfoButton">#525252</color>
+    <color name="cardColor">#e6ddbc</color>
+    <color name="cardText">#822626</color>
 </resources>
