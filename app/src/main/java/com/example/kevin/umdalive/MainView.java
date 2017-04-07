@@ -198,7 +198,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView.setLayoutManager(layoutManager);
         RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
         recyclerView.setAdapter(adapter);
-        recyclerView.setBackgroundColor(0xFF962f2a);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

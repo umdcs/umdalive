@@ -1,8 +1,5 @@
 package com.example.kevin.umdalive;
 
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity {
 
@@ -73,7 +69,6 @@ public class MainActivity {
 
 class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<String> postData;
-    private static View rootView;
 
     public PostAdapter(ArrayList<String> postData) {
         this.postData = postData;
