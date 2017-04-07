@@ -1,9 +1,13 @@
 package com.example.kevin.umdalive;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -69,6 +73,7 @@ public class MainActivity {
 
 class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<String> postData;
+    private static View rootView;
 
     public PostAdapter(ArrayList<String> postData) {
         this.postData = postData;
@@ -94,13 +99,13 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView titleText = (TextView) holder.cardView.findViewById(R.id.post_title_text);
         titleText.setTextSize(20);
         titleText.setText(postData.get(position));
-        Log.d("SET TEXTVIEW: ", postData.get(position) + " at position " + Integer.toString(position));
     }
 
     @Override
     public int getItemCount() {
         return postData.size();
     }
+
 }
 
 

@@ -10,15 +10,25 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kevin.umdalive.MainActivity"
+    tools:context="com.example.kevin.umdalive.MainView"
     tools:showIn="@layout/app_bar_main"
     android:background="@color/colorAccent">
 
-    <EditText
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainPosts"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textMultiLine"
+        android:layout_above="@+id/make_a_club"
+        android:layout_below="@+id/refresh_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Most Recent Posts"
-        android:editable="false"
+        android:text="@string/most_recent_posts"
         android:inputType="textMultiLine"
         android:gravity="top"
         android:ems="10"
@@ -55,23 +65,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="refreshPosts" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/mainPosts"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:inputType="textMultiLine"
-        android:layout_above="@+id/make_a_club"
-        android:layout_below="@+id/refresh_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@color/colorPrimary"
-
-        />
-
-
+        android:onClick="refreshPosts"/>
 </RelativeLayout>
