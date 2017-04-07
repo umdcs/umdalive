@@ -54,15 +54,15 @@
         android:id="@+id/event_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:hint="Enter Date of Event Here"
-        android:ems="10"
-        android:inputType="date"
-        android:layout_below="@+id/event_time"
         android:layout_alignLeft="@+id/event_location"
-        android:layout_alignStart="@+id/event_location"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignStart="@+id/event_location"
+        android:layout_below="@+id/event_time"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:hint="Enter Date of Event Here"
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/event_location"

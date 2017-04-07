@@ -1,8 +1,13 @@
 package com.example.kevin.umdalive;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -53,11 +58,10 @@ public class MainActivity {
             JSONArray jsonArray = object.getJSONArray("items");
             if (jsonArray != null) {
                 int len = jsonArray.length();
-                for (int i = 0; i < len; i++) {
+                for (int i = len - 1; i >= 0; i--) {
                     list.add(jsonArray.get(i).toString());
                     Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
                 }
-                Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -69,37 +73,39 @@ public class MainActivity {
 
 class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<String> postData;
+    private static View rootView;
 
     public PostAdapter(ArrayList<String> postData) {
         this.postData = postData;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public ViewHolder(TextView tView) {
-            super(tView);
-            textView = tView;
+        public CardView cardView;
+        public ViewHolder(CardView cView) {
+            super(cView);
+            cardView = cView;
         }
     }
 
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView tView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.text_view, parent, false);
-        tView.setTextSize(15);
-        ViewHolder viewHolder = new ViewHolder(tView);
+        CardView cView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false);
+        ViewHolder viewHolder = new ViewHolder(cView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(postData.get(position));
-        Log.d("SET TEXTVIEW: ", postData.get(position) + " at position " + Integer.toString(position));
+        TextView titleText = (TextView) holder.cardView.findViewById(R.id.post_title_text);
+        titleText.setTextSize(20);
+        titleText.setText(postData.get(position));
     }
 
     @Override
     public int getItemCount() {
         return postData.size();
     }
+
 }
 
 
