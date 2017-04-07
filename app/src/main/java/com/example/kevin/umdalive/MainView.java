@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.util.Log;
+import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     Presenter presenter;
     private static UserInformationModel thisUser;
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
     private ArrayList<String> posts;
 
     @Override

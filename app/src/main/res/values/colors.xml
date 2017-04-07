@@ -6,8 +6,9 @@
     <color name="textColorPrimary">#ead84c</color>
     <color name="black">#000 </color>
     <color name="white">#ffffff </color>
-    <color name="cardTitleBar">#32262525</color>
-    <color name="moreInfoButton">#525252</color>
-    <color name="cardColor">#e6ddbc</color>
-    <color name="cardText">#822626</color>
+    <color name="machineryTransparent">#32262525</color>
+    <color name="machinery">#262525</color>
+    <color name="bearGrey">#525252</color>
+    <color name="oatmeal">#e6ddbc</color>
+    <color name="darkMaroon">#822626</color>
 </resources>
