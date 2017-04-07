@@ -11,8 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.kevin.umdalive.MainView"
-    tools:showIn="@layout/app_bar_main"
-    android:background="@color/colorAccent">
+    tools:showIn="@layout/app_bar_main">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mainPosts"
@@ -23,7 +22,8 @@
         android:layout_above="@+id/make_a_club"
         android:layout_below="@+id/refresh_button"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@color/colorAccent"/>
 
     <TextView
         android:layout_width="wrap_content"
