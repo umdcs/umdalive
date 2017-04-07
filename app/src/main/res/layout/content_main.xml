@@ -23,7 +23,7 @@
         android:layout_below="@+id/refresh_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent" />
 
     <TextView
         android:layout_width="wrap_content"
