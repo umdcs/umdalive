@@ -14,7 +14,7 @@ import org.json.JSONObject;
 public class PostingActivityView extends AppCompatActivity {
 
 
-    Presenter presenter;
+    private Presenter presenter;
     private String postToDisplay;
     private static String clubToPost;
     private EditText title;
