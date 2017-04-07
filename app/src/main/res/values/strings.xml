@@ -44,9 +44,5 @@
     <string name="action_settings">Settings</string>
     <string name="refresh_settings">Refresh User Data </string>
     <string name="version"> 0.5.2b</string>
-<<<<<<< HEAD
-    <string name="pick_time">pick time</string>
-=======
-    <string name="most_recent_posts">Most Recent Posts</string>
->>>>>>> aa3f56134efcc7786d3a7947e76a143c80f73d3d
-</resources>
+   <string name="most_recent_posts">Most Recent Posts</string>
+></resources>
