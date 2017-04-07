@@ -7,6 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ArrayList<String> posts;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +67,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     public void displayClub() {
         Intent intent = new Intent(this, DisplayClubView.class);
         startActivity(intent);
-    }
-
-
-    /**
-     * Refreshes the posts.
-     *
-     * @param view the button handles this
-     */
-    public void refreshPosts(View view) {
-        displayPosts();
     }
 
     /**
@@ -181,6 +173,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
         RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
         recyclerView.swapAdapter(adapter, true);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private void setPosts(){
@@ -199,6 +192,15 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView.setLayoutManager(layoutManager);
         RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
         recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                displayPosts();
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
