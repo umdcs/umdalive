@@ -1,5 +1,6 @@
 package com.example.kevin.umdalive;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,24 +75,25 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textView;
-        public ViewHolder(TextView tView) {
-            super(tView);
-            textView = tView;
+        public CardView cardView;
+        public ViewHolder(CardView cView) {
+            super(cView);
+            cardView = cView;
         }
     }
 
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView tView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.text_view, parent, false);
-        tView.setTextSize(15);
-        ViewHolder viewHolder = new ViewHolder(tView);
+        CardView cView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false);
+        ViewHolder viewHolder = new ViewHolder(cView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(postData.get(position));
+        TextView titleText = (TextView) holder.cardView.findViewById(R.id.post_title_text);
+        titleText.setTextSize(20);
+        titleText.setText(postData.get(position));
         Log.d("SET TEXTVIEW: ", postData.get(position) + " at position " + Integer.toString(position));
     }
 
