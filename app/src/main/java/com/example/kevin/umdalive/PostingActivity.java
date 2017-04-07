@@ -7,11 +7,13 @@ import org.json.JSONObject;
 
 public class PostingActivity{
 
-    public static String jsonRequest(String club, String title, String time, String date, String location){
+    public static String jsonRequest(String club, String title, String time, String date, String location, String addInfo){
         JSONObject jsonParam = null;
 
-        String post = title + time + date + location; // this will smush the words together but its just a start - Ryan
+        // this will smush the words together but its just a start - Ryan
 
+        String post = "Title: " + title + " Time: " + time + " Date: " + date
+                + " Location: " + location + " Additional Info: " + addInfo;
         try {
             jsonParam = new JSONObject();
             jsonParam.put("clubToPost", club);

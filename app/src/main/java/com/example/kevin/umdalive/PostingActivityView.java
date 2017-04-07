@@ -14,13 +14,14 @@ import org.json.JSONObject;
 public class PostingActivityView extends AppCompatActivity {
 
 
-    Presenter presenter;
+    private Presenter presenter;
     private String postToDisplay;
     private static String clubToPost;
     private EditText title;
     private EditText location;
     private EditText time;
     private EditText date;
+    private EditText addInfo;
 
     protected void onCreate(Bundle savedInstanceState) {
         presenter = new Presenter(this);
@@ -30,6 +31,8 @@ public class PostingActivityView extends AppCompatActivity {
         time = (EditText) findViewById(R.id.event_time);
         date = (EditText) findViewById(R.id.event_date);
         location = (EditText) findViewById(R.id.event_location);
+        addInfo = (EditText) findViewById(R.id.additional_info);
+
     }
 
     public void sendPost(View view) {
@@ -40,11 +43,12 @@ public class PostingActivityView extends AppCompatActivity {
         String tempTime = time.getText().toString();
         String tempDate = date.getText().toString();
         String tempLocation = location.getText().toString();
+        String tempAddInfo = addInfo.getText().toString();
 
         try {
             JSONObject club = new JSONObject(curClub);
             String clubName = club.get("clubname").toString();
-            presenter.putPost(clubName, tempTitle, tempTime, tempDate, tempLocation);
+            presenter.putPost(clubName, tempTitle, tempTime, tempDate, tempLocation, tempAddInfo);
             Log.d("Club posting: " + clubName, "New post: " + title.getText().toString()); // forgot to alter this - Ryan
         } catch (JSONException e) {
             e.printStackTrace();
