@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,6 +25,7 @@ import android.util.Log;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -235,7 +237,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
 
         PopupWindow popupWindow = new PopupWindow(popupView,
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
         // Example: If you have a TextView inside `popup_layout.xml`
         TextView tv = (TextView) popupView.findViewById(R.id.tv);
@@ -248,15 +250,15 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         popupWindow.setFocusable(true);
 
         // If you need the PopupWindow to dismiss when when touched outside
-        popupWindow.setBackgroundDrawable(new ColorDrawable());
+       // popupWindow.setBackgroundDrawable(new ColorDrawable());
 
-        int location[] = new int[2];
+//        int location[] = new int[2];
 
         // Get the View's(the one that was clicked in the Fragment) location
-        anchorView.getLocationOnScreen(location);
+//        anchorView.getLocationOnScreen(location);
 
         // Using location, the PopupWindow will be displayed right under anchorView
-        popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);// + anchorView.getHeight());
+        popupWindow.showAtLocation(anchorView, Gravity.CLIP_HORIZONTAL, 0, 0);// + anchorView.getHeight());
 
     }
 
