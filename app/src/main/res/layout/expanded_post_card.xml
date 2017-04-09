@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="255dp"
-    android:elevation="0dp"
-    android:animateLayoutChanges="true">
+    android:layout_height="395dp"
+    android:id="@+id/expanded_card_view"
+    android:elevation="0dp">
 
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
         android:layout_gravity="top"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="390dp"
         card_view:cardCornerRadius="8dp"
         card_view:cardBackgroundColor="@color/oatmeal">
 
@@ -79,14 +78,24 @@
             android:layout_height="wrap_content"
             android:textColor="@color/darkMaroon" />
 
+        <TextView
+            android:layout_marginTop="246dp"
+            android:layout_marginLeft="7dp"
+            android:text="Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. "
+            android:textSize="15dp"
+            android:id="@+id/description_content"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black" />
+
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="270dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="350dp"
             android:background="@null"
-            android:text="Show More"
+            android:text="Show Less"
             android:textColor="@color/bearGrey"
             android:onClick="getMoreInfo" />
 
@@ -96,8 +105,7 @@
     <View
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="255dp"
+        android:layout_height="395dp"
         android:background="@color/colorAccent"/>
 
 </android.support.v7.widget.CardView>
-

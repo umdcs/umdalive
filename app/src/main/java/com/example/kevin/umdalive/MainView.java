@@ -1,30 +1,23 @@
 package com.example.kevin.umdalive;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.util.Log;
-import android.support.v7.widget.RecyclerView.ItemDecoration;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -177,7 +170,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
     private void displayPosts(){
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
-        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
+        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts, recyclerView);
         recyclerView.swapAdapter(adapter, true);
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -196,7 +189,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         setUser();
         recyclerView = (RecyclerView) findViewById(R.id.mainPosts);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts);
+        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts, recyclerView);
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);

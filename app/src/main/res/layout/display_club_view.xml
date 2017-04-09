@@ -18,7 +18,7 @@
         android:gravity="center_horizontal"
         android:maxLines="2"
         android:paddingBottom="10dp"
-        android:text="gfadsgaSfsd"
+        android:text="Club Name"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary" />
 

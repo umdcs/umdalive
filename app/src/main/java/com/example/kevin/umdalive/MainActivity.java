@@ -1,7 +1,10 @@
 package com.example.kevin.umdalive;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,15 +72,20 @@ public class MainActivity {
 
 class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<String> postData;
+    private RecyclerView recyclerView;
+    int expandedPosition = -1;
 
-    public PostAdapter(ArrayList<String> postData) {
+    public PostAdapter(ArrayList<String> postData, RecyclerView recyclerView) {
         this.postData = postData;
+        this.recyclerView = recyclerView;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
-        public ViewHolder(CardView cView) {
+        CardView expandedView;
+        public ViewHolder(CardView cView, CardView eView) {
             super(cView);
+            expandedView = eView;
             cardView = cView;
         }
     }
@@ -85,15 +93,30 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CardView cView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false);
-        ViewHolder viewHolder = new ViewHolder(cView);
+        CardView eView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.expanded_post_card, parent, false);
+        ViewHolder viewHolder = new ViewHolder(cView, eView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         TextView titleText = (TextView) holder.cardView.findViewById(R.id.post_title_text);
         titleText.setTextSize(20);
         titleText.setText(postData.get(position));
+
+        final boolean isExpanded = position== expandedPosition;
+        holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        holder.itemView.setActivated(isExpanded);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                expandedPosition = isExpanded ? -1 : position;
+                TransitionManager.beginDelayedTransition(recyclerView);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

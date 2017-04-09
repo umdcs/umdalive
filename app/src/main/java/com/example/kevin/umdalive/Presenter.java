@@ -1,6 +1,8 @@
 package com.example.kevin.umdalive;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -169,8 +171,8 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
-    public PostAdapter getPostAdapter(ArrayList<String> posts){
-        return new PostAdapter(posts);
+    public PostAdapter getPostAdapter(ArrayList<String> posts, RecyclerView rView){
+        return new PostAdapter(posts, rView);
     }
     }
 
