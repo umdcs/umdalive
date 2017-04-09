@@ -141,7 +141,7 @@ public class Presenter {
     }
 
     public void putPost(String club, String title, String time, String date, String location, String addInfo){
-        restPut("putNewPost", PostingActivity.jsonRequest(club, title, time, date, location, addInfo));
+        restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
     }
 
     /**

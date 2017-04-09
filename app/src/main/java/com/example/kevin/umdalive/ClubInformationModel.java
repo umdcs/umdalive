@@ -18,7 +18,6 @@ public class ClubInformationModel {
     private String userName;
     private String keyWords;
     private String description;
-    private String post;
 
     //private Object keywordItem = new Object(); //this item grabs from user WTF is this?
 
@@ -43,7 +42,7 @@ public class ClubInformationModel {
      * constructor
      *
      * @param clubName name of club
-     * @param userName usre creating club
+     * @param userName user creating club
      * @param keyWords keywords to id club
      * @param description of club
      */
