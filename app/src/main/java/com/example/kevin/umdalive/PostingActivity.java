@@ -7,24 +7,29 @@ import org.json.JSONObject;
 
 public class PostingActivity{
 
-    public static String jsonRequest(String club, String title, String time, String date, String location, String addInfo){
-        JSONObject jsonParam = null;
-
-        // this will smush the words together but its just a start - Ryan
-
-        String post = "Title: " + title + " Time: " + time + " Date: " + date
-                + " Location: " + location + " Additional Info: " + addInfo;
+    /**
+     * Function to create a JSON object of a club
+     * JSON object is then made into a string and returned
+     *
+     * @return jsonString string form of JSON object Club
+     */
+    public String jsonStringify(String club, String title, String time, String date, String location, String addInfo) {
+        JSONObject jsonString = null;
         try {
-            jsonParam = new JSONObject();
-            jsonParam.put("clubToPost", club);
-            jsonParam.put("postToDisplay", post);
-            // would like to see .put for each parameter instead of the smushed post - Ryan
+            jsonString = new JSONObject();
+            jsonString.put("clubname", club);
+            jsonString.put("title", title);
+            jsonString.put("time", time);
+            jsonString.put("date", date);
+            jsonString.put("location", location);
+            jsonString.put("description", addInfo);
+            //jsonString.put("post", post);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String jsonString = jsonParam.toString();
-        Log.d("DEBUG [PUT]:", jsonString);
-        return jsonString;
+        Log.d("DEBUG:", jsonString.toString());
+
+        return jsonString.toString();
     }
 
 }

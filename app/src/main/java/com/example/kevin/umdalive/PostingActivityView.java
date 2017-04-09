@@ -38,17 +38,11 @@ public class PostingActivityView extends AppCompatActivity {
     public void sendPost(View view) {
         String curClub = presenter.restGet("getClub", "");
 
-        // temps to keep .putPost() call clean looking - Ryan
-        String tempTitle = title.getText().toString();
-        String tempTime = time.getText().toString();
-        String tempDate = date.getText().toString();
-        String tempLocation = location.getText().toString();
-        String tempAddInfo = addInfo.getText().toString();
-
         try {
             JSONObject club = new JSONObject(curClub);
             String clubName = club.get("clubname").toString();
-            presenter.putPost(clubName, tempTitle, tempTime, tempDate, tempLocation, tempAddInfo);
+            presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
+                    , location.getText().toString(), addInfo.getText().toString());
             Log.d("Club posting: " + clubName, "New post: " + title.getText().toString()); // forgot to alter this - Ryan
         } catch (JSONException e) {
             e.printStackTrace();
