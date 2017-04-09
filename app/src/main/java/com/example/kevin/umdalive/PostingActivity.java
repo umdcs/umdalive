@@ -17,13 +17,12 @@ public class PostingActivity{
         JSONObject jsonString = null;
         try {
             jsonString = new JSONObject();
-            jsonString.put("clubname", club);
+            jsonString.put("clubName", club);
             jsonString.put("title", title);
             jsonString.put("time", time);
             jsonString.put("date", date);
             jsonString.put("location", location);
             jsonString.put("description", addInfo);
-            //jsonString.put("post", post);
         } catch (JSONException e) {
             e.printStackTrace();
         }
