@@ -123,13 +123,13 @@ app.put('/newClub', function (req, res) {
         username: req.body.username,
         keywords: req.body.keywords,
         description: req.body.description,
-        post: req.body.post
+        //post: req.body.post
     };
 
 
     // Adds dataObject items to array
     countClubs = clubs.items.push(dataObject);
-    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
+//    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
 
     //print post to server for testing
     console.log(req.body.post);
@@ -142,7 +142,7 @@ app.put('/newClub', function (req, res) {
     console.log("Name of username/admin : " + req.body.username);
     console.log("Name of keyword/catagory : " + req.body.keywords);
     console.log("Name of description : " + req.body.description);
-    console.log("Name of new post : " + req.body.post);
+  //  console.log("Name of new post : " + req.body.post);
     console.log("total items in array : " + countClubs);
     console.log("total posts saved on server: " + countPosts);
 });

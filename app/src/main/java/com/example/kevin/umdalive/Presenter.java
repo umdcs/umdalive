@@ -86,11 +86,10 @@ public class Presenter {
      * @param userName name of admin
      * @param keyWords tags
      * @param description description of club
-     * @param initialPost first post
      * @return string version of the JSON package.
      */
-    public String makeClub(String clubName, String userName, String keyWords, String description, String initialPost){
-        return CreateClub.makeClub(clubName, userName, keyWords, description, initialPost);
+    public String makeClub(String clubName, String userName, String keyWords, String description){
+        return CreateClub.makeClub(clubName, userName, keyWords, description);//, initialPost);
     }
 
     /**
