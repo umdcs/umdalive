@@ -1,6 +1,9 @@
 package com.example.kevin.umdalive;
 
 import android.app.Activity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Presenter {
+private LoginActivity log;
     private Activity activity;
     private RestModel restModel;
     private AllClubs allClubs;
@@ -178,6 +182,15 @@ public class Presenter {
         //get info from server of all posts made by one club
         //send to view a list of all posts.
     }
+
+    public void googleSignIn(){
+        log.initializeButtons();
+log.GoogleSignInitializer();
+
+
+
+    }
+
 
 
     }
