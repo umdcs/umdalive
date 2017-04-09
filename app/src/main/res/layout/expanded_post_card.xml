@@ -2,12 +2,12 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="395dp"
-    android:id="@+id/expanded_card_view"
     android:elevation="0dp">
 
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="390dp"
