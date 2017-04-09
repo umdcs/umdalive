@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -82,10 +84,13 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
-        CardView expandedView;
-        public ViewHolder(CardView cView, CardView eView) {
+        LinearLayout expandedView;
+        Button expandButton;
+
+        public ViewHolder(CardView cView) {
             super(cView);
-            expandedView = eView;
+            expandedView = (LinearLayout) itemView.findViewById(R.id.extended_view);
+            expandButton = (Button) itemView.findViewById(R.id.card_button);
             cardView = cView;
         }
     }
@@ -93,8 +98,7 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         CardView cView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false);
-        CardView eView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.expanded_post_card, parent, false);
-        ViewHolder viewHolder = new ViewHolder(cView, eView);
+        ViewHolder viewHolder = new ViewHolder(cView);
         return viewHolder;
     }
 
@@ -106,6 +110,7 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         final boolean isExpanded = position== expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        holder.expandButton.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
         holder.itemView.setActivated(isExpanded);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
