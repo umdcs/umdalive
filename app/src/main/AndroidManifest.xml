@@ -22,7 +22,7 @@ package="com.example.kevin.umdalive">
     </activity>
     <activity android:name=".CreateClubView">
 
-    </activity>
+    </activity>  
     <activity android:name=".AllClubsView">
     </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
