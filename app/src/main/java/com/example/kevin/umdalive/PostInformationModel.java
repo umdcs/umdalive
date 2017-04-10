@@ -17,9 +17,8 @@ public class PostInformationModel {
     private String location;
     private String description;
 
-    public PostInformationModel(String jsonData){
+    public PostInformationModel(JSONObject postInfo){
         try {
-            JSONObject postInfo = new JSONObject(jsonData);
             club = postInfo.get("club").toString();
             title = postInfo.get("title").toString();
             time = postInfo.get("time").toString();

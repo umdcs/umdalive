@@ -51,17 +51,16 @@ public class MainActivity {
         }
     }
 
-    public static ArrayList<String> refreshPosts(String jsonString) {
-        ArrayList<String> list = new ArrayList<>();
-        //converting Json string to ArrayList
+    public static ArrayList<PostInformationModel> refreshPosts(String jsonString) {
+        ArrayList<PostInformationModel> list = new ArrayList<>();
         try {
-            JSONObject object = new JSONObject(jsonString);
-            JSONArray jsonArray = object.getJSONArray("items");
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray("items");
             if (jsonArray != null) {
                 int len = jsonArray.length();
                 for (int i = len - 1; i >= 0; i--) {
-                    list.add(jsonArray.get(i).toString());
-                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                    JSONObject currentJSON = jsonArray.getJSONObject(i);
+                    list.add(new PostInformationModel(currentJSON));
                 }
             }
         } catch (JSONException e) {
@@ -73,11 +72,11 @@ public class MainActivity {
 }
 
 class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-    private ArrayList<String> postData;
+    private ArrayList<PostInformationModel> postData;
     private RecyclerView recyclerView;
     int expandedPosition = -1;
 
-    public PostAdapter(ArrayList<String> postData, RecyclerView recyclerView) {
+    public PostAdapter(ArrayList<PostInformationModel> postData, RecyclerView recyclerView) {
         this.postData = postData;
         this.recyclerView = recyclerView;
     }
@@ -104,9 +103,20 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        PostInformationModel curPost = postData.get(position);
         TextView titleText = (TextView) holder.cardView.findViewById(R.id.post_title_text);
-        titleText.setTextSize(20);
-        titleText.setText(postData.get(position));
+        TextView clubName = (TextView) holder.cardView.findViewById(R.id.post_club_name);
+        TextView eventDate = (TextView) holder.cardView.findViewById(R.id.post_date);
+        TextView eventTime = (TextView) holder.cardView.findViewById(R.id.post_time);
+        TextView eventLocation = (TextView) holder.cardView.findViewById(R.id.post_location);
+        TextView description = (TextView) holder.cardView.findViewById(R.id.description_content);
+
+        titleText.setText(curPost.getTitle());
+        clubName.setText(curPost.getClub());
+        eventDate.setText(curPost.getDate());
+        eventTime.setText(curPost.getTime());
+        eventLocation.setText(curPost.getLocation());
+        description.setText(curPost.getDescription());
 
         final boolean isExpanded = position== expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);

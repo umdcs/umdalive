@@ -94,7 +94,7 @@ var users = {
     items: []
 };
 var mostRecentPosts = {
-    items: [] // thinking we should add a variable for each (event title, time, date, and location - Ryan
+    items: []
 };
 
 var countUsers = 0;
@@ -152,17 +152,18 @@ app.put('/newPost', function (req, res) {
     if (!req.body) return res.sendStatus(400);
 
     var dataObject = {
-        clubToPost: req.body.clubToPost,
-        postToDisplay: req.body.postToDisplay
+        club: req.body.clubName,
+        title: req.body.title,
+        time: req.body.time,
+        date: req.body.date,
+        location: req.body.location,
+        description: req.body.description
     };
     // Adds dataObject items to array
     // this would have to be altered to handle new parameters event title, time, date, and location. - Ryan
-    countPosts = mostRecentPosts.items.push(req.body.clubToPost + ": " + req.body.postToDisplay);
-
-    //print post to server for testing
-    // alter this too - Ryan
-    console.log(req.body.clubToPost);
-    console.log(req.body.postToDisplay);
+    countPosts = mostRecentPosts.items.push(dataObject);
+    console.log(req.body.club);
+    console.log(req.body.title);
     var jsonResponse = {
         id: '123', status: 'updated'
     };

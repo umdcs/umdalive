@@ -27,7 +27,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     private static UserInformationModel thisUser;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    private ArrayList<String> posts;
+    private ArrayList<PostInformationModel> posts;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -174,7 +174,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
     private void setPosts(){
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
-        thisUser.setLocalPosts(posts);
+        //thisUser.setLocalPosts(posts);
+        //commented out because not needed at this point.
     }
 
 

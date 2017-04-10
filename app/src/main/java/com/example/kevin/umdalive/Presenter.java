@@ -108,7 +108,7 @@ public class Presenter {
      * @param jsonString
      * @return
      */
-    public ArrayList<String> refreshPosts(String jsonString) {
+    public ArrayList<PostInformationModel> refreshPosts(String jsonString) {
         return MainActivity.refreshPosts(jsonString);
     }
 
@@ -171,7 +171,7 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
-    public PostAdapter getPostAdapter(ArrayList<String> posts, RecyclerView rView){
+    public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
         return new PostAdapter(posts, rView);
     }
     }
