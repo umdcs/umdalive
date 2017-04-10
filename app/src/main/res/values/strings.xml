@@ -10,12 +10,13 @@
     <string-array name="keyword_list">
         <item name="academic">Academic</item>
         <item name="athletic">Athletic</item>
-        <item name="intermurals">Intermurals</item>
+        <item name="intramurals">Intramurals</item>
         <item name="fitness">Fitness</item>
         <item name="food">Food</item>
         <item name="religious">Religious</item>
         <item name="movies">Movies</item>
         <item name="video_games">VideoGames</item>
+        <item name="free">free</item>
       </string-array>
 
     <string-array name="graduation_date">
@@ -32,7 +33,7 @@
         <item name="computer_science">Computer Science</item>
         <item name="finance">Finance</item>
         <item name="chemistry">Chemistry</item>
-        <item name="mathmatics">Mathmatics</item>
+        <item name="mathematics">Mathematics</item>
         <item name="english">English</item>
         <item name="history">History</item>
     </string-array>
@@ -42,4 +43,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="refresh_settings">Refresh User Data </string>
-</resources>
+    <string name="version_number"> Version 0.5.2b </string>
+   <string name="most_recent_posts">Most Recent Posts</string>
+    <string name="login">Login</string>
+    ></resources>

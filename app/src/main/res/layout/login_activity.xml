@@ -113,7 +113,7 @@
         android:layout_marginBottom="7dp" />
 
     <Button
-        android:text="Login"
+        android:text="@string/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login_button"
@@ -126,4 +126,16 @@
         android:layout_marginEnd="21dp"
         android:background="@color/colorPrimary"
         android:onClick="login" />
+
+    <TextView
+        android:id="@+id/version"
+        android:text="@string/version_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/make_account"
+        android:layout_alignLeft="@+id/password_input"
+        android:layout_alignStart="@+id/password_input"
+        android:textColor="@color/oatmeal"
+        android:textSize="14sp"/>
+
 </RelativeLayout>

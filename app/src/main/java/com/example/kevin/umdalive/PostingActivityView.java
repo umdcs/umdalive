@@ -14,25 +14,36 @@ import org.json.JSONObject;
 public class PostingActivityView extends AppCompatActivity {
 
 
-    Presenter presenter;
+    private Presenter presenter;
     private String postToDisplay;
     private static String clubToPost;
-    private EditText newPost;
+    private EditText title;
+    private EditText location;
+    private EditText time;
+    private EditText date;
+    private EditText addInfo;
 
     protected void onCreate(Bundle savedInstanceState) {
         presenter = new Presenter(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
-        newPost = (EditText) findViewById(R.id.post_entry_box);
+        title = (EditText) findViewById(R.id.event_title);
+        time = (EditText) findViewById(R.id.event_time);
+        date = (EditText) findViewById(R.id.event_date);
+        location = (EditText) findViewById(R.id.event_location);
+        addInfo = (EditText) findViewById(R.id.additional_info);
+
     }
 
     public void sendPost(View view) {
         String curClub = presenter.restGet("getClub", "");
+
         try {
             JSONObject club = new JSONObject(curClub);
             String clubName = club.get("clubname").toString();
-            presenter.putPost(clubName, newPost.getText().toString());
-            Log.d("Club posting: " + clubName, "New post: " + newPost.getText().toString());
+            presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
+                    , location.getText().toString(), addInfo.getText().toString());
+            Log.d("Club posting: " + clubName, "New post: " + title.getText().toString()); // forgot to alter this - Ryan
         } catch (JSONException e) {
             e.printStackTrace();
         }

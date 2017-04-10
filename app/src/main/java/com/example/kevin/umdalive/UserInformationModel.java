@@ -78,12 +78,12 @@ public class UserInformationModel extends AppCompatActivity {
        Removes all current posts and then replaces objects in arraylist temp
        and addes them to local array list
    */
-    public void setLocalPosts(ArrayList<String> temp_posts_subscribed)
+    public void setLocalPosts(ArrayList<String> tempPostsSubscribed)
     {
         while(localPostsSubscribed.size() !=0){
             localPostsSubscribed.remove(0);
         }
-        for(String x : temp_posts_subscribed)
+        for(String x : tempPostsSubscribed)
         {
             localPostsSubscribed.add(x);
         }

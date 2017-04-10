@@ -1,6 +1,8 @@
 package com.example.kevin.umdalive;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -86,11 +88,10 @@ public class Presenter {
      * @param userName name of admin
      * @param keyWords tags
      * @param description description of club
-     * @param initialPost first post
      * @return string version of the JSON package.
      */
-    public String makeClub(String clubName, String userName, String keyWords, String description, String initialPost){
-        return CreateClub.makeClub(clubName, userName, keyWords, description, initialPost);
+    public String makeClub(String clubName, String userName, String keyWords, String description){
+        return CreateClub.makeClub(clubName, userName, keyWords, description);//, initialPost);
     }
 
     /**
@@ -107,17 +108,8 @@ public class Presenter {
      * @param jsonString
      * @return
      */
-    public ArrayList<String> refreshPosts(String jsonString) {
+    public ArrayList<PostInformationModel> refreshPosts(String jsonString) {
         return MainActivity.refreshPosts(jsonString);
-    }
-
-    /**
-     * For MainActivity
-     * @param posts
-     * @return
-     */
-    public String displayPosts(ArrayList<String> posts){
-        return MainActivity.displayPosts(posts);
     }
 
     /**
@@ -148,8 +140,8 @@ public class Presenter {
         restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
     }
 
-    public void putPost(String club, String post){
-        restPut("putNewPost", PostingActivity.jsonRequest(club, post));
+    public void putPost(String club, String title, String time, String date, String location, String addInfo){
+        restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
     }
 
     /**
@@ -179,7 +171,9 @@ public class Presenter {
         //send to view a list of all posts.
     }
 
-
+    public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
+        return new PostAdapter(posts, rView);
+    }
     }
 
 

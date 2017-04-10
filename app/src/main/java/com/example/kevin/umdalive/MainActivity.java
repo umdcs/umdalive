@@ -1,13 +1,23 @@
 package com.example.kevin.umdalive;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity {
 
@@ -41,19 +51,17 @@ public class MainActivity {
         }
     }
 
-    public static ArrayList<String> refreshPosts(String jsonString) {
-        ArrayList<String> list = new ArrayList<>();
-        //converting Json string to ArrayList
+    public static ArrayList<PostInformationModel> refreshPosts(String jsonString) {
+        ArrayList<PostInformationModel> list = new ArrayList<>();
         try {
-            JSONObject object = new JSONObject(jsonString);
-            JSONArray jsonArray = object.getJSONArray("items");
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray("items");
             if (jsonArray != null) {
                 int len = jsonArray.length();
-                for (int i = 0; i < len; i++) {
-                    list.add(jsonArray.get(i).toString());
-                    Log.d(jsonArray.get(i).toString(), jsonArray.get(i).toString());
+                for (int i = len - 1; i >= 0; i--) {
+                    JSONObject currentJSON = jsonArray.getJSONObject(i);
+                    list.add(new PostInformationModel(currentJSON));
                 }
-                Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -61,13 +69,77 @@ public class MainActivity {
         return list;
     }
 
-    public static String displayPosts(ArrayList<String> list) {
-        String displayPosts = "";
-        for (int i = 0; i < list.size(); i++) {
-            displayPosts += " \n" + list.get(i);
-        }
-        return displayPosts;
-    }
 }
+
+class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+    private ArrayList<PostInformationModel> postData;
+    private RecyclerView recyclerView;
+    int expandedPosition = -1;
+
+    public PostAdapter(ArrayList<PostInformationModel> postData, RecyclerView recyclerView) {
+        this.postData = postData;
+        this.recyclerView = recyclerView;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public CardView cardView;
+        LinearLayout expandedView;
+        Button expandButton;
+
+        public ViewHolder(CardView cView) {
+            super(cView);
+            expandedView = (LinearLayout) itemView.findViewById(R.id.extended_view);
+            expandButton = (Button) itemView.findViewById(R.id.card_button);
+            cardView = cView;
+        }
+    }
+
+    @Override
+    public PostAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        CardView cView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false);
+        ViewHolder viewHolder = new ViewHolder(cView);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        PostInformationModel curPost = postData.get(position);
+        TextView titleText = (TextView) holder.cardView.findViewById(R.id.post_title_text);
+        TextView clubName = (TextView) holder.cardView.findViewById(R.id.post_club_name);
+        TextView eventDate = (TextView) holder.cardView.findViewById(R.id.post_date);
+        TextView eventTime = (TextView) holder.cardView.findViewById(R.id.post_time);
+        TextView eventLocation = (TextView) holder.cardView.findViewById(R.id.post_location);
+        TextView description = (TextView) holder.cardView.findViewById(R.id.description_content);
+
+        titleText.setText(curPost.getTitle());
+        clubName.setText(curPost.getClub());
+        eventDate.setText(curPost.getDate());
+        eventTime.setText(curPost.getTime());
+        eventLocation.setText(curPost.getLocation());
+        description.setText(curPost.getDescription());
+
+        final boolean isExpanded = position== expandedPosition;
+        holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+        holder.expandButton.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+        holder.itemView.setActivated(isExpanded);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                expandedPosition = isExpanded ? -1 : position;
+                TransitionManager.beginDelayedTransition(recyclerView);
+                notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return postData.size();
+    }
+
+}
+
 
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:shadowRadius="1"
+    android:background="@color/oatmeal"
+    android:fadingEdge="horizontal|vertical"
+    android:fadingEdgeLength="15dp"
+    android:minHeight="275dp"
+    android:minWidth="325dp"
+    android:outlineProvider="background"
+    android:padding="5dp"
+    android:shadowColor="@color/black"
+    android:shadowDx="10"
+    android:shadowDy="10"
+    android:elevation="10dp">
+
+
+
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/darkMaroon"
+        android:textSize="20sp"/>
+
+</FrameLayout>
