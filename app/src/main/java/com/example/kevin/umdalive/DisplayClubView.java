@@ -10,18 +10,26 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.R.attr.description;
+
 /**
  * This class is supposed to display the club that is selected from all clubs but the previous group never did that so it's just
  * blank spaces.
  */
 public class DisplayClubView extends AppCompatActivity {
 
-    private static String clubName;
-    private static String description;
-    private static ArrayList<String> posts;
-    private static String administrator;
-    private static String keywords;
+
     private Presenter presenter;
+
+    private String clubName;
+    private String description;
+    private String keywords;
+    private String administrator;
+
+    private TextView clubNameSetText;
+    private TextView descriptionSetText;
+    private TextView keywordSetText;
+    private TextView administratorSetText;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +51,13 @@ public class DisplayClubView extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        TextView clubNameSetText = (TextView) findViewById(R.id.display_club_name);
-        TextView descriptionSetText = (TextView) findViewById(R.id.display_club_description);
-        TextView keywordSetText = (TextView) findViewById(R.id.display_clubs_keyword);
-        TextView administratorSetText = (TextView) findViewById(R.id.display_clubs_administator);
+        clubNameSetText = (TextView) findViewById(R.id.display_club_name);
+        descriptionSetText = (TextView) findViewById(R.id.display_club_description);
+        keywordSetText = (TextView) findViewById(R.id.display_clubs_keyword);
+        administratorSetText = (TextView) findViewById(R.id.display_clubs_administrator);
 
         clubNameSetText.setText(clubName);
+        clubNameSetText.setTextSize(45);
         descriptionSetText.setText(description);
         keywordSetText.setText(keywords);
         administratorSetText.setText(administrator);

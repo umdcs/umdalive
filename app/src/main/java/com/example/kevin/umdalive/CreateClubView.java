@@ -14,12 +14,7 @@ public class CreateClubView extends AppCompatActivity {
 
     private Object keywordItem = new Object();          //this item grabs from user
     Presenter presenter;
-    /*
-   onCreate method for CreateClub class
-   Contains a spinner that will display the categories for
-   the user to choose from to determine what category their
-   club fits into.
-    */
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new Presenter(this);
@@ -39,22 +34,16 @@ public class CreateClubView extends AppCompatActivity {
         });
     }
 
-
-    /*
-        onClick for make CreateClub button
-        current functionality: currently this takes in the user input
-        of administrator, description, post, keyword/catagory, and
-        sends them to server to be saved.
-         */
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainView.class);
 
         EditText newName = (EditText) findViewById(R.id.name_title_enter);
         EditText admin = (EditText) findViewById(R.id.admin_of_club);
         EditText description = (EditText) findViewById(R.id.description_of_club);
-        EditText newPost = (EditText) findViewById(R.id.post_of_club);
+        //EditText newPost = (EditText) findViewById(R.id.post_of_club);
 
-        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(), (String)keywordItem, description.getText().toString(), newPost.getText().toString());
+        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
+                (String)keywordItem, description.getText().toString());
 
         startActivity(intent);
         presenter.restPut("putNewClub", jsonString);

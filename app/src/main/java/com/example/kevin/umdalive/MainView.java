@@ -7,36 +7,44 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class MainView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Presenter presenter;
+    private Presenter presenter;
     private static UserInformationModel thisUser;
-    EditText posts;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private ArrayList<PostInformationModel> posts;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new Presenter(this);
         thisUser = new UserInformationModel();
-        setUser(); // calls server
+        layoutManager = new LinearLayoutManager(this);
         setContentView(R.layout.activity_main);
+        Log.d("DEBUG: ", "Setting up view");
         viewSetup();
     }
 
     /**
-     * starts display CreateClub Activity View
+     * starts display CreateClub Activity View //I think this should say display AllClubsView
      */
-    public void displayClubs() {
+    public void displayAllClubs() {
         Intent intent = new Intent(this, AllClubsView.class);
         startActivity(intent);
     }
@@ -50,16 +58,11 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     /**
-     * Refreshes the posts.
-     *
-     * @param view the button handles this
+     * starts DisplayClubView
      */
-    public void refreshPosts(View view) {
-        //make mostRecentPosts equal the results from mostRecentPostsGET() in RestModel
-        String mostRecentPosts = presenter.restGet("getRecentPosts", "");
-        ArrayList<String> recentPosts = presenter.refreshPosts(mostRecentPosts);
-        thisUser.setLocalPosts(recentPosts);
-        posts.setText(presenter.displayPosts(recentPosts));
+    public void displayClub() {
+        Intent intent = new Intent(this, DisplayClubView.class);
+        startActivity(intent);
     }
 
     /**
@@ -141,12 +144,16 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         int id = item.getItemId();
 
         if (id == R.id.allClubs) {
-            displayClubs();
+            displayAllClubs();
         } else if (id == R.id.Post) {
             displayClubsForPost();
         } else if (id == R.id.calendar) {
 
         } else if (id == R.id.tools) {
+
+        } else if (id == R.id.nav_club1) {
+            displayClub();
+        } else if (id == R.id.nav_club2) {
 
         } else if (id == R.id.nav_share) {
 
@@ -158,15 +165,42 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    private void displayPosts(){
+        posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
+        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts, recyclerView);
+        recyclerView.swapAdapter(adapter, true);
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    private void setPosts(){
+        posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
+        //thisUser.setLocalPosts(posts);
+        //commented out because not needed at this point.
+    }
+
+
     /**
      * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
      */
     private void viewSetup() {
+        setPosts();
+        setUser();
+        recyclerView = (RecyclerView) findViewById(R.id.mainPosts);
+        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView.Adapter adapter = presenter.getPostAdapter(posts, recyclerView);
+        recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                displayPosts();
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Understand this fab better
-        //I believe it says "Replace with your own action" because the last group copy/pasted this from the internet
-        //lololololololololololololllolololol
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,19 +210,49 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
-        //this is a sidebar thing check layout for better idea
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //commented out because it's deprecated. If it turns out we need it we'll figure it out later.
-        //drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        posts = (EditText) findViewById(R.id.mainPosts);
-        posts.setMaxLines(20);
     }
+
+//    public void getMoreInfo(View view) {
+//        showPopup(view);
+//    }
+//
+//
+//    public void showPopup(View anchorView) {
+//
+//        View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
+//
+//        PopupWindow popupWindow = new PopupWindow(popupView,
+//                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+//
+//        // Example: If you have a TextView inside `popup_layout.xml`
+//        TextView tv = (TextView) popupView.findViewById(R.id.tv);
+//
+//        tv.setText("Pop Up View With Additional Info");
+//
+//        // Initialize more widgets from `popup_layout.xml`
+//
+//        // If the PopupWindow should be focusable
+//        popupWindow.setFocusable(true);
+//
+//        // If you need the PopupWindow to dismiss when when touched outside
+//       // popupWindow.setBackgroundDrawable(new ColorDrawable());
+//
+////        int location[] = new int[2];
+//
+//        // Get the View's(the one that was clicked in the Fragment) location
+////        anchorView.getLocationOnScreen(location);
+//
+//        // Using location, the PopupWindow will be displayed right under anchorView
+//        popupWindow.showAtLocation(anchorView, Gravity.CLIP_HORIZONTAL, 0, 0);// + anchorView.getHeight());
+//
+//    }
+
 
     @Override
     public void onStart() {

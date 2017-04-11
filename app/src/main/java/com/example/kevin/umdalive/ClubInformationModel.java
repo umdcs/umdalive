@@ -18,18 +18,17 @@ public class ClubInformationModel {
     private String userName;
     private String keyWords;
     private String description;
-    private String post;
 
     //private Object keywordItem = new Object(); //this item grabs from user WTF is this?
 
-    /**
+    /*
      * constructor
      *
      * @param clubName name of club
      * @param userName usre creating club
      * @param keyWords keywords to id club
      * @param description of club
-     */
+
     public ClubInformationModel(String clubName, String userName, String keyWords, String description, String initialPost) {
         this.clubName = clubName;
         this.userName = userName;
@@ -37,6 +36,16 @@ public class ClubInformationModel {
         this.description = description;
         this.post = initialPost;
     }
+    */
+
+    /**
+     * constructor
+     *
+     * @param clubName name of club
+     * @param userName user creating club
+     * @param keyWords keywords to id club
+     * @param description of club
+     */
 
     public ClubInformationModel(String clubName, String userName, String keyWords, String description) {
         this.clubName = clubName;
@@ -123,19 +132,19 @@ public class ClubInformationModel {
      * setter for post
      *
      * @param post sets the new post for the club
-     */
     public void setPost(String post) {
         this.post = post;
     }
+     */
 
-    /**
+    /*
      * getter for post
      *
      * @return post
-     */
     public String getPost() {
         return post;
     }
+     */
 
     /**
      * Function to create a JSON object of a club
@@ -151,7 +160,7 @@ public class ClubInformationModel {
             jsonString.put("username", userName);
             jsonString.put("keywords", keyWords);
             jsonString.put("description", description);
-            jsonString.put("post", post);
+            //jsonString.put("post", post);
         } catch (JSONException e) {
             e.printStackTrace();
         }

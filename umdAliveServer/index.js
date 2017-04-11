@@ -123,13 +123,13 @@ app.put('/newClub', function (req, res) {
         username: req.body.username,
         keywords: req.body.keywords,
         description: req.body.description,
-        post: req.body.post
+        //post: req.body.post
     };
 
 
     // Adds dataObject items to array
     countClubs = clubs.items.push(dataObject);
-    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
+//    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
 
     //print post to server for testing
     console.log(req.body.post);
@@ -142,7 +142,7 @@ app.put('/newClub', function (req, res) {
     console.log("Name of username/admin : " + req.body.username);
     console.log("Name of keyword/catagory : " + req.body.keywords);
     console.log("Name of description : " + req.body.description);
-    console.log("Name of new post : " + req.body.post);
+  //  console.log("Name of new post : " + req.body.post);
     console.log("total items in array : " + countClubs);
     console.log("total posts saved on server: " + countPosts);
 });
@@ -152,15 +152,18 @@ app.put('/newPost', function (req, res) {
     if (!req.body) return res.sendStatus(400);
 
     var dataObject = {
-        clubToPost: req.body.clubToPost,
-        postToDisplay: req.body.postToDisplay
+        club: req.body.clubName,
+        title: req.body.title,
+        time: req.body.time,
+        date: req.body.date,
+        location: req.body.location,
+        description: req.body.description
     };
     // Adds dataObject items to array
-    countPosts = mostRecentPosts.items.push(req.body.clubToPost + ": " + req.body.postToDisplay);
-
-    //print post to server for testing
-    console.log(req.body.clubToPost);
-    console.log(req.body.postToDisplay);
+    // this would have to be altered to handle new parameters event title, time, date, and location. - Ryan
+    countPosts = mostRecentPosts.items.push(dataObject);
+    console.log(req.body.club);
+    console.log(req.body.title);
     var jsonResponse = {
         id: '123', status: 'updated'
     };

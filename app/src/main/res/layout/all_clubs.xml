@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent">
+
     <ListView
         android:id="@+id/list2"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:textColor="@color/colorPrimary">
-    </ListView>
+        android:textColor="@color/oatmeal" />
 
 </LinearLayout>
