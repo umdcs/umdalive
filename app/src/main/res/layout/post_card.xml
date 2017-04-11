@@ -96,9 +96,10 @@
 
             <TextView
                 android:id="@+id/description_content"
-                android:layout_width="365dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:layout_marginTop="246dp"
                 android:text="@string/here_is_the_description_of_the_event"
                 android:textColor="@color/black"
