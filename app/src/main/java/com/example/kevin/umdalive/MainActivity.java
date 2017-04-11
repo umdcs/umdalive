@@ -84,12 +84,12 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
         LinearLayout expandedView;
-        Button expandButton;
+        TextView expandText;
 
         public ViewHolder(CardView cView) {
             super(cView);
             expandedView = (LinearLayout) itemView.findViewById(R.id.extended_view);
-            expandButton = (Button) itemView.findViewById(R.id.card_button);
+            expandText = (TextView) itemView.findViewById(R.id.card_expand);
             cardView = cView;
         }
     }
@@ -120,7 +120,7 @@ class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         final boolean isExpanded = position== expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        holder.expandButton.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+        holder.expandText.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
         holder.itemView.setActivated(isExpanded);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

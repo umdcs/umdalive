@@ -31,7 +31,7 @@
             android:layout_marginTop="120dp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/white"
-            android:text="Title"
+            android:text="@string/title"
             android:textSize="20dp"
             android:id="@+id/post_title_text"
             android:layout_width="241dp"
@@ -43,7 +43,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="250dp"
             android:layout_marginTop="128dp"
-            android:text="Club Name"
+            android:text="@string/club_name"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="12dp" />
@@ -54,14 +54,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="165dp"
-            android:text="Date"
+            android:text="@string/date"
             android:textSize="15dp"
             android:textColor="@color/darkMaroon"/>
 
         <TextView
             android:layout_marginTop="191dp"
             android:layout_marginLeft="7dp"
-            android:text="Time"
+            android:text="@string/time"
             android:textSize="15dp"
             android:id="@+id/post_time"
             android:layout_width="150dp"
@@ -71,24 +71,23 @@
         <TextView
             android:layout_marginTop="217dp"
             android:layout_marginLeft="7dp"
-            android:text="Location"
+            android:text="@string/location"
             android:textSize="15dp"
             android:id="@+id/post_location"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:textColor="@color/darkMaroon" />
 
-        <Button
-            android:id="@+id/card_button"
+        <TextView
+            android:id="@+id/card_expand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="270dp"
             android:layout_marginTop="200dp"
             android:background="@null"
-            android:text="Tap for More info"
+            android:text="@string/tap_for_more_info"
             android:textSize="10dp"
-            android:textColor="@color/bearGrey"
-            android:onClick="getMoreInfo" />
+            android:textColor="@color/bearGrey" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="246dp"
-                android:text="Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. Here is the description of the event. "
+                android:text="@string/here_is_the_description_of_the_event"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
 
