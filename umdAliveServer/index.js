@@ -106,9 +106,6 @@ countUsers = users.items.push(dummyUser1);
 countUsers = users.items.push(dummyUser2);
 
 
-<<<<<<< Updated upstream
-
-=======
 /*
  ************************
  * PUT ROUTE SECTION
@@ -172,7 +169,6 @@ app.put('/newPost', function (req, res) {
     };
     res.json(jsonResponse);
 });
->>>>>>> Stashed changes
 
 console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
 /*
