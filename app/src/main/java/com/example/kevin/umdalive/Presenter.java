@@ -73,6 +73,9 @@ private LoginActivity log;
         return restModel.restDelete(task, toDelete);
     }
 
+
+
+
     /**
      * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
      *
