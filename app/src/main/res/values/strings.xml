@@ -43,7 +43,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="refresh_settings">Refresh User Data </string>
-    <string name="version"> 0.5.2b</string>
+    <string name="version"> v0.5.2b</string>
     <string name="version_number"> Version 0.5.2b </string>
     <string name="most_recent_posts">Most Recent Posts</string>
     <string name="login">Login</string>
