@@ -64,6 +64,30 @@ public class PostInformationModel {
         return description;
     }
 
+    public void setClub(String club) {
+        this.club = club;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * Function to create a JSON object of a post
      * JSON object is then made into a string and returned
@@ -110,4 +134,28 @@ public class PostInformationModel {
 
         return jsonString.toString();
     }
+
+
+    public boolean equals(PostInformationModel rightHand) {
+        boolean isEqual = true;
+
+        if (!this.club.equals(rightHand.club))
+            isEqual = false;
+        else if (!this.title.equals(rightHand.title))
+            isEqual = false;
+        else if (!this.time.equals(rightHand.time))
+            isEqual = false;
+        else if (!this.date.equals(rightHand.date))
+            isEqual = false;
+        else if (!this.location.equals(rightHand.location))
+            isEqual = false;
+        else if (!this.description.equals(rightHand.description))
+            isEqual = false;
+
+        return isEqual;
+    }
+
+
+
+
 }

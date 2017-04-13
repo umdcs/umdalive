@@ -145,8 +145,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             updateUI(true);
         } else {
-            Intent intent= new Intent(this, MainView.class);
-            startActivity(intent);
+
 
             // Signed out, show unauthenticated UI.
             updateUI(false);
