@@ -49,3 +49,21 @@ Make it functional to acually go and pull the user data from server after checki
 **Main Activity**
 
 Is the main page of the app where the posts from clubs should be shown. As of now it shows posts associated with the user's clubs that they follow after selecting the refresh button. Plan to make the posts a container type object vs just text. The menu on the page contains access to all clubs and posting for each club. The menu has the users email and name from the server. It pulles a dummy user not a real one from the array of users.
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Additions by Spring Semester Team
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+************************************************************************************************************
+TESTING
+
+-Ryan-
+PostInformationModel - Test checks proper initialization of Posts. It compares different posts checking for inequality.
+    JSONStringify() is not tested due to this error: java.lang.RuntimeException: Method put in org.json.JSONObject not mocked.
+
+
+
+
+
