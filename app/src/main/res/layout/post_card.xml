@@ -34,7 +34,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/white"
             android:text="@string/title"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/post_title_text"
             android:layout_width="241dp"
             android:layout_height="25dp" />
@@ -48,7 +48,7 @@
             android:text="@string/club_name"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/post_date"
@@ -57,14 +57,14 @@
             android:layout_marginLeft="7dp"
             android:layout_marginTop="165dp"
             android:text="@string/date"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="@color/darkMaroon"/>
 
         <TextView
             android:layout_marginTop="191dp"
             android:layout_marginLeft="7dp"
             android:text="@string/time"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:id="@+id/post_time"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             android:layout_marginTop="217dp"
             android:layout_marginLeft="7dp"
             android:text="@string/location"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:id="@+id/post_location"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginTop="200dp"
             android:background="@null"
             android:text="@string/tap_for_more_info"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:textColor="@color/bearGrey" />
 
         <LinearLayout
@@ -105,7 +105,7 @@
                 android:layout_marginTop="246dp"
                 android:text="@string/here_is_the_description_of_the_event"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
