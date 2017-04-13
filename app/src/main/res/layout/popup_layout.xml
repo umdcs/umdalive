@@ -10,13 +10,10 @@
     android:fadingEdgeLength="15dp"
     android:minHeight="275dp"
     android:minWidth="325dp"
-    android:outlineProvider="background"
     android:padding="5dp"
     android:shadowColor="@color/black"
     android:shadowDx="10"
-    android:shadowDy="10"
-    android:elevation="10dp">
-
+    android:shadowDy="10">
 
 
 
