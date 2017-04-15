@@ -66,4 +66,6 @@ PostInformationModel - Test checks proper initialization of Posts. It compares d
 
 
 
+--Wesley OSumo--
+NodeServer: The test checks several Get and Put Rquests. an initial querry is done to the server to get the current stack, then several put requests are sent to the server. The server then is requested to return the current stack once more.  Current club and the position methods are not tested due to incompletes in the project infrauscture. 
 
