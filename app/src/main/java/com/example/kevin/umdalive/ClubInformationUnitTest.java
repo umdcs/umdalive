@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertFalse;
 
 public class ClubInformationUnitTest {
     String clubName1="Sassy Club";
-    String username1="Sassysquatch";
+    String username1="SassAdmin";
     String keywords1="Rhonda";
     String description1="fabulous";
     ClubInformationModel testOne = new ClubInformationModel(clubName1, username1, keywords1, description1);
