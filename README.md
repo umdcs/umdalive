@@ -8,6 +8,7 @@ One team was responsible for business aspects and idea creation, while the other
 Cultural entrepreneurship (CUE) team: Anastasia Kratzner, Holly Pudwill, and Ryan Danielson.
 
 Computer science (CS) team: Brandon Harshe, Kevin Schauer, Luke Anderson, and Ray Cerney.
+Andy Miller, Wesley Osumo, Ryan Gebhart, and Jenna Anderson. 
 
 ----------
 
@@ -43,9 +44,15 @@ This class will make a new club and send JSON data to be stored on server. This 
 
 **LoginActivity**
 
-Make it functional to acually go and pull the user data from server after checking thier password. 
+Uses Google OAuth to let user log in using their UMD ID and password.
 
 
 **Main Activity**
 
 Is the main page of the app where the posts from clubs should be shown. As of now it shows posts associated with the user's clubs that they follow after selecting the refresh button. Plan to make the posts a container type object vs just text. The menu on the page contains access to all clubs and posting for each club. The menu has the users email and name from the server. It pulles a dummy user not a real one from the array of users.
+
+
+Unit Testing Inlcuded
+---------------------
+
+Jenna: ClubInformationUnitTest; creates a test club and checks to see that all the data is created and stored properly. 
