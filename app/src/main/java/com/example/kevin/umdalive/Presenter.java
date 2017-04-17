@@ -34,6 +34,7 @@ public class Presenter {
      * Constructor for testing RestModel that requires no view
      */
     public Presenter() {
+        activity = null;
         allClubs = new AllClubs();
         restModel = new RestModel();
     }
