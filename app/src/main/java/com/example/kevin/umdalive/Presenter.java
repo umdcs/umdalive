@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class Presenter {
     private Activity activity;
     private RestModel restModel;
-    private AllClubs allClubs;
 
     /**
      * Constructor for presenter
@@ -26,7 +25,6 @@ public class Presenter {
      */
     public Presenter(Activity incomingActivity) {
         restModel = new RestModel();
-        allClubs = new AllClubs();
         activity = incomingActivity;
     }
 
@@ -35,8 +33,23 @@ public class Presenter {
      */
     public Presenter() {
         activity = null;
-        allClubs = new AllClubs();
         restModel = new RestModel();
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public RestModel getRestModel() {
+        return restModel;
+    }
+
+    public void setRestModel(RestModel restModel) {
+        this.restModel = restModel;
     }
 
     /**
@@ -149,11 +162,18 @@ public class Presenter {
      *gets all the club names
      */
     public ArrayList<String> getClubNames(){
-        return allClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
+        return AllClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
     }
 
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
         return new PostAdapter(posts, rView);
+    }
+
+    public boolean equals(Presenter presenter){
+        boolean isEqual = true;
+        if(!activity.equals(presenter.getActivity())) isEqual = false;
+        if(!restModel.equals(presenter.getRestModel())) isEqual = false;
+        return isEqual;
     }
     }
 
