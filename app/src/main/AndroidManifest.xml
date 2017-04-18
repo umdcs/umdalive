@@ -8,31 +8,31 @@ package="com.example.kevin.umdalive">
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".LoginActivity">
+    <activity android:name=".Models.LoginActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
     <activity
-        android:name=".MainView"
+        android:name=".Views.MainView"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar">
 
     </activity>
-    <activity android:name=".CreateClubView">
+    <activity android:name=".Views.CreateClubView">
 
     </activity>  
-    <activity android:name=".AllClubsView">
+    <activity android:name=".Views.AllClubsView">
     </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-    <activity android:name=".PostForClubActivityView">
+    <activity android:name=".Views.PostForClubActivityView">
 
     </activity>
-    <activity android:name=".PostingActivityView">
+    <activity android:name=".Views.PostingActivityView">
 
     </activity>
-    <activity android:name=".DisplayClubView">
+    <activity android:name=".Views.DisplayClubView">
 
     </activity>
     <meta-data

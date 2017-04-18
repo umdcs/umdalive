@@ -1,4 +1,4 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Models;
 
 /**
  * Does nothing at this point. Probably will in the future.

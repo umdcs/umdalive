@@ -1,8 +1,10 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Models;
 
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.example.kevin.umdalive.Models.ClubInformationModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;

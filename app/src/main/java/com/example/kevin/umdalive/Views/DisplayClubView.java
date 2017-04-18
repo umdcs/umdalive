@@ -1,16 +1,14 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import org.json.JSONArray;
+import com.example.kevin.umdalive.Presenters.Presenter;
+import com.example.kevin.umdalive.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-import static android.R.attr.description;
 
 /**
  * This class is supposed to display the club that is selected from all clubs but the previous group never did that so it's just
