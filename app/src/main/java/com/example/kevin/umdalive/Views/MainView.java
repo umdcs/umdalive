@@ -69,6 +69,12 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
+    public void searchClub() {
+        Intent intent = new Intent(this, SearchClubsView.class);
+        startActivity(intent);
+    }
+
+
     /**
      * Starts CreateClubView
      *
@@ -154,7 +160,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         } else if (id == R.id.calendar) {
 
         } else if (id == R.id.search) {
-            //search activity
+            searchClub();
         } else if (id == R.id.nav_club1) {
             displayClub();
         } else if (id == R.id.nav_club2) {
