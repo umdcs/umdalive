@@ -19,25 +19,6 @@ public class ClubInformationModel {
     private String keyWords;
     private String description;
 
-    //private Object keywordItem = new Object(); //this item grabs from user WTF is this?
-
-    /*
-     * constructor
-     *
-     * @param clubName name of club
-     * @param userName usre creating club
-     * @param keyWords keywords to id club
-     * @param description of club
-
-    public ClubInformationModel(String clubName, String userName, String keyWords, String description, String initialPost) {
-        this.clubName = clubName;
-        this.userName = userName;
-        this.keyWords = keyWords;
-        this.description = description;
-        this.post = initialPost;
-    }
-    */
-
     /**
      * constructor
      *
@@ -127,24 +108,6 @@ public class ClubInformationModel {
     public String getDescription() {
         return description;
     }
-
-    /**
-     * setter for post
-     *
-     * @param post sets the new post for the club
-    public void setPost(String post) {
-        this.post = post;
-    }
-     */
-
-    /*
-     * getter for post
-     *
-     * @return post
-    public String getPost() {
-        return post;
-    }
-     */
 
     /**
      * Function to create a JSON object of a club

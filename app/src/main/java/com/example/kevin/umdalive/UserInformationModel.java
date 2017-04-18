@@ -24,13 +24,10 @@ public class UserInformationModel extends AppCompatActivity {
     private String major;
     private String gradDate;
 
-
     private ArrayList<String> localClubNames;
+
     private ArrayList<ClubInformationModel> localClubsSubscribed;
     private ArrayList<String> localPostsSubscribed;
-
-
-
 
     public UserInformationModel(){
         name = "";
@@ -39,36 +36,13 @@ public class UserInformationModel extends AppCompatActivity {
         localPostsSubscribed = new ArrayList<String>();
     }
 
-
-    /**
-     * constructor
-     *
-     * not currently using post and clubs subscribed for simplicity
-     * @param name of user
-     * @param password of user
-     * @param major of user
-     * @param email of user
-     * @param gradDate of user
-     *
-     */
-    public UserInformationModel(String name, String password, String major, String email, String gradDate, ArrayList<String> temp_clubs_subscribed){
+    public UserInformationModel(String name, String major, String email, String gradDate, ArrayList<ClubInformationModel> tempClubsSubscribed){
         this.name = name;
-        this.password = password;
         this.email = email;
         this.major = major;
         this.gradDate = gradDate;
         localPostsSubscribed = new ArrayList<String>();
-        localClubNames = temp_clubs_subscribed;
-    }
-
-    public UserInformationModel(String name, String major, String email, String gradDate, ArrayList<ClubInformationModel> temp_clubs_subscribed){
-        this.name = name;
-
-        this.email = email;
-        this.major = major;
-        this.gradDate = gradDate;
-        localPostsSubscribed = new ArrayList<String>();
-        localClubsSubscribed = temp_clubs_subscribed;
+        localClubsSubscribed = tempClubsSubscribed;
     }
 
 

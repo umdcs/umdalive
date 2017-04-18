@@ -119,35 +119,11 @@ public class Presenter {
 
     /**
      * For MainActivity
-     * @param jsonString
-     * @return
+     * @param jsonString restGet results for most recent posts
+     * @return list of post objects
      */
     public ArrayList<PostInformationModel> refreshPosts(String jsonString) {
         return MainActivity.refreshPosts(jsonString);
-    }
-
-    /**
-     * Sets user info called from signUpActivityView
-     *
-     * Sets by using constructor from UserInformationModel
-     *
-     * not sure if this is the appropriate way to do all this.
-     *
-     * @param name of new user
-     * @param password of new user
-     * @param email of new user
-     * @param major of new user
-     * @param gradDate of new user
-     */
-    public void setUserInfo(String name, String password, String email, String major, String gradDate) {
-        //geting loocal post subscribed
-
-        ArrayList<String> localPostSubscribed= this.getClubNames();
-
-
-        UserInformationModel newUser = new UserInformationModel(name, password, email, major, gradDate,localPostSubscribed);
-        //send to rest function and then to server to store data
-        //confirmation to user?
     }
 
     public void setCurrentClub(String itemValue){

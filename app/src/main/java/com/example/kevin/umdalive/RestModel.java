@@ -98,7 +98,6 @@ public class RestModel {
     public boolean equals(RestModel restModel){
         boolean isEquals = true;
         if(!serverAddress.equals(restModel.serverAddress)) isEquals = false;
-        if(!context.equals(restModel.getContext())) isEquals = false;
         return isEquals;
     }
 

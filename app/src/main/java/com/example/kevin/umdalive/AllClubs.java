@@ -20,7 +20,7 @@ public class AllClubs {
      * @param jsonResponse the response from the REST get call to the server retrieving all clubs.
      * @return ArrayList of all club names
      */
-    public ArrayList<String> getClubNames(String jsonResponse) {
+    public static ArrayList<String> getClubNames(String jsonResponse) {
 
         ArrayList<String> clubList = new ArrayList<>();
         try {
