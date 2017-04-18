@@ -1,10 +1,16 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Presenters;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.kevin.umdalive.Models.AllClubs;
+import com.example.kevin.umdalive.Models.CreateClub;
+import com.example.kevin.umdalive.Models.MainActivity;
+import com.example.kevin.umdalive.Models.PostAdapter;
+import com.example.kevin.umdalive.Models.PostInformationModel;
+import com.example.kevin.umdalive.Models.RestModel;
+import com.example.kevin.umdalive.Models.UserInformationModel;
+
 import java.util.ArrayList;
 
 /**

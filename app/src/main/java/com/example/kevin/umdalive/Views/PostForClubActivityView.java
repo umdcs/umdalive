@@ -1,5 +1,5 @@
 
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Views;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.kevin.umdalive.Presenters.Presenter;
+import com.example.kevin.umdalive.R;
 
 import java.util.ArrayList;
 

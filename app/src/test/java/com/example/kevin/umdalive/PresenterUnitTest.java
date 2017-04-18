@@ -1,5 +1,13 @@
 package com.example.kevin.umdalive;
 
+import com.example.kevin.umdalive.Models.ClubInformationModel;
+import com.example.kevin.umdalive.Models.MainActivity;
+import com.example.kevin.umdalive.Models.PostInformationModel;
+import com.example.kevin.umdalive.Models.RestModel;
+import com.example.kevin.umdalive.Models.UserInformationModel;
+import com.example.kevin.umdalive.Presenters.Presenter;
+import com.example.kevin.umdalive.Views.MainView;
+
 import org.junit.Test;
 
 import java.util.ArrayList;

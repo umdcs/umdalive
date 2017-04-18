@@ -1,4 +1,6 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Models;
+
+import com.example.kevin.umdalive.Models.ClubInformationModel;
 
 /**
  * This is the model class for CreateClubView

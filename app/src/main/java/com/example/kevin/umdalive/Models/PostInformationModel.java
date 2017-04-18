@@ -1,4 +1,4 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Models;
 
 import android.util.Log;
 

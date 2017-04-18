@@ -1,4 +1,4 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Views;
 
 
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.kevin.umdalive.Presenters.Presenter;
+import com.example.kevin.umdalive.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
