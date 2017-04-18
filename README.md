@@ -63,9 +63,10 @@ TESTING
 PostInformationModel - Test checks proper initialization of Posts. It compares different posts checking for inequality.
     JSONStringify() is not tested due to this error: java.lang.RuntimeException: Method put in org.json.JSONObject not mocked.
 
-
-
-
 --Wesley OSumo--
-NodeServer: The test checks several Get and Put Rquests. an initial querry is done to the server to get the current stack, then several put requests are sent to the server. The server then is requested to return the current stack once more.  Current club and the position methods are not tested due to incompletes in the project infrauscture. 
+NodeServer: The test checks several Get and Put Rquests. an initial querry is done to the server to get the current stack, then several put requests are sent to the server. The server then is requested to return the current stack once more.  Current club and the position methods are not tested due to incompletes in the project infrauscture.
+
+-Andy-
+Presenter: Created a thorough unit test for all functionality.
+    There are issues with using AsyncTask in unit tests so it makes many of the tests worthless. I will look into it more to see if there's a good way to work around that.
 
