@@ -23,29 +23,25 @@ var dummyClub1 = {
     clubname: "BBQ",
     username: "umdAlive1",
     keywords: "Food",
-    description: "we enjoy BBQ's",
-    post: "BBQ this sunday, 2 pm, bring your own food. Be there or your kicked out of the club."
+    description: "we enjoy BBQ's"
 };
 var dummyClub2 = {
     clubname: "ACM",
     username: "umdAlive2",
     keywords: "Academic",
-    description: "we enjoy vast amounts of code not working",
-    post: "rewriting facebook this friday, meet at edu 115 3pm "
+    description: "we enjoy vast amounts of code not working"
 };
 var dummyClub3 = {
     clubname: "UnderWaterBasketWeaving",
     username: "umdAlive1",
     keywords: "Athletic",
-    description: "We are the best under water basket weaving club in the northland",
-    post: "dryland this sunday, 2 pm, bring your own weights. Be there or no more basket weaving with us."
+    description: "We are the best under water basket weaving club in the northland"
 };
 var dummyClub4 = {
     clubname: "Air Guitar Club",
     username: "umdAlive1",
     keywords: "Music",
-    description: "We jam to songs and play air instruments",
-    post: "Send email to umd.alive@gmail.com for questions about playlist"
+    description: "We jam to songs and play air instruments"
 };
 
 // Empty array for clubs to reside in
@@ -68,22 +64,12 @@ var stringArray = JSON.stringify(clubs);
 var dummyUser1 = {
     name: "Billy Joe",
     email: "umdAlive1@gmail.com",
-    password: "123abc",
     graduationDate: "2018",
     major: "computer science",
     clubs: []
 
 };
 dummyUser1.clubs[0] = dummyClub1;
-dummyUser1.clubs[1] = dummyClub2;
-var dummyUser2 = {
-    name: "Seemore Buts",
-    email: "Seemore.Buts@gmail.com",
-    password: "password",
-    graduationDate: "2019",
-    major: "mechanical engineering",
-    users_clubs: []
-};
 
 /*///////////////////////////
  *   End of dummy users/clubs
@@ -126,12 +112,7 @@ app.put('/newClub', function (req, res) {
         //post: req.body.post
     };
 
-
-    // Adds dataObject items to array
     countClubs = clubs.items.push(dataObject);
-//    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
-
-    //print post to server for testing
     console.log(req.body.post);
     var jsonResponse = {
         id: '123', status: 'updated'
@@ -142,7 +123,6 @@ app.put('/newClub', function (req, res) {
     console.log("Name of username/admin : " + req.body.username);
     console.log("Name of keyword/catagory : " + req.body.keywords);
     console.log("Name of description : " + req.body.description);
-  //  console.log("Name of new post : " + req.body.post);
     console.log("total items in array : " + countClubs);
     console.log("total posts saved on server: " + countPosts);
 });
@@ -214,7 +194,6 @@ app.put('/userInformation', function (req, res) {
     var dataObject = {
         name: req.body.name,
         email: req.body.emailAddress,
-        password: req.body.user_password,
         graduation_date: req.body.graduation_date,
         major: req.body.major,
         users_clubs: [],
