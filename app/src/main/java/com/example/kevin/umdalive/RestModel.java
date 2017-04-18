@@ -50,10 +50,16 @@ public class RestModel {
     /**
      * Constructor for RestModel
      */
-    public RestModel(){}
+    public RestModel(){
+        context = null;
+    }
 
     public void setContext(Context context){
         this.context = context;
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     public String restGet(String getString, String data){
@@ -87,6 +93,13 @@ public class RestModel {
 
     public String restDelete(String deleteString, String data){
         return null;
+    }
+
+    public boolean equals(RestModel restModel){
+        boolean isEquals = true;
+        if(!serverAddress.equals(restModel.serverAddress)) isEquals = false;
+        if(!context.equals(restModel.getContext())) isEquals = false;
+        return isEquals;
     }
 
     /**
