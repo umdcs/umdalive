@@ -17,9 +17,9 @@
             android:title="Calendar" />
 
         <item
-            android:id="@+id/tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/search"
+            android:src="@drawable/ic_menu_manage"
+            android:title="@string/search" />
     </group>
     <item android:title="My Clubs">
         <menu android:id="@+id/clubMenu">

@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -149,8 +148,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
             displayClubsForPost();
         } else if (id == R.id.calendar) {
 
-        } else if (id == R.id.tools) {
-
+        } else if (id == R.id.search) {
+            //search activity
         } else if (id == R.id.nav_club1) {
             displayClub();
         } else if (id == R.id.nav_club2) {
