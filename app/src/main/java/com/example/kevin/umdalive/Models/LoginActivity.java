@@ -1,4 +1,4 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Models;
 
 
 import android.app.ProgressDialog;
@@ -9,11 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.kevin.umdalive.Views.MainView;
+import com.example.kevin.umdalive.Presenters.Presenter;
+import com.example.kevin.umdalive.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;

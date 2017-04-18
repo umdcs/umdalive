@@ -1,4 +1,4 @@
-package com.example.kevin.umdalive;
+package com.example.kevin.umdalive.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.util.Log;
+
+import com.example.kevin.umdalive.Models.PostInformationModel;
+import com.example.kevin.umdalive.Models.UserInformationModel;
+import com.example.kevin.umdalive.Presenters.Presenter;
+import com.example.kevin.umdalive.R;
 
 import java.util.ArrayList;
 

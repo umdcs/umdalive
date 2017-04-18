@@ -1,5 +1,7 @@
 package com.example.kevin.umdalive;
 
+import com.example.kevin.umdalive.Models.PostInformationModel;
+
 import org.junit.Test;
 
 import static junit.framework.Assert.assertFalse;
