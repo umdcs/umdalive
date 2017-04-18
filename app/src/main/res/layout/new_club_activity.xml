@@ -36,7 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="none"
@@ -50,7 +50,8 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/description_of_club"
         android:layout_toStartOf="@+id/description_of_club"
-        android:clickable="false" />
+        android:clickable="false"
+        android:textSize="20sp"/>
 
     <Spinner
         android:layout_width="match_parent"
@@ -62,18 +63,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="96dp" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="none"
         android:ems="10"
         android:id="@+id/keyword_title"
         android:textColor="@color/textColorPrimary"
-        android:text="Catagory of Club:"
+        android:text="Category of Club:"
         android:layout_below="@+id/description_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:clickable="false" />
+        android:clickable="false"
+        android:textSize="20sp"/>
 
     <Button
         android:text="Create Club"
@@ -101,7 +103,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="none"
@@ -114,9 +116,10 @@
         android:layout_alignParentStart="true"
         android:clickable="false"
         android:layout_toLeftOf="@+id/admin_of_club"
-        android:layout_toStartOf="@+id/admin_of_club" />
+        android:layout_toStartOf="@+id/admin_of_club"
+        android:textSize="20sp"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -125,12 +128,10 @@
         android:text="Admin User:"
         android:inputType="none"
         android:clickable="false"
-        android:layout_alignBaseline="@+id/admin_of_club"
-        android:layout_alignBottom="@+id/admin_of_club"
+        android:textSize="20sp"
+        android:layout_below="@+id/name_title_enter"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/description_of_club"
-        android:layout_toStartOf="@+id/description_of_club" />
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
