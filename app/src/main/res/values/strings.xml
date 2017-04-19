@@ -20,7 +20,7 @@
     </string-array>
 
     <string-array name="keyword_list2">
-        <item name="blank"></item>
+        <item name="select">Select a Keyword</item>
         <item name="academic">Academic</item>
         <item name="athletic">Athletic</item>
         <item name="intermurals">Intramurals</item>
