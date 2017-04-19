@@ -36,10 +36,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".Views.Main2Activity" />
-        <activity
-            android:name=".Views.userInfo"
-            android:label="@string/title_activity_user_info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Views.userdata"></activity>
     </application>
 
 </manifest>
