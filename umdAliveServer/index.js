@@ -181,21 +181,29 @@ app.put('/userInformation', function (req, res) {
  ************************
  */
 
-/*
- * Function to get a specific users data, will eventually return a user info based on the name of them
- * for now it returns a fake user for testing purposes -Kevin
- */
 app.get('/getAllClubs', function (req, res) {
     //array to which each club will be stored
     var clubNames = {
         items: []
     };
-    for (var x = 0; x < clubs.items.length; x++) {
-        clubNames.items[x] = getClubName(x);
-    }
-    var stringArray = JSON.stringify(clubNames);
-    console.log("clubs being sent to client: " + stringArray);
-    res.send(stringArray);
+    mongodb.getCollection('allClubs', function(result){
+            var clubsData = {
+                jsonArray: []
+            };
+
+            result.forEach(function(clubs){
+                clubsData.jsonArray.push(clubs);
+            });
+
+            for(var i = 0; i < clubsData.jsonArray.length; i++){
+                var curClub = clubsData.jsonArray[i];
+                clubNames.items[i] = curClub.club;
+            }
+
+            var stringArray = JSON.stringify(clubNames);
+            console.log("clubs being sent to client: " + stringArray);
+            res.send(stringArray);
+    });
 
 });
 
@@ -203,24 +211,11 @@ app.get('/currentClub', function (req,res) {
     var club;
     console.log("Looking for " + currentClub);
 
-//    var pos = getClubPosition(currentClub);
-
     mongodb.findClub(currentClub, function(result){
         var club = result[0];
-        console.log("here is the club: " + club);
+        console.log("Found club.");
         res.send(JSON.stringify(club));
     });
-
-//    if(pos !== -1){
-//        console.log("SUCCESS: " + currentClub + " WAS FOUND");
-//        club = clubs.items[pos];
-//        var stringArray = JSON.stringify(club);
-//        res.send(stringArray);
-//    }
-//
-//    else{
-//        console.log("ERROR: " + currentClub + " NOT FOUND.");
-//    }
 });
 
 app.get('/userDataGet', function (req, res) {

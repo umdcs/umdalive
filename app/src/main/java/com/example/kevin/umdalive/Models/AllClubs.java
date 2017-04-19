@@ -23,6 +23,7 @@ public class AllClubs {
     public static ArrayList<String> getClubNames(String jsonResponse) {
 
         ArrayList<String> clubList = new ArrayList<>();
+        Log.d("clubs: ", jsonResponse);
         try {
             JSONObject object = new JSONObject(jsonResponse);
             JSONArray jsonArray = object.getJSONArray("items");

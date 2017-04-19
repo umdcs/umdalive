@@ -16,7 +16,7 @@ console.log("MongoDB is active.")
 /**
 * Inserts json info of a new club into the allClubs collection.
 * If allClubs collection doesn't exist, it is created.
-* @param - clubData JSON data of the club
+* @param clubData - JSON data of the club
 */
 module.exports.insertClub = function(clubData) {
     mongoDBRef.collection('allClubs').save({club: clubData.clubName, clubData}, function(err, result){
@@ -26,7 +26,9 @@ module.exports.insertClub = function(clubData) {
 };
 
 /**
-*
+* Finds a specific club
+* @param clubName - string of club's name
+* @param callback - the function that the result is sent to
 */
 module.exports.findClub = function(clubName, callback) {
     mongoDBRef.collection('allClubs').find({club: clubName}).toArray(function(err, docs) {
@@ -37,4 +39,15 @@ module.exports.findClub = function(clubName, callback) {
 	    }
 	    else console.log("Club not found.")
     });
+};
+
+module.exports.getCollection = function(collectionName, callback) {
+    var cursor = mongoDBRef.collection(collectionName).find(function(err, docs) {
+            if(err || !docs) {
+    	    console.log("Error in retrieving collection\n");
+    	}
+            else {
+    	    callback(docs);
+    	}
+        });
 };

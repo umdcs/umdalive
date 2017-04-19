@@ -43,7 +43,7 @@ public class PostingActivityView extends AppCompatActivity {
 
         try {
             JSONObject club = new JSONObject(curClub);
-            String clubName = club.get("clubname").toString();
+            String clubName = club.get("clubName").toString();
             presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
                     , location.getText().toString(), addInfo.getText().toString());
             Log.d("Club posting: " + clubName, "New post: " + title.getText().toString()); // forgot to alter this - Ryan
