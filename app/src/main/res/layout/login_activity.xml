@@ -46,17 +46,5 @@
         android:text="@string/btn_logout_from_google"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="13dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@+id/btn_sign_out"
-        android:layout_toRightOf="@+id/btn_sign_out"
-        android:text="@string/version" />
-
 
 </RelativeLayout>

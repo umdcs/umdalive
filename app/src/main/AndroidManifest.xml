@@ -20,22 +20,26 @@
         <activity
             android:name=".Views.MainView"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Views.CreateClubView"></activity>
-        <activity android:name=".Views.AllClubsView"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Views.CreateClubView" />
+        <activity android:name=".Views.AllClubsView" />
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <activity android:name=".Views.PostForClubActivityView"></activity>
-        <activity android:name=".Views.PostingActivityView"></activity>
-        <activity android:name=".Views.DisplayClubView"></activity>
+        <activity android:name=".Views.PostForClubActivityView" />
+        <activity android:name=".Views.PostingActivityView" />
+        <activity android:name=".Views.DisplayClubView" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Views.Main2Activity"></activity>
+        <activity android:name=".Views.Main2Activity" />
+        <activity
+            android:name=".Views.userInfo"
+            android:label="@string/title_activity_user_info"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
