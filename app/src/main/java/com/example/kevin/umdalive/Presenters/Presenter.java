@@ -14,7 +14,7 @@ import com.example.kevin.umdalive.Models.UserInformationModel;
 import java.util.ArrayList;
 
 /**
- * Created by rgebh_000 on 3/15/2017.
+ * Created by ryan_000 on 3/15/2017.
  *
  * Presenter class to communicate between views and models
  */
