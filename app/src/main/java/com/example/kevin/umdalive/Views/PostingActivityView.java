@@ -18,8 +18,8 @@ public class PostingActivityView extends AppCompatActivity {
 
 
     private Presenter presenter;
-    private String postToDisplay;
-    private static String clubToPost;
+    //private String postToDisplay;
+    //private static String clubToPost;
     private EditText title;
     private EditText location;
     private EditText time;
