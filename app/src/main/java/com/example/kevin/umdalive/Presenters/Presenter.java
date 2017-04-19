@@ -42,7 +42,7 @@ public class Presenter {
         restModel = new RestModel();
     }
 
-    public Activity getActivity() {
+    private Activity getActivity() {
         return activity;
     }
 
@@ -50,13 +50,15 @@ public class Presenter {
         this.activity = activity;
     }
 
-    public RestModel getRestModel() {
+    private RestModel getRestModel() {
         return restModel;
     }
 
+    /*
     public void setRestModel(RestModel restModel) {
         this.restModel = restModel;
     }
+    */
 
     /**
      * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
@@ -116,8 +118,8 @@ public class Presenter {
 
     /**
      * For MainActivity
-     * @param userData
-     * @return
+     * @param userData to get
+     * @return user
      */
     public UserInformationModel getMainUser(String userData){
         return MainActivity.getUser(userData);
@@ -149,11 +151,11 @@ public class Presenter {
      *gets all the club names
      */
     public ArrayList<String> getClubNames(){
-        return AllClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
+        return AllClubs.getClubNames(restGet("getAllClubs", ""));
     }
 
     public ArrayList<String> getSearchClubNames(){
-        return AllClubs.getClubNames(restGet(new String("getSearchAllClubs"), ""));
+        return AllClubs.getClubNames(restGet("getSearchAllClubs", ""));
     }
 
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
