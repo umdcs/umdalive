@@ -40,8 +40,9 @@ public class DisplayClubView extends AppCompatActivity {
         String jsonResponse = presenter.restGet("getClub", "");
 
         try {
-            JSONObject club = new JSONObject(jsonResponse);
-            clubName = club.get("clubname").toString();
+            JSONObject object = new JSONObject(jsonResponse);
+            JSONObject club = (JSONObject) object.get("clubData");
+            clubName = club.get("clubName").toString();
             description = club.get("description").toString();
             keywords = club.get("keywords").toString();
             administrator = club.get("username").toString();

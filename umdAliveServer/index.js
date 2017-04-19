@@ -69,30 +69,23 @@ app.put('/newClub', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
         return res.sendStatus(400);
-
     // Takes data from request and makes a new object
-    var dataObject = {
+    var clubData = {
         clubName: req.body.clubName,
         username: req.body.username,
         keywords: req.body.keywords,
         description: req.body.description,
     };
 
-    mongodb.insertClub(dataObject);
+    mongodb.insertClub(clubData);
 
-    countClubs = clubs.items.push(dataObject);
-    console.log(req.body.post);
+    countClubs = clubs.items.push(clubData);
     var jsonResponse = {
         id: '123', status: 'updated'
     };
     res.json(jsonResponse);
 
-    console.log("New club has been created: " + req.body.clubname);
-    console.log("Name of username/admin : " + req.body.username);
-    console.log("Name of keyword/catagory : " + req.body.keywords);
-    console.log("Name of description : " + req.body.description);
-    console.log("total items in array : " + countClubs);
-    console.log("total posts saved on server: " + countPosts);
+    console.log("New club has been created: " + req.body.clubName);
 });
 
 app.put('/newPost', function (req, res) {
@@ -207,14 +200,15 @@ app.get('/getAllClubs', function (req, res) {
 });
 
 app.get('/currentClub', function (req,res) {
-    var success = false;
     var club;
     console.log("Looking for " + currentClub);
 
-    var pos = getClubPosition(currentClub);
+//    var pos = getClubPosition(currentClub);
 
     mongodb.findClub(currentClub, function(result){
-        res.send(JSON.stringify(result))
+        var club = result[0];
+        console.log("here is the club: " + club);
+        res.send(JSON.stringify(club));
     });
 
 //    if(pos !== -1){
@@ -230,15 +224,6 @@ app.get('/currentClub', function (req,res) {
 });
 
 app.get('/userDataGet', function (req, res) {
-
-    //console log for testing what data is being sent
-    console.log("User data being returned: \n" + "Name: " + dummyUser1.name
-            + "\n Email: " + dummyUser1.email
-            + "\n Password: " + dummyUser1.password
-            + "\n Graduation Date: " + dummyUser1.graduationDate
-            + "\n Major: " + dummyUser1.major
-            + "\n UserClubs:" + dummyUser1.clubs)
-    //response message from server
     res.send(JSON.stringify(dummyUser1));
 });
 

@@ -19,7 +19,7 @@ console.log("MongoDB is active.")
 * @param - clubData JSON data of the club
 */
 module.exports.insertClub = function(clubData) {
-    mongoDBRef.collection('allClubs').save({club: clubData.clubName}, function(err, result){
+    mongoDBRef.collection('allClubs').save({club: clubData.clubName, clubData}, function(err, result){
         if(err || !result) console.log("Club failed to save in database.");
         else console.log("Club inserted into allClubs collection in MongoDB.");
     });
@@ -29,7 +29,7 @@ module.exports.insertClub = function(clubData) {
 *
 */
 module.exports.findClub = function(clubName, callback) {
-    mongoDBRef.collection('allClubs').find({ week: clubName }).toArray(function(err, docs) {
+    mongoDBRef.collection('allClubs').find({club: clubName}).toArray(function(err, docs) {
 	    if(!err){
 	        console.log("Found the following records");
 	        console.log(docs);
