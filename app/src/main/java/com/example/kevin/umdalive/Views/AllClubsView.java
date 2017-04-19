@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Andrew Miller 3/21/2017
- *
+ * <p>
  * This is a view that displays all club names. When a user selects a club, DisplayClubView is launched with the correct club info.
  */
 public class AllClubsView extends Activity {
@@ -34,16 +34,16 @@ public class AllClubsView extends Activity {
 
     /**
      * Sets up the view.
-     *
+     * <p>
      * For clarification, an ArrayAdapter is used to take the contents of clubNames and display
      * it on a default layout provided by Android(simple_list_item_1).
-     *
+     * <p>
      * The listener is used to check if a club has been clicked. Once clicked, we send a get request to the server
      * and the club info is received in the response. The response is used to set the info for DisplayClubView before it is launched.
      * I don't like the way the previous group implemented this part, mainly because it doesn't work lol.
      * We will have to fix it(setDisplayClubInfo(String) in the presenter).
      */
-    private void setView(){
+    private void setView() {
         ArrayList<String> clubNames = presenter.getClubNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
         listView.setAdapter(adapter);
@@ -64,18 +64,23 @@ public class AllClubsView extends Activity {
     protected void onPause() {
         super.onPause();
     }
+
     protected void onResume() { //brings activity back to main screen.
         super.onResume();
     }
+
     protected void onStop() {
         super.onStop();
     }
+
     protected void onDestroy() {
         super.onDestroy();
     }
+
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }
+
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }

@@ -133,8 +133,13 @@ public class Presenter {
     }
 
     public void setCurrentClub(String itemValue){
-        restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
+        restPut("putCurrentClub", AllClubs.jsonStringifyClubName(itemValue));
     }
+
+    public void setKeyword(String keyword){
+        restPut("putKeyword", AllClubs.jsonStringifyKeyword(keyword));
+    }
+
 
     public void putPost(String club, String title, String time, String date, String location, String addInfo){
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
@@ -147,6 +152,10 @@ public class Presenter {
         return AllClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
     }
 
+    public ArrayList<String> getSearchClubNames(){
+        return AllClubs.getClubNames(restGet(new String("getSearchAllClubs"), ""));
+    }
+
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
         return new PostAdapter(posts, rView);
     }
@@ -157,7 +166,7 @@ public class Presenter {
         if(!restModel.equals(presenter.getRestModel())) isEqual = false;
         return isEqual;
     }
-    }
+}
 
 
 

@@ -34,16 +34,18 @@ public class SearchClubsView extends AppCompatActivity {
         //keyword_list is the list of all the club categories. We should probably expand this at some point and add on "other" option.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
                 (this, R.array.keyword_list, android.R.layout.simple_spinner_item); // Specify the layout to use when the list of choices appears
+       
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Apply the adapter to the spinner
+
         spinner.setAdapter(adapter);
         //dealing with the selected option of the spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 keywordItem = parent.getItemAtPosition(pos);
+                presenter.setKeyword((String) keywordItem);
 
                 setView();
-
-
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -64,10 +66,11 @@ public class SearchClubsView extends AppCompatActivity {
      * We will have to fix it(setDisplayClubInfo(String) in the presenter).
      */
     private void setView() {
-        ArrayList<String> clubNames = presenter.getClubNames();
+        ArrayList<String> clubNames = presenter.getSearchClubNames();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 launchActivity = true;
