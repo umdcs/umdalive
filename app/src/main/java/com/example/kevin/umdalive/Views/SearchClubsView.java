@@ -1,6 +1,5 @@
 package com.example.kevin.umdalive.Views;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,17 +66,17 @@ public class SearchClubsView extends AppCompatActivity {
      */
     private void setView() {
         ArrayList<String> clubNames = presenter.getSearchClubNames();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, clubNames);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 launchActivity = true;
-                int itemPosition = position;
+                //int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
                 presenter.setCurrentClub(itemValue);
-                Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(com.example.kevin.umdalive.Views.SearchClubsView.this, DisplayClubView.class);
                 startActivity(intent);
             }
