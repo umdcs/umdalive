@@ -15,34 +15,9 @@ app.use(bodyParser.urlencoded({
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 
-
-/*//////////////////////////
- *   Dummy clubs/users for testing
- *//////////////////////////
-var dummyClub1 = {
-    clubname: "BBQ",
-    username: "umdAlive1",
-    keywords: "Food",
-    description: "we enjoy BBQ's"
-};
-var dummyClub2 = {
-    clubname: "ACM",
-    username: "umdAlive2",
-    keywords: "Academic",
-    description: "we enjoy vast amounts of code not working"
-};
-var dummyClub3 = {
-    clubname: "UnderWaterBasketWeaving",
-    username: "umdAlive1",
-    keywords: "Athletic",
-    description: "We are the best under water basket weaving club in the northland"
-};
-var dummyClub4 = {
-    clubname: "Air Guitar Club",
-    username: "umdAlive1",
-    keywords: "Music",
-    description: "We jam to songs and play air instruments"
-};
+//loads the mongo functions in this file
+var mongodb = require('./mongoDBFunctions.js');
+console.log(mongodb);
 
 // Empty array for clubs to reside in
 var clubs = {
@@ -52,14 +27,8 @@ var clubs = {
 var currentClub;
 
 var countClubs = 0;
-countClubs = clubs.items.push(dummyClub1);
-countClubs = clubs.items.push(dummyClub2);
-countClubs = clubs.items.push(dummyClub3);
-countClubs = clubs.items.push(dummyClub4);
-
 
 var stringArray = JSON.stringify(clubs);
-
 
 var dummyUser1 = {
     name: "Billy Joe",
@@ -69,7 +38,6 @@ var dummyUser1 = {
     clubs: []
 
 };
-dummyUser1.clubs[0] = dummyClub1;
 
 /*///////////////////////////
  *   End of dummy users/clubs
@@ -88,7 +56,6 @@ var countPosts = 0;
 var countDummy1SubscribedClubs = 0;
 
 countUsers = users.items.push(dummyUser1);
-countUsers = users.items.push(dummyUser2);
 
 console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
 
@@ -105,12 +72,13 @@ app.put('/newClub', function (req, res) {
 
     // Takes data from request and makes a new object
     var dataObject = {
-        clubname: req.body.clubname,
+        clubName: req.body.clubName,
         username: req.body.username,
         keywords: req.body.keywords,
         description: req.body.description,
-        //post: req.body.post
     };
+
+    mongodb.insertClub(dataObject);
 
     countClubs = clubs.items.push(dataObject);
     console.log(req.body.post);
@@ -175,7 +143,7 @@ app.put('/currentClub', function (req, res) {
     if (!req.body)
         return res.sendStatus(400);
 
-    currentClub = req.body.clubname;
+    currentClub = req.body.clubName;
 
     console.log("Club selected: " + currentClub);
 
@@ -245,16 +213,20 @@ app.get('/currentClub', function (req,res) {
 
     var pos = getClubPosition(currentClub);
 
-    if(pos !== -1){
-        console.log("SUCCESS: " + currentClub + " WAS FOUND");
-        club = clubs.items[pos];
-        var stringArray = JSON.stringify(club);
-        res.send(stringArray);
-    }
+    mongodb.findClub(currentClub, function(result){
+        res.send(JSON.stringify(result))
+    });
 
-    else{
-        console.log("ERROR: " + currentClub + " NOT FOUND.");
-    }
+//    if(pos !== -1){
+//        console.log("SUCCESS: " + currentClub + " WAS FOUND");
+//        club = clubs.items[pos];
+//        var stringArray = JSON.stringify(club);
+//        res.send(stringArray);
+//    }
+//
+//    else{
+//        console.log("ERROR: " + currentClub + " NOT FOUND.");
+//    }
 });
 
 app.get('/userDataGet', function (req, res) {
@@ -289,7 +261,7 @@ function getClubPosition(clubname_temp) {
     for (var x = 0; x < clubs.items.length; x++)
     {//search for club name and return once found
         //  console.log(clubs.items[x].clubname);
-        if (clubs.items[x].clubname === clubname_temp)
+        if (clubs.items[x].clubName === clubname_temp)
             return x;
     }
     return -1;
@@ -305,7 +277,7 @@ function getUserPosition(username_temp) {
 }
 
 function getClubName(position) {
-    return clubs.items[position].clubname;
+    return clubs.items[position].clubName;
 }
 
 app.listen(app.get("port"), function () {

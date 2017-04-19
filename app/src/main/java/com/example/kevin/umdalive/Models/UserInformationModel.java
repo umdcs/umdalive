@@ -48,7 +48,6 @@ public class UserInformationModel extends AppCompatActivity {
     }
 
 
-
     /*
        Takes in a new arraylist of most recent posts then
        Removes all current posts and then replaces objects in arraylist temp

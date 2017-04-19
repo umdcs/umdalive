@@ -45,7 +45,7 @@ public class AllClubs {
         JSONObject jsonString = null;
         try {
             jsonString = new JSONObject();
-            jsonString.put("clubname", clubName);
+            jsonString.put("clubName", clubName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
