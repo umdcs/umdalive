@@ -17,7 +17,7 @@
         <item name="movies">Movies</item>
         <item name="video_games">VideoGames</item>
         <item name="free">free</item>
-      </string-array>
+    </string-array>
 
     <string-array name="graduation_date">
         <item name="2020">2020</item>

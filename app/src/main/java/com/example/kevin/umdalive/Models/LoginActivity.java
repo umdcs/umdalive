@@ -26,6 +26,9 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
 
@@ -46,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         initializeButtons();
         GoogleSignInitializer();
-
+presenter=new Presenter(this);
 
 
     }
@@ -135,9 +138,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             mFullName=acct.getDisplayName();
             mEmail=acct.getEmail();
 
+            Log.d("presenters", "planning to user data to server");
+
+
 
             Intent intent= new Intent(this, MainView.class);
             startActivity(intent);
+
+
+            extractUserData(mFullName, mEmail);
 
 
 
@@ -169,6 +178,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         }
     }
+
+
+    public void extractUserData(String name, String Email){
+        JSONObject Jsonobj=new JSONObject();
+         try {
+                Jsonobj.put("name", name);
+                Jsonobj.put("email",Email);
+
+
+         }
+         catch (JSONException e) {
+             e.printStackTrace();
+         }
+
+        String data= Jsonobj.toString();
+        Log.d("JSON_Conversion", "converting Json to String ");
+        presenter.restPut("putNewUser",data);
+
+
+
+    }
+
 
 
     @Override
