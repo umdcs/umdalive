@@ -45,16 +45,16 @@ public class AllClubsView extends Activity {
      */
     private void setView() {
         ArrayList<String> clubNames = presenter.getClubNames();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, clubNames);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 launchActivity = true;
-                int itemPosition = position;
+                //int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
                 presenter.setCurrentClub(itemValue);
-                Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
                 startActivity(intent);
             }
