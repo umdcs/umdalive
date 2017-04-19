@@ -18,6 +18,7 @@ import java.util.ArrayList;
  *
  * Class to define UserInformation on sign up
  */
+@SuppressWarnings("unused")
 public class UserInformationModel extends AppCompatActivity {
 
     private String name;
