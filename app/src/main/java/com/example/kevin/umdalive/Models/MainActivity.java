@@ -1,18 +1,6 @@
 package com.example.kevin.umdalive.Models;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.kevin.umdalive.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
