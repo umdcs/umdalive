@@ -19,6 +19,20 @@
         <item name="free">Free</item>
     </string-array>
 
+    <string-array name="keyword_list2">
+        <item name="blank"></item>
+        <item name="academic">Academic</item>
+        <item name="athletic">Athletic</item>
+        <item name="intermurals">Intramurals</item>
+        <item name="fitness">Fitness</item>
+        <item name="food">Food</item>
+        <item name="religious">Religious</item>
+        <item name="movies">Movies</item>
+        <item name="video_games">VideoGames</item>
+        <item name="free">Free</item>
+    </string-array>
+
+
     <string-array name="graduation_date">
         <item name="2020">2020</item>
         <item name="2019">2019</item>
