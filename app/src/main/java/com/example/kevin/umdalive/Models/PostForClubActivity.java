@@ -1,4 +1,3 @@
-package com.example.kevin.umdalive.Models;
+//package com.example.kevin.umdalive.Models;
 
-public class PostForClubActivity {
-}
+//public class PostForClubActivity {}
