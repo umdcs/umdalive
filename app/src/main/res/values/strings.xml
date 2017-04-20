@@ -69,4 +69,5 @@
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="search">Search Clubs by Keyword</string>
+    <string name="make_a_new_club">Make a New Club</string>
 </resources>

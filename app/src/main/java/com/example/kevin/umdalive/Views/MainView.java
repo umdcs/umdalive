@@ -74,13 +74,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
-
-    /**
-     * Starts CreateClubView
-     *
-     * @param view button handles this
-     */
-    public void onClickNewClub(View view) {
+    public void makeNewClub() {
         Intent intent = new Intent(this, CreateClubView.class);
         startActivity(intent);
     }
@@ -161,6 +155,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
         } else if (id == R.id.search) {
             searchClub();
+        } else if (id == R.id.new_club) {
+            makeNewClub();
         } else if (id == R.id.nav_club1) {
             displayClub();
         } else if (id == R.id.nav_club2) {
