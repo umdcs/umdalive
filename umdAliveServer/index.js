@@ -19,10 +19,6 @@ app.use(bodyParser.json());
 var mongodb = require('./mongoDBFunctions.js');
 console.log(mongodb);
 
-var currentClub;
-
-var countClubs = 0;
-
 var dummyUser1 = {
     name: "Billy Joe",
     email: "umdAlive1@gmail.com",
@@ -103,20 +99,6 @@ app.put('/newPost', function (req, res) {
     res.json(jsonResponse);
 });
 
-app.put('/currentClub', function (req, res) {
-    if (!req.body)
-        return res.sendStatus(400);
-
-    currentClub = req.body.clubName;
-
-    console.log("Club selected: " + currentClub);
-
-    var jsonResponse = {
-            id: '123', status: 'updated'
-        };
-    res.json(jsonResponse);
-});
-
 app.put('/userInformation', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
@@ -143,6 +125,19 @@ app.put('/userInformation', function (req, res) {
     console.log("Email of user created: " + req.body.email);
     console.log("GraduationDate of user created: " + req.body.graduation_date);
     console.log("Major of new user: " + req.body.major);
+});
+
+
+app.get('/currentClub/:clubName', function (req,res) {
+    var club;
+    console.log("Looking for " + req.params.clubName);
+
+    mongodb.findClub(req.params.clubName, function(result){
+        var club = result[0];
+        console.log("Found club.");
+        res.body = JSON.stringify(club.clubData);
+        res.send(res.body);
+    });
 });
 
 
@@ -176,17 +171,6 @@ app.get('/getAllClubs', function (req, res) {
             res.send(stringArray);
     });
 
-});
-
-app.get('/currentClub', function (req,res) {
-    var club;
-    console.log("Looking for " + currentClub);
-
-    mongodb.findClub(currentClub, function(result){
-        var club = result[0];
-        console.log("Found club.");
-        res.send(JSON.stringify(club));
-    });
 });
 
 app.get('/userDataGet', function (req, res) {

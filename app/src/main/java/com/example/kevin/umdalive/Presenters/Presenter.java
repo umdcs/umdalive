@@ -132,10 +132,6 @@ public class Presenter {
         return MainActivity.refreshPosts(jsonString);
     }
 
-    public void setCurrentClub(String itemValue){
-        restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
-    }
-
     public void putPost(String club, String title, String time, String date, String location, String addInfo){
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
     }
