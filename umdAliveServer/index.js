@@ -94,29 +94,9 @@ app.put('/newPost', function (req, res) {
     };
 
     mongodb.insertPost(postData);
+
     console.log(req.body.club);
     console.log(req.body.title);
-    var jsonResponse = {
-        id: '123', status: 'updated'
-    };
-    res.json(jsonResponse);
-});
-
-app.put('/subscribeUser', function (req, res) {
-
-    // If for some reason the JSON isn't parsed, return HTTP error 400
-    if (!req.body)
-        return res.sendStatus(400);
-    var tempUser = req.body.username;
-    var tempClub = req.body.clubname;
-
-    var user_position = getUserPosition(tempUser);
-    var club_position = getClubPosition(tempClub);
-
-
-    users[user_position].users_clubs.items.push(clubs[club_position])
-    countClubs = clubs.items.push(dataObject);
-
     var jsonResponse = {
         id: '123', status: 'updated'
     };
@@ -238,32 +218,6 @@ app.get('/mostRecentPosts', function (req, res) {
                 res.send(stringArray);
     });
 });
-
-function getClubPosition(clubname_temp) {
-    //loop through array
-    //console.log(clubname_temp);
-
-    for (var x = 0; x < clubs.items.length; x++)
-    {//search for club name and return once found
-        //  console.log(clubs.items[x].clubname);
-        if (clubs.items[x].clubName === clubname_temp)
-            return x;
-    }
-    return -1;
-}
-
-function getUserPosition(username_temp) {
-    for (var x = 0; x < users.length; x++)
-    {
-        if (users.items[x].body.username === username_temp)
-            return x;
-    }
-    return -1;
-}
-
-function getClubName(position) {
-    return clubs.items[position].clubName;
-}
 
 app.listen(app.get("port"), function () {
     console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));
