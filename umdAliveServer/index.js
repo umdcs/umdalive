@@ -147,6 +147,7 @@ app.get('/clubs/:clubName', function (req,res) {
     });
 });
 
+//Only returns dummy
 app.get('/userData/:user', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
 });
