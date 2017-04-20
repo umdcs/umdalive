@@ -106,7 +106,7 @@ public class RestModel {
     private String getCurrentClub(String data){
         try{
             Log.d(data, data);
-            return new HTTPAsyncTask().execute(serverAddress + "/currentClub/" + data, "GET").get();
+            return new HTTPAsyncTask().execute(serverAddress + "/clubs/" + data, "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class RestModel {
 
     private String getAllClubs(){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/getAllClubs", "GET").get();
+            return new HTTPAsyncTask().execute(serverAddress + "/clubs", "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -145,7 +145,7 @@ public class RestModel {
     private String getRecentPosts(){
         String mostRecentPosts = null;
         try {
-            mostRecentPosts = new HTTPAsyncTask().execute(serverAddress + "/mostRecentPosts", "GET").get();
+            mostRecentPosts = new HTTPAsyncTask().execute(serverAddress + "/posts", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -159,7 +159,7 @@ public class RestModel {
     private String getUserData(){
         String userData;
         try {
-            userData = new HTTPAsyncTask().execute(serverAddress + "/userDataGet", "GET").get();
+            userData = new HTTPAsyncTask().execute(serverAddress + "/userData", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             userData = null;
@@ -172,7 +172,7 @@ public class RestModel {
      * @param data name of the club being fetched
      */
     private void putNewClub(String data) {
-        new HTTPAsyncTask().execute(serverAddress + "/newClub", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/clubs", "PUT", data);
     }
 
     /**
@@ -180,11 +180,11 @@ public class RestModel {
      * @param data the post to be made
      */
     private void putNewPost(String data){
-        new HTTPAsyncTask().execute(serverAddress + "/newPost", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/posts", "PUT", data);
     }
 
     private void putNewUser(String data){
-        new HTTPAsyncTask().execute(serverAddress + "/userInformation", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/userData", "PUT", data);
     }
 
 //<<<<<<< HEAD
