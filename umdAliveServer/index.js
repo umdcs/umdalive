@@ -32,28 +32,12 @@ var dummyUser1 = {
  *   End of dummy users/clubs
  *////////////////////////////
 
-// Empty array for clubs to reside in
-var users = {
-    items: []
-};
-var mostRecentPosts = {
-    items: []
-};
-
-var countUsers = 0;
-var countPosts = 0;
-var countDummy1SubscribedClubs = 0;
-
-countUsers = users.items.push(dummyUser1);
-
-console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
-
 /*
  ************************
  * PUT ROUTE SECTION
  ************************
  */
-app.put('/newClub', function (req, res) {
+app.put('/clubs', function (req, res) {
 
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
@@ -76,7 +60,7 @@ app.put('/newClub', function (req, res) {
     console.log("New club has been created: " + req.body.clubName);
 });
 
-app.put('/newPost', function (req, res) {
+app.put('/posts', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body) return res.sendStatus(400);
 
@@ -99,47 +83,25 @@ app.put('/newPost', function (req, res) {
     res.json(jsonResponse);
 });
 
-app.put('/userInformation', function (req, res) {
+app.put('/userData', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
-    if (!req.body)
-        return res.sendStatus(400);
+    if (!req.body) return res.sendStatus(400);
 
-    // Takes data from request and makes a new object
-    var dataObject = {
+    var userData = {
         name: req.body.name,
         email: req.body.emailAddress,
-        graduation_date: req.body.graduation_date,
+        graduation_date: req.body.graduationDate,
         major: req.body.major,
         users_clubs: [],
     };
 
-    // Adds dataObject items to array
-    countUsers = users.items.push(dataObject);
+    mongodb.insertUser(userData);
 
     var jsonResponse = {
         id: '123', status: 'updated'
     };
     res.json(jsonResponse);
-
-    console.log("Number of Users: " + countUsers);
-    console.log("Email of user created: " + req.body.email);
-    console.log("GraduationDate of user created: " + req.body.graduation_date);
-    console.log("Major of new user: " + req.body.major);
 });
-
-
-app.get('/currentClub/:clubName', function (req,res) {
-    var club;
-    console.log("Looking for " + req.params.clubName);
-
-    mongodb.findClub(req.params.clubName, function(result){
-        var club = result[0];
-        console.log("Found club.");
-        res.body = JSON.stringify(club.clubData);
-        res.send(res.body);
-    });
-});
-
 
 /*
  ************************
@@ -147,12 +109,12 @@ app.get('/currentClub/:clubName', function (req,res) {
  ************************
  */
 
-app.get('/getAllClubs', function (req, res) {
+app.get('/clubs', function (req, res) {
     //array to which each club will be stored
     var clubNames = {
         items: []
     };
-    mongodb.getCollection('allClubs', function(result){
+    mongodb.getCollection('clubs', function(result){
             var clubsData = {
                 jsonArray: []
             };
@@ -173,11 +135,23 @@ app.get('/getAllClubs', function (req, res) {
 
 });
 
-app.get('/userDataGet', function (req, res) {
+app.get('/clubs/:clubName', function (req,res) {
+    var club;
+    console.log("Looking for " + req.params.clubName);
+
+    mongodb.findClub(req.params.clubName, function(result){
+        var club = result[0];
+        console.log("Found club.");
+        res.body = JSON.stringify(club.clubData);
+        res.send(res.body);
+    });
+});
+
+app.get('/userData/:user', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
 });
 
-app.get('/mostRecentPosts', function (req, res) {
+app.get('/posts', function (req, res) {
     var mostRecentPosts = {
         items: []
     };
