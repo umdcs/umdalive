@@ -19,7 +19,7 @@ public class PostInformationModel {
 
     public PostInformationModel(JSONObject postInfo){
         try {
-            club = postInfo.get("club").toString();
+            club = postInfo.get("clubName").toString();
             title = postInfo.get("title").toString();
             time = postInfo.get("time").toString();
             date = postInfo.get("date").toString();

@@ -19,16 +19,9 @@ app.use(bodyParser.json());
 var mongodb = require('./mongoDBFunctions.js');
 console.log(mongodb);
 
-// Empty array for clubs to reside in
-var clubs = {
-    items: []
-};
-
 var currentClub;
 
 var countClubs = 0;
-
-var stringArray = JSON.stringify(clubs);
 
 var dummyUser1 = {
     name: "Billy Joe",
@@ -79,7 +72,6 @@ app.put('/newClub', function (req, res) {
 
     mongodb.insertClub(clubData);
 
-    countClubs = clubs.items.push(clubData);
     var jsonResponse = {
         id: '123', status: 'updated'
     };
@@ -92,17 +84,16 @@ app.put('/newPost', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body) return res.sendStatus(400);
 
-    var dataObject = {
-        club: req.body.clubName,
+    var postData = {
+        clubName: req.body.clubName,
         title: req.body.title,
         time: req.body.time,
         date: req.body.date,
         location: req.body.location,
         description: req.body.description
     };
-    // Adds dataObject items to array
-    // this would have to be altered to handle new parameters event title, time, date, and location. - Ryan
-    countPosts = mostRecentPosts.items.push(dataObject);
+
+    mongodb.insertPost(postData);
     console.log(req.body.club);
     console.log(req.body.title);
     var jsonResponse = {
@@ -223,15 +214,29 @@ app.get('/userDataGet', function (req, res) {
 });
 
 app.get('/mostRecentPosts', function (req, res) {
-    var mostRecentPostsTemp = {
+    var mostRecentPosts = {
         items: []
     };
-    for (var x = 0; x < mostRecentPosts.items.length; x++) {
-        mostRecentPostsTemp.items[x] = mostRecentPosts.items[x];
-    }
-    var stringArray = JSON.stringify(mostRecentPostsTemp);
-    console.log("posts being sent to client: " + stringArray);
-    res.send(stringArray);
+
+    mongodb.getCollection('posts', function(result){
+                var postsData = {
+                    jsonArray: []
+                };
+
+                result.forEach(function(posts){
+                    postsData.jsonArray.push(posts);
+                });
+
+                for(var i = 0; i < postsData.jsonArray.length; i++){
+                    var curPost = postsData.jsonArray[i];
+                    mostRecentPosts.items[i] = curPost.postData;
+                    console.log(mostRecentPosts[i]);
+                }
+
+                var stringArray = JSON.stringify(mostRecentPosts);
+                console.log(stringArray);
+                res.send(stringArray);
+    });
 });
 
 function getClubPosition(clubname_temp) {

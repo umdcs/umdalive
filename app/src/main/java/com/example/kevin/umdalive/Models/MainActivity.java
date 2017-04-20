@@ -33,11 +33,11 @@ public class MainActivity {
                 for (int i = 0; i < len; i++) {
                     JSONObject clubObject = jArray.getJSONObject(i);
                     //create new club object from server data
-                    ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubname").toString(),
+                    ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubName").toString(),
                             clubObject.get("username").toString(), clubObject.get("keywords").toString(),
                             clubObject.get("description").toString());
 
-                    Log.d("club name: ", clubObject.get("clubname").toString());
+                    Log.d("club name: ", clubObject.get("clubName").toString());
                     //add new club object to array
                     list.add(tempClub);
                 }

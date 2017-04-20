@@ -18,13 +18,12 @@ import java.util.ArrayList;
 
 public class PostForClubActivityView extends Activity {
 
-    ListView listView;
-    boolean launchActivity;
-    Presenter presenter;
+    private ListView listView;
+    private Presenter presenter;
+    public static final String CLUB_NAME = "com.example.kevin.umdalive.MESSAGE";
 
     protected void onCreate(Bundle savedInstanceState) {
         presenter = new Presenter(this);
-        launchActivity = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_for_club_select);
         listView = (ListView) findViewById(R.id.list);
@@ -50,12 +49,11 @@ public class PostForClubActivityView extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchActivity = true;
                 int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(PostForClubActivityView.this, PostingActivityView.class);
+                intent.putExtra(CLUB_NAME, itemValue);
                 startActivity(intent);
             }
         });
