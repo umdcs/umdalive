@@ -51,10 +51,10 @@ public class PostForClubActivityView extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 launchActivity = true;
-                int itemPosition = position;
+//                int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
                 presenter.setCurrentClub(itemValue);
-                Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(PostForClubActivityView.this, PostingActivityView.class);
                 startActivity(intent);
             }

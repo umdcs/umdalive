@@ -32,11 +32,11 @@
         android:id="@+id/admin_of_club"
         android:hint='ex: "JohnDoe585"'
         android:textColor="@color/textColorPrimary"
-        android:layout_below="@+id/name_title"
+        android:layout_below="@+id/name_title_enter"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="none"
@@ -44,13 +44,14 @@
         android:id="@+id/description_title"
         android:textColor="@color/textColorPrimary"
         android:text="Description:"
-        android:layout_alignBaseline="@+id/description_of_club"
-        android:layout_alignBottom="@+id/description_of_club"
+        android:clickable="false"
+        android:textSize="20sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/description_of_club"
         android:layout_toStartOf="@+id/description_of_club"
-        android:clickable="false" />
+        android:layout_alignBottom="@+id/description_of_club"
+        android:layout_below="@+id/admin_of_club" />
 
     <Spinner
         android:layout_width="match_parent"
@@ -62,18 +63,19 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="96dp" />
 
-    <EditText
+    <TextView
+        android:id="@+id/keyword_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:ems="10"
-        android:id="@+id/keyword_title"
-        android:textColor="@color/textColorPrimary"
-        android:text="Catagory of Club:"
-        android:layout_below="@+id/description_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:clickable="false" />
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:text="Category of Club:"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="20sp"
+        android:layout_below="@+id/description_of_club" />
 
     <Button
         android:text="Create Club"
@@ -90,33 +92,39 @@
         android:layout_marginBottom="18dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/name_title_enter"
-        android:hint='ex: "BBQ"'
-        android:textColor="@color/textColorPrimary"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:ems="10"
-        android:id="@+id/name_title"
-        android:textColor="@color/textColorPrimary"
-        android:text="Name of Club:"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:hint='ex: "BBQ"'
+        android:inputType="textPersonName"
+        android:textColor="@color/textColorPrimary"
+        android:layout_toRightOf="@+id/name_title"
+        android:layout_toEndOf="@+id/name_title" />
+
+    <TextView
+        android:id="@+id/name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
         android:clickable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:text="Club Name:"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="19sp"
         android:layout_toLeftOf="@+id/admin_of_club"
         android:layout_toStartOf="@+id/admin_of_club" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -125,12 +133,13 @@
         android:text="Admin User:"
         android:inputType="none"
         android:clickable="false"
-        android:layout_alignBaseline="@+id/admin_of_club"
-        android:layout_alignBottom="@+id/admin_of_club"
+        android:textSize="20sp"
+        android:layout_below="@+id/name_title_enter"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/description_of_club"
-        android:layout_toStartOf="@+id/description_of_club" />
+        android:layout_toLeftOf="@+id/admin_of_club"
+        android:layout_toStartOf="@+id/admin_of_club"
+        android:layout_above="@+id/description_of_club" />
 
 
 </RelativeLayout>

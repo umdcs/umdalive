@@ -14,10 +14,11 @@ import java.util.ArrayList;
 /**
  * Questioning this files usage
  *
- * Created by rgebh_000 on 3/17/2017.
+ * Created by Ryan on 3/17/2017.
  *
  * Class to define UserInformation on sign up
  */
+@SuppressWarnings("unused")
 public class UserInformationModel extends AppCompatActivity {
 
     private String name;

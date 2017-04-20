@@ -14,7 +14,7 @@ import com.example.kevin.umdalive.Models.UserInformationModel;
 import java.util.ArrayList;
 
 /**
- * Created by rgebh_000 on 3/15/2017.
+ * Created by ryan_000 on 3/15/2017.
  *
  * Presenter class to communicate between views and models
  */
@@ -42,7 +42,7 @@ public class Presenter {
         restModel = new RestModel();
     }
 
-    public Activity getActivity() {
+    private Activity getActivity() {
         return activity;
     }
 
@@ -50,13 +50,15 @@ public class Presenter {
         this.activity = activity;
     }
 
-    public RestModel getRestModel() {
+    private RestModel getRestModel() {
         return restModel;
     }
 
+    /*
     public void setRestModel(RestModel restModel) {
         this.restModel = restModel;
     }
+    */
 
     /**
      * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
@@ -116,8 +118,8 @@ public class Presenter {
 
     /**
      * For MainActivity
-     * @param userData
-     * @return
+     * @param userData to get
+     * @return user
      */
     public UserInformationModel getMainUser(String userData){
         return MainActivity.getUser(userData);
@@ -133,8 +135,13 @@ public class Presenter {
     }
 
     public void setCurrentClub(String itemValue){
-        restPut("putCurrentClub", AllClubs.jsonStringify(itemValue));
+        restPut("putCurrentClub", AllClubs.jsonStringifyClubName(itemValue));
     }
+
+    public void setKeyword(String keyword){
+        restPut("putKeyword", AllClubs.jsonStringifyKeyword(keyword));
+    }
+
 
     public void putPost(String club, String title, String time, String date, String location, String addInfo){
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
@@ -144,7 +151,11 @@ public class Presenter {
      *gets all the club names
      */
     public ArrayList<String> getClubNames(){
-        return AllClubs.getClubNames(restGet(new String("getAllClubs"), new String("")));
+        return AllClubs.getClubNames(restGet("getAllClubs", ""));
+    }
+
+    public ArrayList<String> getSearchClubNames(){
+        return AllClubs.getClubNames(restGet("getSearchAllClubs", ""));
     }
 
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
@@ -157,7 +168,7 @@ public class Presenter {
         if(!restModel.equals(presenter.getRestModel())) isEqual = false;
         return isEqual;
     }
-    }
+}
 
 
 

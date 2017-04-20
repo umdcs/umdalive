@@ -55,6 +55,8 @@ var clubs = {
 
 var currentClub;
 
+var currentKeyword;
+
 var countClubs = 0;
 countClubs = clubs.items.push(dummyClub1);
 countClubs = clubs.items.push(dummyClub2);
@@ -205,6 +207,20 @@ app.put('/currentClub', function (req, res) {
     res.json(jsonResponse);
 });
 
+app.put('/keyword', function (req, res) {
+    if (!req.body)
+        return res.sendStatus(400);
+
+    currentKeyword = req.body.keyword;
+
+    console.log("keyword: " + currentKeyword);
+
+    var jsonResponse = {
+            id: '123', status: 'updated'
+        };
+    res.json(jsonResponse);
+});
+
 app.put('/userInformation', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
@@ -258,6 +274,26 @@ app.get('/getAllClubs', function (req, res) {
     res.send(stringArray);
 
 });
+
+app.get('/getSearchAllClubs', function (req, res) {
+    //array to which each club will be stored
+    var clubNames = {
+        items: []
+    };
+
+    var i = 0;
+
+    for (var x = 0; x < clubs.items.length; x++) {
+        if(currentKeyword === getClubKeyword(x)) {
+            clubNames.items[i] = getClubName(x);
+            ++i;
+            }
+    }
+    var stringArray = JSON.stringify(clubNames);
+    console.log("clubs being sent to client: " + stringArray);
+    res.send(stringArray);
+});
+
 
 app.get('/currentClub', function (req,res) {
     var success = false;
@@ -327,6 +363,10 @@ function getUserPosition(username_temp) {
 
 function getClubName(position) {
     return clubs.items[position].clubname;
+}
+
+function getClubKeyword(position) {
+    return clubs.items[position].keywords;
 }
 
 app.listen(app.get("port"), function () {

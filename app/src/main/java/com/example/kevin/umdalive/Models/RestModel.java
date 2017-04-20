@@ -25,10 +25,10 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class RestModel {
-    //public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
+    public final String serverAddress = "http://10.0.2.2:5000"; //Emulator Tunnel
     //public final String serverAddress = "https://lempo.d.umn.edu:5001"; //To be used for a real address
     //public final String serverAddress = "http://192.168.1.123:5000"; //Ryan IP
-    public final String serverAddress = "http://131.212.41.37:5004"; //Permanent IP
+    //public final String serverAddress = "http://131.212.41.37:5004"; //Permanent IP
 
     private Context context;
     /**
@@ -57,6 +57,7 @@ public class RestModel {
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
+            case "getSearchAllClubs": return getSearchAllClubs();
             case "getClub": return getCurrentClub();
             case "getRecentPosts": return getRecentPosts();
             case "getUserData": return getUserData();
@@ -77,6 +78,8 @@ public class RestModel {
             case "putNewUser": putNewUser(data);
                 break;
             case "putCurrentClub": putCurrentClub(data);
+                break;
+            case "putKeyword": putKeyword(data);
                 break;
             default: break;
         }
@@ -115,6 +118,19 @@ public class RestModel {
         }
         return null;
     }
+
+    private String getSearchAllClubs(){
+        try{
+            return new HTTPAsyncTask().execute(serverAddress + "/getSearchAllClubs", "GET").get();
+        }
+        catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 
     /**
      * From MainActivity refreshPosts function.
@@ -173,6 +189,10 @@ public class RestModel {
      */
     private void putCurrentClub(String data){
         new HTTPAsyncTask().execute(serverAddress + "/currentClub", "PUT", data);
+    }
+
+    private void putKeyword(String data){
+        new HTTPAsyncTask().execute(serverAddress + "/keyword", "PUT", data);
     }
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {

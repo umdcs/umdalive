@@ -6,13 +6,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by rgebh_000 on 3/17/2017.
+ * Created by ryan on 3/17/2017.
  *
  * Class to define a club.
  *
  * Constructor requires a club name but no other data to instantiate
  */
 
+@SuppressWarnings("unused")
 public class ClubInformationModel {
     private String clubName;
     private String userName;
