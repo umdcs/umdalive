@@ -2,6 +2,8 @@ package com.example.kevin.umdalive;
 
 import android.util.Log;
 
+import com.example.kevin.umdalive.Models.ClubInformationModel;
+
 import org.junit.Test;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertFalse;
