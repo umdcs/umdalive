@@ -39,6 +39,19 @@ module.exports.insertPost = function(postData) {
 };
 
 /**
+* Inserts json info of a new user into the posts collection.
+* If posts collection doesn't exist, it is created.
+* @param userData - JSON data of the post
+*/
+module.exports.insertUser = function(userData) {
+    console.log(userData);
+    mongoDBRef.collection('users').save({user: userData.name, userData}, function(err, result){
+        if(err || !result) console.log("User failed to save in database.");
+        else console.log("Post inserted into posts collection in MongoDB.");
+    });
+};
+
+/**
 * Finds a specific club
 * @param clubName - string of club's name
 * @param callback - the function that the result is sent to

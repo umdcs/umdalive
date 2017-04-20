@@ -32,22 +32,6 @@ var dummyUser1 = {
  *   End of dummy users/clubs
  *////////////////////////////
 
-// Empty array for clubs to reside in
-var users = {
-    items: []
-};
-var mostRecentPosts = {
-    items: []
-};
-
-var countUsers = 0;
-var countPosts = 0;
-var countDummy1SubscribedClubs = 0;
-
-countUsers = users.items.push(dummyUser1);
-
-console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
-
 /*
  ************************
  * PUT ROUTE SECTION
@@ -173,7 +157,7 @@ app.get('/getAllClubs', function (req, res) {
 
 });
 
-app.get('/userDataGet', function (req, res) {
+app.get('/userData/:user', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
 });
 
