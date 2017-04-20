@@ -17,18 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mainPosts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/make_a_club"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/refresh_button"
-            android:background="@color/colorAccent"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical" />
-
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
@@ -59,5 +47,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mainPosts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorAccent"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>
