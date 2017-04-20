@@ -37,7 +37,7 @@ var dummyUser1 = {
  * PUT ROUTE SECTION
  ************************
  */
-app.put('/newClub', function (req, res) {
+app.put('/clubs', function (req, res) {
 
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
@@ -60,7 +60,7 @@ app.put('/newClub', function (req, res) {
     console.log("New club has been created: " + req.body.clubName);
 });
 
-app.put('/newPost', function (req, res) {
+app.put('/posts', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body) return res.sendStatus(400);
 
@@ -83,7 +83,7 @@ app.put('/newPost', function (req, res) {
     res.json(jsonResponse);
 });
 
-app.put('/userInformation', function (req, res) {
+app.put('/userData', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body) return res.sendStatus(400);
 
@@ -103,32 +103,18 @@ app.put('/userInformation', function (req, res) {
     res.json(jsonResponse);
 });
 
-
-app.get('/currentClub/:clubName', function (req,res) {
-    var club;
-    console.log("Looking for " + req.params.clubName);
-
-    mongodb.findClub(req.params.clubName, function(result){
-        var club = result[0];
-        console.log("Found club.");
-        res.body = JSON.stringify(club.clubData);
-        res.send(res.body);
-    });
-});
-
-
 /*
  ************************
  * GET ROUTE SECTION
  ************************
  */
 
-app.get('/getAllClubs', function (req, res) {
+app.get('/clubs', function (req, res) {
     //array to which each club will be stored
     var clubNames = {
         items: []
     };
-    mongodb.getCollection('allClubs', function(result){
+    mongodb.getCollection('clubs', function(result){
             var clubsData = {
                 jsonArray: []
             };
@@ -149,11 +135,23 @@ app.get('/getAllClubs', function (req, res) {
 
 });
 
+app.get('/clubs/:clubName', function (req,res) {
+    var club;
+    console.log("Looking for " + req.params.clubName);
+
+    mongodb.findClub(req.params.clubName, function(result){
+        var club = result[0];
+        console.log("Found club.");
+        res.body = JSON.stringify(club.clubData);
+        res.send(res.body);
+    });
+});
+
 app.get('/userData/:user', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
 });
 
-app.get('/mostRecentPosts', function (req, res) {
+app.get('/posts', function (req, res) {
     var mostRecentPosts = {
         items: []
     };
