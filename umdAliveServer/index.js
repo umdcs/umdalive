@@ -85,30 +85,22 @@ app.put('/newPost', function (req, res) {
 
 app.put('/userInformation', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
-    if (!req.body)
-        return res.sendStatus(400);
+    if (!req.body) return res.sendStatus(400);
 
-    // Takes data from request and makes a new object
-    var dataObject = {
+    var userData = {
         name: req.body.name,
         email: req.body.emailAddress,
-        graduation_date: req.body.graduation_date,
+        graduation_date: req.body.graduationDate,
         major: req.body.major,
         users_clubs: [],
     };
 
-    // Adds dataObject items to array
-    countUsers = users.items.push(dataObject);
+    mongodb.insertUser(userData);
 
     var jsonResponse = {
         id: '123', status: 'updated'
     };
     res.json(jsonResponse);
-
-    console.log("Number of Users: " + countUsers);
-    console.log("Email of user created: " + req.body.email);
-    console.log("GraduationDate of user created: " + req.body.graduation_date);
-    console.log("Major of new user: " + req.body.major);
 });
 
 
