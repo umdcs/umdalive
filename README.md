@@ -8,6 +8,7 @@ One team was responsible for business aspects and idea creation, while the other
 Cultural entrepreneurship (CUE) team: Anastasia Kratzner, Holly Pudwill, and Ryan Danielson.
 
 Computer science (CS) team: Brandon Harshe, Kevin Schauer, Luke Anderson, and Ray Cerney.
+Andy Miller, Wesley Osumo, Ryan Gebhart, and Jenna Anderson. 
 
 ----------
 
@@ -43,7 +44,7 @@ This class will make a new club and send JSON data to be stored on server. This 
 
 **LoginActivity**
 
-Make it functional to acually go and pull the user data from server after checking thier password. 
+Uses Google OAuth to let user log in using their UMD ID and password.
 
 
 **Main Activity**
@@ -70,3 +71,7 @@ NodeServer: The test checks several Get and Put Rquests. an initial querry is do
 Presenter: Created a thorough unit test for all functionality.
     There are issues with using AsyncTask in unit tests so it makes many of the tests worthless. I will look into it more to see if there's a good way to work around that.
 
+Unit Testing Inlcuded
+---------------------
+
+Jenna: ClubInformationUnitTest; creates a test club and checks to see that all the data is created and stored properly. 
