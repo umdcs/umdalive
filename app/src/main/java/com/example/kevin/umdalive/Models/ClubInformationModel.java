@@ -120,7 +120,7 @@ public class ClubInformationModel {
         JSONObject jsonString = null;
         try {
             jsonString = new JSONObject();
-            jsonString.put("clubname", clubName);
+            jsonString.put("clubName", clubName);
             jsonString.put("username", userName);
             jsonString.put("keywords", keyWords);
             jsonString.put("description", description);

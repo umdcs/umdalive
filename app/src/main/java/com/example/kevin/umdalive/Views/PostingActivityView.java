@@ -11,22 +11,25 @@ import android.widget.EditText;
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class PostingActivityView extends AppCompatActivity {
 
 
     private Presenter presenter;
-    //private String postToDisplay;
-    //private static String clubToPost;
+//<<<<<<< HEAD
+//    //private String postToDisplay;
+//    //private static String clubToPost;
+//=======
+    private static String clubToPost;
+//>>>>>>> mongo
     private EditText title;
     private EditText location;
     private EditText time;
     private EditText date;
     private EditText addInfo;
+    private String clubName;
 
     protected void onCreate(Bundle savedInstanceState) {
+        clubName = getIntent().getStringExtra(PostForClubActivityView.CLUB_NAME);
         presenter = new Presenter(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting_activity);
@@ -39,17 +42,9 @@ public class PostingActivityView extends AppCompatActivity {
     }
 
     public void sendPost(View view) {
-        String curClub = presenter.restGet("getClub", "");
-
-        try {
-            JSONObject club = new JSONObject(curClub);
-            String clubName = club.get("clubname").toString();
-            presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
-                    , location.getText().toString(), addInfo.getText().toString());
-            Log.d("Club posting: " + clubName, "New post: " + title.getText().toString()); // forgot to alter this - Ryan
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
+        presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
+                , location.getText().toString(), addInfo.getText().toString());
         Intent intent = new Intent(this, MainView.class);
         startActivity(intent);
     }

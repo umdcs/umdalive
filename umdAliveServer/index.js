@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
 // Support JSON-encoded bodies
 app.use(bodyParser.json());
 
+<<<<<<< HEAD
 
 /*//////////////////////////
  *   Dummy clubs/users for testing
@@ -66,25 +67,19 @@ countClubs = clubs.items.push(dummyClub4);
 
 var stringArray = JSON.stringify(clubs);
 
+=======
+//loads the mongo functions in this file
+var mongodb = require('./mongoDBFunctions.js');
+console.log(mongodb);
+>>>>>>> mongo
 
 var dummyUser1 = {
     name: "Billy Joe",
     email: "umdAlive1@gmail.com",
-    password: "123abc",
     graduationDate: "2018",
     major: "computer science",
     clubs: []
 
-};
-dummyUser1.clubs[0] = dummyClub1;
-dummyUser1.clubs[1] = dummyClub2;
-var dummyUser2 = {
-    name: "Seemore Buts",
-    email: "Seemore.Buts@gmail.com",
-    password: "password",
-    graduationDate: "2019",
-    major: "mechanical engineering",
-    users_clubs: []
 };
 
 /*///////////////////////////
@@ -104,7 +99,6 @@ var countPosts = 0;
 var countDummy1SubscribedClubs = 0;
 
 countUsers = users.items.push(dummyUser1);
-countUsers = users.items.push(dummyUser2);
 
 console.log("Dummy 1 is subscribed to  : " + countDummy1SubscribedClubs + " Clubs");
 
@@ -118,52 +112,39 @@ app.put('/newClub', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
         return res.sendStatus(400);
-
     // Takes data from request and makes a new object
-    var dataObject = {
-        clubname: req.body.clubname,
+    var clubData = {
+        clubName: req.body.clubName,
         username: req.body.username,
         keywords: req.body.keywords,
         description: req.body.description,
-        //post: req.body.post
     };
 
+    mongodb.insertClub(clubData);
 
-    // Adds dataObject items to array
-    countClubs = clubs.items.push(dataObject);
-//    countPosts = mostRecentPosts.items.push(req.body.clubname + ": " + req.body.post);
-
-    //print post to server for testing
-    console.log(req.body.post);
     var jsonResponse = {
         id: '123', status: 'updated'
     };
     res.json(jsonResponse);
 
-    console.log("New club has been created: " + req.body.clubname);
-    console.log("Name of username/admin : " + req.body.username);
-    console.log("Name of keyword/catagory : " + req.body.keywords);
-    console.log("Name of description : " + req.body.description);
-  //  console.log("Name of new post : " + req.body.post);
-    console.log("total items in array : " + countClubs);
-    console.log("total posts saved on server: " + countPosts);
+    console.log("New club has been created: " + req.body.clubName);
 });
 
 app.put('/newPost', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body) return res.sendStatus(400);
 
-    var dataObject = {
-        club: req.body.clubName,
+    var postData = {
+        clubName: req.body.clubName,
         title: req.body.title,
         time: req.body.time,
         date: req.body.date,
         location: req.body.location,
         description: req.body.description
     };
-    // Adds dataObject items to array
-    // this would have to be altered to handle new parameters event title, time, date, and location. - Ryan
-    countPosts = mostRecentPosts.items.push(dataObject);
+
+    mongodb.insertPost(postData);
+
     console.log(req.body.club);
     console.log(req.body.title);
     var jsonResponse = {
@@ -172,27 +153,7 @@ app.put('/newPost', function (req, res) {
     res.json(jsonResponse);
 });
 
-app.put('/subscribeUser', function (req, res) {
-
-    // If for some reason the JSON isn't parsed, return HTTP error 400
-    if (!req.body)
-        return res.sendStatus(400);
-    var tempUser = req.body.username;
-    var tempClub = req.body.clubname;
-
-    var user_position = getUserPosition(tempUser);
-    var club_position = getClubPosition(tempClub);
-
-
-    users[user_position].users_clubs.items.push(clubs[club_position])
-    countClubs = clubs.items.push(dataObject);
-
-    var jsonResponse = {
-        id: '123', status: 'updated'
-    };
-    res.json(jsonResponse);
-});
-
+<<<<<<< HEAD
 app.put('/currentClub', function (req, res) {
     if (!req.body)
         return res.sendStatus(400);
@@ -221,6 +182,8 @@ app.put('/keyword', function (req, res) {
     res.json(jsonResponse);
 });
 
+=======
+>>>>>>> mongo
 app.put('/userInformation', function (req, res) {
     // If for some reason the JSON isn't parsed, return HTTP error 400
     if (!req.body)
@@ -230,7 +193,6 @@ app.put('/userInformation', function (req, res) {
     var dataObject = {
         name: req.body.name,
         email: req.body.emailAddress,
-        password: req.body.user_password,
         graduation_date: req.body.graduation_date,
         major: req.body.major,
         users_clubs: [],
@@ -251,30 +213,36 @@ app.put('/userInformation', function (req, res) {
 });
 
 
+app.get('/currentClub/:clubName', function (req,res) {
+    var club;
+    console.log("Looking for " + req.params.clubName);
+
+    mongodb.findClub(req.params.clubName, function(result){
+        var club = result[0];
+        console.log("Found club.");
+        res.body = JSON.stringify(club.clubData);
+        res.send(res.body);
+    });
+});
+
+
 /*
  ************************
  * GET ROUTE SECTION
  ************************
  */
 
-/*
- * Function to get a specific users data, will eventually return a user info based on the name of them
- * for now it returns a fake user for testing purposes -Kevin
- */
 app.get('/getAllClubs', function (req, res) {
     //array to which each club will be stored
     var clubNames = {
         items: []
     };
-    for (var x = 0; x < clubs.items.length; x++) {
-        clubNames.items[x] = getClubName(x);
-    }
-    var stringArray = JSON.stringify(clubNames);
-    console.log("clubs being sent to client: " + stringArray);
-    res.send(stringArray);
+    mongodb.getCollection('allClubs', function(result){
+            var clubsData = {
+                jsonArray: []
+            };
 
-});
-
+<<<<<<< HEAD
 app.get('/getSearchAllClubs', function (req, res) {
     //array to which each club will be stored
     var clubNames = {
@@ -299,71 +267,53 @@ app.get('/currentClub', function (req,res) {
     var success = false;
     var club;
     console.log("Looking for " + currentClub);
+=======
+            result.forEach(function(clubs){
+                clubsData.jsonArray.push(clubs);
+            });
+>>>>>>> mongo
 
-    var pos = getClubPosition(currentClub);
+            for(var i = 0; i < clubsData.jsonArray.length; i++){
+                var curClub = clubsData.jsonArray[i];
+                clubNames.items[i] = curClub.club;
+            }
 
-    if(pos !== -1){
-        console.log("SUCCESS: " + currentClub + " WAS FOUND");
-        club = clubs.items[pos];
-        var stringArray = JSON.stringify(club);
-        res.send(stringArray);
-    }
+            var stringArray = JSON.stringify(clubNames);
+            console.log("clubs being sent to client: " + stringArray);
+            res.send(stringArray);
+    });
 
-    else{
-        console.log("ERROR: " + currentClub + " NOT FOUND.");
-    }
 });
 
 app.get('/userDataGet', function (req, res) {
-
-    //console log for testing what data is being sent
-    console.log("User data being returned: \n" + "Name: " + dummyUser1.name
-            + "\n Email: " + dummyUser1.email
-            + "\n Password: " + dummyUser1.password
-            + "\n Graduation Date: " + dummyUser1.graduationDate
-            + "\n Major: " + dummyUser1.major
-            + "\n UserClubs:" + dummyUser1.clubs)
-    //response message from server
     res.send(JSON.stringify(dummyUser1));
 });
 
 app.get('/mostRecentPosts', function (req, res) {
-    var mostRecentPostsTemp = {
+    var mostRecentPosts = {
         items: []
     };
-    for (var x = 0; x < mostRecentPosts.items.length; x++) {
-        mostRecentPostsTemp.items[x] = mostRecentPosts.items[x];
-    }
-    var stringArray = JSON.stringify(mostRecentPostsTemp);
-    console.log("posts being sent to client: " + stringArray);
-    res.send(stringArray);
+
+    mongodb.getCollection('posts', function(result){
+                var postsData = {
+                    jsonArray: []
+                };
+
+                result.forEach(function(posts){
+                    postsData.jsonArray.push(posts);
+                });
+
+                for(var i = 0; i < postsData.jsonArray.length; i++){
+                    var curPost = postsData.jsonArray[i];
+                    mostRecentPosts.items[i] = curPost.postData;
+                    console.log(mostRecentPosts[i]);
+                }
+
+                var stringArray = JSON.stringify(mostRecentPosts);
+                console.log(stringArray);
+                res.send(stringArray);
+    });
 });
-
-function getClubPosition(clubname_temp) {
-    //loop through array
-    //console.log(clubname_temp);
-
-    for (var x = 0; x < clubs.items.length; x++)
-    {//search for club name and return once found
-        //  console.log(clubs.items[x].clubname);
-        if (clubs.items[x].clubname === clubname_temp)
-            return x;
-    }
-    return -1;
-}
-
-function getUserPosition(username_temp) {
-    for (var x = 0; x < users.length; x++)
-    {
-        if (users.items[x].body.username === username_temp)
-            return x;
-    }
-    return -1;
-}
-
-function getClubName(position) {
-    return clubs.items[position].clubname;
-}
 
 function getClubKeyword(position) {
     return clubs.items[position].keywords;

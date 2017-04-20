@@ -134,6 +134,7 @@ public class Presenter {
         return MainActivity.refreshPosts(jsonString);
     }
 
+<<<<<<< HEAD
     public void setCurrentClub(String itemValue){
         restPut("putCurrentClub", AllClubs.jsonStringifyClubName(itemValue));
     }
@@ -143,6 +144,8 @@ public class Presenter {
     }
 
 
+=======
+>>>>>>> mongo
     public void putPost(String club, String title, String time, String date, String location, String addInfo){
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
     }
