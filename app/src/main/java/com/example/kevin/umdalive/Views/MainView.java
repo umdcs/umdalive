@@ -222,42 +222,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-//    public void getMoreInfo(View view) {
-//        showPopup(view);
-//    }
-//
-//
-//    public void showPopup(View anchorView) {
-//
-//        View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
-//
-//        PopupWindow popupWindow = new PopupWindow(popupView,
-//                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-//
-//        // Example: If you have a TextView inside `popup_layout.xml`
-//        TextView tv = (TextView) popupView.findViewById(R.id.tv);
-//
-//        tv.setText("Pop Up View With Additional Info");
-//
-//        // Initialize more widgets from `popup_layout.xml`
-//
-//        // If the PopupWindow should be focusable
-//        popupWindow.setFocusable(true);
-//
-//        // If you need the PopupWindow to dismiss when when touched outside
-//       // popupWindow.setBackgroundDrawable(new ColorDrawable());
-//
-////        int location[] = new int[2];
-//
-//        // Get the View's(the one that was clicked in the Fragment) location
-////        anchorView.getLocationOnScreen(location);
-//
-//        // Using location, the PopupWindow will be displayed right under anchorView
-//        popupWindow.showAtLocation(anchorView, Gravity.CLIP_HORIZONTAL, 0, 0);// + anchorView.getHeight());
-//
-//    }
-
-
     @Override
     public void onStart() {
         super.onStart();
