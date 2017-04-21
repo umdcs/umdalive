@@ -42,7 +42,7 @@ public class SearchClubsView extends AppCompatActivity {
 
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 keywordItem = parent.getItemAtPosition(pos);
-                presenter.setKeyword((String) keywordItem);
+                //presenter.setKeyword((String) keywordItem);
 
                 setView();
             }
@@ -75,7 +75,7 @@ public class SearchClubsView extends AppCompatActivity {
                 launchActivity = true;
                 //int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                presenter.setCurrentClub(itemValue);
+                //presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(com.example.kevin.umdalive.Views.SearchClubsView.this, DisplayClubView.class);
                 startActivity(intent);

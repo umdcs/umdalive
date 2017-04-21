@@ -234,22 +234,22 @@ app.get('/clubs', function (req, res) {
 //    var club;
 //    console.log("Looking for " + currentClub);
 //=======
-//            result.forEach(function(clubs){
-//                clubsData.jsonArray.push(clubs);
-//            });
+            result.forEach(function(clubs){
+                clubsData.jsonArray.push(clubs);
+            });
 //>>>>>>> mongo
-//
-//            for(var i = 0; i < clubsData.jsonArray.length; i++){
-//                var curClub = clubsData.jsonArray[i];
-//                clubNames.items[i] = curClub.club;
-//            }
-//
-//            var stringArray = JSON.stringify(clubNames);
-//            console.log("clubs being sent to client: " + stringArray);
-//            res.send(stringArray);
-//    });
-//
-//});
+
+            for(var i = 0; i < clubsData.jsonArray.length; i++){
+                var curClub = clubsData.jsonArray[i];
+                clubNames.items[i] = curClub.club;
+            }
+
+            var stringArray = JSON.stringify(clubNames);
+            console.log("clubs being sent to client: " + stringArray);
+            res.send(stringArray);
+    });
+
+});
 
 app.get('/clubs/:clubName', function (req,res) {
     var club;
@@ -301,3 +301,5 @@ app.listen(app.get("port"), function () {
     console.log('CS4531 UMDAlive app listening on port: ', app.get("port"));
 
 });
+
+
