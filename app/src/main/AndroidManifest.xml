@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.example.kevin.umdalive">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.kevin.umdalive">
 <uses-permission android:name="android.permission.INTERNET"/>
 <application
     android:allowBackup="true"
@@ -38,6 +39,16 @@ package="com.example.kevin.umdalive">
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
+    <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="${applicationId}.com.vansuita.pickimage.provider"
+        android:exported="false"
+        android:grantUriPermissions="true"
+        tools:replace="android:authorities">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/picker_provider_paths" />
+    </provider>
 </application>
 
 </manifest>

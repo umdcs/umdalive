@@ -54,4 +54,5 @@
     <string name="title">Title</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
+    <string name="chooseImage">Click icon to choose an image.</string>
 </resources>
