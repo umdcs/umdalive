@@ -76,8 +76,8 @@ app.put('/posts', function (req, res) {
 
     mongodb.insertPost(postData);
 
-    console.log(req.body.clubName);
-    console.log(req.body.title);
+    console.log("Club posting: " + req.body.clubName);
+    console.log("Title of post: " + req.body.title);
     var jsonResponse = {
         id: '123', status: 'updated'
     };
