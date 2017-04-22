@@ -157,8 +157,8 @@ public class Presenter {
         return AllClubs.getClubNames(restGet("getAllClubs", ""));
     }
 
-    public ArrayList<String> getSearchClubNames(){
-        return AllClubs.getClubNames(restGet("getSearchAllClubs", ""));
+    public ArrayList<String> getSearchClubNames(String keyword){
+        return AllClubs.getClubNames(restGet("getSearchAllClubs", keyword));
     }
 
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){

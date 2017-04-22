@@ -52,17 +52,8 @@ public class AllClubsView extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//<<<<<<< HEAD
-//                launchActivity = true;
-//                //int itemPosition = position;
-//                String itemValue = (String) listView.getItemAtPosition(position);
-//                presenter.setCurrentClub(itemValue);
-//                Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
-//=======
-                int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
-//>>>>>>> mongo
+                Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
                 intent.putExtra(CLUB_NAME, itemValue);
                 startActivity(intent);

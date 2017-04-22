@@ -58,7 +58,7 @@ public class RestModel {
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
-            case "getSearchAllClubs": return getSearchAllClubs();
+            case "getSearchAllClubs": return getSearchAllClubs(data);
             //case "getClub": return getCurrentClub();
             case "getClub": return getCurrentClub(data);
             case "getRecentPosts": return getRecentPosts();
@@ -124,9 +124,9 @@ public class RestModel {
         return null;
     }
 
-    private String getSearchAllClubs(){
+    private String getSearchAllClubs(String data){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/getSearchAllClubs", "GET").get();
+            return new HTTPAsyncTask().execute(serverAddress + "/clubSearch/" + data, "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
