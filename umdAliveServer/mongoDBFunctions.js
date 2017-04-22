@@ -31,7 +31,6 @@ module.exports.insertClub = function(clubData) {
 * @param postData - JSON data of the post
 */
 module.exports.insertPost = function(postData) {
-    console.log(postData);
     mongoDBRef.collection('posts').save({post: postData.clubName, postData}, function(err, result){
         if(err || !result) console.log("Post failed to save in database.");
         else console.log("Post inserted into posts collection in MongoDB.");
