@@ -170,11 +170,12 @@ app.get('/clubSearch/:keyword', function (req,res) {
                     }
             }
 
-            var stringArray = JSON.stringify(clubNames.items);
+            var stringArray = JSON.stringify(clubNames);
             console.log("clubs being sent to client: " + stringArray);
             res.send(stringArray);
     });
 });
+
 
 app.get('/userData/:user', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
