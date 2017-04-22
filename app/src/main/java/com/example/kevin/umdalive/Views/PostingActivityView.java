@@ -70,7 +70,6 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
             public void onClick(View view) {
                 PickSetup setup = new PickSetup();
                 setup.setTitle("Select a picture source.");
-                setup.setWidth(620).setHeight(350);
                 setup.setGalleryIcon(R.mipmap.gallery_colored);
                 setup.setCameraIcon(R.mipmap.camera_colored);
                 PickImageDialog.build(setup).show(PostingActivityView.this);
@@ -83,7 +82,8 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         if (r.getError() == null) {
             displayImage.setImageBitmap(r.getBitmap());
             ByteArrayOutputStream bitStream = new ByteArrayOutputStream();
-            r.getBitmap().compress(Bitmap.CompressFormat.JPEG, 70, bitStream);
+            Bitmap imageMap = r.getBitmap();
+            imageMap.compress(Bitmap.CompressFormat.JPEG, 70, bitStream);
             imageString = Base64.encodeToString(bitStream.toByteArray(), Base64.NO_WRAP);
         } else {
             Log.d("ERROR in image: ", r.getError().getMessage());

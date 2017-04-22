@@ -69,8 +69,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         byte[] bitmapData = Base64.decode(curPost.getImage(), Base64.NO_WRAP);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
-        if (bitmap != null)
+        if (bitmap != null) {
             image.setImageBitmap(bitmap);
+        }
 
         final boolean isExpanded = position == expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
