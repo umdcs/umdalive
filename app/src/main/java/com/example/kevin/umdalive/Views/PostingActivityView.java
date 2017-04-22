@@ -2,8 +2,10 @@ package com.example.kevin.umdalive.Views;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +24,9 @@ import com.vansuita.pickimage.listeners.IPickResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 public class PostingActivityView extends AppCompatActivity implements IPickResult {
 
 
@@ -34,6 +39,7 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
     private EditText addInfo;
     private String clubName;
     private ImageView displayImage;
+    String imageString;
 
     protected void onCreate(Bundle savedInstanceState) {
         clubName = getIntent().getStringExtra(PostForClubActivityView.CLUB_NAME);
@@ -75,18 +81,10 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
     @Override
     public void onPickResult(PickResult r) {
         if (r.getError() == null) {
-            //If you want the Uri.
-            //Mandatory to refresh image from Uri.
-            //getImageView().setImageURI(null);
-
-            //Setting the real returned image.
-            //getImageView().setImageURI(r.getUri());
-
-            //If you want the Bitmap.
-             displayImage.setImageBitmap(r.getBitmap());
-
-            //Image path
-            //r.getPath();
+            displayImage.setImageBitmap(r.getBitmap());
+            ByteArrayOutputStream bitStream = new ByteArrayOutputStream();
+            r.getBitmap().compress(Bitmap.CompressFormat.JPEG, 70, bitStream);
+            imageString = Base64.encodeToString(bitStream.toByteArray(), Base64.NO_WRAP);
         } else {
             Log.d("ERROR in image: ", r.getError().getMessage());
         }
