@@ -26,6 +26,7 @@ public class PostInformationModel {
             date = postInfo.get("date").toString();
             location = postInfo.get("location").toString();
             description = postInfo.get("description").toString();
+            image = postInfo.get("image").toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }

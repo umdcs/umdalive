@@ -17,10 +17,9 @@
         card_view:cardBackgroundColor="@color/oatmeal">
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/post_image"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:src="@drawable/example_image"
             android:scaleType="fitXY"/>
 
         <View
