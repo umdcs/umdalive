@@ -170,11 +170,9 @@ app.get('/posts', function (req, res) {
                 for(var i = 0; i < postsData.jsonArray.length; i++){
                     var curPost = postsData.jsonArray[i];
                     mostRecentPosts.items[i] = curPost.postData;
-                    console.log(mostRecentPosts[i]);
                 }
 
                 var stringArray = JSON.stringify(mostRecentPosts);
-                console.log(stringArray);
                 res.send(stringArray);
     });
 });
