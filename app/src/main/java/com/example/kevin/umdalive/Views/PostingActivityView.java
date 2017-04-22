@@ -7,15 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.kevin.umdalive.Models.PostForClubActivity;
+import com.example.kevin.umdalive.Models.PostingActivity;
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
+import com.vansuita.pickimage.bean.PickResult;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+import com.vansuita.pickimage.listeners.IPickResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PostingActivityView extends AppCompatActivity {
+public class PostingActivityView extends AppCompatActivity implements IPickResult {
 
 
     private Presenter presenter;
@@ -26,6 +33,7 @@ public class PostingActivityView extends AppCompatActivity {
     private EditText date;
     private EditText addInfo;
     private String clubName;
+    private ImageView displayImage;
 
     protected void onCreate(Bundle savedInstanceState) {
         clubName = getIntent().getStringExtra(PostForClubActivityView.CLUB_NAME);
@@ -37,7 +45,8 @@ public class PostingActivityView extends AppCompatActivity {
         date = (EditText) findViewById(R.id.event_date);
         location = (EditText) findViewById(R.id.event_location);
         addInfo = (EditText) findViewById(R.id.additional_info);
-
+         displayImage = ((ImageView) findViewById(R.id.result_image));
+        imageSetup();
     }
 
     public void sendPost(View view) {
@@ -46,6 +55,41 @@ public class PostingActivityView extends AppCompatActivity {
                 , location.getText().toString(), addInfo.getText().toString());
         Intent intent = new Intent(this, MainView.class);
         startActivity(intent);
+    }
+
+
+    private void imageSetup() {
+         displayImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PickSetup setup = new PickSetup();
+                setup.setTitle("Select a picture source.");
+                setup.setWidth(620).setHeight(350);
+                setup.setGalleryIcon(R.mipmap.gallery_colored);
+                setup.setCameraIcon(R.mipmap.camera_colored);
+                PickImageDialog.build(setup).show(PostingActivityView.this);
+            }
+        });
+    }
+
+    @Override
+    public void onPickResult(PickResult r) {
+        if (r.getError() == null) {
+            //If you want the Uri.
+            //Mandatory to refresh image from Uri.
+            //getImageView().setImageURI(null);
+
+            //Setting the real returned image.
+            //getImageView().setImageURI(r.getUri());
+
+            //If you want the Bitmap.
+             displayImage.setImageBitmap(r.getBitmap());
+
+            //Image path
+            //r.getPath();
+        } else {
+            Log.d("ERROR in image: ", r.getError().getMessage());
+        }
     }
 
     protected void onPause() {

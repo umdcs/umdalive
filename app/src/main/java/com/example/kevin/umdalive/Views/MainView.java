@@ -222,6 +222,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
