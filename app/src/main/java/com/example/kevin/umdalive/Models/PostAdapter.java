@@ -1,13 +1,17 @@
 package com.example.kevin.umdalive.Models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -54,6 +58,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView eventTime = (TextView) holder.cardView.findViewById(R.id.post_time);
         TextView eventLocation = (TextView) holder.cardView.findViewById(R.id.post_location);
         TextView description = (TextView) holder.cardView.findViewById(R.id.description_content);
+        ImageView image = (ImageView) holder.cardView.findViewById(R.id.post_image);
 
         titleText.setText(curPost.getTitle());
         clubName.setText(curPost.getClub());
@@ -62,7 +67,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         eventLocation.setText(curPost.getLocation());
         description.setText(curPost.getDescription());
 
-        final boolean isExpanded = position== expandedPosition;
+        byte[] bitmapData = Base64.decode(curPost.getImage(), Base64.NO_WRAP);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length);
+        if (bitmap != null) {
+            image.setImageBitmap(bitmap);
+        }
+
+        final boolean isExpanded = position == expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
         holder.expandText.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
         holder.itemView.setActivated(isExpanded);

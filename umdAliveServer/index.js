@@ -69,13 +69,14 @@ app.put('/posts', function (req, res) {
         time: req.body.time,
         date: req.body.date,
         location: req.body.location,
-        description: req.body.description
+        description: req.body.description,
+        image: req.body.image
     };
 
     mongodb.insertPost(postData);
 
-    console.log(req.body.club);
-    console.log(req.body.title);
+    console.log("Club posting: " + req.body.clubName);
+    console.log("Title of post: " + req.body.title);
     var jsonResponse = {
         id: '123', status: 'updated'
     };
@@ -176,7 +177,7 @@ app.get('/clubSearch/:keyword', function (req,res) {
     });
 });
 
-
+//Only returns dummy
 app.get('/userData/:user', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
 });
@@ -198,11 +199,9 @@ app.get('/posts', function (req, res) {
                 for(var i = 0; i < postsData.jsonArray.length; i++){
                     var curPost = postsData.jsonArray[i];
                     mostRecentPosts.items[i] = curPost.postData;
-                    console.log(mostRecentPosts[i]);
                 }
 
                 var stringArray = JSON.stringify(mostRecentPosts);
-                console.log(stringArray);
                 res.send(stringArray);
     });
 });
