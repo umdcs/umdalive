@@ -58,7 +58,7 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
     public void sendPost(View view) {
         Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
         presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
-                , location.getText().toString(), addInfo.getText().toString());
+                , location.getText().toString(), addInfo.getText().toString(), imageString);
         Intent intent = new Intent(this, MainView.class);
         startActivity(intent);
     }

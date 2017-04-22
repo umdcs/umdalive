@@ -16,6 +16,7 @@ public class PostInformationModel {
     private String date;
     private String location;
     private String description;
+    private String image;
 
     public PostInformationModel(JSONObject postInfo){
         try {
@@ -64,6 +65,8 @@ public class PostInformationModel {
         return description;
     }
 
+    public String getImage(){ return image; }
+
     public void setClub(String club) {
         this.club = club;
     }
@@ -87,6 +90,8 @@ public class PostInformationModel {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setImage(String image){ this.image = image; }
 
     /**
      * Function to create a JSON object of a post
@@ -117,7 +122,7 @@ public class PostInformationModel {
      *
      * @return jsonString string form of JSON object Club
      */
-    public static String jsonStringify(String club, String title, String time, String date, String location, String description) {
+    public static String jsonStringify(String club, String title, String time, String date, String location, String description, String image) {
         JSONObject jsonString = null;
         try {
             jsonString = new JSONObject();
@@ -127,6 +132,7 @@ public class PostInformationModel {
             jsonString.put("date", date);
             jsonString.put("location", location);
             jsonString.put("description", description);
+            jsonString.put("image", image);
         } catch (JSONException e) {
             e.printStackTrace();
         }
