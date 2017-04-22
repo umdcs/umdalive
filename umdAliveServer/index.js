@@ -70,7 +70,8 @@ app.put('/posts', function (req, res) {
         time: req.body.time,
         date: req.body.date,
         location: req.body.location,
-        description: req.body.description
+        description: req.body.description,
+        image: req.body.image
     };
 
     mongodb.insertPost(postData);
