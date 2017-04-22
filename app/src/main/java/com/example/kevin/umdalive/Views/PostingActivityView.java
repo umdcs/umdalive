@@ -15,12 +15,7 @@ public class PostingActivityView extends AppCompatActivity {
 
 
     private Presenter presenter;
-//<<<<<<< HEAD
-//    //private String postToDisplay;
-//    //private static String clubToPost;
-//=======
     private static String clubToPost;
-//>>>>>>> mongo
     private EditText title;
     private EditText location;
     private EditText time;
@@ -38,7 +33,6 @@ public class PostingActivityView extends AppCompatActivity {
         date = (EditText) findViewById(R.id.event_date);
         location = (EditText) findViewById(R.id.event_location);
         addInfo = (EditText) findViewById(R.id.additional_info);
-
     }
 
     public void sendPost(View view) {

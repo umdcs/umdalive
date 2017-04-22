@@ -5,8 +5,8 @@ package com.example.kevin.umdalive.Models;
  */
 
 public class CreateClub{
-    public static String makeClub(String clubName, String userName, String keyWords, String description){//, String initialPost){
-        ClubInformationModel newClub = new ClubInformationModel(clubName, userName, keyWords, description);//, initialPost);
+    public static String makeClub(String clubName, String userName, String keyWords, String description){
+        ClubInformationModel newClub = new ClubInformationModel(clubName, userName, keyWords, description);
         return newClub.jsonStringify();
     }
 }

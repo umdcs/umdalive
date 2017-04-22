@@ -69,9 +69,8 @@ public class UserInformationModel extends AppCompatActivity {
     {
         localClubNames = names;
     }
-    public ArrayList<String> getLocalClubNames()
 
-    {
+    public ArrayList<String> getLocalClubNames() {
         return localClubNames;
     }
 
@@ -147,7 +146,6 @@ public class UserInformationModel extends AppCompatActivity {
      */
     public void setMajor(String major) {
         this.major = major;
-
     }
 
     /**

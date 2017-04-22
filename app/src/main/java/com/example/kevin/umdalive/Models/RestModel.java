@@ -59,7 +59,6 @@ public class RestModel {
         switch(getString){
             case "getAllClubs": return getAllClubs();
             case "getSearchAllClubs": return getSearchAllClubs(data);
-            //case "getClub": return getCurrentClub();
             case "getClub": return getCurrentClub(data);
             case "getRecentPosts": return getRecentPosts();
             case "getUserData": return getUserData();
@@ -79,12 +78,6 @@ public class RestModel {
                 break;
             case "putNewUser": putNewUser(data);
                 break;
-//<<<<<<< HEAD
-//            case "putCurrentClub": putCurrentClub(data);
-//                break;
-//            case "putKeyword": putKeyword(data);
-//                break;
-//=======
             default: break;
         }
         return null;
@@ -187,22 +180,6 @@ public class RestModel {
         new HTTPAsyncTask().execute(serverAddress + "/userData", "PUT", data);
     }
 
-//<<<<<<< HEAD
-//    /**
-//     * For AllClubsView to set the club that display club will use.
-//     * The club name will be set in the currentClub string of the server's user info object
-//     * @param data the selected club name
-//     */
-//    private void putCurrentClub(String data){
-//        new HTTPAsyncTask().execute(serverAddress + "/currentClub", "PUT", data);
-//    }
-//
-//    private void putKeyword(String data){
-//        new HTTPAsyncTask().execute(serverAddress + "/keyword", "PUT", data);
-//    }
-//
-//=======
-//>>>>>>> mongo
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
