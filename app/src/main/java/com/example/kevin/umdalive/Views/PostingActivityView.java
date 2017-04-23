@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kevin.umdalive.Presenters.Presenter;
@@ -26,8 +27,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class PostingActivityView extends AppCompatActivity implements IPickResult {
-
-
     private Presenter presenter;
     private static String clubToPost;
     private EditText title;
@@ -35,9 +34,11 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
     private EditText time;
     private EditText date;
     private EditText addInfo;
+    private TextView inputError;
     private String clubName;
     private ImageView displayImage;
-    String imageString;
+    private String errorMessage;
+    private String imageString;
 
     protected void onCreate(Bundle savedInstanceState) {
         clubName = getIntent().getStringExtra(PostForClubActivityView.CLUB_NAME);
@@ -49,19 +50,47 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         date = (EditText) findViewById(R.id.event_date);
         location = (EditText) findViewById(R.id.event_location);
         addInfo = (EditText) findViewById(R.id.additional_info);
-        displayImage = ((ImageView) findViewById(R.id.result_image));
+        displayImage = (ImageView) findViewById(R.id.result_image);
+        inputError = (TextView) findViewById(R.id.invalid_input);
         imageSetup();
     }
 
     public void sendPost(View view) {
-        boolean error = false;
+        boolean isError = checkStrings();
+        ;
         Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
-        if(!error) {
+        if (!isError) {
             presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()
                     , location.getText().toString(), addInfo.getText().toString(), imageString);
+            Intent intent = new Intent(this, MainView.class);
+            startActivity(intent);
+        } else inputError.setText(errorMessage);
+    }
+
+    private boolean checkStrings() {
+        boolean isError = false;
+        errorMessage = "";
+        if (title.getText().toString().matches("")) {
+            errorMessage = "You must enter a title.";
+            isError = true;
         }
-        Intent intent = new Intent(this, MainView.class);
-        startActivity(intent);
+        if (time.getText().toString().matches("")) {
+            errorMessage = "You must enter a time.";
+            isError = true;
+        }
+        if (date.getText().toString().matches("")) {
+            errorMessage = "You must enter a date.";
+            isError = true;
+        }
+        if (location.getText().toString().matches("")) {
+            errorMessage = "You must enter a location.";
+            isError = true;
+        }
+        if (addInfo.getText().toString().matches("")) {
+            errorMessage = "You must enter a description.";
+            isError = true;
+        }
+        return isError;
     }
 
 
