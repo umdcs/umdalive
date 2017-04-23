@@ -72,6 +72,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         if (bitmap != null) {
             image.setImageBitmap(bitmap);
         }
+        else image.setImageResource(R.drawable.umd_alive_default);
 
         final boolean isExpanded = position == expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
