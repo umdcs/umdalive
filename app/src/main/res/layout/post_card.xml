@@ -13,6 +13,7 @@
         android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         card_view:cardCornerRadius="8dp"
         card_view:cardBackgroundColor="@color/oatmeal">
 
@@ -55,16 +56,25 @@
             android:id="@+id/post_date"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="27dp"
             android:layout_marginTop="165dp"
             android:text="@string/date"
             android:textSize="15sp"
             android:textColor="@color/darkMaroon"
             android:maxLines="1"/>
 
+        <ImageView
+            android:id="@+id/date_image"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_marginTop="165dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/date"
+            />
+
         <TextView
             android:layout_marginTop="191dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="27dp"
             android:text="@string/time"
             android:textSize="15sp"
             android:id="@+id/post_time"
@@ -73,9 +83,18 @@
             android:textColor="@color/darkMaroon"
             android:maxLines="1" />
 
+        <ImageView
+            android:id="@+id/time_image"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_marginTop="191dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/time"
+            />
+
         <TextView
             android:layout_marginTop="217dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="27dp"
             android:text="@string/location"
             android:textSize="15sp"
             android:id="@+id/post_location"
@@ -84,16 +103,14 @@
             android:textColor="@color/darkMaroon"
             android:maxLines="1" />
 
-        <TextView
-            android:id="@+id/card_expand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
-            android:layout_marginTop="215dp"
-            android:background="@null"
-            android:text="@string/tap_for_more_info"
-            android:textSize="10sp"
-            android:textColor="@color/bearGrey" />
+        <ImageView
+            android:id="@+id/location_image"
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_marginTop="217dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/location"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
