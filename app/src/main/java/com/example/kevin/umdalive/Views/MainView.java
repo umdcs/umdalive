@@ -155,7 +155,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         } else if (id == R.id.new_club) {
             makeNewClub();
         } else if (id == R.id.nav_club1) {
-            displayClub();
+
         } else if (id == R.id.nav_club2) {
 
         } else if (id == R.id.nav_share) {
