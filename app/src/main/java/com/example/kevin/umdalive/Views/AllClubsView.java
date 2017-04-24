@@ -14,6 +14,8 @@ import com.example.kevin.umdalive.R;
 
 import java.util.ArrayList;
 
+;
+
 /**
  * Created by Andrew Miller 3/21/2017
  * <p>
