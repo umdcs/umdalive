@@ -66,11 +66,17 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
+    /**
+     * starts SearchClubsView
+     */
     public void searchClub() {
         Intent intent = new Intent(this, SearchClubsView.class);
         startActivity(intent);
     }
 
+    /**
+     * starts CreateClubView
+     */
     public void makeNewClub() {
         Intent intent = new Intent(this, CreateClubView.class);
         startActivity(intent);
@@ -168,6 +174,9 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    /**
+     * gets recent posts and displays
+     */
     private void displayPosts(){
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
         RecyclerView.Adapter adapter = presenter.getPostAdapter(posts, recyclerView);
@@ -175,15 +184,17 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    /**
+     * sets posts
+     */
     private void setPosts(){
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
         //thisUser.setLocalPosts(posts);
         //commented out because not needed at this point.
     }
 
-
     /**
-     * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
+     * This was all in onCreate and it was really cluttered so I just moved it to a separate function.
      */
     private void viewSetup() {
         setPosts();

@@ -30,7 +30,6 @@ public class PostForClubActivityView extends Activity {
         setView();
     }
 
-
     /**
      * Sets up the view.
      *
@@ -81,5 +80,4 @@ public class PostForClubActivityView extends Activity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
 }
