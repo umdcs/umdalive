@@ -37,6 +37,10 @@ public class CreateClubView extends AppCompatActivity {
         });
     }
 
+    /**
+     * o
+     * @param view passing view
+     */
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainView.class);
 
