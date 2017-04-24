@@ -133,12 +133,18 @@ public class Presenter {
     }
 
     /**
-     *gets all the club names
+     * gets all the club names
+     * @return list of all clubs
      */
     public ArrayList<String> getClubNames(){
         return AllClubs.getClubNames(restGet("getAllClubs", ""));
     }
 
+    /**
+     * used to get all clubs with a keyword
+     * @param keyword to search
+     * @return clubs containing keywords
+     */
     public ArrayList<String> getSearchClubNames(String keyword){
         return AllClubs.getClubNames(restGet("getSearchAllClubs", keyword));
     }
@@ -147,6 +153,11 @@ public class Presenter {
         return new PostAdapter(posts, rView);
     }
 
+    /**
+     * testing
+     * @param presenter to compare
+     * @return if presenter is equal
+     */
     public boolean equals(Presenter presenter){
         boolean isEqual = true;
         if(!activity.equals(presenter.getActivity())) isEqual = false;
