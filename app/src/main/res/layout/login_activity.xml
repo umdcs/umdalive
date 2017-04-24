@@ -22,12 +22,12 @@
         android:id="@+id/UMD_Alive_Title"
         android:textSize="@android:dimen/app_icon_size"
         android:textColor="@color/textColorPrimary"
-        android:layout_marginTop="101dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginLeft="63dp"
+        android:layout_marginStart="63dp"
         android:layout_below="@+id/btn_sign_out"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
