@@ -55,7 +55,6 @@ public class PostInformationModel {
         this.description = description;
     }
 
-
     /*
     Getters and Setters
      */
@@ -162,6 +161,11 @@ public class PostInformationModel {
     }
 
 
+    /**
+     * used in testing
+     * @param rightHand clubto be compared
+     * @return true or false is equal
+     */
     public boolean equals(PostInformationModel rightHand) {
         boolean isEqual = true;
 
@@ -180,8 +184,4 @@ public class PostInformationModel {
 
         return isEqual;
     }
-
-
-
-
 }
