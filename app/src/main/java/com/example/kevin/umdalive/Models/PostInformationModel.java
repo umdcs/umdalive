@@ -184,4 +184,19 @@ public class PostInformationModel {
 
         return isEqual;
     }
+
+    /**
+     * Checks if a string is a valid form of input(ascii characters between 32 and 126)
+     * @param str input
+     * @return isError if invalid
+     */
+    public static boolean checkAscii(String str){
+        boolean isError = false;
+        char[] charArray = str.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            Log.d("checking: " , Integer.toString((int)charArray[i]));
+            if(((int) charArray[i]) <  32 || (int) charArray[i] > 126) isError = true;
+        }
+        return isError;
+    }
 }

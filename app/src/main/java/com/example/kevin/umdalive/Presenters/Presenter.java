@@ -166,11 +166,33 @@ public class Presenter {
         return isEqual;
     }
 
+    /**
+     * Checks if a string is a valid form of input
+     * @param str input
+     * @return false if invalid
+     */
     public boolean isClubInfoValid(String str){
         return ClubInformationModel.checkAscii(str);
     }
 
+    /**
+     * Checks if a string is a valid form of input
+     * @param str input
+     * @return false if invalid
+     */
     public boolean isClubNameValid(String str){
         return ClubInformationModel.checkClubNameAscii(str);
     }
+
+    /**
+     * Checks if a string is a valid form of input
+     * @param str input
+     * @return false if invalid
+     */
+    public boolean isPostInfoValid(String str){
+        return PostInformationModel.checkAscii(str);
+    }
+
+
+
 }

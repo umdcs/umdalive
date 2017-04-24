@@ -67,33 +67,40 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         } else inputError.setText(errorMessage);
     }
 
+    /**
+     * Checks if strings are invalid
+     * @return false if invalid input
+     */
     private boolean checkStrings() {
         boolean isError = false;
         errorMessage = "";
-        if (title.getText().toString().matches("")) {
-            errorMessage = "You must enter a title.";
+        if (title.getText().toString().matches("") || presenter.isPostInfoValid(title.getText().toString())) {
+            errorMessage = "You must enter a valid title.";
             isError = true;
         }
-        if (time.getText().toString().matches("")) {
-            errorMessage = "You must enter a time.";
+        if (time.getText().toString().matches("") || presenter.isPostInfoValid(time.getText().toString())) {
+            errorMessage = "You must enter a valid time.";
             isError = true;
         }
-        if (date.getText().toString().matches("")) {
-            errorMessage = "You must enter a date.";
+        if (date.getText().toString().matches("") || presenter.isPostInfoValid(date.getText().toString())) {
+            errorMessage = "You must enter a valid date.";
             isError = true;
         }
-        if (location.getText().toString().matches("")) {
-            errorMessage = "You must enter a location.";
+        if (location.getText().toString().matches("") || presenter.isPostInfoValid(location.getText().toString())) {
+            errorMessage = "You must enter a valid location.";
             isError = true;
         }
-        if (addInfo.getText().toString().matches("")) {
-            errorMessage = "You must enter a description.";
+        if (addInfo.getText().toString().matches("") || presenter.isPostInfoValid(addInfo.getText().toString())) {
+            errorMessage = "You must enter a valid description.";
             isError = true;
         }
         return isError;
     }
 
 
+    /**
+     * Sets up the selected image
+     */
     private void imageSetup() {
          displayImage.setOnClickListener(new View.OnClickListener() {
             @Override

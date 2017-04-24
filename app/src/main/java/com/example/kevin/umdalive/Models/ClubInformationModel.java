@@ -133,6 +133,11 @@ public class ClubInformationModel {
         return jsonString.toString();
     }
 
+    /**
+     * Checks if a string is a valid form of input(ascii chararcters between 32 and 126)
+     * @param str input
+     * @return isError if invalid
+     */
     public static boolean checkAscii(String str){
         boolean isError = false;
         char[] charArray = str.toCharArray();
@@ -143,6 +148,11 @@ public class ClubInformationModel {
         return isError;
     }
 
+    /**
+     * Checks if a string is a valid form of input(number, /, or characters a-z/A-Z)
+     * @param str input
+     * @return isError if invalid
+     */
     public static boolean checkClubNameAscii(String str){
         boolean isError = false;
         char[] charArray = str.toCharArray();

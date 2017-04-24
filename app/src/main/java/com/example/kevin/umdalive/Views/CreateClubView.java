@@ -61,6 +61,10 @@ public class CreateClubView extends AppCompatActivity {
         else invalidInput.setText(errorMessage);
     }
 
+    /**
+     * Checks if strings are invalid
+     * @return false if invalid input
+     */
     private boolean checkStrings() {
         boolean isError = false;
 
