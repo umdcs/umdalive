@@ -10,14 +10,28 @@
     <string-array name="keyword_list">
         <item name="academic">Academic</item>
         <item name="athletic">Athletic</item>
-        <item name="intermurals">Intermurals</item>
+        <item name="intermurals">Intramurals</item>
         <item name="fitness">Fitness</item>
         <item name="food">Food</item>
         <item name="religious">Religious</item>
         <item name="movies">Movies</item>
         <item name="video_games">VideoGames</item>
-        <item name="free">free</item>
+        <item name="free">Free</item>
     </string-array>
+
+    <string-array name="keyword_list2">
+        <item name="select">Select a Keyword</item>
+        <item name="academic">Academic</item>
+        <item name="athletic">Athletic</item>
+        <item name="intermurals">Intramurals</item>
+        <item name="fitness">Fitness</item>
+        <item name="food">Food</item>
+        <item name="religious">Religious</item>
+        <item name="movies">Movies</item>
+        <item name="video_games">VideoGames</item>
+        <item name="free">Free</item>
+    </string-array>
+
 
     <string-array name="graduation_date">
         <item name="2020">2020</item>
@@ -33,7 +47,7 @@
         <item name="computer_science">Computer Science</item>
         <item name="finance">Finance</item>
         <item name="chemistry">Chemistry</item>
-        <item name="mathematics">Mathmatics</item>
+        <item name="mathematics">Mathematics</item>
         <item name="english">English</item>
         <item name="history">History</item>
     </string-array>
@@ -54,5 +68,6 @@
     <string name="title">Title</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
-    <string name="title_activity_user_info">userInfo</string>
+    <string name="search">Search Clubs by Keyword</string>
+    <string name="make_a_new_club">Make a New Club</string>
 </resources>

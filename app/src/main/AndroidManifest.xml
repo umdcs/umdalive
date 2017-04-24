@@ -35,8 +35,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Views.Main2Activity" />
-        <activity android:name=".Views.userdata"></activity>
+        <activity android:name=".Views.SearchClubsView"></activity>
     </application>
 
 </manifest>
