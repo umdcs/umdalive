@@ -55,6 +55,10 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         imageSetup();
     }
 
+    /**
+     * sends post
+     * @param view view
+     */
     public void sendPost(View view) {
         boolean isError = checkStrings();
         ;
@@ -67,6 +71,10 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         } else inputError.setText(errorMessage);
     }
 
+    /**
+     * checks for valid input
+     * @return error message
+     */
     private boolean checkStrings() {
         boolean isError = false;
         errorMessage = "";
@@ -93,7 +101,9 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         return isError;
     }
 
-
+    /**
+     * sets up image
+     */
     private void imageSetup() {
          displayImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +117,10 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         });
     }
 
+    /**
+     * image selected
+     * @param r result
+     */
     @Override
     public void onPickResult(PickResult r) {
         if (r.getError() == null) {
