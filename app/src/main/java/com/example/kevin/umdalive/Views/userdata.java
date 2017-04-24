@@ -28,7 +28,7 @@ public class userdata extends AppCompatActivity {
 
     Object graduationItem;
     Object majorItem;
-ArrayList<String> mSelectedItems;
+ArrayList<Integer> mSelectedItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,11 +97,14 @@ ArrayList<String> mSelectedItems;
     }
 
 
-    public Dialog onCreateDialog() {
+
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         mSelectedItems = new ArrayList();  // Where we track the selected items
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Set the dialog title
-        builder.setTitle("Choose your Interests")
+        builder.setTitle("Choose your interests")
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
                 .setMultiChoiceItems(R.array.list_of_interests, null,
@@ -119,7 +122,7 @@ ArrayList<String> mSelectedItems;
                             }
                         })
                 // Set the action buttons
-                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK, so save the mSelectedItems results somewhere
