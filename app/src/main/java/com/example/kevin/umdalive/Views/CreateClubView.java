@@ -16,7 +16,10 @@ import com.example.kevin.umdalive.R;
 public class CreateClubView extends AppCompatActivity {
 
     private Object keywordItem = new Object();
-    Presenter presenter;
+    private Presenter presenter;
+    private EditText newName;
+    private EditText admin;
+    private EditText description;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +43,26 @@ public class CreateClubView extends AppCompatActivity {
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainView.class);
 
-        EditText newName = (EditText) findViewById(R.id.name_title_enter);
-        EditText admin = (EditText) findViewById(R.id.admin_of_club);
-        EditText description = (EditText) findViewById(R.id.description_of_club);
+        newName = (EditText) findViewById(R.id.name_title_enter);
+        admin = (EditText) findViewById(R.id.admin_of_club);
+        description = (EditText) findViewById(R.id.description_of_club);
 
-        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
-                (String)keywordItem, description.getText().toString());
+        if(!checkStrings()) {
+            String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
+                    (String) keywordItem, description.getText().toString());
 
-        startActivity(intent);
-        presenter.restPut("putNewClub", jsonString);
+            startActivity(intent);
+            presenter.restPut("putNewClub", jsonString);
+        }
+    }
+
+    private boolean checkStrings() {
+        boolean isError = false;
+        //errorMessage = "";
+        if (newName.getText().toString().contains("/")) {
+            //errorMessage = "You must enter a title.";
+            isError = true;
+        }
+        return false;
     }
 }

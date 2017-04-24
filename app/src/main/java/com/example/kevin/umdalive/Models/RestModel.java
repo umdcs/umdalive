@@ -98,6 +98,7 @@ public class RestModel {
      */
     private String getCurrentClub(String data){
         try{
+            data = data.replace("/", "_");
             Log.d(data, data);
             return new HTTPAsyncTask().execute(serverAddress + "/clubs/" + data, "GET").get();
         }
