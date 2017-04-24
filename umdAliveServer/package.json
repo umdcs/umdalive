@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.16.1",
-    "express": "^4.14.1"
+    "express": "^4.14.1",
+    "mongodb": "^2.2.11",
+    "mongojs": "^2.4.0"
   },
   "devDependencies": {
     "module-js": "^5.15.0"

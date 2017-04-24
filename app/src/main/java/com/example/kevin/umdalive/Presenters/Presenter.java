@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.kevin.umdalive.Models.AllClubs;
+import com.example.kevin.umdalive.Models.ClubInformationModel;
 import com.example.kevin.umdalive.Models.CreateClub;
 import com.example.kevin.umdalive.Models.MainActivity;
 import com.example.kevin.umdalive.Models.PostAdapter;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 public class Presenter {
     private Activity activity;
     private RestModel restModel;
-
 
     /**
      * Constructor for presenter
@@ -54,12 +54,6 @@ public class Presenter {
     private RestModel getRestModel() {
         return restModel;
     }
-
-    /*
-    public void setRestModel(RestModel restModel) {
-        this.restModel = restModel;
-    }
-    */
 
     /**
      * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
@@ -135,34 +129,36 @@ public class Presenter {
         return MainActivity.refreshPosts(jsonString);
     }
 
-    public void setCurrentClub(String itemValue){
-        restPut("putCurrentClub", AllClubs.jsonStringifyClubName(itemValue));
-    }
-
-    public void setKeyword(String keyword){
-        restPut("putKeyword", AllClubs.jsonStringifyKeyword(keyword));
-    }
-
-
-    public void putPost(String club, String title, String time, String date, String location, String addInfo){
-        restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
+    public void putPost(String club, String title, String time, String date, String location, String addInfo, String image){
+        restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo, image));
     }
 
     /**
-     *gets all the club names
+     * gets all the club names
+     * @return list of all clubs
      */
     public ArrayList<String> getClubNames(){
         return AllClubs.getClubNames(restGet("getAllClubs", ""));
     }
 
-    public ArrayList<String> getSearchClubNames(){
-        return AllClubs.getClubNames(restGet("getSearchAllClubs", ""));
+    /**
+     * used to get all clubs with a keyword
+     * @param keyword to search
+     * @return clubs containing keywords
+     */
+    public ArrayList<String> getSearchClubNames(String keyword){
+        return AllClubs.getClubNames(restGet("getSearchAllClubs", keyword));
     }
 
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
         return new PostAdapter(posts, rView);
     }
 
+    /**
+     * testing
+     * @param presenter to compare
+     * @return if presenter is equal
+     */
     public boolean equals(Presenter presenter){
         boolean isEqual = true;
         if(!activity.equals(presenter.getActivity())) isEqual = false;
@@ -170,14 +166,33 @@ public class Presenter {
         return isEqual;
     }
 
-    public void startUSer(){
+    /**
+     * Checks if a string is a valid form of input
+     * @param str input
+     * @return false if invalid
+     */
+    public boolean isClubInfoValid(String str){
+        return ClubInformationModel.checkAscii(str);
+    }
 
+    /**
+     * Checks if a string is a valid form of input
+     * @param str input
+     * @return false if invalid
+     */
+    public boolean isClubNameValid(String str){
+        return ClubInformationModel.checkClubNameAscii(str);
+    }
 
+    /**
+     * Checks if a string is a valid form of input
+     * @param str input
+     * @return false if invalid
+     */
+    public boolean isPostInfoValid(String str){
+        return PostInformationModel.checkAscii(str);
     }
 
 
+
 }
-
-
-
-

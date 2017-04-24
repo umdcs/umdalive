@@ -66,11 +66,17 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         startActivity(intent);
     }
 
+    /**
+     * starts SearchClubsView
+     */
     public void searchClub() {
         Intent intent = new Intent(this, SearchClubsView.class);
         startActivity(intent);
     }
 
+    /**
+     * starts CreateClubView
+     */
     public void makeNewClub() {
         Intent intent = new Intent(this, CreateClubView.class);
         startActivity(intent);
@@ -165,7 +171,7 @@ Intent intent= new Intent(this, userdata.class);
         } else if (id == R.id.new_club) {
             makeNewClub();
         } else if (id == R.id.nav_club1) {
-            displayClub();
+
         } else if (id == R.id.nav_club2) {
 
         } else if (id == R.id.nav_share) {
@@ -178,6 +184,9 @@ Intent intent= new Intent(this, userdata.class);
         return true;
     }
 
+    /**
+     * gets recent posts and displays
+     */
     private void displayPosts(){
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
         RecyclerView.Adapter adapter = presenter.getPostAdapter(posts, recyclerView);
@@ -185,15 +194,17 @@ Intent intent= new Intent(this, userdata.class);
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    /**
+     * sets posts
+     */
     private void setPosts(){
         posts = presenter.refreshPosts(presenter.restGet("getRecentPosts", ""));
         //thisUser.setLocalPosts(posts);
         //commented out because not needed at this point.
     }
 
-
     /**
-     * This was all in onCreate and it was really cluttered so I just moved it to a seperate function.
+     * This was all in onCreate and it was really cluttered so I just moved it to a separate function.
      */
     private void viewSetup() {
         setPosts();
@@ -214,15 +225,6 @@ Intent intent= new Intent(this, userdata.class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
@@ -230,41 +232,6 @@ Intent intent= new Intent(this, userdata.class);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
-//    public void getMoreInfo(View view) {
-//        showPopup(view);
-//    }
-//
-//
-//    public void showPopup(View anchorView) {
-//
-//        View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
-//
-//        PopupWindow popupWindow = new PopupWindow(popupView,
-//                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-//
-//        // Example: If you have a TextView inside `popup_layout.xml`
-//        TextView tv = (TextView) popupView.findViewById(R.id.tv);
-//
-//        tv.setText("Pop Up View With Additional Info");
-//
-//        // Initialize more widgets from `popup_layout.xml`
-//
-//        // If the PopupWindow should be focusable
-//        popupWindow.setFocusable(true);
-//
-//        // If you need the PopupWindow to dismiss when when touched outside
-//       // popupWindow.setBackgroundDrawable(new ColorDrawable());
-//
-////        int location[] = new int[2];
-//
-//        // Get the View's(the one that was clicked in the Fragment) location
-////        anchorView.getLocationOnScreen(location);
-//
-//        // Using location, the PopupWindow will be displayed right under anchorView
-//        popupWindow.showAtLocation(anchorView, Gravity.CLIP_HORIZONTAL, 0, 0);// + anchorView.getHeight());
-//
-//    }
 
 
     @Override

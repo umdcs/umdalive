@@ -15,7 +15,6 @@ import java.util.Collections;
 public class AllClubs {
     /**
      * This is used to convert a JSON response into a list of strings containing the names of the clubs.
-     * ...I really hope this works :)
      *
      * @param jsonResponse the response from the REST get call to the server retrieving all clubs.
      * @return ArrayList of all club names
@@ -23,6 +22,7 @@ public class AllClubs {
     public static ArrayList<String> getClubNames(String jsonResponse) {
 
         ArrayList<String> clubList = new ArrayList<>();
+        Log.d("clubs: ", jsonResponse);
         try {
             JSONObject object = new JSONObject(jsonResponse);
             JSONArray jsonArray = object.getJSONArray("items");
@@ -40,29 +40,4 @@ public class AllClubs {
         }
         return clubList;
     }
-
-    public static String jsonStringifyClubName(String clubName){
-        JSONObject jsonString = null;
-        try {
-            jsonString = new JSONObject();
-            jsonString.put("clubname", clubName);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonString.toString();
-    }
-
-    public static String jsonStringifyKeyword(String keyword){
-        JSONObject jsonString = null;
-        try {
-            jsonString = new JSONObject();
-            jsonString.put("keyword", keyword);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonString.toString();
-    }
-
 }
-
-

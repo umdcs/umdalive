@@ -49,7 +49,6 @@ public class UserInformationModel extends AppCompatActivity {
     }
 
 
-
     /*
        Takes in a new arraylist of most recent posts then
        Removes all current posts and then replaces objects in arraylist temp
@@ -70,9 +69,8 @@ public class UserInformationModel extends AppCompatActivity {
     {
         localClubNames = names;
     }
-    public ArrayList<String> getLocalClubNames()
 
-    {
+    public ArrayList<String> getLocalClubNames() {
         return localClubNames;
     }
 
@@ -148,7 +146,6 @@ public class UserInformationModel extends AppCompatActivity {
      */
     public void setMajor(String major) {
         this.major = major;
-
     }
 
     /**

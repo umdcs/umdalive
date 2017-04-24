@@ -4,19 +4,27 @@ package com.example.kevin.umdalive.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
 
 public class CreateClubView extends AppCompatActivity {
 
-    private Object keywordItem = new Object();          //this item grabs from user
-    Presenter presenter;
+    private Object keywordItem = new Object();
+    private Presenter presenter;
+    private EditText newName;
+    private EditText admin;
+    private EditText description;
+    private TextView invalidInput;
+    private String errorMessage;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +45,46 @@ public class CreateClubView extends AppCompatActivity {
         });
     }
 
+    /**
+     * o
+     * @param view passing view
+     */
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainView.class);
+        invalidInput = (TextView) findViewById(R.id.invalid_input);
+        newName = (EditText) findViewById(R.id.name_title_enter);
+        admin = (EditText) findViewById(R.id.admin_of_club);
+        description = (EditText) findViewById(R.id.description_of_club);
 
-        EditText newName = (EditText) findViewById(R.id.name_title_enter);
-        EditText admin = (EditText) findViewById(R.id.admin_of_club);
-        EditText description = (EditText) findViewById(R.id.description_of_club);
-        //EditText newPost = (EditText) findViewById(R.id.post_of_club);
+        if(!checkStrings()) {
+            String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
+                    (String) keywordItem, description.getText().toString());
+            startActivity(intent);
+            presenter.restPut("putNewClub", jsonString);
+        }
+        else invalidInput.setText(errorMessage);
+    }
 
-        String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
-                (String)keywordItem, description.getText().toString());
+    /**
+     * Checks if strings are invalid
+     * @return false if invalid input
+     */
+    private boolean checkStrings() {
+        boolean isError = false;
 
-        startActivity(intent);
-        presenter.restPut("putNewClub", jsonString);
+        errorMessage = "";
+        if (newName.getText().toString().matches("") || presenter.isClubNameValid(newName.getText().toString())) {
+            errorMessage = "You must enter a valid club name";
+            isError = true;
+        }
+        if (admin.getText().toString().matches("") || presenter.isClubInfoValid(admin.getText().toString())) {
+            errorMessage = "You must enter a valid admin name.";
+            isError = true;
+        }
+        if (description.getText().toString().matches("") || presenter.isClubInfoValid(description.getText().toString())) {
+            errorMessage = "You must enter a valid description.";
+            isError = true;
+        }
+        return isError;
     }
 }

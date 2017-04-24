@@ -6,10 +6,11 @@
     <color name="textColorPrimary">#ead84c</color>
     <color name="black">#000 </color>
     <color name="white">#ffffff </color>
-    <color name="machineryTransparent">#28262525</color>
+    <color name="machineryTransparent">#3c262525</color>
     <color name="machinery">#262525</color>
     <color name="bearGrey">#525252</color>
     <color name="oatmeal">#e6ddbc</color>
     <color name="darkMaroon">#822626</color>
     <color name="clear">#00000000</color>
+    <color name="divider">#BDBDBD</color>
 </resources>

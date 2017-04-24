@@ -2,6 +2,7 @@ package com.example.kevin.umdalive.Views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.kevin.umdalive.Presenters.Presenter;
@@ -16,14 +17,11 @@ import org.json.JSONObject;
  */
 public class DisplayClubView extends AppCompatActivity {
 
-
     private Presenter presenter;
-
     private String clubName;
     private String description;
     private String keywords;
     private String administrator;
-
     private TextView clubNameSetText;
     private TextView descriptionSetText;
     private TextView keywordSetText;
@@ -36,15 +34,18 @@ public class DisplayClubView extends AppCompatActivity {
         setView();
     }
 
+    /**
+     * sets up view
+     */
     private void setView(){
-        String jsonResponse = presenter.restGet("getClub", "");
-
         try {
-            JSONObject club = new JSONObject(jsonResponse);
-            clubName = club.get("clubname").toString();
-            description = club.get("description").toString();
-            keywords = club.get("keywords").toString();
-            administrator = club.get("username").toString();
+            clubName = getIntent().getStringExtra(AllClubsView.CLUB_NAME);
+            String jsonResponse = presenter.restGet("getClub", clubName);
+            Log.d("DisplayClub response: ",jsonResponse);
+            JSONObject clubObject = new JSONObject(jsonResponse);
+            description = clubObject.get("description").toString();
+            keywords = clubObject.get("keywords").toString();
+            administrator = clubObject.get("username").toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }

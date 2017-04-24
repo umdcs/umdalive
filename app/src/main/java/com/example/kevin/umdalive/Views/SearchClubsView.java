@@ -18,8 +18,10 @@ import java.util.ArrayList;
 public class SearchClubsView extends AppCompatActivity {
     ListView listView;
     Presenter presenter;
-    boolean launchActivity = false;
     private Object keywordItem = new Object();
+
+    public static final String CLUB_NAME = "com.example.kevin.umdalive.MESSAGE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,6 @@ public class SearchClubsView extends AppCompatActivity {
         presenter = new Presenter(this);
         setContentView(R.layout.activity_search_clubs_view);
         listView = (ListView) findViewById(R.id.list2);
-
 
         Spinner spinner = (Spinner) findViewById(R.id.keywordChooser); // Create an ArrayAdapter using the string array and a default spinner layout
         //keyword_list is the list of all the club categories. We should probably expand this at some point and add on "other" option.
@@ -42,15 +43,11 @@ public class SearchClubsView extends AppCompatActivity {
 
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 keywordItem = parent.getItemAtPosition(pos);
-                presenter.setKeyword((String) keywordItem);
-
                 setView();
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-
     }
 
     /**
@@ -65,19 +62,17 @@ public class SearchClubsView extends AppCompatActivity {
      * We will have to fix it(setDisplayClubInfo(String) in the presenter).
      */
     private void setView() {
-        ArrayList<String> clubNames = presenter.getSearchClubNames();
+        ArrayList<String> clubNames = presenter.getSearchClubNames((String) keywordItem);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, clubNames);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchActivity = true;
-                //int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(com.example.kevin.umdalive.Views.SearchClubsView.this, DisplayClubView.class);
+                intent.putExtra(CLUB_NAME, itemValue);
                 startActivity(intent);
             }
         });

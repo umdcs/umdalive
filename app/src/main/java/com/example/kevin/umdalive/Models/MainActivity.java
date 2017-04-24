@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 public class MainActivity {
 
+    /**
+     * used to get the current user
+     * @param userData description of user
+     * @return user's UserInfoModel
+     */
     public static UserInformationModel getUser(String userData) {
         try {
             JSONObject user = new JSONObject(userData);
@@ -21,11 +26,11 @@ public class MainActivity {
                 for (int i = 0; i < len; i++) {
                     JSONObject clubObject = jArray.getJSONObject(i);
                     //create new club object from server data
-                    ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubname").toString(),
+                    ClubInformationModel tempClub = new ClubInformationModel(clubObject.get("clubName").toString(),
                             clubObject.get("username").toString(), clubObject.get("keywords").toString(),
                             clubObject.get("description").toString());
 
-                    Log.d("club name: ", clubObject.get("clubname").toString());
+                    Log.d("club name: ", clubObject.get("clubName").toString());
                     //add new club object to array
                     list.add(tempClub);
                 }
@@ -40,6 +45,11 @@ public class MainActivity {
         }
     }
 
+    /**
+     *
+     * @param jsonString representing all posts
+     * @return ArrayList of PostInfoModels
+     */
     public static ArrayList<PostInformationModel> refreshPosts(String jsonString) {
         ArrayList<PostInformationModel> list = new ArrayList<>();
         try {
@@ -57,8 +67,4 @@ public class MainActivity {
         }
         return list;
     }
-
 }
-
-
-
