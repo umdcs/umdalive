@@ -11,24 +11,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
 import com.vansuita.pickimage.listeners.IPickResult;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 public class PostingActivityView extends AppCompatActivity implements IPickResult {
     private Presenter presenter;
-    private static String clubToPost;
     private EditText title;
     private EditText location;
     private EditText time;
