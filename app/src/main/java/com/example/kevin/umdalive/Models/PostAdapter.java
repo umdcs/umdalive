@@ -30,14 +30,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView cardView;
-        LinearLayout expandedView;
-        TextView expandText;
+        private CardView cardView;
+        private LinearLayout expandedView;
 
         public ViewHolder(CardView cView) {
             super(cView);
             expandedView = (LinearLayout) itemView.findViewById(R.id.extended_view);
-            expandText = (TextView) itemView.findViewById(R.id.card_expand);
             cardView = cView;
         }
     }
@@ -72,10 +70,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         if (bitmap != null) {
             image.setImageBitmap(bitmap);
         }
+        else image.setImageResource(R.drawable.umd_alive_default);
 
         final boolean isExpanded = position == expandedPosition;
         holder.expandedView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-        holder.expandText.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
         holder.itemView.setActivated(isExpanded);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +81,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 expandedPosition = isExpanded ? -1 : position;
-                TransitionManager.beginDelayedTransition(recyclerView);
+                //TransitionManager.beginDelayedTransition(recyclerView);
                 notifyDataSetChanged();
             }
         });
