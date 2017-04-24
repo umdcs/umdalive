@@ -24,8 +24,8 @@ import java.util.ArrayList;
 public class Presenter {
     private Activity activity;
     private RestModel restModel;
-private LoginActivity log;
-    private UserInformationModel User;
+
+
 
     /**
      * Constructor for presenter
@@ -196,10 +196,10 @@ private LoginActivity log;
         return PostInformationModel.checkAscii(str);
     }
 
-public void userdata(String major, String grad){
+public void userData(String major, String grad){
+    LoginActivity log=new LoginActivity();
 
-
-String email=this.log.getmEmail();
+String email=log.getmEmail();
 
     String name=log.getmFullName();
 

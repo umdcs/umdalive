@@ -19,11 +19,11 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class UserInformationModel extends AppCompatActivity {
 
-    private String name;
-    private String password;
-    private String email;
-    private String major;
-    private String gradDate;
+   static private String name;
+
+    static private String email;
+    static private String major;
+   static  private String gradDate;
 
     private ArrayList<String> localClubNames;
 
@@ -184,13 +184,15 @@ public class UserInformationModel extends AppCompatActivity {
      *
      * @return jsonString string form of JSON object UserInformation
      */
-    public String jsonStringify() {
+
+
+    public static String jsonStringify() {
         JSONObject jsonString = null;
         try {
             //Create JSONObject here
             jsonString = new JSONObject();
             jsonString.put("name", name);
-            jsonString.put("password", password);
+
             jsonString.put("email", email);
             jsonString.put("major", major);
             jsonString.put("gradDate", gradDate);
@@ -201,4 +203,5 @@ public class UserInformationModel extends AppCompatActivity {
 
         return jsonString.toString();
     }
+
 }

@@ -24,10 +24,10 @@ public class userdata extends AppCompatActivity {
 
     Spinner major;
     Spinner gradDate;
-    String GradDate;
+    String graduationDate;
 String Major;
 
-    String gradDatee;
+
     Object graduationItem;
     Object majorItem;
 ArrayList<Integer> mSelectedItems;
@@ -73,10 +73,22 @@ ArrayList<Integer> mSelectedItems;
         });
 
 
+
+        convertToStrings();
+
+
+        presenter.userData(Major,graduationDate);
+
     }
+
+
+
+
+
+
     public void convertToStrings(){
-        major = (Spinner) findViewById(R.id.spinnermajor);
-        gradDate = (Spinner) findViewById(R.id.spinnergrad);
+        Major= major.getSelectedItem().toString();
+                graduationDate=gradDate.getSelectedItem().toString();
 
     }
 
@@ -91,13 +103,7 @@ public void Interests(View view){
 
 }
 
-public void sendData(View view){
 
-    convertToStrings();
-
-    presenter.userdata(Major,gradDatee);
-
-}
 
 
 
@@ -146,6 +152,34 @@ public void sendData(View view){
 
         return builder.create();
     }
+
+
+
+
+    protected void onPause() {
+        super.onPause();
+    }
+
+    protected void onResume() { //brings activity back to main screen.
+        super.onResume();
+    }
+
+    protected void onStop() {
+        super.onStop();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
 
 }
 
