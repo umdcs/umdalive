@@ -125,7 +125,7 @@ app.get('/clubs', function (req, res) {
 
             for(var i = 0; i < clubsData.jsonArray.length; i++){
                 var curClub = clubsData.jsonArray[i];
-                clubNames.items[i] = curClub.club;
+                clubNames.items[i] = curClub.clubData.clubName;
             }
 
             var stringArray = JSON.stringify(clubNames);
@@ -179,6 +179,11 @@ app.get('/clubSearch/:keyword', function (req,res) {
 
 //Only returns dummy
 app.get('/userData/:user', function (req, res) {
+    res.send(JSON.stringify(dummyUser1));
+});
+
+//Only returns dummy
+app.get('/userData/', function (req, res) {
     res.send(JSON.stringify(dummyUser1));
 });
 

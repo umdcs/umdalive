@@ -19,7 +19,11 @@ console.log("MongoDB is active.")
 * @param clubData - JSON data of the club
 */
 module.exports.insertClub = function(clubData) {
-    mongoDBRef.collection('clubs').save({club: clubData.clubName, clubData}, function(err, result){
+    var temp = clubData.clubName;
+
+    var title = temp.split('/').join('_');
+
+    mongoDBRef.collection('clubs').save({club: title, clubData}, function(err, result){
         if(err || !result) console.log("Club failed to save in database.");
         else console.log("Club inserted into clubs collection in MongoDB.");
     });
