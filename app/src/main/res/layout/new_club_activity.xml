@@ -141,5 +141,16 @@
         android:layout_toStartOf="@+id/admin_of_club"
         android:layout_above="@+id/description_of_club" />
 
+    <TextView
+        android:id="@+id/invalid_input"
+        android:paddingRight="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/machinery"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="18dp"/>
+
 
 </RelativeLayout>

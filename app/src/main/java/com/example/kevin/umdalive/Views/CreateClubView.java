@@ -4,11 +4,13 @@ package com.example.kevin.umdalive.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
@@ -20,6 +22,9 @@ public class CreateClubView extends AppCompatActivity {
     private EditText newName;
     private EditText admin;
     private EditText description;
+    private TextView invalidInput;
+    private String errorMessage;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +47,7 @@ public class CreateClubView extends AppCompatActivity {
 
     public void onClickMakeClub(View view) {
         Intent intent = new Intent(this, MainView.class);
-
+        invalidInput = (TextView) findViewById(R.id.invalid_input);
         newName = (EditText) findViewById(R.id.name_title_enter);
         admin = (EditText) findViewById(R.id.admin_of_club);
         description = (EditText) findViewById(R.id.description_of_club);
@@ -50,19 +55,50 @@ public class CreateClubView extends AppCompatActivity {
         if(!checkStrings()) {
             String jsonString = presenter.makeClub(newName.getText().toString(), admin.getText().toString(),
                     (String) keywordItem, description.getText().toString());
-
             startActivity(intent);
             presenter.restPut("putNewClub", jsonString);
         }
+        else invalidInput.setText(errorMessage);
     }
 
     private boolean checkStrings() {
         boolean isError = false;
-        //errorMessage = "";
-        if (newName.getText().toString().contains("/")) {
-            //errorMessage = "You must enter a title.";
+
+        errorMessage = "";
+        if (newName.getText().toString().matches("") || checkClubNameAscii(newName.getText().toString())) {
+            errorMessage = "You must enter a valid club name";
             isError = true;
         }
-        return false;
+        if (admin.getText().toString().matches("")) {
+            errorMessage = "You must enter a valid admin name.";
+            isError = true;
+        }
+        if (description.getText().toString().matches("")) {
+            errorMessage = "You must enter a valid description.";
+            isError = true;
+        }
+        return isError;
+    }
+
+    private boolean checkAscii(String str){
+        boolean isError = false;
+        char[] charArray = str.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            Log.d("checking: " , Integer.toString((int)charArray[i]));
+            if(((int) charArray[i]) <  32 || (int) charArray[i] > 126) isError = true;
+        }
+        return isError;
+    }
+
+    private boolean checkClubNameAscii(String str){
+        boolean isError = false;
+        char[] charArray = str.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            Log.d("checking: " , Integer.toString((int)charArray[i]));
+            if(!((46 < charArray[i] && charArray[i] < 58) ||
+                    (64 < charArray[i] && charArray[i] < 91) ||
+                    (96 < charArray[i] && charArray[i] < 123))) isError = true;
+        }
+        return isError;
     }
 }
