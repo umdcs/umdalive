@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.kevin.umdalive.Views.MainView;
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
+import com.example.kevin.umdalive.Views.MainView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,12 +26,10 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
-
+    private String mFullName;
+   private  String mEmail;
 
 
     Presenter presenter; //there shouldn't be an error here after merging with the Presenter branch to gain the presenter class
@@ -59,8 +57,7 @@ presenter=new Presenter(this);
     private RelativeLayout Rlayout;
 
     private static final String TAG ="SignInActivity" ;
-    String mFullName;
-    String mEmail;
+
     private static final int RC_SIGN_IN = 9001;
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
@@ -146,7 +143,7 @@ presenter=new Presenter(this);
             startActivity(intent);
 
 
-            extractUserData(mFullName, mEmail);
+
 
 
 
@@ -180,25 +177,7 @@ presenter=new Presenter(this);
     }
 
 
-    public void extractUserData(String name, String Email){
-        JSONObject Jsonobj=new JSONObject();
-         try {
-                Jsonobj.put("name", name);
-                Jsonobj.put("email",Email);
 
-
-         }
-         catch (JSONException e) {
-             e.printStackTrace();
-         }
-
-        String data= Jsonobj.toString();
-        Log.d("JSON_Conversion", "converting Json to String ");
-        presenter.restPut("putNewUser",data);
-
-
-
-    }
 
 
 
@@ -285,6 +264,19 @@ presenter=new Presenter(this);
 
 
     }
+
+
+   public String getmEmail(){
+       return mEmail;
+   }
+
+   public String getmFullName(){
+
+       return mFullName;
+
+   }
+
+
 }
 
 

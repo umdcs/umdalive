@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.kevin.umdalive.Models.AllClubs;
 import com.example.kevin.umdalive.Models.ClubInformationModel;
 import com.example.kevin.umdalive.Models.CreateClub;
+import com.example.kevin.umdalive.Models.LoginActivity;
 import com.example.kevin.umdalive.Models.MainActivity;
 import com.example.kevin.umdalive.Models.PostAdapter;
 import com.example.kevin.umdalive.Models.PostInformationModel;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 public class Presenter {
     private Activity activity;
     private RestModel restModel;
+private LoginActivity log;
+    private UserInformationModel User;
 
     /**
      * Constructor for presenter
@@ -192,6 +195,19 @@ public class Presenter {
     public boolean isPostInfoValid(String str){
         return PostInformationModel.checkAscii(str);
     }
+
+public void userdata(String major, String grad){
+
+
+String email=this.log.getmEmail();
+
+    String name=log.getmFullName();
+
+    UserInformationModel User=new UserInformationModel(name,major,email,grad);
+
+
+}
+
 
 
 

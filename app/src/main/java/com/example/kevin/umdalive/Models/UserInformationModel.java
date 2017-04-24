@@ -4,8 +4,6 @@ package com.example.kevin.umdalive.Models;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.kevin.umdalive.Models.ClubInformationModel;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,6 +45,20 @@ public class UserInformationModel extends AppCompatActivity {
         localPostsSubscribed = new ArrayList<String>();
         localClubsSubscribed = tempClubsSubscribed;
     }
+
+
+    public UserInformationModel(String name, String major, String email, String gradDate){
+        this.name = name;
+        this.email = email;
+        this.major = major;
+        this.gradDate = gradDate;
+
+    }
+
+
+
+
+
 
 
     /*

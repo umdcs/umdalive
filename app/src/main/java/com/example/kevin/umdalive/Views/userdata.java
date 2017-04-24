@@ -25,7 +25,9 @@ public class userdata extends AppCompatActivity {
     Spinner major;
     Spinner gradDate;
     String GradDate;
+String Major;
 
+    String gradDatee;
     Object graduationItem;
     Object majorItem;
 ArrayList<Integer> mSelectedItems;
@@ -39,6 +41,11 @@ ArrayList<Integer> mSelectedItems;
 
         major = (Spinner) findViewById(R.id.spinnermajor);
         gradDate = (Spinner) findViewById(R.id.spinnergrad);
+
+        Major= (String) major.getSelectedItem().toString();
+
+gradDatee=(String) gradDate.getSelectedItem().toString();
+
 
 
         ArrayAdapter<CharSequence> gradAdapter = ArrayAdapter.createFromResource(this, R.array.list_of_interests, android.R.layout.simple_spinner_item);
@@ -73,8 +80,14 @@ public void Interests(View view){
     Dialog x= onCreateDialog();
     x.show();
 
+    presenter.userdata(Major,gradDatee);
+
 
 }
+
+
+
+
 
 
 
