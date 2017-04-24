@@ -160,7 +160,8 @@ public class ClubInformationModel {
             Log.d("checking: " , Integer.toString((int)charArray[i]));
             if(!((46 < charArray[i] && charArray[i] < 58) ||
                     (64 < charArray[i] && charArray[i] < 91) ||
-                    (96 < charArray[i] && charArray[i] < 123))) isError = true;
+                    (96 < charArray[i] && charArray[i] < 123) ||
+                    (charArray[i] == 32))) isError = true;
         }
         return isError;
     }

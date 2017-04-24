@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/keywordChooser"
         android:textColor="@color/textColorPrimary"
-        android:background="@color/bearGrey"
+        android:background="@color/machineryTransparent"
         android:layout_below="@+id/keyword_title"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="96dp" />
@@ -86,10 +86,11 @@
         android:background="@color/bearGrey"
         android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
         android:textColor="@color/colorAccent"
+        android:textSize="16dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginBottom="18dp"/>
 
     <EditText
         android:id="@+id/name_title_enter"
