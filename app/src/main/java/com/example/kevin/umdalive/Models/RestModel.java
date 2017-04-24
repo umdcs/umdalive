@@ -55,6 +55,12 @@ public class RestModel {
         return context;
     }
 
+    /**
+     * switch statement to handle REST GETS
+     * @param getString what we are getting
+     * @param data data to get.
+     * @return data from server
+     */
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
@@ -66,6 +72,12 @@ public class RestModel {
         }
     }
 
+    /**
+     * not used
+     * @param postString task
+     * @param data to post
+     * @return null
+     */
     public String restPost(String postString, String data){
         return null;
     }
@@ -83,18 +95,32 @@ public class RestModel {
         return null;
     }
 
+    /**
+     * unused
+     * @param deleteString task
+     * @param data to delete
+     * @return null
+     */
     public String restDelete(String deleteString, String data){
         return null;
     }
 
+    /**
+     * testing method
+     * @param restModel rest to test
+     * @return boolean is equal
+     */
     public boolean equals(RestModel restModel){
         boolean isEquals = true;
         if(!serverAddress.equals(restModel.serverAddress)) isEquals = false;
         return isEquals;
     }
 
+
     /**
-     * Used by DisplayClub and PostingActivity to fetch the club selected by the user in the previous view
+     * Used by DisplayClub and PostingActivity to fetch the club selected by the user in the previous view.
+     * @param data to get
+     * @return current club
      */
     private String getCurrentClub(String data){
         try{
@@ -107,6 +133,10 @@ public class RestModel {
         return null;
     }
 
+    /**
+     * get all clubs from server
+     * @return data of all clubs
+     */
     private String getAllClubs(){
         try{
             return new HTTPAsyncTask().execute(serverAddress + "/clubs", "GET").get();
@@ -117,6 +147,11 @@ public class RestModel {
         return null;
     }
 
+    /**
+     *
+     * @param data keyword to search for
+     * @return searched for club
+     */
     private String getSearchAllClubs(String data){
         try{
             return new HTTPAsyncTask().execute(serverAddress + "/clubSearch/" + data, "GET").get();
@@ -126,9 +161,6 @@ public class RestModel {
         }
         return null;
     }
-
-
-
 
     /**
      * From MainActivity refreshPosts function.
@@ -176,6 +208,10 @@ public class RestModel {
         new HTTPAsyncTask().execute(serverAddress + "/posts", "PUT", data);
     }
 
+    /**
+     * put a new user
+     * @param data user
+     */
     private void putNewUser(String data){
         new HTTPAsyncTask().execute(serverAddress + "/userData", "PUT", data);
     }
@@ -240,7 +276,4 @@ public class RestModel {
             Log.d("onPostExecute JSON: ", result);
         }
     }
-
-
-
 }
