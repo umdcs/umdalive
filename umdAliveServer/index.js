@@ -166,7 +166,7 @@ app.get('/clubSearch/:keyword', function (req,res) {
             for(var i = 0; i < clubsData.jsonArray.length; i++){
                 var curClub = clubsData.jsonArray[i];
                 if(req.params.keyword === curClub.clubData.keywords) {
-                    clubNames.items[x] = curClub.club;
+                    clubNames.items[x] = curClub.clubData.clubName;
                     x++;
                     }
             }
