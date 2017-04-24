@@ -42,9 +42,8 @@ ArrayList<Integer> mSelectedItems;
         major = (Spinner) findViewById(R.id.spinnermajor);
         gradDate = (Spinner) findViewById(R.id.spinnergrad);
 
-        Major= (String) major.getSelectedItem().toString();
 
-gradDatee=(String) gradDate.getSelectedItem().toString();
+
 
 
 
@@ -75,13 +74,28 @@ gradDatee=(String) gradDate.getSelectedItem().toString();
 
 
     }
+    public void convertToStrings(){
+        major = (Spinner) findViewById(R.id.spinnermajor);
+        gradDate = (Spinner) findViewById(R.id.spinnergrad);
+
+    }
+
+
 
 public void Interests(View view){
     Dialog x= onCreateDialog();
     x.show();
 
-    presenter.userdata(Major,gradDatee);
+    //presenter.userdata(Major,gradDatee);
 
+
+}
+
+public void sendData(View view){
+
+    convertToStrings();
+
+    presenter.userdata(Major,gradDatee);
 
 }
 
