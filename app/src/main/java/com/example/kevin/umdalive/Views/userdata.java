@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.example.kevin.umdalive.Presenters.Presenter;
 import com.example.kevin.umdalive.R;
@@ -16,23 +19,80 @@ import java.util.ArrayList;
 
 public class userdata extends AppCompatActivity {
 
-    ArrayAdapter<String> listOfInterest;
-
+    Presenter presenter;
     ListView list;
 
-    Presenter presenter;
-ArrayList<Integer> mSelectedItems;
+    Spinner major;
+    Spinner gradDate;
+    String GradDate;
+
+    Object graduationItem;
+    Object majorItem;
+ArrayList<String> mSelectedItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new Presenter();
         setContentView(R.layout.activity_userdata);
-        //getting the list
-        list= (ListView) findViewById(R.id.list3);
-        presenter=new Presenter();
 
-        onCreateDialog();
 
+        major = (Spinner) findViewById(R.id.spinnermajor);
+        gradDate = (Spinner) findViewById(R.id.spinnergrad);
+
+
+        ArrayAdapter<CharSequence> gradAdapter = ArrayAdapter.createFromResource(this, R.array.list_of_interests, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> majorAdapter = ArrayAdapter.createFromResource(this, R.array.major_list, android.R.layout.simple_spinner_item);
+        majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        gradAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        major.setAdapter(majorAdapter);
+        gradDate.setAdapter(gradAdapter);
+        gradDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                graduationItem = parent.getItemAtPosition(pos);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        major.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                majorItem = parent.getItemAtPosition(pos);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+    }
+
+    public void setStuff() {
+        ArrayAdapter<CharSequence> gradAdapter = ArrayAdapter.createFromResource(this, R.array.list_of_interests, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> majorAdapter = ArrayAdapter.createFromResource(this, R.array.major_list, android.R.layout.simple_spinner_item);
+        majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        gradAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+        gradDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                graduationItem = parent.getItemAtPosition(pos);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        major.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                majorItem = parent.getItemAtPosition(pos);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
     }
 
@@ -44,7 +104,7 @@ ArrayList<Integer> mSelectedItems;
         builder.setTitle("Choose your Interests")
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
-                .setMultiChoiceItems(R.array.keyword_list2, null,
+                .setMultiChoiceItems(R.array.list_of_interests, null,
                         new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which,
@@ -77,5 +137,5 @@ ArrayList<Integer> mSelectedItems;
         return builder.create();
     }
 
-
 }
+

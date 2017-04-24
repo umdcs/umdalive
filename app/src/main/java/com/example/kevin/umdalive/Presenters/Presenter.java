@@ -10,6 +10,7 @@ import com.example.kevin.umdalive.Models.PostAdapter;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.RestModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
+import com.example.kevin.umdalive.Models.userdataModel;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class Presenter {
     private Activity activity;
     private RestModel restModel;
+    private userdataModel user;
 
     /**
      * Constructor for presenter
@@ -168,6 +170,13 @@ public class Presenter {
         if(!restModel.equals(presenter.getRestModel())) isEqual = false;
         return isEqual;
     }
+
+    public void startUSer(){
+
+
+    }
+
+
 }
 
 
