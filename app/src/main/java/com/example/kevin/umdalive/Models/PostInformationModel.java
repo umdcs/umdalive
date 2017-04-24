@@ -9,6 +9,7 @@ import org.json.JSONObject;
  * Created by Andrew Miller on 4/9/2017.
  */
 
+@SuppressWarnings("unused")
 public class PostInformationModel {
     private String club;
     private String title;
@@ -18,6 +19,10 @@ public class PostInformationModel {
     private String description;
     private String image;
 
+    /**
+     * constructor initialized by a JSONObject
+     * @param postInfo info containing post
+     */
     public PostInformationModel(JSONObject postInfo){
         try {
             club = postInfo.get("clubName").toString();
@@ -32,6 +37,15 @@ public class PostInformationModel {
         }
     }
 
+    /**
+     * Initialized by user in PostingActivityView
+     * @param club name given by selecting which club is posting
+     * @param title of event
+     * @param time of event
+     * @param date of event
+     * @param location of event
+     * @param description of event
+     */
     public PostInformationModel(String club, String title, String time, String date, String location, String description){
         this.club = club;
         this.title = title;
@@ -39,9 +53,11 @@ public class PostInformationModel {
         this.date = date;
         this.location = location;
         this.description = description;
-
     }
 
+    /*
+    Getters and Setters
+     */
     public String getClub() {
         return club;
     }
@@ -98,6 +114,8 @@ public class PostInformationModel {
      * Function to create a JSON object of a post
      * JSON object is then made into a string and returned
      *
+     * Unused
+     *
      * @return jsonString string form of JSON object Club
      */
     public String jsonStringify() {
@@ -143,6 +161,11 @@ public class PostInformationModel {
     }
 
 
+    /**
+     * used in testing
+     * @param rightHand clubto be compared
+     * @return true or false is equal
+     */
     public boolean equals(PostInformationModel rightHand) {
         boolean isEqual = true;
 
@@ -161,8 +184,4 @@ public class PostInformationModel {
 
         return isEqual;
     }
-
-
-
-
 }

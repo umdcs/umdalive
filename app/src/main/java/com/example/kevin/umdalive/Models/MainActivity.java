@@ -10,6 +10,11 @@ import java.util.ArrayList;
 
 public class MainActivity {
 
+    /**
+     * used to get the current user
+     * @param userData description of user
+     * @return user's UserInfoModel
+     */
     public static UserInformationModel getUser(String userData) {
         try {
             JSONObject user = new JSONObject(userData);
@@ -40,6 +45,11 @@ public class MainActivity {
         }
     }
 
+    /**
+     *
+     * @param jsonString representing all posts
+     * @return ArrayList of PostInfoModels
+     */
     public static ArrayList<PostInformationModel> refreshPosts(String jsonString) {
         ArrayList<PostInformationModel> list = new ArrayList<>();
         try {
@@ -57,8 +67,4 @@ public class MainActivity {
         }
         return list;
     }
-
 }
-
-
-

@@ -19,16 +19,27 @@ import com.example.kevin.umdalive.R;
 
 import java.util.ArrayList;
 
+/**
+ * Class to handle the RecyclerView and Post Cards
+ */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private ArrayList<PostInformationModel> postData;
     private RecyclerView recyclerView;
     int expandedPosition = -1;
 
+    /**
+     *
+     * @param postData ArrayList of posts
+     * @param recyclerView this view
+     */
     public PostAdapter(ArrayList<PostInformationModel> postData, RecyclerView recyclerView) {
         this.postData = postData;
         this.recyclerView = recyclerView;
     }
 
+    /**
+     * Holder for each card
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private LinearLayout expandedView;
@@ -91,5 +102,4 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public int getItemCount() {
         return postData.size();
     }
-
 }
