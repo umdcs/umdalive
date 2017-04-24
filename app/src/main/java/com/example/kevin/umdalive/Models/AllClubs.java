@@ -15,7 +15,6 @@ import java.util.Collections;
 public class AllClubs {
     /**
      * This is used to convert a JSON response into a list of strings containing the names of the clubs.
-     * ...I really hope this works :)
      *
      * @param jsonResponse the response from the REST get call to the server retrieving all clubs.
      * @return ArrayList of all club names
@@ -42,5 +41,3 @@ public class AllClubs {
         return clubList;
     }
 }
-
-
