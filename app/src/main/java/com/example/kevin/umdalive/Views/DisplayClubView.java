@@ -17,7 +17,6 @@ import org.json.JSONObject;
  */
 public class DisplayClubView extends AppCompatActivity {
 
-
     private Presenter presenter;
     private String clubName;
     private String description;
@@ -28,7 +27,6 @@ public class DisplayClubView extends AppCompatActivity {
     private TextView keywordSetText;
     private TextView administratorSetText;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_club_view);
@@ -36,6 +34,9 @@ public class DisplayClubView extends AppCompatActivity {
         setView();
     }
 
+    /**
+     * sets up view
+     */
     private void setView(){
         try {
             clubName = getIntent().getStringExtra(AllClubsView.CLUB_NAME);
