@@ -39,7 +39,6 @@
         <activity android:name=".Views.userdata"/>
 
 
-        <activity android:name=".Models.userdataModel"></activity>
     </application>
 
 </manifest>

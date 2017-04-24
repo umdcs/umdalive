@@ -69,38 +69,18 @@ ArrayList<Integer> mSelectedItems;
 
     }
 
-    public void setStuff() {
-        ArrayAdapter<CharSequence> gradAdapter = ArrayAdapter.createFromResource(this, R.array.list_of_interests, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> majorAdapter = ArrayAdapter.createFromResource(this, R.array.major_list, android.R.layout.simple_spinner_item);
-        majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gradAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+public void Interests(View view){
+    Dialog x= onCreateDialog();
+    x.show();
 
 
-        gradDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                graduationItem = parent.getItemAtPosition(pos);
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        major.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                majorItem = parent.getItemAtPosition(pos);
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-    }
+}
 
 
 
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+    public Dialog onCreateDialog() {
         mSelectedItems = new ArrayList();  // Where we track the selected items
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Set the dialog title
