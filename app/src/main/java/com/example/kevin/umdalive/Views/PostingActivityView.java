@@ -47,6 +47,10 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         imageSetup();
     }
 
+    /**
+     * sends post
+     * @param view view
+     */
     public void sendPost(View view) {
         boolean isError = checkStrings();
         ;
@@ -106,6 +110,10 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
         });
     }
 
+    /**
+     * image selected
+     * @param r result
+     */
     @Override
     public void onPickResult(PickResult r) {
         if (r.getError() == null) {

@@ -20,7 +20,7 @@
         android:paddingBottom="10dp"
         android:text="Club Name"
         android:textAllCaps="true"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/machinery" />
 
     <TextView
         android:id="@+id/display_club_administrator_title"
@@ -35,7 +35,7 @@
         android:ems="10"
         android:inputType="none"
         android:text="Administrator of Club:"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/machinery"
         android:textSize="18sp"
         tools:inputType="none" />
 
@@ -51,7 +51,7 @@
         android:ems="10"
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
-        android:textColor="@color/oatmeal"
+        android:textColor="@color/machinery"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -66,7 +66,7 @@
         android:background="@android:color/transparent"
         android:ems="10"
         android:text="Description:"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/machinery"
         android:textSize="18sp" />
 
     <TextView
@@ -83,7 +83,7 @@
         android:ems="10"
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
-        android:textColor="@color/oatmeal" />
+        android:textColor="@color/machinery" />
 
     <TextView
         android:id="@+id/display_club_keywords_title"
@@ -96,7 +96,7 @@
         android:background="@android:color/transparent"
         android:ems="10"
         android:text="Keywords"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/machinery"
         android:textSize="18sp"
         android:layout_alignRight="@+id/display_club_description_title"
         android:layout_alignEnd="@+id/display_club_description_title" />
@@ -110,7 +110,7 @@
         android:ems="10"
         android:paddingEnd="15dp"
         android:paddingStart="15dp"
-        android:textColor="@color/oatmeal"
+        android:textColor="@color/machinery"
         android:layout_below="@+id/display_club_keywords_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

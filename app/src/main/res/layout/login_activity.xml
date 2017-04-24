@@ -1,41 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/RLayout"
     android:background="@color/colorAccent">
-
-    <TextView
-        android:text="Welcome \n          to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/welcome_title"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="@android:dimen/app_icon_size"
-
-        android:layout_marginBottom="40dp" />
-
-    <TextView
-        android:text="U M D \n     A L I V E"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/UMD_Alive_Title"
-        android:textSize="@android:dimen/app_icon_size"
-        android:textColor="@color/textColorPrimary"
-        android:layout_marginTop="113dp"
-        android:layout_marginLeft="63dp"
-        android:layout_marginStart="63dp"
-        android:layout_below="@+id/btn_sign_out"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="googleLogin"
-        android:layout_marginTop="89dp"
-        android:layout_below="@+id/UMD_Alive_Title"
+        android:layout_marginBottom="45dp"
+        android:layout_above="@+id/textView"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -56,8 +33,18 @@
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/btn_sign_out"
         android:layout_toRightOf="@+id/btn_sign_out"
-        android:textSize="20sp"
-        android:textColor="@color/oatmeal"
+        android:textSize="12sp"
+        android:textColor="@color/machinery"
         android:text="@string/version_number" />
+
+    <ImageView
+        android:id="@+id/login_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sign_in_button"
+        android:layout_marginBottom="83dp"
+        android:layout_toEndOf="@+id/btn_sign_out"
+        android:layout_toRightOf="@+id/btn_sign_out"
+        app:srcCompat="@drawable/login_banner_2" />
 
 </RelativeLayout>

@@ -10,17 +10,17 @@
         android:inputType="none"
         android:ems="10"
         android:id="@+id/keyword_title"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/machinery"
         android:text="Category of Club:"
         android:clickable="false"
         android:textSize="20sp"/>
 
     <Spinner
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/keywordChooser"
-        android:textColor="@color/textColorPrimary"
-        android:background="@color/colorPrimary"
+        android:textColor="@color/oatmeal"
+        android:background="@color/clear"
         android:layout_below="@+id/keyword_title"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="96dp" />
