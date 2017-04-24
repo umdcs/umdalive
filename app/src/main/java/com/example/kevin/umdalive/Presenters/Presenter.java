@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.kevin.umdalive.Models.AllClubs;
+import com.example.kevin.umdalive.Models.ClubInformationModel;
 import com.example.kevin.umdalive.Models.CreateClub;
 import com.example.kevin.umdalive.Models.MainActivity;
 import com.example.kevin.umdalive.Models.PostAdapter;
@@ -163,5 +164,13 @@ public class Presenter {
         if(!activity.equals(presenter.getActivity())) isEqual = false;
         if(!restModel.equals(presenter.getRestModel())) isEqual = false;
         return isEqual;
+    }
+
+    public boolean isClubInfoValid(String str){
+        return ClubInformationModel.checkAscii(str);
+    }
+
+    public boolean isClubNameValid(String str){
+        return ClubInformationModel.checkClubNameAscii(str);
     }
 }

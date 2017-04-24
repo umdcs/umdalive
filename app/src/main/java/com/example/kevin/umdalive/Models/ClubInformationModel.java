@@ -132,4 +132,26 @@ public class ClubInformationModel {
 
         return jsonString.toString();
     }
+
+    public static boolean checkAscii(String str){
+        boolean isError = false;
+        char[] charArray = str.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            Log.d("checking: " , Integer.toString((int)charArray[i]));
+            if(((int) charArray[i]) <  32 || (int) charArray[i] > 126) isError = true;
+        }
+        return isError;
+    }
+
+    public static boolean checkClubNameAscii(String str){
+        boolean isError = false;
+        char[] charArray = str.toCharArray();
+        for(int i = 0; i < charArray.length; i++){
+            Log.d("checking: " , Integer.toString((int)charArray[i]));
+            if(!((46 < charArray[i] && charArray[i] < 58) ||
+                    (64 < charArray[i] && charArray[i] < 91) ||
+                    (96 < charArray[i] && charArray[i] < 123))) isError = true;
+        }
+        return isError;
+    }
 }
