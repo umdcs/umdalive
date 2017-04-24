@@ -54,12 +54,6 @@ public class Presenter {
         return restModel;
     }
 
-    /*
-    public void setRestModel(RestModel restModel) {
-        this.restModel = restModel;
-    }
-    */
-
     /**
      * Rest Function sends parameters to RestModel where they are dealt with using switch statement.
      *
@@ -134,17 +128,8 @@ public class Presenter {
         return MainActivity.refreshPosts(jsonString);
     }
 
-    public void setCurrentClub(String itemValue){
-        restPut("putCurrentClub", AllClubs.jsonStringifyClubName(itemValue));
-    }
-
-    public void setKeyword(String keyword){
-        restPut("putKeyword", AllClubs.jsonStringifyKeyword(keyword));
-    }
-
-
-    public void putPost(String club, String title, String time, String date, String location, String addInfo){
-        restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo));
+    public void putPost(String club, String title, String time, String date, String location, String addInfo, String image){
+        restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo, image));
     }
 
     /**
@@ -154,8 +139,8 @@ public class Presenter {
         return AllClubs.getClubNames(restGet("getAllClubs", ""));
     }
 
-    public ArrayList<String> getSearchClubNames(){
-        return AllClubs.getClubNames(restGet("getSearchAllClubs", ""));
+    public ArrayList<String> getSearchClubNames(String keyword){
+        return AllClubs.getClubNames(restGet("getSearchAllClubs", keyword));
     }
 
     public PostAdapter getPostAdapter(ArrayList<PostInformationModel> posts, RecyclerView rView){
@@ -169,7 +154,3 @@ public class Presenter {
         return isEqual;
     }
 }
-
-
-
-

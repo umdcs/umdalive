@@ -31,6 +31,7 @@ public class RestModel {
     //public final String serverAddress = "http://131.212.41.37:5004"; //Permanent IP
 
     private Context context;
+
     /**
      * The context might be used later debugging with toast messages. Right now it is not needed though.
      * @param context for toast
@@ -57,8 +58,8 @@ public class RestModel {
     public String restGet(String getString, String data){
         switch(getString){
             case "getAllClubs": return getAllClubs();
-            case "getSearchAllClubs": return getSearchAllClubs();
-            case "getClub": return getCurrentClub();
+            case "getSearchAllClubs": return getSearchAllClubs(data);
+            case "getClub": return getCurrentClub(data);
             case "getRecentPosts": return getRecentPosts();
             case "getUserData": return getUserData();
             default: return null;
@@ -76,10 +77,6 @@ public class RestModel {
             case "putNewPost": putNewPost(data);
                 break;
             case "putNewUser": putNewUser(data);
-                break;
-            case "putCurrentClub": putCurrentClub(data);
-                break;
-            case "putKeyword": putKeyword(data);
                 break;
             default: break;
         }
@@ -99,9 +96,10 @@ public class RestModel {
     /**
      * Used by DisplayClub and PostingActivity to fetch the club selected by the user in the previous view
      */
-    private String getCurrentClub(){
+    private String getCurrentClub(String data){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/currentClub", "GET").get();
+            Log.d(data, data);
+            return new HTTPAsyncTask().execute(serverAddress + "/clubs/" + data, "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -111,7 +109,7 @@ public class RestModel {
 
     private String getAllClubs(){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/getAllClubs", "GET").get();
+            return new HTTPAsyncTask().execute(serverAddress + "/clubs", "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -119,9 +117,9 @@ public class RestModel {
         return null;
     }
 
-    private String getSearchAllClubs(){
+    private String getSearchAllClubs(String data){
         try{
-            return new HTTPAsyncTask().execute(serverAddress + "/getSearchAllClubs", "GET").get();
+            return new HTTPAsyncTask().execute(serverAddress + "/clubSearch/" + data, "GET").get();
         }
         catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -140,7 +138,7 @@ public class RestModel {
     private String getRecentPosts(){
         String mostRecentPosts = null;
         try {
-            mostRecentPosts = new HTTPAsyncTask().execute(serverAddress + "/mostRecentPosts", "GET").get();
+            mostRecentPosts = new HTTPAsyncTask().execute(serverAddress + "/posts", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
@@ -154,7 +152,7 @@ public class RestModel {
     private String getUserData(){
         String userData;
         try {
-            userData = new HTTPAsyncTask().execute(serverAddress + "/userDataGet", "GET").get();
+            userData = new HTTPAsyncTask().execute(serverAddress + "/userData", "GET").get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             userData = null;
@@ -167,7 +165,7 @@ public class RestModel {
      * @param data name of the club being fetched
      */
     private void putNewClub(String data) {
-        new HTTPAsyncTask().execute(serverAddress + "/newClub", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/clubs", "PUT", data);
     }
 
     /**
@@ -175,24 +173,11 @@ public class RestModel {
      * @param data the post to be made
      */
     private void putNewPost(String data){
-        new HTTPAsyncTask().execute(serverAddress + "/newPost", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/posts", "PUT", data);
     }
 
     private void putNewUser(String data){
-        new HTTPAsyncTask().execute(serverAddress + "/userInformation", "PUT", data);
-    }
-
-    /**
-     * For AllClubsView to set the club that display club will use.
-     * The club name will be set in the currentClub string of the server's user info object
-     * @param data the selected club name
-     */
-    private void putCurrentClub(String data){
-        new HTTPAsyncTask().execute(serverAddress + "/currentClub", "PUT", data);
-    }
-
-    private void putKeyword(String data){
-        new HTTPAsyncTask().execute(serverAddress + "/keyword", "PUT", data);
+        new HTTPAsyncTask().execute(serverAddress + "/userData", "PUT", data);
     }
 
     private class HTTPAsyncTask extends AsyncTask<String, Integer, String> {
@@ -209,16 +194,19 @@ public class RestModel {
                 URL url = new URL(params[0]);
                 serverConnection = (HttpURLConnection) url.openConnection();
                 serverConnection.setRequestMethod(params[1]);
+
                 if (params[1].equals("PUT")) {
-                    Log.d("DEBUG PUT:", "In post: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
-                    serverConnection.setDoOutput(true);
-                    serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-                    serverConnection.setRequestProperty("Content-Length", "" +
-                            Integer.toString(params[2].getBytes().length));
-                    DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
-                    out.writeBytes(params[2]);
-                    out.flush();
-                    out.close();
+                    if(params[1].equals("PUT")) {
+                        Log.d("DEBUG PUT:", "In put: params[0]=" + params[0] + ", params[1]=" + params[1] + ", params[2]=" + params[2]);
+                        serverConnection.setDoOutput(true);
+                        serverConnection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                        serverConnection.setRequestProperty("Content-Length", "" +
+                                Integer.toString(params[2].getBytes().length));
+                        DataOutputStream out = new DataOutputStream(serverConnection.getOutputStream());
+                        out.writeBytes(params[2]);
+                        out.flush();
+                        out.close();
+                    }
                 }
 
                 int responseCode = serverConnection.getResponseCode();
@@ -226,7 +214,7 @@ public class RestModel {
                 Log.d("Debug: ", "Response Code : " + responseCode);
                 is = serverConnection.getInputStream();
 
-                if (params[1].equals("GET") || params[1].equals("POST")) {
+                if (params[1].equals("GET")) {
                     StringBuilder sb = new StringBuilder();
                     String line;
                     BufferedReader br = new BufferedReader(new InputStreamReader(is));

@@ -98,5 +98,40 @@
         android:background="@color/colorAccent"
         android:textColor="@color/colorPrimary" />
 
+    <TextView
+        android:id="@+id/hint"
+        android:layout_below="@+id/result_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="@string/chooseImage"
+        android:textColor="@color/machinery"/>
+
+    <ImageView
+        android:id="@+id/result_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/image_selector"
+        android:minHeight="150dp"
+        android:minWidth="200dp"
+        android:padding="5dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/default_image"
+        android:layout_below="@+id/additional_info"/>
+
+    <TextView
+        android:id="@+id/invalid_input"
+        android:layout_toLeftOf="@+id/send_post_button"
+        android:layout_alignBaseline="@+id/send_post_button"
+        android:paddingRight="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/machinery"
+        android:layout_alignLeft="@+id/result_image"
+        android:layout_alignStart="@+id/result_image" />
+
 
 </RelativeLayout>

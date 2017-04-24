@@ -2,9 +2,7 @@ package com.example.kevin.umdalive.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,10 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.util.Log;
 
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
@@ -158,7 +155,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         } else if (id == R.id.new_club) {
             makeNewClub();
         } else if (id == R.id.nav_club1) {
-            displayClub();
+
         } else if (id == R.id.nav_club2) {
 
         } else if (id == R.id.nav_share) {
@@ -207,15 +204,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.syncState();
@@ -223,41 +211,6 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
-//    public void getMoreInfo(View view) {
-//        showPopup(view);
-//    }
-//
-//
-//    public void showPopup(View anchorView) {
-//
-//        View popupView = getLayoutInflater().inflate(R.layout.popup_layout, null);
-//
-//        PopupWindow popupWindow = new PopupWindow(popupView,
-//                FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-//
-//        // Example: If you have a TextView inside `popup_layout.xml`
-//        TextView tv = (TextView) popupView.findViewById(R.id.tv);
-//
-//        tv.setText("Pop Up View With Additional Info");
-//
-//        // Initialize more widgets from `popup_layout.xml`
-//
-//        // If the PopupWindow should be focusable
-//        popupWindow.setFocusable(true);
-//
-//        // If you need the PopupWindow to dismiss when when touched outside
-//       // popupWindow.setBackgroundDrawable(new ColorDrawable());
-//
-////        int location[] = new int[2];
-//
-//        // Get the View's(the one that was clicked in the Fragment) location
-////        anchorView.getLocationOnScreen(location);
-//
-//        // Using location, the PopupWindow will be displayed right under anchorView
-//        popupWindow.showAtLocation(anchorView, Gravity.CLIP_HORIZONTAL, 0, 0);// + anchorView.getHeight());
-//
-//    }
 
 
     @Override

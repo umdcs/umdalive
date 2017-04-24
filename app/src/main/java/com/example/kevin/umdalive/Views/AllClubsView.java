@@ -20,9 +20,11 @@ import java.util.ArrayList;
  * This is a view that displays all club names. When a user selects a club, DisplayClubView is launched with the correct club info.
  */
 public class AllClubsView extends Activity {
+
     ListView listView;
     Presenter presenter;
-    boolean launchActivity = false;
+
+    public static final String CLUB_NAME = "com.example.kevin.umdalive.MESSAGE";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +52,10 @@ public class AllClubsView extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                launchActivity = true;
-                //int itemPosition = position;
                 String itemValue = (String) listView.getItemAtPosition(position);
-                presenter.setCurrentClub(itemValue);
                 Toast.makeText(getApplicationContext(), "Position :" + position + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(AllClubsView.this, DisplayClubView.class);
+                intent.putExtra(CLUB_NAME, itemValue);
                 startActivity(intent);
             }
         });
