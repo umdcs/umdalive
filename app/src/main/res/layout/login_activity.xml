@@ -58,6 +58,6 @@
         android:layout_toRightOf="@+id/btn_sign_out"
         android:textSize="20sp"
         android:textColor="@color/oatmeal"
-        android:text="@string/version" />
+        android:text="@string/version_number" />
 
 </RelativeLayout>
