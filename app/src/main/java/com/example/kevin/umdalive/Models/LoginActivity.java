@@ -155,9 +155,20 @@ presenter=new Presenter(this);
 
             Intent intent= new Intent(this, MainView.class);
 
+
+
+
+
+
+
+
+
             intent.putExtra("Email", mEmail);
             intent.putExtra("Name",mFullName);
-            intent.putExtra("pic",personPhoto);
+            intent.putExtra("pic",personPhoto.toString());
+
+            intent.setData(personPhoto);
+
             startActivity(intent);
 
 

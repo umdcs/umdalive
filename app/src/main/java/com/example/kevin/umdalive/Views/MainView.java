@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.kevin.umdalive.Models.LoginActivity;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
@@ -53,13 +55,13 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
         String value = null;
         String name=null;
-        Uri pic;
+        String pic="";
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             value = extras.getString("Email");
             name=extras.getString("Name");
-          
+            pic=extras.getString("pic");
             //The key argument here must match that used in the other activity
         }
 
@@ -71,8 +73,14 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         Name.setText(name);
         Email.setText(value);
         ImageView img=(ImageView) hView.findViewById(R.id.imageView);
+        Uri fileurl= Uri.parse(pic);
 
-        img.setImageURI();
+
+        Glide.with(getApplicationContext()).load(fileurl)
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(img);
 
 
 
