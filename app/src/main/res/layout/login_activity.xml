@@ -33,9 +33,10 @@
         android:layout_marginStart="15dp"
         android:layout_toEndOf="@+id/btn_sign_out"
         android:layout_toRightOf="@+id/btn_sign_out"
-        android:textSize="12sp"
+        android:fontFamily="serif"
+        android:text="@string/version_number"
         android:textColor="@color/machinery"
-        android:text="@string/version_number" />
+        android:textSize="15sp" />
 
     <ImageView
         android:id="@+id/login_banner"
