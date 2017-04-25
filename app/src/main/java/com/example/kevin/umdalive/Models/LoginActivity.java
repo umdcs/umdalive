@@ -3,8 +3,10 @@ package com.example.kevin.umdalive.Models;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,23 +33,35 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private String mFullName;
    private  String mEmail;
 
-
+    TextView userEmail;
+    NavigationView mNavigationView;
     Presenter presenter; //there shouldn't be an error here after merging with the Presenter branch to gain the presenter class
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
-
-
-        super.onCreate(savedInstanceState);
+ super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
-        initializeButtons();
+initializeButtons();
         GoogleSignInitializer();
 presenter=new Presenter(this);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
@@ -134,12 +148,16 @@ presenter=new Presenter(this);
             GoogleSignInAccount acct = result.getSignInAccount();
             mFullName=acct.getDisplayName();
             mEmail=acct.getEmail();
-
+            Uri personPhoto = acct.getPhotoUrl();
             Log.d("presenters", "planning to user data to server");
 
 
 
             Intent intent= new Intent(this, MainView.class);
+
+            intent.putExtra("Email", mEmail);
+            intent.putExtra("Name",mFullName);
+            intent.putExtra("pic",personPhoto);
             startActivity(intent);
 
 

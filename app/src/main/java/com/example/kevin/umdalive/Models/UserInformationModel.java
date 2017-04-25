@@ -111,18 +111,14 @@ public class UserInformationModel extends AppCompatActivity {
      *
      * @return password
      */
-    public String getPassword() {
-        return password;
-    }
+
 
     /**
      * setter for password
      *
      * @param password to be set
      */
-    public void setPassword(String password) {
-        this.password = password;
-    }
+   
 
     /**
      * getter for email

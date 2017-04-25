@@ -1,6 +1,7 @@
 package com.example.kevin.umdalive.Views;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.kevin.umdalive.Models.LoginActivity;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
 import com.example.kevin.umdalive.Presenters.Presenter;
@@ -31,6 +36,8 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     private ArrayList<PostInformationModel> posts;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    LoginActivity log;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,37 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_main);
         Log.d("DEBUG: ", "Setting up view");
         viewSetup();
+
+
+
+
+        String value = null;
+        String name=null;
+        Uri pic;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            value = extras.getString("Email");
+            name=extras.getString("Name");
+          
+            //The key argument here must match that used in the other activity
+        }
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        TextView Email = (TextView)hView.findViewById(R.id.studentEmail);
+        TextView Name=(TextView) hView.findViewById(R.id.userName);
+
+        Name.setText(name);
+        Email.setText(value);
+        ImageView img=(ImageView) hView.findViewById(R.id.imageView);
+
+        img.setImageURI();
+
+
+
+
+
     }
 
     /**
