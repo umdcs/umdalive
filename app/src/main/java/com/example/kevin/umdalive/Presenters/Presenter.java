@@ -12,6 +12,7 @@ import com.example.kevin.umdalive.Models.PostAdapter;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.RestModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
+import com.example.kevin.umdalive.Views.userdata;
 
 import java.util.ArrayList;
 
@@ -139,9 +140,10 @@ public class Presenter {
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo, image));
     }
 
-    public void putUser(String major, String gradDate, String Name, String email, String[] interests) {
+    public void putUser(String major, String gradDate, String Name, String email) {
+userdata user=new userdata();
 
-restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradDate,interests));
+restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradDate, user.getmSelectedItems()));
     }
 
 

@@ -163,7 +163,9 @@ public void Interests(View view){
     }
 
 
-
+public ArrayList<String> getmSelectedItems(){
+    return mSelectedItems;
+}
 
     protected void onPause() {
         super.onPause();

@@ -182,7 +182,7 @@ public class UserInformationModel extends AppCompatActivity {
      */
 
 
-    public static String jsonStringify(String name,String email,String major, String gradDate, String [] interests) {
+    public static String jsonStringify(String name,String email,String major, String gradDate, ArrayList<String> interests) {
         JSONObject jsonString = null;
         try {
             //Create JSONObject here
