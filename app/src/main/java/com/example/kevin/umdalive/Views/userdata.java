@@ -27,10 +27,11 @@ public class userdata extends AppCompatActivity {
     String graduationDate;
 String Major;
 
+    String[] l1;
 
     Object graduationItem;
     Object majorItem;
-ArrayList<Integer> mSelectedItems;
+ArrayList<String> mSelectedItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ ArrayList<Integer> mSelectedItems;
         major = (Spinner) findViewById(R.id.spinnermajor);
         gradDate = (Spinner) findViewById(R.id.spinnergrad);
 
-
+        l1= getResources().getStringArray(R.array.list_of_interests);
 
 
 
@@ -75,6 +76,15 @@ ArrayList<Integer> mSelectedItems;
 
 
         convertToStrings();
+
+
+
+
+
+
+
+
+
 
 
         presenter.userData(Major,graduationDate);
@@ -127,7 +137,7 @@ public void Interests(View view){
                                                 boolean isChecked) {
                                 if (isChecked) {
                                     // If the user checked the item, add it to the selected items
-                                    mSelectedItems.add(which);
+                                    mSelectedItems.add(l1[which]);
                                 } else if (mSelectedItems.contains(which)) {
                                     // Else, if the item is already in the array, remove it
                                     mSelectedItems.remove(Integer.valueOf(which));
