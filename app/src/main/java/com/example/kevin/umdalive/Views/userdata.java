@@ -49,7 +49,7 @@ ArrayList<String> mSelectedItems;
 
 
 
-        ArrayAdapter<CharSequence> gradAdapter = ArrayAdapter.createFromResource(this, R.array.list_of_interests, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> gradAdapter = ArrayAdapter.createFromResource(this, R.array.graduation_date, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> majorAdapter = ArrayAdapter.createFromResource(this, R.array.major_list, android.R.layout.simple_spinner_item);
         majorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gradAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
