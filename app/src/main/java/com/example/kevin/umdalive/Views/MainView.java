@@ -64,7 +64,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         if (extras != null) {
             value = extras.getString("Email");
             name=extras.getString("Name");
-            pic=extras.getString("pic");
+            //pic=extras.getString("pic");
             Major=extras.getString("Major");
             //The key argument here must match that used in the other activity
         }
@@ -77,16 +77,18 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         Name.setText(name);
         Email.setText(value);
         ImageView img=(ImageView) hView.findViewById(R.id.imageView);
-        Uri fileurl= Uri.parse(pic);
+        Uri fileurl= getIntent().getData();
 
+        //Uri.parse(pic);
 
-        Glide.with(getApplicationContext()).load(fileurl)
-               .fitCenter()
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(img);
-
+if(null != fileurl) {
+    Glide.with(getApplicationContext()).load(fileurl)
+            .fitCenter()
+            .thumbnail(0.5f)
+            .crossFade()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(img);
+}
 
         SharedPreferences bb = getSharedPreferences("my_prefs", 0);
         Major = bb.getString("NUM", "");

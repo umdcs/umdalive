@@ -149,6 +149,8 @@ presenter=new Presenter(this);
             mFullName=acct.getDisplayName();
             mEmail=acct.getEmail();
             Uri personPhoto = acct.getPhotoUrl();
+
+
             Log.d("presenters", "planning to user data to server");
 
 
@@ -157,7 +159,10 @@ presenter=new Presenter(this);
 
             intent.putExtra("Email", mEmail);
             intent.putExtra("Name",mFullName);
-            intent.putExtra("pic",personPhoto.toString());
+
+
+                //intent.putExtra("pic", personPhoto.toString());
+
 
             intent.setData(personPhoto);
 
