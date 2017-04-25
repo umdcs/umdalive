@@ -1,6 +1,8 @@
 package com.example.kevin.umdalive.Views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.kevin.umdalive.Models.LoginActivity;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
 import com.example.kevin.umdalive.Presenters.Presenter;
@@ -23,13 +31,19 @@ import com.example.kevin.umdalive.R;
 import java.util.ArrayList;
 
 public class MainView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    String value = null;
+    String name=null;
+    String pic="";
+    String Major="";
+    String gradDate="";
     private Presenter presenter;
     private static UserInformationModel thisUser;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ArrayList<PostInformationModel> posts;
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    LoginActivity log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +54,50 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_main);
         Log.d("DEBUG: ", "Setting up view");
         viewSetup();
+
+
+
+
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            value = extras.getString("Email");
+            name=extras.getString("Name");
+            //pic=extras.getString("pic");
+            Major=extras.getString("Major");
+            //The key argument here must match that used in the other activity
+        }
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        TextView Email = (TextView)hView.findViewById(R.id.studentEmail);
+        TextView Name=(TextView) hView.findViewById(R.id.userName);
+
+        Name.setText(name);
+        Email.setText(value);
+        ImageView img=(ImageView) hView.findViewById(R.id.imageView);
+        Uri fileurl= getIntent().getData();
+
+        //Uri.parse(pic);
+
+if(null != fileurl) {
+    Glide.with(getApplicationContext()).load(fileurl)
+            .fitCenter()
+            .thumbnail(0.5f)
+            .crossFade()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(img);
+}
+
+        SharedPreferences bb = getSharedPreferences("my_prefs", 0);
+        Major = bb.getString("NUM", "");
+        gradDate=bb.getString("gradDate","");
+
+        presenter.putUser(name,value,Major,gradDate);
+
+
+
     }
 
     /**
@@ -152,7 +210,17 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
         if (id == R.id.allClubs) {
             displayAllClubs();
-        } else if (id == R.id.Post) {
+        }
+        else if(id == R.id.user_profile) {
+Intent intent= new Intent(this, userdata.class);
+            startActivity(intent);
+
+
+        }
+
+
+
+        else if (id == R.id.Post) {
             displayClubsForPost();
         } else if (id == R.id.calendar) {
 
@@ -222,6 +290,9 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
+
 
 
     @Override

@@ -134,5 +134,4 @@
         android:layout_alignLeft="@+id/result_image"
         android:layout_alignStart="@+id/result_image" />
 
-
 </RelativeLayout>

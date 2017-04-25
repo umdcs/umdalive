@@ -4,8 +4,6 @@ package com.example.kevin.umdalive.Models;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.kevin.umdalive.Models.ClubInformationModel;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,11 +19,11 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class UserInformationModel extends AppCompatActivity {
 
-    private String name;
-    private String password;
-    private String email;
-    private String major;
-    private String gradDate;
+   static private String name;
+
+    static private String email;
+    static private String major;
+   static  private String gradDate;
 
     private ArrayList<String> localClubNames;
 
@@ -47,6 +45,20 @@ public class UserInformationModel extends AppCompatActivity {
         localPostsSubscribed = new ArrayList<String>();
         localClubsSubscribed = tempClubsSubscribed;
     }
+
+
+    public UserInformationModel(String name, String major, String email, String gradDate){
+        this.name = name;
+        this.email = email;
+        this.major = major;
+        this.gradDate = gradDate;
+
+    }
+
+
+
+
+
 
 
     /*
@@ -99,18 +111,14 @@ public class UserInformationModel extends AppCompatActivity {
      *
      * @return password
      */
-    public String getPassword() {
-        return password;
-    }
+
 
     /**
      * setter for password
      *
      * @param password to be set
      */
-    public void setPassword(String password) {
-        this.password = password;
-    }
+   
 
     /**
      * getter for email
@@ -172,16 +180,19 @@ public class UserInformationModel extends AppCompatActivity {
      *
      * @return jsonString string form of JSON object UserInformation
      */
-    public String jsonStringify() {
+
+
+    public static String jsonStringify(String name,String email,String major, String gradDate, ArrayList<String> interests) {
         JSONObject jsonString = null;
         try {
             //Create JSONObject here
             jsonString = new JSONObject();
             jsonString.put("name", name);
-            jsonString.put("password", password);
+
             jsonString.put("email", email);
             jsonString.put("major", major);
             jsonString.put("gradDate", gradDate);
+            jsonString.put("Interests", interests);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -189,4 +200,5 @@ public class UserInformationModel extends AppCompatActivity {
 
         return jsonString.toString();
     }
+
 }

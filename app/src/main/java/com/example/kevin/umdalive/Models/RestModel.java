@@ -30,6 +30,7 @@ public class RestModel {
     public final String serverAddress = "http://192.168.1.130:5000"; //Ryan IP
     //public final String serverAddress = "http://131.212.41.37:5004"; //Permanent IP
     //public final String serverAddress = "http://131.212.188.202:5000";
+    //public final String serverAddress = "http://10.0.2.2:5000";
 
     private Context context;
 

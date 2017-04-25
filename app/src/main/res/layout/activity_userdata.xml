@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+
+        <TextView
+            android:id="@+id/graduation_text"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please enter Graduation"
+            android:layout_marginTop="27dp"
+            android:layout_below="@+id/spinnermajor"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+
+    <Spinner
+            android:id="@+id/spinnermajor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/majorText"
+            android:layout_alignLeft="@+id/spinnergrad"
+            android:layout_alignStart="@+id/spinnergrad" />
+
+        <TextView
+            android:text="What is your Major"
+            android:id="@+id/majorText"
+            android:layout_marginTop="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinnergrad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="87dp"
+            android:layout_marginStart="87dp"
+            android:layout_alignBottom="@+id/graduation_text"
+            android:layout_toRightOf="@+id/majorText"
+            android:layout_toEndOf="@+id/majorText"></Spinner>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click to select interest"
+        android:layout_below="@+id/graduation_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp"
+        android:onClick="Interests"
+        />
+
+   
+
+</RelativeLayout>

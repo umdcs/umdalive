@@ -19,6 +19,24 @@
         <item name="free">Free</item>
     </string-array>
 
+    <string-array name="list_of_interests">
+        <item name="Business">Business </item>
+        <item name="Outdoors">Outdoors</item>
+        <item name="Free">Free</item>
+        <item name="Sports">Sports</item>
+        <item name="Social">Social</item>
+        <item name="Politics">Politics</item>
+        <item name="Movies">Movies</item>
+        <item name="Academics">Academics</item>
+        <item name="Gaming">Gaming</item>
+        <item name="Music">Music</item>
+        <item name="Greek Life">Greek Life</item>
+        <item name="Food">Food</item>
+        <item name="Literature">Literature</item>
+        <item name="Board Games">Board Games</item>
+    </string-array>
+
+
     <string-array name="keyword_list2">
         <item name="select">Select a Keyword</item>
         <item name="academic">Academic</item>
