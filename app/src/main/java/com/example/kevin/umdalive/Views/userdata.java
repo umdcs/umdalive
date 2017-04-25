@@ -2,6 +2,7 @@ package com.example.kevin.umdalive.Views;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -78,16 +79,14 @@ ArrayList<String> mSelectedItems;
         convertToStrings();
 
 
+        SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("major",Major  );
+        edit.putString("gradDate", graduationDate);
+        edit.apply();
 
 
 
-
-
-
-
-
-
-        presenter.userData(Major,graduationDate);
 
     }
 

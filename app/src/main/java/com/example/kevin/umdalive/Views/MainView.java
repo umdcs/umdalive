@@ -1,6 +1,7 @@
 package com.example.kevin.umdalive.Views;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -30,7 +31,11 @@ import com.example.kevin.umdalive.R;
 import java.util.ArrayList;
 
 public class MainView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    String value = null;
+    String name=null;
+    String pic="";
+    String Major="";
+    String gradDate="";
     private Presenter presenter;
     private static UserInformationModel thisUser;
     private RecyclerView recyclerView;
@@ -53,15 +58,14 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
 
 
-        String value = null;
-        String name=null;
-        String pic="";
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             value = extras.getString("Email");
             name=extras.getString("Name");
             pic=extras.getString("pic");
+            Major=extras.getString("Major");
             //The key argument here must match that used in the other activity
         }
 
@@ -84,6 +88,9 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
                 .into(img);
 
 
+        SharedPreferences bb = getSharedPreferences("my_prefs", 0);
+        Major = bb.getString("NUM", "");
+        gradDate=bb.getString("gradDate","");
 
 
 
@@ -279,6 +286,9 @@ Intent intent= new Intent(this, userdata.class);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+
+
 
 
     @Override
