@@ -83,7 +83,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
 if(null != fileurl) {
     Glide.with(getApplicationContext()).load(fileurl)
-            .fitCenter()
+
             .thumbnail(0.5f)
             .crossFade()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
