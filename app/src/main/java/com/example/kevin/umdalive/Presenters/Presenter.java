@@ -139,9 +139,9 @@ public class Presenter {
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo, image));
     }
 
-    public void putUser(String major, String gradDate, String Name, String email, ) {
+    public void putUser(String major, String gradDate, String Name, String email, String[] interests) {
 
-restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradDate));
+restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradDate,interests));
     }
 
 
