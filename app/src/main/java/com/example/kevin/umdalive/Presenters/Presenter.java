@@ -139,6 +139,12 @@ public class Presenter {
         restPut("putNewPost", PostInformationModel.jsonStringify(club, title, time, date, location, addInfo, image));
     }
 
+    public void putUser(String major, String gradDate, String Name, String email, ) {
+
+restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradDate));
+    }
+
+
     /**
      * gets all the club names
      *
@@ -204,6 +210,11 @@ public class Presenter {
     public boolean isPostInfoValid(String str) {
         return PostInformationModel.checkAscii(str);
     }
+
+
+
+
+
 
     public void userData(String major, String grad) {
         LoginActivity log = new LoginActivity();

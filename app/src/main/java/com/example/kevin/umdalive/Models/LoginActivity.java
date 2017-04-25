@@ -155,14 +155,6 @@ presenter=new Presenter(this);
 
             Intent intent= new Intent(this, MainView.class);
 
-
-
-
-
-
-
-
-
             intent.putExtra("Email", mEmail);
             intent.putExtra("Name",mFullName);
             intent.putExtra("pic",personPhoto.toString());
@@ -170,14 +162,6 @@ presenter=new Presenter(this);
             intent.setData(personPhoto);
 
             startActivity(intent);
-
-
-
-
-
-
-
-
 
             updateUI(true);
         } else {

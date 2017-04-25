@@ -77,7 +77,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
 
 
         Glide.with(getApplicationContext()).load(fileurl)
-                .centerCrop()
+               .fitCenter()
                 .thumbnail(0.5f)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
