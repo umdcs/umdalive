@@ -53,7 +53,7 @@ public class PostingActivityView extends AppCompatActivity implements IPickResul
      */
     public void sendPost(View view) {
         boolean isError = checkStrings();
-        ;
+        //;
         Log.d("Club posting: " + clubName, "New post: " + title.getText().toString());
         if (!isError) {
             presenter.putPost(clubName, title.getText().toString(), time.getText().toString(), date.getText().toString()

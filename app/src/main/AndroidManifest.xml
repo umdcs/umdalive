@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.kevin.umdalive">
 <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 <application
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
@@ -34,7 +37,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".Views.SearchClubsView"></activity>
-    </application>
+
+
     <provider
         android:name="android.support.v4.content.FileProvider"
         android:authorities="${applicationId}.com.vansuita.pickimage.provider"
@@ -45,5 +49,12 @@
             android:name="android.support.FILE_PROVIDER_PATHS"
             android:resource="@xml/picker_provider_paths" />
     </provider>
+
+
+
+    </application>
+
+
+
 
 </manifest>
