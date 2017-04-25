@@ -157,7 +157,7 @@ presenter=new Presenter(this);
 
             intent.putExtra("Email", mEmail);
             intent.putExtra("Name",mFullName);
-            intent.putExtra("pic",personPhoto.toString());
+            intent.putExtra("pic", personPhoto != null ? personPhoto.toString() : null);
 
             intent.setData(personPhoto);
 

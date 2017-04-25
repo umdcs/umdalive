@@ -77,16 +77,19 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
         Name.setText(name);
         Email.setText(value);
         ImageView img=(ImageView) hView.findViewById(R.id.imageView);
-        Uri fileurl= Uri.parse(pic);
+
+        Uri fileurl;
+        if (pic != null) {
+            fileurl = Uri.parse(pic);
 
 
-        Glide.with(getApplicationContext()).load(fileurl)
-               .fitCenter()
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(img);
-
+            Glide.with(getApplicationContext()).load(fileurl)
+                    .fitCenter()
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(img);
+        }
 
         SharedPreferences bb = getSharedPreferences("my_prefs", 0);
         Major = bb.getString("NUM", "");
