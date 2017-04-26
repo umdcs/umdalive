@@ -16,7 +16,7 @@ Preparing to Install
 -------------
 The application should work without trouble for over 97% of Android users, but the tested software version details are outlined below.
 
-> **Software Information:**
+ **Software Information:**
 
 > - Android Studio Version last verified to work with `master`: 2.2.3
 > - Minimum Android SDK: 15+ (minimum Ice Cream Sandwich 4.0.3).
