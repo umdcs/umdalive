@@ -12,7 +12,7 @@
     android:label="@string/app_name"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".Models.LoginActivity">
+    <activity android:name=".Views.LoginView">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -39,7 +39,7 @@
         <activity android:name=".Views.SearchClubsView"/>
 
 
-        <activity android:name=".Views.userdata"/>
+        <activity android:name=".Views.UserDataView"/>
 
     <provider
         android:name="android.support.v4.content.FileProvider"

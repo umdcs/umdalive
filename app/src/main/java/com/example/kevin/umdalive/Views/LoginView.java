@@ -1,4 +1,4 @@
-package com.example.kevin.umdalive.Models;
+package com.example.kevin.umdalive.Views;
 
 
 import android.app.ProgressDialog;
@@ -28,13 +28,10 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class LoginView extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private String mFullName;
-   private  String mEmail;
-
-    TextView userEmail;
-    NavigationView mNavigationView;
+    private String mEmail;
     Presenter presenter; //there shouldn't be an error here after merging with the Presenter branch to gain the presenter class
 
     @Override

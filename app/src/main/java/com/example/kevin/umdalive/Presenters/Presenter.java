@@ -6,13 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import com.example.kevin.umdalive.Models.AllClubs;
 import com.example.kevin.umdalive.Models.ClubInformationModel;
 import com.example.kevin.umdalive.Models.CreateClub;
-import com.example.kevin.umdalive.Models.LoginActivity;
+import com.example.kevin.umdalive.Views.LoginView;
 import com.example.kevin.umdalive.Models.MainActivity;
 import com.example.kevin.umdalive.Models.PostAdapter;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.RestModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
-import com.example.kevin.umdalive.Views.userdata;
+import com.example.kevin.umdalive.Views.UserDataView;
 
 import java.util.ArrayList;
 
@@ -141,7 +141,7 @@ public class Presenter {
     }
 
     public void putUser(String major, String gradDate, String Name, String email) {
-userdata user=new userdata();
+UserDataView user=new UserDataView();
 
 restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradDate, user.getmSelectedItems()));
     }
@@ -213,13 +213,8 @@ restPut("putNewUser", UserInformationModel.jsonStringify(Name,email,major, gradD
         return PostInformationModel.checkAscii(str);
     }
 
-
-
-
-
-
     public void userData(String major, String grad) {
-        LoginActivity log = new LoginActivity();
+        LoginView log = new LoginView();
 
         String email = log.getmEmail();
 

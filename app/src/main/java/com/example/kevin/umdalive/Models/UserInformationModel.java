@@ -19,18 +19,15 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class UserInformationModel extends AppCompatActivity {
 
-   static private String name;
-
+    static private String name;
     static private String email;
     static private String major;
-   static  private String gradDate;
-
+    static private String gradDate;
     private ArrayList<String> localClubNames;
-
     private ArrayList<ClubInformationModel> localClubsSubscribed;
     private ArrayList<String> localPostsSubscribed;
 
-    public UserInformationModel(){
+    public UserInformationModel() {
         name = "";
         localClubsSubscribed = new ArrayList<ClubInformationModel>();
         localClubNames = new ArrayList<String>();
@@ -46,20 +43,12 @@ public class UserInformationModel extends AppCompatActivity {
         localClubsSubscribed = tempClubsSubscribed;
     }
 
-
     public UserInformationModel(String name, String major, String email, String gradDate){
         this.name = name;
         this.email = email;
         this.major = major;
         this.gradDate = gradDate;
-
     }
-
-
-
-
-
-
 
     /*
        Takes in a new arraylist of most recent posts then
@@ -86,8 +75,6 @@ public class UserInformationModel extends AppCompatActivity {
         return localClubNames;
     }
 
-
-
     /**
      * getter for name
      *
@@ -105,20 +92,6 @@ public class UserInformationModel extends AppCompatActivity {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * getter for password
-     *
-     * @return password
-     */
-
-
-    /**
-     * setter for password
-     *
-     * @param password to be set
-     */
-   
 
     /**
      * getter for email
@@ -180,15 +153,12 @@ public class UserInformationModel extends AppCompatActivity {
      *
      * @return jsonString string form of JSON object UserInformation
      */
-
-
     public static String jsonStringify(String name,String email,String major, String gradDate, ArrayList<String> interests) {
         JSONObject jsonString = null;
         try {
             //Create JSONObject here
             jsonString = new JSONObject();
             jsonString.put("name", name);
-
             jsonString.put("email", email);
             jsonString.put("major", major);
             jsonString.put("gradDate", gradDate);

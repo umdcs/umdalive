@@ -7,6 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
 import com.example.kevin.umdalive.R;
+import com.example.kevin.umdalive.Views.LoginView;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,10 +23,10 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class LoginViewTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<LoginView> mActivityTestRule = new ActivityTestRule<>(LoginView.class);
 
     @Test
     public void loginActivityTest() {

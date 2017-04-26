@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +23,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.kevin.umdalive.Models.LoginActivity;
 import com.example.kevin.umdalive.Models.PostInformationModel;
 import com.example.kevin.umdalive.Models.UserInformationModel;
 import com.example.kevin.umdalive.Presenters.Presenter;
@@ -43,7 +43,7 @@ public class MainView extends AppCompatActivity implements NavigationView.OnNavi
     private ArrayList<PostInformationModel> posts;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    LoginActivity log;
+    LoginView log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +204,7 @@ if(null != fileurl) {
      */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -212,7 +212,7 @@ if(null != fileurl) {
             displayAllClubs();
         }
         else if(id == R.id.user_profile) {
-Intent intent= new Intent(this, userdata.class);
+Intent intent= new Intent(this, UserDataView.class);
             startActivity(intent);
 
 
