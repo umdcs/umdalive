@@ -75,3 +75,7 @@ Unit Testing Inlcuded
 ---------------------
 
 Jenna: ClubInformationUnitTest; creates a test club and checks to see that all the data is created and stored properly. 
+
+Licensing
+----------------
+The licensing can be found in the Java Folder. 
