@@ -22,7 +22,7 @@ The application should work without trouble for over 97% of Android users, but t
 > - Minimum Android SDK: 15+ (minimum Ice Cream Sandwich 4.0.3).
 > - Target SDK: 25.
 
-To run the App you need to connect to the server and a MongoDB. The IP address is set to the emulator tunnel by default but can be changed in RESTModel. 
+To run the App you need to connect run the node server and have an instance of mongo running. The IP address is set to the emulator tunnel by default but can be changed in RESTModel. 
 
 **Node will need these modules installed**
 - express
