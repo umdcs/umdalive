@@ -80,3 +80,7 @@ Wesley Osumo: NodeServer; The test checks several Get and Put Rquests. an initia
 
 Andy Miller: Presenter; Created a thorough unit test for all functionality.
     There are issues with using AsyncTask in unit tests so it makes many of the tests worthless. I will look into it more to see if there's a good way to work around that.
+
+License
+-------
+GNU General Public License v3.0
