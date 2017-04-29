@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
+    "forever": "^0.15.3",
     "mongodb": "^2.2.11",
     "mongojs": "^2.4.0"
   },
@@ -13,7 +14,9 @@
     "module-js": "^5.15.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "forever start -al forever.log -o forever_output.log -e forever_error.log index.js",
+    "stop": "forever stop index.js"
   },
   "repository": {
     "type": "git",
