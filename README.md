@@ -6,6 +6,7 @@ A two-team effort, UMD Alive is an Android Application meant to connect students
 One team was responsible for business aspects and idea creation, while the other team was responsible for implementing the ideas in the form of an application.
 
 Cultural entrepreneurship (CUE) 
+[UMD CUE Program link](https://cla.d.umn.edu/departments/world-languages-and-cultures/cue)
 team: Anastasia Kratzner, Holly Pudwill, and Ryan Danielson.
 
 Computer Science (CS) 
