@@ -3,7 +3,7 @@ UMD Alive
 
 A two-team effort, UMD Alive is an Android Application meant to connect students on campus with information and events from clubs around campus. The application is meant to be an informational hub and, in a way, digitizes the informational posters a student may find around campus.
 
-One team was responsible for business aspects and idea creation, while the other team was responsible for implementing the ideas in the form of an application.
+One team formed from the UMD CUE program and was chiefly responsible for business aspects and initial and continued idea creation. The second team formed from two instances of the UMD Computer Science course CS 4531 Software Engineering in the Fall 2016 and Spring 2017 semesters. The CS 4531 teams were mainly responsible for implementing the ideas in the form of an application and also contributed to the idea generation discusses with the CUE team.
 
 Cultural entrepreneurship (CUE - [UMD CUE Program](https://cla.d.umn.edu/departments/world-languages-and-cultures/cue))
 team: Anastasia Kratzner, Holly Pudwill, and Ryan Danielson.
