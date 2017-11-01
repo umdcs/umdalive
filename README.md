@@ -9,7 +9,8 @@ Cultural entrepreneurship (CUE)
 team: Anastasia Kratzner, Holly Pudwill, and Ryan Danielson.
 
 Computer Science (CS) 
-Andy Miller, Wesley Osumo, Ryan Gebhart, and Jenna Anderson. 
+Andy Miller, Wesley Osumo, Ryan Gebhart, and Jenna Anderson (Spring 2017 CS 4531)
+Luke Anderson, Ray Cerney, Brandon Harshe, and Kevin Schauer (Fall 2016 CS 4531)
 
 ------------
 Preparing to Install
